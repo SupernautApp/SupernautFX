@@ -19,10 +19,9 @@ before_script:
 build:
   script:
     - java -version
-    #- ./gradlew buildCI airgapfx-wallet:jpackage --stacktrace
     - ./gradlew buildCI --stacktrace
   artifacts:
     paths:
-      - airgapfx-wallet/build/jpackage
-      - airgapfx-wallet/build/libs
+      - supernautfx/build/libs
+      - supernautfx-hello/build/libs
 
