@@ -4,17 +4,10 @@ dist: xenial
 language: java
 matrix:
   include:
-  - jdk: openjdk8
-    env: GRADLE_VERSION=4.4.1
-  - jdk: openjdk8
-    env: GRADLE_VERSION=4.10.3
   - jdk: openjdk11
-    env: GRADLE_VERSION=4.10.3
 install: true
-before_script:
-  - gradle wrapper --gradle-version=$GRADLE_VERSION
 script:
-  - ./gradlew clean build
+  - ./gradlew clean buildCI
 
 notifications:
   irc:
