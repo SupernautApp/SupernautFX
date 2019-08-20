@@ -1,8 +1,8 @@
 = SupernautFX
 Sean Gilligan <https://github.com/msgilligan>
-v0.0.3
+v0.0.4
 :description: SupernautFX DI Framework README.
-:supernautfx-version: 0.0.3
+:supernautfx-version: 0.0.4
 :tip-caption: :bulb:
 :note-caption: :information_source:
 :important-caption: :heavy_exclamation_mark:
@@ -25,7 +25,7 @@ We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing 
 * Provides support for compile-time dependency injection (e.g. https://micronaut.io[Micronaut])
 * Designed for Java apps shipped with a bundled runtime, (e.g. built with https://jdk.java.net/jpackage/[jpackage])
 * Agressively tracks latest JDK for JavaFX, recent Android versions
-** JDK 12 or later for JavaFX components
+** JDK 11 or later for JavaFX components
 ** JDK 8 (with multi-release JARs?) for base components and Android
 * Minimal dependencies, minimal transitive dependencies
 ** Core components in pure Java (no additional language runtimes)
