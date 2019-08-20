@@ -9,7 +9,7 @@ v0.0.4
 :caution-caption: :fire:
 :warning-caption: :warning:
 
-Supernaut is (will be) a generalized application framework that could potentially be used for more than just cryptocurrency wallets. Modules with names beginning with `supernaut` will have no dependencies on any cryptocurrency-related libraries.
+SupernautFX is a generalized application framework that can be used to create JavaFX applications. It was developed for ConsensusJ Wallet-Framework, but is general-purpose and can be used to add Micronaut-based DI to any JavaFX application.
 
 == Design Goals
 
