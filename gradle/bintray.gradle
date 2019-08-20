@@ -47,7 +47,7 @@ allprojects {
             licenses = ['Apache-2.0']
             labels = ['java', 'jdk', 'openjdk', 'cryptocurrency', 'javafx', 'wallet', 'framework']
             version {
-                name = walletFrameworkVersion
+                name = supernautVersion
                 desc = 'Proof-of-concept release.'
                 released  = new Date()
                 vcsTag = 'none'

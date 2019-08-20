@@ -26,7 +26,7 @@ buildScan {
 allprojects {
     apply plugin: 'java'
 
-    version = walletFrameworkVersion     // set in gradle.properties
+    version = supernautVersion     // set in gradle.properties
     group = 'org.consensusj.supernaut'
 
     repositories {
