@@ -1,0 +1,57 @@
+allprojects {
+    apply plugin: 'com.jfrog.bintray'
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
+
+    task sourceJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives sourceJar
+        archives javadocJar
+    }
+
+    publishing {
+        publications {
+            jar(MavenPublication) {
+                from components.java
+
+                artifact sourceJar {
+                    classifier "sources"
+                }
+            }
+
+        }                                                    
+    }
+
+    bintray {
+        user = project.hasProperty("binTrayConsensusJAPIUser") ? binTrayConsensusJAPIUser : 'please set binTrayAPIUser'
+        key = project.hasProperty("binTrayConsensusJAPIKey") ? binTrayConsensusJAPIKey : 'please set binTrayAPIKey'
+        dryRun = false // whether to run this as dry-run, without deploying
+        publications = ['jar'] // When uploading Maven-based publication files
+        pkg {
+            userOrg = 'consensusj'
+            repo = 'maven'
+            name = 'wallet-framework'
+            desc = 'Modular cryptocurrency wallet framework, libraries, and components'
+            websiteUrl = 'https://github.com/ConsensusJ/wallet-framework'
+            issueTrackerUrl = 'https://github.com/ConsensusJ/wallet-framework/issues'
+            vcsUrl = 'https://github.com/ConsensusJ/wallet-framework.git'
+            licenses = ['Apache-2.0']
+            labels = ['java', 'jdk', 'openjdk', 'cryptocurrency', 'javafx', 'wallet', 'framework']
+            version {
+                name = walletFrameworkVersion
+                desc = 'Proof-of-concept release.'
+                released  = new Date()
+                vcsTag = 'none'
+            }
+        }
+    }
+}

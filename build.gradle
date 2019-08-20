@@ -1,0 +1,78 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.asciidoctor:asciidoctorj:${asciidoctorjVersion}"
+        //classpath "org.asciidoctor:asciidoctorj-diagram:${asciidoctorjDiagramVersion}"
+    }
+}
+
+plugins {
+    id 'com.gradle.build-scan'          version '2.3'
+    id 'org.asciidoctor.jvm.convert'    version '2.2.0'
+    id 'com.jfrog.bintray'              version '1.8.4'
+}
+
+buildScan {
+    if (System.getenv('CI')) {
+        publishAlways()
+        tag 'CI'
+    }
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
+
+allprojects {
+    apply plugin: 'java'
+
+    version = walletFrameworkVersion     // set in gradle.properties
+    group = 'org.consensusj.supernaut'
+
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.bintray.com/msgilligan/maven' } // ConsensusJ (bitcoinj DSL)
+    }
+}
+
+subprojects {
+    apply plugin: 'groovy'
+    /*
+     * Supernaut will target recent JDK versions. For now library modules will
+     * target JDK 11 and sample apps will use JDK 12. We intend to migrate to
+     * JDK 14 as soon as it is final, since 14 should have `jpackage` included.
+     *  We want to focus on jpackaged apps and these should always use recent JDK.
+     */
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    dependencies {
+        implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+
+        testCompile "org.codehaus.groovy:groovy:${groovyVersion}:"
+        testCompile("org.spockframework:spock-core:${spockVersion}") {
+            exclude module: "groovy-all"
+        }
+
+        testRuntimeOnly "net.bytebuddy:byte-buddy:1.8.21"                 // allows Spock to mock classes (in addition to interfaces)
+        testRuntimeOnly "org.objenesis:objenesis:2.6"                     // Allow Spock to mock classes with constructor arguments
+        testRuntimeOnly  "org.slf4j:slf4j-jdk14:${slf4jVersion}"          // Runtime implementation of slf4j
+    }
+
+    compileJava {
+        options.compilerArgs << '-Xlint:deprecation' << '-Xlint:unchecked'
+    }
+}
+
+apply from: 'gradle/bintray.gradle'
+
+task testReport(type: TestReport) {
+    destinationDir = file("$buildDir/reports/allTests")
+    // Include the results from the `test` task in all subprojects
+    reportOn subprojects*.test
+}
+
+build.dependsOn subprojects.build
+
+task buildCI(dependsOn: [build])
