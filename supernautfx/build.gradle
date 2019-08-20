@@ -10,10 +10,10 @@ javafx {
 
 dependencies {
     implementation "javax.inject:javax.inject:1"
-    implementation "io.micronaut:micronaut-inject-java:1.1.4"
+    implementation "io.micronaut:micronaut-inject-java:${micronautVersion}"
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
-    annotationProcessor "io.micronaut:micronaut-inject-java:1.1.4"
+    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 }
 
 patchModules.config = [

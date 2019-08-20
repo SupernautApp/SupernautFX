@@ -1,7 +1,7 @@
 /**
  * Module descriptor for SupernautFX Hello Sample app
  */
-module org.consensusj.supernautfx.hello {
+module org.consensusj.supernautfx.sample.hello {
     requires org.consensusj.supernautfx;
 
     requires javafx.graphics;

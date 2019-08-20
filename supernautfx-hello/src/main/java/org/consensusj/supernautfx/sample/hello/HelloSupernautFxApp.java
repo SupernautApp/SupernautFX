@@ -4,13 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.consensusj.supernautfx.FxmlLoaderFactory;
 import org.consensusj.supernautfx.SupernautFxApp;
 import org.consensusj.supernautfx.SupernautFxLauncher;
 import org.consensusj.supernautfx.sample.hello.service.GreetingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Provider;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URL;
@@ -22,18 +22,16 @@ import java.net.URL;
 public class HelloSupernautFxApp implements SupernautFxApp {
     private static final Logger log = LoggerFactory.getLogger(HelloSupernautFxApp.class);
     private final GreetingService greetingService;
-    private final Provider<FXMLLoader> loaderProvider;
+    private final FxmlLoaderFactory loaderFactory;
 
 
     public static void main(String[] args) {
         SupernautFxLauncher.superLaunch(HelloSupernautFxApp.class, args);
     }
 
-    public HelloSupernautFxApp(Provider<FXMLLoader> loaderProvider, GreetingService greetingService) {
+    public HelloSupernautFxApp(FxmlLoaderFactory loaderFactory, GreetingService greetingService) {
         this.greetingService = greetingService;
-        this.loaderProvider = loaderProvider;
-        FXMLLoader loader = loaderProvider.get();
-        log.info("Got an FXMLLoader: {}", loader);
+        this.loaderFactory = loaderFactory;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class HelloSupernautFxApp implements SupernautFxApp {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = loaderProvider.get();
+        FXMLLoader loader = loaderFactory.get();
         loader.setLocation(getFXMLUrl("MainWindow.fxml"));
         log.debug("MainWindow root FXML: {}", loader.getLocation());
         Parent root = loader.load();

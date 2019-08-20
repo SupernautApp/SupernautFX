@@ -2,7 +2,7 @@ plugins {
     id 'groovy'
     id 'application'
     id 'org.openjfx.javafxplugin'           version '0.0.8'
-    id 'org.beryx.jlink'                    version '2.14.0'
+    id 'org.beryx.jlink'                    version '2.14.1'
     id 'org.javamodularity.moduleplugin'    version "1.5.0"
 }
 
@@ -10,12 +10,12 @@ dependencies {
     implementation project (':supernautfx')
 
     implementation "javax.inject:javax.inject:1"
-    implementation "io.micronaut:micronaut-inject-java:1.1.4"
+    implementation "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
     implementation "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
-    annotationProcessor "io.micronaut:micronaut-inject-java:1.1.4"
+    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 }
 
 sourceCompatibility = 11
@@ -28,7 +28,7 @@ patchModules.config = [
 ]
 
 javafx {
-    modules = ['javafx.controls', 'javafx.fxml']
+    modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
 }
 
 test {
@@ -41,7 +41,7 @@ jlink {
     addExtraDependencies("javafx")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
-        name = 'Supernaut Hello'
+        name = 'SupernautFX Hello'
         jvmArgs = []
     }
     mergedModule {
@@ -53,7 +53,7 @@ jlink {
         forceMerge 'org.slf4j'
     }
     jpackage {
-        skipInstaller = true
+        skipInstaller = false
         imageOptions = ["--verbose", "--app-version", version]
         installerOptions = ["--app-version", version]
     }
