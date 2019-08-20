@@ -1,6 +1,6 @@
 # configuration for https://travis-ci.org/bitcoinj/bitcoinj
 sudo: false
-dist: xenial
+dist: bionic
 language: java
 matrix:
   include:
@@ -8,8 +8,3 @@ matrix:
 install: true
 script:
   - ./gradlew clean buildCI
-
-notifications:
-  irc:
-    channels: "irc.freenode.net#bitcoinj"
-    skip_join: true
