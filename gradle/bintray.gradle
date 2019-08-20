@@ -39,13 +39,13 @@ allprojects {
         pkg {
             userOrg = 'consensusj'
             repo = 'maven'
-            name = 'wallet-framework'
-            desc = 'Modular cryptocurrency wallet framework, libraries, and components'
-            websiteUrl = 'https://github.com/ConsensusJ/wallet-framework'
-            issueTrackerUrl = 'https://github.com/ConsensusJ/wallet-framework/issues'
-            vcsUrl = 'https://github.com/ConsensusJ/wallet-framework.git'
+            name = 'supernaut'
+            desc = 'DI for JavaFX using Micronaut'
+            websiteUrl = 'https://github.com/ConsensusJ/SupernautFX'
+            issueTrackerUrl = 'https://github.com/ConsensusJ/SupernautFX/issues'
+            vcsUrl = 'https://github.com/ConsensusJ/SupernautFX.git'
             licenses = ['Apache-2.0']
-            labels = ['java', 'jdk', 'openjdk', 'cryptocurrency', 'javafx', 'wallet', 'framework']
+            labels = ['java', 'jdk', 'openjdk', 'javafx', 'dependency-injection', 'micronaut', 'framework']
             version {
                 name = supernautVersion
                 desc = 'Proof-of-concept release.'
