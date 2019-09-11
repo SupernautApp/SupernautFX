@@ -4,14 +4,18 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+        java: [ '11', '12' ]
+      fail-fast: false
+    name: JAVA ${{ matrix.java }} OS ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v1
-    - name: Set up JDK 11
+    - name: Set up JDK
       uses: actions/setup-java@v1
       with:
-        java-version: 11
+        java-version: ${{ matrix.java }}
     - name: Build with Gradle
-      run: ./gradlew buildCI
+      run: ./gradlew buildCI --stacktrace
