@@ -11,6 +11,8 @@ v0.0.4
 
 SupernautFX is a generalized application framework that can be used to create JavaFX applications. It was developed for ConsensusJ Wallet-Framework, but is general-purpose and can be used to add Micronaut-based DI to any JavaFX application.
 
+image:https://github.com/ConsensusJ/SupernautFX/workflows/Java%20CI/badge.svg["Build Status", link="https://github.com/ConsensusJ/SupernautFX/actions"] image:https://travis-ci.org/ConsensusJ/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.org/ConsensusJ/SupernautFX/"]
+
 == Design Goals
 
 NOTE: If a framework or library like this already exists, please https://github.com/ConsensusJ/wallet-framework/issues/1[let us know] ASAP!
