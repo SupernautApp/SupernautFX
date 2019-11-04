@@ -1,2 +1,6 @@
+plugins {
+    id "com.gradle.enterprise" version "3.0"
+}
+
 include 'supernautfx'
 include 'supernautfx-hello'

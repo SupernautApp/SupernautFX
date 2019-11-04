@@ -9,7 +9,6 @@ buildscript {
 }
 
 plugins {
-    id 'com.gradle.build-scan'          version '2.3'
     id 'org.asciidoctor.jvm.convert'    version '2.2.0'
     id 'com.jfrog.bintray'              version '1.8.4'
 }
