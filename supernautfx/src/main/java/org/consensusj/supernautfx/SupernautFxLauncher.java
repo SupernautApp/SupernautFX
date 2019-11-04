@@ -31,6 +31,7 @@ public class SupernautFxLauncher extends Application {
 
     @Override
     public void init() throws Exception {
+        // TODO: Provide SupernautFX apps with a mechanism for configuring their ApplicationContext
         ctx = ApplicationContext.build()
                 //.mainClass(mainClass)
                 .environments(Environment.CLI).build();
