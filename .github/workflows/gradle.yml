@@ -1,6 +1,6 @@
 name: Java CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
         os: [ubuntu-latest, macOS-latest, windows-latest]
         java: [ '11', '13' ]
       fail-fast: false
-    name: JAVA ${{ matrix.java }} OS ${{ matrix.os }}
+    name: ${{ matrix.os }} JDK ${{ matrix.java }}
     steps:
     - uses: actions/checkout@v1
     - name: Set up JDK
@@ -18,4 +18,9 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
     - name: Build with Gradle
-      run: ./gradlew buildCI --stacktrace
+      run: ./gradlew -D"download.jpackage"=true buildCI supernautfx-hello:jpackage --info --stacktrace
+    - name: Upload jpackage directory as artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-jpackage
+        path: supernautfx-hello/build/jpackage
