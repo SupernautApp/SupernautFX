@@ -39,7 +39,7 @@ test {
     }
 }
 
-def appName = 'Supernaut FXHello'
+def appName = 'SupernautFX Hello'
 
 ext.os = org.gradle.internal.os.OperatingSystem.current()
 
