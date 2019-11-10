@@ -67,7 +67,7 @@ jlink {
         skipInstaller = false
 
         // rpmbuild doesn't like '-' characters in version
-        def appVersionForJpackage = os.linux ? version.replace('-', '.') : version
+        def appVersionForJpackage = '0.0.5' // os.linux ? version.replace('-', '.') : version
 
         imageOptions = ["--verbose", "--app-version", appVersionForJpackage]
         installerOptions = ["--app-version", appVersionForJpackage]
