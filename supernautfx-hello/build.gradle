@@ -66,7 +66,8 @@ jlink {
         }
         skipInstaller = false
 
-        // rpmbuild doesn't like '-' characters in version
+        // Massage version string to be compatible with jpackage installers
+        // for the current OS platform
         def appVersionForJpackage = normalizeAppVersion(version)
 
         imageOptions = ["--verbose", "--app-version", appVersionForJpackage]
@@ -74,8 +75,17 @@ jlink {
     }
 }
 
+/**
+ * Massage the version string based upon the current OS to be valid
+ * for the installer platforms for that OS. rpmbuild, MSI, and potentially
+ * others have restrictions on valid version strings.
+ *
+ * @param appVersion A typical Gradle version string
+ * @return a version string that should work for the currrent platform
+ */
 String normalizeAppVersion(final String appVersion) {
     if (os.linux) {
+        // Replace '-' with '.' for rpmbuild
         return appVersion.replace('-', '.')
     } else if (os.windows) {
         // This is a hack attempt to assure the version conforms to MSI productVersion string rules
