@@ -7,29 +7,29 @@ plugins {
     id 'de.undercouch.download'             version "4.0.0"
 }
 
+def appName = 'SupernautFX Hello'
+mainClassName = "$moduleName/org.consensusj.supernautfx.sample.hello.HelloSupernautFxApp"
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
 dependencies {
     implementation project (':supernautfx')
 
     implementation "javax.inject:javax.inject:1"
     implementation "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
-    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
     implementation "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 }
-
-sourceCompatibility = 11
-targetCompatibility = 11
-
-mainClassName = "$moduleName/org.consensusj.supernautfx.sample.hello.HelloSupernautFxApp"
 
 patchModules.config = [
         "java.annotation=jsr305-3.0.2.jar"
 ]
 
 javafx {
-    version = '13.0.1'
+    version = javaFxVersion
     modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
 }
 
@@ -38,8 +38,6 @@ test {
         runOnClasspath = true
     }
 }
-
-def appName = 'SupernautFX Hello'
 
 ext.os = org.gradle.internal.os.OperatingSystem.current()
 
@@ -52,6 +50,7 @@ jlink {
     }
     mergedModule {
         requires 'java.logging'
+
         requires 'javafx.graphics'
         requires 'javafx.controls'
         requires 'javafx.fxml'

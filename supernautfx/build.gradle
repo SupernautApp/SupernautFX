@@ -5,13 +5,13 @@ plugins {
 }
 
 javafx {
+    version = javaFxVersion
     modules = [ 'javafx.graphics', 'javafx.fxml' ]
 }
 
 dependencies {
     implementation "javax.inject:javax.inject:1"
     implementation "io.micronaut:micronaut-inject-java:${micronautVersion}"
-    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 }
