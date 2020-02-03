@@ -40,6 +40,7 @@ test {
 }
 
 ext.os = org.gradle.internal.os.OperatingSystem.current()
+def signImage = false
 
 jlink {
     addExtraDependencies("javafx")
@@ -71,6 +72,12 @@ jlink {
 
         imageOptions = ["--verbose", "--app-version", appVersionForJpackage]
         installerOptions = ["--app-version", appVersionForJpackage]
+        if (os.macOsX) {
+            imageOptions += [ '--resource-dir', "${projectDir}/src/macos/resource-dir" ]
+            if (signImage) {
+                imageOptions += [ '--mac-sign' ]
+            }
+        }
     }
 }
 
