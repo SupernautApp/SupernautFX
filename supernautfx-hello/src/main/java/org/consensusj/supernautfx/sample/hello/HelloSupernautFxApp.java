@@ -3,6 +3,7 @@ package org.consensusj.supernautfx.sample.hello;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 import org.consensusj.supernautfx.FxmlLoaderFactory;
 import org.consensusj.supernautfx.SupernautFxApp;
@@ -14,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URL;
+
+import de.codecentric.centerdevice.MenuToolkit;
 
 /**
  * A Supernaut FX App, implements SupernautFxApp but is not required to.
@@ -47,7 +50,19 @@ public class HelloSupernautFxApp implements SupernautFxApp {
 
         primaryStage.setScene(new Scene(root, 300, 250));
         primaryStage.setTitle(greetingService.greeting());
+        setupMenus("SupernautFX Hello");
         primaryStage.show();
+    }
+
+    private void setupMenus(String appName) {
+        // Get the toolkit
+        MenuToolkit tk = MenuToolkit.toolkit();
+
+        // Create the default Application menu
+        Menu defaultApplicationMenu = tk.createDefaultApplicationMenu(appName);
+
+        // Update the existing Application menu
+        tk.setApplicationMenu(defaultApplicationMenu);
     }
 
     @Override

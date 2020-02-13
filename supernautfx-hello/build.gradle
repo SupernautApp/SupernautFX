@@ -19,6 +19,8 @@ dependencies {
     implementation "javax.inject:javax.inject:1"
     implementation "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
+    implementation "de.codecentric.centerdevice:centerdevice-nsmenufx:2.1.7"
+
     implementation "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
@@ -30,7 +32,20 @@ patchModules.config = [
 
 javafx {
     version = javaFxVersion
-    modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
+    modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml', 'javafx.web']
+}
+
+
+application {
+    applicationDefaultJvmArgs = [
+            '--add-exports', 'javafx.graphics/com.sun.javafx.tk=centerdevice.nsmenufx',
+             '--add-opens', 'javafx.graphics/com.sun.javafx.tk.quantum=centerdevice.nsmenufx',
+             '--add-opens', 'javafx.graphics/com.sun.javafx.tk=centerdevice.nsmenufx',
+             '--add-opens', 'javafx.graphics/com.sun.glass.ui=centerdevice.nsmenufx',
+             '--add-opens', 'javafx.graphics/com.sun.glass.ui.mac=centerdevice.nsmenufx',
+             '--add-opens', 'javafx.graphics/com.sun.javafx.menu=centerdevice.nsmenufx',
+             '--add-opens', 'javafx.controls/com.sun.javafx.scene.control=centerdevice.nsmenufx'
+    ]
 }
 
 test {
@@ -47,7 +62,15 @@ jlink {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = appName
-        jvmArgs = []
+        jvmArgs = [
+                '--add-exports', 'javafx.graphics/com.sun.javafx.tk=org.consensusj.supernaut.merged.module',
+                '--add-opens', 'javafx.graphics/com.sun.javafx.tk.quantum=org.consensusj.supernaut.merged.module',
+                '--add-opens', 'javafx.graphics/com.sun.javafx.tk=org.consensusj.supernaut.merged.module',
+                '--add-opens', 'javafx.graphics/com.sun.glass.ui=org.consensusj.supernaut.merged.module',
+                '--add-opens', 'javafx.graphics/com.sun.glass.ui.mac=org.consensusj.supernaut.merged.module',
+                '--add-opens', 'javafx.graphics/com.sun.javafx.menu=org.consensusj.supernaut.merged.module',
+                '--add-opens', 'javafx.controls/com.sun.javafx.scene.control=org.consensusj.supernaut.merged.module',
+        ]
     }
     mergedModule {
         requires 'java.logging'
@@ -55,6 +78,7 @@ jlink {
         requires 'javafx.graphics'
         requires 'javafx.controls'
         requires 'javafx.fxml'
+        requires 'javafx.web'
 
         forceMerge 'org.slf4j'
     }

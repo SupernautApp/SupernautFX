@@ -12,6 +12,8 @@ module org.consensusj.supernautfx.sample.hello {
     requires org.slf4j.jul;
     requires javax.inject;
 
+    requires centerdevice.nsmenufx;
+
     /*
      * Although the classes in supernautfx.hello only use annotations
      * from javax.inject and do not import any Micronaut classes,
