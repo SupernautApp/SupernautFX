@@ -1,0 +1,34 @@
+= ConsensusJ SupernautFX Release Process
+
+== Requirements
+
+* OpenJDK 11 or later (OpenJDK 13 is recommended)
+* JDK 14 `jpackage` installed and `BADASS_JLINK_JPACKAGE_HOME` configured (if building sample app with `jpackage`)
+
+== Main Release Process
+
+. Update `CHANGELOG.adoc`
+. Set/verify versions in:
+.. `gradle.properties`
+. Commit version bump and changelog.
+. Full build, test
+.. `./gradlew clean buildCI buildJPackages`
+. Tag: `git tag -a v0.x.y -m "Release 0.x.y"`
+. Push: `git push --tags origin master`
+. Publish to Bintray:
+.. `./gradlew bintrayUpload`
+.. Confirm publish of artifacts in Bintray Web UI.
+
+== Announcements
+
+. Not yet.
+
+== After release
+
+. Set versions back to -SNAPSHOT
+.. `gradle.properties`
+.. `CHANGELOG.adoc`
+. Commit and push to master
+
+
+
