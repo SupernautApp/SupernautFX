@@ -3,9 +3,9 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.0.5-SNAPSHOT
+== v0.0.5
 
-Released: 2020.02.xx
+Released: 2020.02.17
 
 * Many dependency upgrades
 ** Micronaut 1.3.1
@@ -13,6 +13,7 @@ Released: 2020.02.xx
 ** Groovy 3.0.1/Spock 2.0-M2 for testing
 * Build is compatible with `jpackage` from JDK EA 34 and later
 * Gradle build cleanup
+* Support for Gradle dependency verification via `toVerify` configuration and `verification-metadata.xml`
 * Add macOS resources and signing support to macOS jpackage build
 
 == v0.0.4
