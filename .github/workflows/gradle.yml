@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
-        java: [ '11', '13' ]
+        java: [ '11', '13', '14.0.0-ea' ]
       fail-fast: false
     name: ${{ matrix.os }} JDK ${{ matrix.java }}
     steps:
