@@ -37,9 +37,9 @@ subprojects {
     apply plugin: 'groovy'
     /*
      * Supernaut will target recent JDK versions. For now library modules will
-     * target JDK 11 and sample apps will use JDK 12. We intend to migrate to
-     * JDK 14 as soon as it is final, since 14 should have `jpackage` included.
-     *  We want to focus on jpackaged apps and these should always use recent JDK.
+     * target JDK 11 and sample apps will be built using JDK 13. We intend to migrate to
+     * JDK 14 shortly after it is final, since 14 should have `jpackage` included.
+     * We want to focus on jpackaged apps and these should always use recent JDK.
      */
     sourceCompatibility = 11
     targetCompatibility = 11
@@ -47,18 +47,22 @@ subprojects {
     dependencies {
         implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
-        testCompile "org.codehaus.groovy:groovy:${groovyVersion}:"
-        testCompile("org.spockframework:spock-core:${spockVersion}") {
+        testImplementation "org.codehaus.groovy:groovy:${groovyVersion}:"
+        testImplementation("org.spockframework:spock-core:${spockVersion}") {
             exclude module: "groovy-all"
         }
 
         testRuntimeOnly "net.bytebuddy:byte-buddy:1.8.21"                 // allows Spock to mock classes (in addition to interfaces)
-        testRuntimeOnly "org.objenesis:objenesis:2.6"                     // Allow Spock to mock classes with constructor arguments
-        testRuntimeOnly  "org.slf4j:slf4j-jdk14:${slf4jVersion}"          // Runtime implementation of slf4j
+        testRuntimeOnly "org.objenesis:objenesis:2.6"                     // allows Spock to mock classes with constructor arguments
+        testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"           // Runtime implementation of slf4j
     }
 
     compileJava {
         options.compilerArgs << '-Xlint:deprecation' << '-Xlint:unchecked'
+    }
+
+    test {
+        useJUnitPlatform()          // We're using Spock 2.0 and JUnit 5
     }
 }
 
@@ -72,4 +76,6 @@ task testReport(type: TestReport) {
 
 build.dependsOn subprojects.build
 
-task buildCI(dependsOn: [build, 'supernautfx-hello:jlink'])
+task buildCI(dependsOn: [build, testReport,'supernautfx-hello:jlink'])
+
+task buildJPackages(dependsOn: [buildCI, 'supernautfx-hello:jpackage'])

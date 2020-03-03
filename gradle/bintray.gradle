@@ -1,6 +1,6 @@
 allprojects {
     apply plugin: 'com.jfrog.bintray'
-    apply plugin: 'maven'
+    //apply plugin: 'maven'
     apply plugin: 'maven-publish'
 
     task sourceJar(type: Jar, dependsOn: classes) {
