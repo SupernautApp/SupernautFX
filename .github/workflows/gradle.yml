@@ -18,7 +18,7 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
     - name: Build with Gradle
-      run: ./gradlew -D"download.jpackage"=true buildCI supernautfx-hello:jpackage --info --stacktrace
+      run: ./gradlew -D"download.jpackage"=true buildJPackages --scan --info --stacktrace
     - name: Upload jpackage directory as artifact
       uses: actions/upload-artifact@master
       with:
