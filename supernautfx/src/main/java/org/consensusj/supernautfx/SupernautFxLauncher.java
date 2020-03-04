@@ -3,21 +3,25 @@ package org.consensusj.supernautfx;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.env.Environment;
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 
 
 /**
- * SupernautFX app launcher.
+ * SupernautFX application launcher
  * We subclass javafx.application.Application so you don't have to. To create a SupernautFX app,
  * write a class that implements SupernautFxApp.
  *
  */
 public class SupernautFxLauncher extends Application {
     private static Class<? extends SupernautFxApp> mainClass;
-    private ApplicationContext ctx;
+    private ApplicationContext context;
     private SupernautFxApp app;
     private FxmlLoaderFactory loaderFactory;
 
+    public SupernautFxLauncher() {
+    }
+    
     /**
      * Use this static method to start your SupernautFX application
      *
@@ -31,15 +35,34 @@ public class SupernautFxLauncher extends Application {
 
     @Override
     public void init() throws Exception {
-        // TODO: Provide SupernautFX apps with a mechanism for configuring their ApplicationContext
-        ctx = ApplicationContext.build()
-                //.mainClass(mainClass)
+        context = ApplicationContext.build()
                 .environments(Environment.CLI).build();
-        loaderFactory = new FxmlLoaderFactory(ctx);
-        ctx.registerSingleton(FxmlLoaderFactory.class, loaderFactory);
-        ctx.start();
-        app = ctx.getBean(mainClass);
+
+        initApplicationContext(context);
+
+        context.start();
+        app = context.getBean(mainClass);
         app.init();
+    }
+
+    /**
+     * Initialize the ApplicationContext
+     * Put a some JavaFX application-related beans in the context so apps and controllers
+     * can request to have them injected.
+     *
+     * @param context The Micronaut application context
+     */
+    public void initApplicationContext(ApplicationContext context) {
+        // Since SupernautFXApp doesn't extend Application, an app that needs access to the
+        // Application object can have it injected.
+        context.registerSingleton(Application.class, this);
+
+        // An app that needs HostServices can have it injected. For opening URLs in browsers
+        // the BrowserService class is preferred.
+        context.registerSingleton(HostServices.class, this.getHostServices());
+        context.registerSingleton(BrowserService.class, new JavaFxBrowserService(this.getHostServices()));
+        
+        context.registerSingleton(FxmlLoaderFactory.class, new FxmlLoaderFactory(context));
     }
 
     @Override
@@ -50,8 +73,8 @@ public class SupernautFxLauncher extends Application {
     @Override
     public void stop() throws Exception {
         app.stop();
-        if(ctx != null && ctx.isRunning()) {
-            ctx.stop();
+        if(context != null && context.isRunning()) {
+            context.stop();
         }
     }
 }
