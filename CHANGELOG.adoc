@@ -3,7 +3,9 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.0.6-SNAPSHOT
+== v0.0.6
+
+Released: 2020.03.04
 
 * Upgrade to Micronaut 1.3.2
 * Upgrade to Gradle 6.2.1
