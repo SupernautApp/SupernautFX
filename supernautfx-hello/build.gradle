@@ -4,7 +4,7 @@ plugins {
     id 'org.openjfx.javafxplugin'           version '0.0.8'
     id 'org.beryx.jlink'                    version '2.17.1'
     id 'org.javamodularity.moduleplugin'    version "1.5.0"
-    id 'de.undercouch.download'             version "4.0.0"
+    id 'de.undercouch.download'             version "4.0.4"
 }
 
 def appName = 'SupernautFX Hello'
