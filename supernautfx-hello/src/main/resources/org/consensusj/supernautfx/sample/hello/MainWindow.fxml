@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<StackPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="org.consensusj.supernautfx.sample.hello.MainWindowController">
-   <Button fx:id="btn" mnemonicParsing="false" onAction="#buttonAction" text="Hello..."/>
+<StackPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.consensusj.supernautfx.sample.hello.MainWindowController">
+   <VBox alignment="TOP_CENTER">
+      <Button fx:id="btn" mnemonicParsing="false" onAction="#buttonAction" prefHeight="27.0" prefWidth="160.0" text="Hello &lt;name&gt;." textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </VBox.margin></Button>
+      <Label fx:id="message" text="&lt;message&gt;">
+         <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </VBox.margin></Label>
+      <Hyperlink fx:id="githubLink" onAction="#linkAction" text="Powered by ConsensusJ/SupernautFX">
+         <VBox.margin>
+            <Insets top="50.0" />
+         </VBox.margin></Hyperlink>
+   </VBox>
 </StackPane>

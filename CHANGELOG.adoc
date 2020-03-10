@@ -3,6 +3,44 @@
 
 A high-level view of the changes in each SupernautFX release.
 
+== v0.0.7-SNAPSHOT
+
+Released: not yet
+
+=== Supernaut FX
+
+* Upgrade to JavaFX 14
+* Upgrade to Micronaut 1.3.3
+* Use Gradle `java-library` plugin to generate `pom.xml` with
+  transitive dependencies on `javax.inject` and `micronaut-inject-java`
+
+=== Hello Sample App
+
+* Remove explicit dependencies now that `supernautfx` module is using `java-library` correctly.
+
+
+== v0.0.6
+
+Released: 2020.03.04
+
+* Upgrade to Micronaut 1.3.2
+* Upgrade to Gradle 6.2.1
+* Disable Gradle dependency verification (for now)
+
+=== Supernaut FX
+
+* Add `BrowserService` interface to abstract `HostServices`
+* Add `JavaFXBrowserService` as default implementation using `HostServices`
+* register `Application`, `BrowserService`, and `HostServices` in the app context
+* Create overrideable `initApplicationContext()` method
+
+=== Hello Sample App
+
+* Display greeting in primaryStage rather than with `println`
+* Rename/refactor `GreetingConfig` to `HelloAppFactory`
+* Add a `HyperLink` to demonstrate `BrowserService`
+* Additional cleanup and documentation
+
 == v0.0.5
 
 Released: 2020.02.17

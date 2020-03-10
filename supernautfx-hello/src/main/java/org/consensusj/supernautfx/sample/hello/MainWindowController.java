@@ -3,10 +3,15 @@ package org.consensusj.supernautfx.sample.hello;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import org.consensusj.supernautfx.BrowserService;
 import org.consensusj.supernautfx.sample.hello.service.GreetingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.net.URI;
 
 /**
  * Main Window Controller
@@ -16,13 +21,23 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class MainWindowController {
+    private static final Logger log = LoggerFactory.getLogger(MainWindowController.class);
+    private static final URI githubRepoUri = URI.create("https://github.com/ConsensusJ/SupernautFX");
+    private final BrowserService browserService;
     private final GreetingService greetingService;
+
+    @FXML
+    private Hyperlink githubLink;
+
+    @FXML
+    private Label message;
 
     @FXML
     private Button btn;
 
-    public MainWindowController(GreetingService greetingService) {
+    public MainWindowController(BrowserService browserService, GreetingService greetingService) {
         this.greetingService = greetingService;
+        this.browserService = browserService;
     }
 
     /**
@@ -30,12 +45,20 @@ public class MainWindowController {
      */
     @FXML
     public void initialize() {
-        String greeting = greetingService.greeting();
-        btn.setText("Say '" + greeting + "'");
+        var planet = greetingService.getPlanetName();
+        btn.setText("Say Hello to " + planet);
+
+    }
+    
+    @FXML
+    public void buttonAction(ActionEvent event) {
+        var greeting = greetingService.greeting();
+        log.info("buttonAction: greeting: {}", greeting);
+        message.setText(greetingService.greeting());
     }
 
     @FXML
-    public void buttonAction(ActionEvent event) {
-        System.out.println(greetingService.greeting());
+    public void linkAction(ActionEvent actionEvent) {
+        browserService.showDocument(githubRepoUri);
     }
 }

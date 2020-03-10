@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import org.consensusj.supernautfx.FxmlLoaderFactory;
 import org.consensusj.supernautfx.SupernautFxApp;
 import org.consensusj.supernautfx.SupernautFxLauncher;
-import org.consensusj.supernautfx.sample.hello.service.GreetingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,12 +15,11 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * A Supernaut FX App, implements SupernautFxApp but is not required to.
+ * A simple Supernaut FX App implementing SupernautFxApp.
  */
 @Singleton
 public class HelloSupernautFxApp implements SupernautFxApp {
     private static final Logger log = LoggerFactory.getLogger(HelloSupernautFxApp.class);
-    private final GreetingService greetingService;
     private final FxmlLoaderFactory loaderFactory;
 
 
@@ -29,8 +27,7 @@ public class HelloSupernautFxApp implements SupernautFxApp {
         SupernautFxLauncher.superLaunch(HelloSupernautFxApp.class, args);
     }
 
-    public HelloSupernautFxApp(FxmlLoaderFactory loaderFactory, GreetingService greetingService) {
-        this.greetingService = greetingService;
+    public HelloSupernautFxApp(FxmlLoaderFactory loaderFactory) {
         this.loaderFactory = loaderFactory;
     }
 
@@ -40,13 +37,12 @@ public class HelloSupernautFxApp implements SupernautFxApp {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = loaderFactory.get();
-        loader.setLocation(getFXMLUrl("MainWindow.fxml"));
-        log.debug("MainWindow root FXML: {}", loader.getLocation());
+        FXMLLoader loader = loaderFactory.get(getFXMLUrl("MainWindow.fxml"));
+        log.debug("primaryStage root FXML: {}", loader.getLocation());
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, 300, 250));
-        primaryStage.setTitle(greetingService.greeting());
+        primaryStage.setTitle("SupernautFX Hello");
         primaryStage.show();
     }
 
