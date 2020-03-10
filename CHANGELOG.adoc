@@ -3,6 +3,21 @@
 
 A high-level view of the changes in each SupernautFX release.
 
+== v0.0.7-SNAPSHOT
+
+Released: not yet
+
+=== Supernaut FX
+
+* Upgrade to JavaFX 14
+* Use Gradle `java-library` plugin to generate `pom.xml` with
+  transitive dependencies on `javax.inject` and `micronaut-inject-java`
+
+=== Hello Sample App
+
+* Remove explicit dependencies now that `supernautfx` module is using `java-library` correctly.
+
+
 == v0.0.6
 
 Released: 2020.03.04
