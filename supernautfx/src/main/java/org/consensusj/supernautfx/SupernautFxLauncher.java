@@ -17,7 +17,6 @@ public class SupernautFxLauncher extends Application {
     private static Class<? extends SupernautFxApp> mainClass;
     private ApplicationContext context;
     private SupernautFxApp app;
-    private FxmlLoaderFactory loaderFactory;
 
     public SupernautFxLauncher() {
     }
