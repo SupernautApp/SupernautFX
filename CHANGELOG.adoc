@@ -10,6 +10,7 @@ Released: not yet
 === Supernaut FX
 
 * Upgrade to JavaFX 14
+* Upgrade to Micronaut 1.3.3
 * Use Gradle `java-library` plugin to generate `pom.xml` with
   transitive dependencies on `javax.inject` and `micronaut-inject-java`
 
