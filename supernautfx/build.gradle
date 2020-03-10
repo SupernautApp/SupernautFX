@@ -1,5 +1,5 @@
 plugins {
-    id 'groovy'
+    id 'java-library'
     id 'org.openjfx.javafxplugin' version '0.0.8'
     id 'org.javamodularity.moduleplugin' version "1.5.0"
 }
@@ -10,8 +10,8 @@ javafx {
 }
 
 dependencies {
-    implementation "javax.inject:javax.inject:1"
-    implementation "io.micronaut:micronaut-inject-java:${micronautVersion}"
+    api "javax.inject:javax.inject:1"
+    api "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 }

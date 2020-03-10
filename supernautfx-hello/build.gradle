@@ -23,12 +23,9 @@ configurations {
 dependencies {
     implementation project (':supernautfx')
 
-    implementation "javax.inject:javax.inject:1"
-    implementation "io.micronaut:micronaut-inject-java:${micronautVersion}"
-
-    implementation "org.slf4j:slf4j-jdk14:${slf4jVersion}"
-
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
+
+    runtime "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
     toVerify "org.openjfx:javafx-base:$javaFxVersion:mac"
     toVerify "org.openjfx:javafx-graphics:$javaFxVersion:mac"
