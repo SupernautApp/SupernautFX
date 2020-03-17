@@ -2,8 +2,7 @@ plugins {
     id 'groovy'
     id 'application'
     id 'org.openjfx.javafxplugin'           version '0.0.8'
-    id 'org.beryx.jlink'                    version '2.17.1'
-    id 'org.javamodularity.moduleplugin'    version "1.5.0"
+    id 'org.beryx.jlink'                    version '2.17.3'
     id 'de.undercouch.download'             version "4.0.4"
 }
 
