@@ -32,10 +32,16 @@ public class SupernautFxLauncher extends Application {
         Application.launch(args);
     }
 
+    /**
+     * SupernautFX implementation of Application#init().
+     * Initializes the ApplicationContext and loads and dependency injects the Application singleton.
+     * @throws Exception if something goes wrong
+     */
     @Override
     public void init() throws Exception {
         context = ApplicationContext.build()
-                .environments(Environment.CLI).build();
+                .environments(Environment.CLI)
+                .build();
 
         initApplicationContext(context);
 
@@ -64,11 +70,24 @@ public class SupernautFxLauncher extends Application {
         context.registerSingleton(FxmlLoaderFactory.class, new FxmlLoaderFactory(context));
     }
 
+    /**
+     * SupernautFX implementation of Application#start().
+     * Calls the applications implementation of SupernautFxApp#start
+     *
+     * @param primaryStage The primary Stage for the application
+     * @throws Exception if something goes wrong
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         app.start(primaryStage);
     }
 
+
+    /**
+     * SupernautFX implementation of Application#stop().
+     * Stops the SupernautFxApp and then stops the Micronaut ApplicationContext
+     * @throws Exception if something goes wrong
+     */
     @Override
     public void stop() throws Exception {
         app.stop();
