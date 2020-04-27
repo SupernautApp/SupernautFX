@@ -18,6 +18,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}
+    - name: Verify Gradle Wrapper
+      uses: gradle/wrapper-validation-action@v1
     - name: Build with Gradle
       run: ./gradlew -D"download.jpackage"=true buildJPackages --scan --info --stacktrace
     - name: Upload jpackage directory as artifact
