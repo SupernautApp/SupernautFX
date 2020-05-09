@@ -1,0 +1,250 @@
+= Supernaut/FX
+
+
+== Startup
+
+Supernaut allows you to initialize _background_ services *in parallel* with the initialization of JavaFX and your _foreground_ application running on the JavaFX Application Thread. This allows you to make network requests as early as possible so that their results will be available before or shortly after display of the application main Window.
+
+Creating a `BackgroundApplication` is optional, there is a `DefaultBackgroundApplication` that loads no services and can be used for simple applications or in early-stage development. When you are ready to add background services, you can create a `BackgroundApplication` class.
+
+NOTE:: JavaFX provides the `Preloader` class that can display a simple window while the main window is loading. For now, Supernaut is ignoring the preloader capability and instead focusing on displaying the main window as quickly as possible and then updating it with content in the background. The philosophy of a Supernaut application is to display the main window as quickly as a preloader and then update its contents as data becomes available. In those use cases, there is little benefit to displaying a preloader window. If there is a use case that needing preloader capability and/or a contributor with a pull request adding support, Supernaut can be updated to launch an optional preloader at the appropriate time.
+
+
+
+=== Supernaut/FX Sequence Diagrams
+
+==== Foreground Only
+
+This diagram shows the simplest Supernaut configuration from the perspective of the developer of a `ForegroundApplication`. It shows the four methods that an implementor _may_ implement (all but `start()` are optional) and shows the order in which they are called and what threads they are called on. This behavior is identical to a normal JavaFX app that subclasses `Application` but with the added capability of having dependencies injected into the constructor.
+
+[plantuml, format="svg", id="foreground-seq"]
+....
+
+skinparam NoteBackgroundColor white
+hide footbox
+
+participant "Supernaut/\nMicronaut" as Supernaut #pink
+participant ForegroundApplication
+
+[-> Supernaut : launch()
+activate  Supernaut
+
+
+Supernaut -> ForegroundApplication ** : new w/inject
+note right: <font color=lightgreen>JFX application thread in light green
+activate ForegroundApplication
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : constructed
+deactivate  ForegroundApplication  #LightGreen
+
+Supernaut -> ForegroundApplication  : init()
+activate  ForegroundApplication #DarkGreen
+note right: <font color=green>JFX init thread in dark green
+Supernaut <-- ForegroundApplication : return
+deactivate  ForegroundApplication  #DarkGreen
+
+Supernaut -> ForegroundApplication  : start()
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : return
+deactivate  ForegroundApplication  #LightGreen
+
+
+Supernaut -> ForegroundApplication  : stop()
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : return
+
+deactivate ForegroundApplication  #LightGreen
+deactivate ForegroundApplication
+
+deactivate  Supernaut
+....
+
+==== Foreground & Background
+
+[plantuml, format="svg", id="background-seq"]
+....
+
+skinparam NoteBackgroundColor white
+hide footbox
+
+participant "Supernaut/\nMicronaut" as Supernaut #pink
+participant ForegroundApplication
+participant BackgroundApplication
+
+[-> Supernaut : launch()
+activate  Supernaut
+
+Supernaut -> BackgroundApplication ** : new w/inject
+note right: <font color=pink>Supernaut init thread in pink
+activate BackgroundApplication
+activate BackgroundApplication #pink
+Supernaut <-- BackgroundApplication : constructed
+deactivate BackgroundApplication #pink
+
+Supernaut -> BackgroundApplication : init()
+activate BackgroundApplication #pink
+Supernaut <-- BackgroundApplication : return
+deactivate BackgroundApplication #pink
+
+note left: <font color=lightgreen>JFX application thread in light green
+
+Supernaut -> BackgroundApplication : start()
+activate BackgroundApplication #pink
+BackgroundApplication -> BackgroundApplication : start service threads
+Supernaut <-- BackgroundApplication : return
+
+note right: <font color=blue>Background application thread(s) if any in blue
+activate BackgroundApplication #blue
+
+Supernaut -> ForegroundApplication ** : new w/inject
+activate ForegroundApplication
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : constructed
+deactivate  ForegroundApplication  #LightGreen
+
+note left: <font color=green>JFX init thread in dark green
+Supernaut -> ForegroundApplication  : init()
+activate  ForegroundApplication #DarkGreen
+Supernaut <-- ForegroundApplication : return
+deactivate  ForegroundApplication  #DarkGreen
+
+Supernaut -> ForegroundApplication  : start()
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : return
+deactivate  ForegroundApplication  #LightGreen
+
+ForegroundApplication <- BackgroundApplication : started
+
+Supernaut -> ForegroundApplication  : stop()
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : return
+deactivate ForegroundApplication  #LightGreen
+deactivate ForegroundApplication
+
+Supernaut -> BackgroundApplication  : stop()
+activate  BackgroundApplication #LightGreen
+BackgroundApplication -> BackgroundApplication : stop service threads
+Supernaut <-- BackgroundApplication : return
+deactivate  BackgroundApplication  #blue
+deactivate  BackgroundApplication  #LightGreen
+deactivate  BackgroundApplication
+
+
+deactivate  ForegroundApplication
+deactivate  Supernaut
+
+....
+
+==== Foreground, Background, and Simplified Internals
+
+[plantuml, format="svg", id="full-seq"]
+....
+
+skinparam NoteBackgroundColor white
+hide footbox
+
+participant JFX #LightGreen
+participant "Supernaut/\nMicronaut" as Supernaut #pink
+participant ForegroundApplication
+participant "Supernaut Launch Thread" as LaunchThread #pink
+participant BackgroundApplication
+
+[-> Supernaut : launch()
+activate  Supernaut
+Supernaut -> Supernaut : create thread
+Supernaut -> JFX : initialize JFX
+activate JFX
+note right: <font color=pink>Supernaut init thread in pink
+Supernaut -> LaunchThread ** : start thread
+activate LaunchThread #pink
+
+LaunchThread -> LaunchThread : ApplicationContext.build().start()
+LaunchThread -> BackgroundApplication ** : new w/inject
+activate BackgroundApplication
+activate BackgroundApplication #pink
+LaunchThread <-- BackgroundApplication : constructed
+deactivate BackgroundApplication #pink
+
+LaunchThread -> BackgroundApplication : init()
+activate BackgroundApplication #pink
+LaunchThread <-- BackgroundApplication : return
+deactivate BackgroundApplication #pink
+
+JFX -> Supernaut : new app
+note left: <font color=lightgreen>JFX application thread in light green
+activate Supernaut #LightGreen
+Supernaut -> Supernaut : wait for latch
+Supernaut <- LaunchThread : latch.countdown()
+
+LaunchThread -> BackgroundApplication : start()
+activate BackgroundApplication #pink
+BackgroundApplication -> BackgroundApplication : start service threads
+LaunchThread <-- BackgroundApplication : return
+
+deactivate LaunchThread #pink
+note right: <font color=blue>Background application thread(s) if any in blue
+activate BackgroundApplication #blue
+
+
+
+Supernaut -> ForegroundApplication ** : new w/inject
+activate ForegroundApplication
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : constructed
+deactivate  ForegroundApplication  #LightGreen
+JFX <-- Supernaut : constructed
+deactivate  Supernaut  #LightGreen
+
+JFX -> Supernaut : init app
+note left: <font color=green>JFX init thread in dark green
+activate Supernaut #DarkGreen
+Supernaut -> ForegroundApplication  : init()
+activate  ForegroundApplication #DarkGreen
+Supernaut <-- ForegroundApplication : return
+deactivate  ForegroundApplication  #DarkGreen
+JFX <-- Supernaut : return
+deactivate  Supernaut  #DarkGreen
+
+JFX -> Supernaut : start app
+activate Supernaut #LightGreen
+Supernaut -> ForegroundApplication  : start()
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : return
+deactivate  ForegroundApplication  #LightGreen
+JFX <-- Supernaut : return
+deactivate  Supernaut  #LightGreen
+
+ForegroundApplication <- BackgroundApplication : started
+
+JFX -> Supernaut : stop app
+activate Supernaut #LightGreen
+Supernaut -> ForegroundApplication  : stop()
+activate  ForegroundApplication #LightGreen
+Supernaut <-- ForegroundApplication : return
+deactivate ForegroundApplication  #LightGreen
+deactivate ForegroundApplication
+
+Supernaut -> BackgroundApplication  : stop()
+activate  BackgroundApplication #LightGreen
+BackgroundApplication -> BackgroundApplication : stop service threads
+Supernaut <-- BackgroundApplication : return
+deactivate  BackgroundApplication  #blue
+deactivate  BackgroundApplication  #LightGreen
+deactivate  BackgroundApplication
+
+
+JFX <-- Supernaut : return
+deactivate  Supernaut  #LightGreen
+
+deactivate  ForegroundApplication
+deactivate  Supernaut
+deactivate  JFX
+
+....
+
+
+
+== Bibliography
+
+* https://blog.codecentric.de/en/2015/09/javafx-how-to-easily-implement-application-preloader-2/
+* https://stackoverflow.com/questions/37579645/how-do-i-start-one-thread-for-my-code-and-one-for-a-javafx-application

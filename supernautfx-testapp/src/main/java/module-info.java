@@ -21,7 +21,6 @@ module org.consensusj.supernautfx.sample.hello {
     requires org.slf4j;
     requires java.logging;
 
-    opens org.consensusj.supernautfx.sample.hello to javafx.graphics, javafx.fxml, java.base;
-    exports org.consensusj.supernautfx.sample.hello;
-    exports org.consensusj.supernautfx.sample.hello.service;
+    opens org.consensusj.supernautfx.sample.testapp to javafx.graphics, javafx.fxml, java.base;
+    exports org.consensusj.supernautfx.sample.testapp;
 }

@@ -1,0 +1,108 @@
+plugins {
+    id 'groovy'
+    id 'application'
+//    id 'org.openjfx.javafxplugin'           version '0.0.8'
+//    id 'org.beryx.jlink'                    version '2.17.3'
+}
+
+//apply plugin: "org.javamodularity.moduleplugin"
+apply plugin: "org.openjfx.javafxplugin"
+apply plugin: "org.javamodularity.moduleplugin"
+apply plugin: "org.beryx.jlink"
+
+def appName = 'SupernautFXTestApp'
+mainClassName = "$moduleName/org.consensusj.supernautfx.sample.testapp.TestApp"
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+dependencies {
+    implementation project (':supernautfx')
+
+    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
+
+    implementation "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+}
+
+
+patchModules.config = [
+        "java.annotation=jsr305-3.0.2.jar"
+]
+
+javafx {
+    version = javaFxVersion
+    modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
+}
+
+test {
+    moduleOptions {
+        runOnClasspath = true
+    }
+}
+
+ext.os = org.gradle.internal.os.OperatingSystem.current()
+def signImage = false
+
+jlink {
+    addExtraDependencies("javafx")
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = appName
+        jvmArgs = []
+    }
+    mergedModule {
+        requires 'java.logging'
+
+        requires 'javafx.graphics'
+        requires 'javafx.controls'
+        requires 'javafx.fxml'
+
+        forceMerge 'org.slf4j'
+    }
+    jpackage {
+        // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for
+        // where the plugin's jpackage task finds the path to the jpackage tool by default
+        if (Boolean.getBoolean('download.jpackage')) {
+            jpackageHome = downloadJPackage()
+        }
+        skipInstaller = false
+
+        // Massage version string to be compatible with jpackage installers
+        // for the current OS platform
+        def appVersionForJpackage = normalizeAppVersion(version)
+
+        imageOptions = ["--verbose", "--app-version", appVersionForJpackage]
+        installerOptions = ["--app-version", appVersionForJpackage]
+        if (os.macOsX) {
+            imageOptions += [ '--resource-dir', "${projectDir}/src/macos/resource-dir" ]
+            if (signImage) {
+                imageOptions += [ '--mac-sign' ]
+            }
+        } else if (os.windows) {
+            installerOptions += ['--win-dir-chooser', '--win-menu', '--win-shortcut']
+        }
+
+    }
+}
+
+/**
+ * Massage the version string based upon the current OS to be valid
+ * for the installer platforms for that OS. rpmbuild, MSI, and potentially
+ * others have restrictions on valid version strings.
+ *
+ * @param appVersion A typical Gradle version string
+ * @return a version string that should work for the currrent platform
+ */
+String normalizeAppVersion(final String appVersion) {
+    if (os.linux) {
+        // Replace '-' with '.' for rpmbuild
+        return appVersion.replace('-', '.')
+    } else if (os.windows) {
+        // This is a hack attempt to assure the version conforms to MSI productVersion string rules
+        // See https://docs.microsoft.com/en-us/windows/win32/msi/productversion
+        // For now, we'll just remove '-SNAPSHOT' if present.
+        return appVersion.replaceAll('-SNAPSHOT$', '')
+    } else {
+        return appVersion
+    }
+}

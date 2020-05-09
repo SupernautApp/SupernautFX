@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.consensusj.supernautfx.sample.testapp.MainWindowView">
+   <VBox alignment="CENTER">
+      <Button fx:id="btn" mnemonicParsing="false" onAction="#buttonAction" prefHeight="27.0" prefWidth="160.0" text="Quit" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </VBox.margin>
+      </Button>
+      <Hyperlink fx:id="githubLink" onAction="#linkAction" text="Powered by Supernaut/FX">
+         <VBox.margin>
+            <Insets top="50.0" />
+         </VBox.margin>
+      </Hyperlink>
+   </VBox>
+</StackPane>

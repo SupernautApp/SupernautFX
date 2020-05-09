@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import org.consensusj.supernautfx.BrowserService;
+import org.consensusj.supernaut.services.BrowserService;
 import org.consensusj.supernautfx.sample.hello.service.GreetingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

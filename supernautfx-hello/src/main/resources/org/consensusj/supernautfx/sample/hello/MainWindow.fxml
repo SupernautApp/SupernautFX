@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <StackPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.consensusj.supernautfx.sample.hello.MainWindowController">
-   <VBox alignment="TOP_CENTER">
+   <VBox alignment="CENTER">
       <Button fx:id="btn" mnemonicParsing="false" onAction="#buttonAction" prefHeight="27.0" prefWidth="160.0" text="Hello &lt;name&gt;." textAlignment="CENTER">
          <VBox.margin>
             <Insets bottom="20.0" top="20.0" />

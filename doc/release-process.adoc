@@ -10,6 +10,7 @@
 . Update `CHANGELOG.adoc`
 . Set/verify versions in:
 .. `gradle.properties`
+.. `README.adoc`
 . Commit version bump and changelog.
 . Full build, test
 .. `./gradlew clean buildCI buildJPackages`
@@ -18,6 +19,34 @@
 . Publish to Bintray:
 .. `./gradlew bintrayUpload`
 .. Confirm publish of artifacts in Bintray Web UI.
+
+== Updating Gradle Dependency Verification configuration
+
+We are using Gradle's https://docs.gradle.org/current/userguide/dependency_verification.html[dependency verification] feature to verify dependencies used during the build. For now, we are verifying their "checksums" (actually SHA-256 hashes.) For now we are using a "Trust on First Use" (ToFU) approach when we first use or update a dependency. So this means verification will detect any unexpected changes after the expected checksum is set in `gradle/verification-metadata.xml`.
+
+After adding or updating a dependency, first set the `verify-metadata` flag in `gradle/verification-metadata.xml` to false, by editing the line to like this:
+
+[source, xml]
+----
+<verify-metadata>false</verify-metadata>
+----
+
+
+Then produce the updated metadata in `gradle/verification-metadata.dryrun.xml`:
+
+[source, bash]
+----
+./gradlew  --write-verification-metadata sha256 help --dry-run
+----
+
+Finally, use a diff utility to merge in the changes/additions to the orginal `gradle/verification-metadata.xml` file. Also makes sure to set the `verify-metadata` flag back to true:
+
+[source, xml]
+----
+<verify-metadata>true</verify-metadata>
+----
+
+Now you can make sure the build works and push the changes to the Git repo.
 
 == Announcements
 

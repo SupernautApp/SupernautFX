@@ -4,3 +4,4 @@ plugins {
 
 include 'supernautfx'
 include 'supernautfx-hello'
+include 'supernautfx-testapp'

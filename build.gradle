@@ -9,8 +9,11 @@ buildscript {
 }
 
 plugins {
-    id 'org.asciidoctor.jvm.convert'    version '2.2.0'
-    id 'com.jfrog.bintray'              version '1.8.4'
+    id 'org.asciidoctor.jvm.convert'        version '2.2.0'
+    id 'com.jfrog.bintray'                  version '1.8.4'
+    id 'org.javamodularity.moduleplugin'    version '1.5.0'  apply false
+    id 'org.openjfx.javafxplugin'           version '0.0.8'  apply false
+    id 'org.beryx.jlink'                    version '2.17.3' apply false
 }
 
 buildScan {
@@ -52,8 +55,8 @@ subprojects {
             exclude module: "groovy-all"
         }
 
-        testRuntimeOnly "net.bytebuddy:byte-buddy:1.8.21"                 // allows Spock to mock classes (in addition to interfaces)
-        testRuntimeOnly "org.objenesis:objenesis:2.6"                     // allows Spock to mock classes with constructor arguments
+        testRuntimeOnly "net.bytebuddy:byte-buddy:1.10.9"                 // allows Spock to mock classes (in addition to interfaces)
+        testRuntimeOnly "org.objenesis:objenesis:3.1"                     // Allow Spock to mock classes with constructor arguments
         testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"           // Runtime implementation of slf4j
     }
 
@@ -78,4 +81,4 @@ build.dependsOn subprojects.build
 
 task buildCI(dependsOn: [build, testReport,'supernautfx-hello:jlink'])
 
-task buildJPackages(dependsOn: [buildCI, 'supernautfx-hello:jpackage'])
+task buildJPackages(dependsOn: [buildCI, 'supernautfx-hello:jpackage', 'supernautfx-testapp:jpackage'])

@@ -1,18 +1,23 @@
-package org.consensusj.supernautfx;
+package org.consensusj.supernautfx.micronaut;
 
+import io.micronaut.context.annotation.Context;
 import javafx.application.HostServices;
+import org.consensusj.supernaut.services.BrowserService;
+
+import javax.inject.Singleton;
 
 /**
  * Default implementation of BrowserService using JavaFX HostServices.
  */
-public class JavaFxBrowserService implements BrowserService {
+@Singleton
+public class SfxBrowserService implements BrowserService {
     private final HostServices hostServices;
 
     /**
      * Constructor
      * @param hostServices HostServices object to wrap
      */
-    public JavaFxBrowserService(HostServices hostServices) {
+    public SfxBrowserService(HostServices hostServices) {
         this.hostServices = hostServices;
     }
 

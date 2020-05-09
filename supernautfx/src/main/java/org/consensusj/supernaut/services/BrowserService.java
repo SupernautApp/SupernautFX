@@ -1,9 +1,9 @@
-package org.consensusj.supernautfx;
+package org.consensusj.supernaut.services;
 
 import java.net.URI;
 
 /**
- * Injectable interface that abstracts HostServices.showDocument()
+ * Interface that abstracts JavaFX {@code }HostServices.showDocument()}
  * Use this interface to controllers/services that wish to tell a browser
  * to open a window. The interface allows you to not reference JavaFX
  * in your controller and to use mocks/stubs for unit test, etc.
