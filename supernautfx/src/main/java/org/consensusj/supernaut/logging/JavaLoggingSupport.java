@@ -23,6 +23,10 @@ public class JavaLoggingSupport {
     /**
      * Configure logging.
      * Should be one of the first things called in `main()`
+     *
+     * @param rootClass root class for calling {@code }getResourceAsStream()}
+     * @param loggingPropertiesResource Path to logging configuration properties resource file
+     * @param loggerName The logger name
      */
     public static void configure(Class<?> rootClass, String loggingPropertiesResource, String loggerName) {
         InputStream inputStream = rootClass.getResourceAsStream(loggingPropertiesResource);

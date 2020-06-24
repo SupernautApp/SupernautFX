@@ -2,7 +2,7 @@
 
 == Requirements
 
-* OpenJDK 11 or later (OpenJDK 13 is recommended)
+* OpenJDK 11 or later (OpenJDK 14 is recommended: `sdk use java 14.0.1.hs-adpt`)
 * JDK 14 `jpackage` installed and `BADASS_JLINK_JPACKAGE_HOME` configured (if building sample app with `jpackage`)
 
 == Main Release Process
@@ -21,6 +21,8 @@
 .. Confirm publish of artifacts in Bintray Web UI.
 
 == Updating Gradle Dependency Verification configuration
+
+NOTE:: We are not using Dependency Verification yet, but we did try to use it.
 
 We are using Gradle's https://docs.gradle.org/current/userguide/dependency_verification.html[dependency verification] feature to verify dependencies used during the build. For now, we are verifying their "checksums" (actually SHA-256 hashes.) For now we are using a "Trust on First Use" (ToFU) approach when we first use or update a dependency. So this means verification will detect any unexpected changes after the expected checksum is set in `gradle/verification-metadata.xml`.
 

@@ -119,12 +119,11 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
     }
 
     /**
-     * This is a temporary hack. Should be removed shortly.
+     * This is a temporary hack. Should be replaced in the next release.
      *
      * @return The one-and-only instance
      * @throws RuntimeException if called before the constructor is used.
      */
-    @Deprecated
     public static SfxLauncher getInstance() throws RuntimeException {
         if (INSTANCE == null) throw new RuntimeException("getInstance() called when INSTANCE is null");
         return INSTANCE;

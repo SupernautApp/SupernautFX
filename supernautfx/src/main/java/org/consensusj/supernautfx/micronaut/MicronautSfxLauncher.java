@@ -19,24 +19,33 @@ public class MicronautSfxLauncher extends SfxLauncher {
     private static final Logger log = LoggerFactory.getLogger(SfxLauncher.class);
 
 
+    /**
+     *
+     * @param backgroundAppClass The class object of the background app
+     * @param foregroundAppClass The class object of the foreground app
+     * @param initializeBackgroundAppOnNewThread If true, initializes {@code appFactorySupplier} and
+     *        {@code BackgroundApp} on new thread, if false start them on calling thread (typically the main thread)
+     */
     public MicronautSfxLauncher(Class<? extends BackgroundApp> backgroundAppClass,
                                 Class<? extends SfxForegroundApp> foregroundAppClass,
-                                boolean backgroundStart) {
-        super(() -> new MicronautAppFactory(backgroundAppClass, foregroundAppClass,  false), backgroundStart);
+                                boolean initializeBackgroundAppOnNewThread) {
+        super(() -> new MicronautAppFactory(backgroundAppClass, foregroundAppClass,  false), initializeBackgroundAppOnNewThread);
     }
 
     /**
      *
-     * @param backgroundAppClass
-     * @param foregroundAppClass
-     * @param backgroundOpenJfxStart
-     * @param useApplicationContext If true creates and uses an ApplicationContext, if false uses a BeanContext
+     * @param backgroundAppClass The class object of the background app
+     * @param foregroundAppClass The class object of the foreground app
+     * @param initializeBackgroundAppOnNewThread If true, initializes {@code appFactorySupplier} and
+     *        {@code BackgroundApp} on new thread, if false start them on calling thread (typically the main thread)
+     * @param useApplicationContext If {@code true} creates and uses an {@link ApplicationContext},
+     *                             if {@code false} creates and uses a {@link BeanContext}
      */
     public MicronautSfxLauncher(Class<? extends BackgroundApp> backgroundAppClass,
                                 Class<? extends SfxForegroundApp> foregroundAppClass,
-                                boolean backgroundOpenJfxStart,
+                                boolean initializeBackgroundAppOnNewThread,
                                 boolean useApplicationContext) {
-        super(() -> new MicronautAppFactory(backgroundAppClass, foregroundAppClass, useApplicationContext), backgroundOpenJfxStart);
+        super(() -> new MicronautAppFactory(backgroundAppClass, foregroundAppClass, useApplicationContext), initializeBackgroundAppOnNewThread);
     }
 
     public static class MicronautAppFactory implements AppFactory {
