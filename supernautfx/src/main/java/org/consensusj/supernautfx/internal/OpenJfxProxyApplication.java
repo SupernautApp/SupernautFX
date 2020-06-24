@@ -88,5 +88,7 @@ public final class OpenJfxProxyApplication extends Application {
     public void stop() throws Exception {
         log.info("Stopping SfxForegroundApp");
         foregroundApp.stop();
+        // TODO: Should call a "stop" method in the launcher or the AppFactory?
+        launcher.getBackgroundApp().get().stop();
     }
 }
