@@ -54,24 +54,23 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
         MicronautSfxLauncher launcher = getLauncher();
 
         /*
-           Get a Future for a background app, then resolve the future
+           Get a Future for a ForegroundApp app, then resolve the future
          */
         log.info("Calling launch");
         CompletableFuture<ForegroundApp> futureForegroundApp = launcher.launchAsync(args);
+        log.info("We have a CompletableFuture<ForegroundApp>");
 
-        log.info("We have a CompletableFuture<SkyBackgroundApp>");
         ForegroundApp foregroundApp = futureForegroundApp.get();
-        measurements.add("Background app ready");
+        measurements.add("ForegroundApp app ready");
 
         /*
-           Get a Future for a Foreground app, then resolve the future
+           Get a Future for a BackgroundApp app, then resolve the future
          */
-        log.info("We have a SkyBackgroundApp, getting a CompletableFuture<SkyApp>");
+        log.info("Getting a CompletableFuture<BackgroundApp>");
         CompletableFuture<BackgroundApp> futureBackgroundApp = launcher.getBackgroundApp();
+        log.info("We have a CompletableFuture<BackgroundApp>");
 
-        log.info("We have a CompletableFuture<SkyApp>");
         BackgroundApp backgroundApp = futureBackgroundApp.get();
-
         log.info("We have a BackgroundApp");
 
         if (args.length > 1 && args[0].equals("--test=exit_main_end")) {

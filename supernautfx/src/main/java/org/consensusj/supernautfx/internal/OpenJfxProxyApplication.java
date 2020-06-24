@@ -41,7 +41,7 @@ public final class OpenJfxProxyApplication extends Application {
     }
 
     /**
-     * Create a JavaFX application that wraps a JfxSkyApp
+     * Create a JavaFX application that wraps a SfxForegroundApp
      * Note that {@link org.consensusj.supernautfx.SfxLauncher#createForegroundApp(OpenJfxProxyApplication)} will wait
      * on the background app initialized latch so this constructor
      * will block until the background app is created and initialized.
@@ -54,27 +54,27 @@ public final class OpenJfxProxyApplication extends Application {
     }
 
     /**
-     * SupernautFX implementation of Application#init().
+     * Supernaut.fx implementation of {@link Application#init}.
      * Initializes the ApplicationContext and loads and dependency injects the Application singleton.
      * Called on the JavaFX-launcher thread
      * @throws Exception if something goes wrong
      */
     @Override
     public void init() throws Exception {
-        log.info("Initializing JfxSkyApp");
+        log.info("Initializing SfxForegroundApp");
         foregroundApp.init();
     }
 
     /**
-     * SupernautFX implementation of Application#start().
-     * Calls the applications implementation of SupernautFxApp#start
+     * Supernaut.fx implementation of {@link Application#start}.
+     * Calls the application's implementation of {@link SfxForegroundApp#start}
      *
      * @param primaryStage The primary Stage for the application
      * @throws Exception if something goes wrong
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        log.info("Starting JfxSkyApp");
+        log.info("Starting SfxForegroundApp");
         foregroundApp.start(DefaultSfxMainView.of(primaryStage));
     }
 
@@ -86,7 +86,7 @@ public final class OpenJfxProxyApplication extends Application {
      */
     @Override
     public void stop() throws Exception {
-        log.info("Stopping JfxSkyApp");
+        log.info("Stopping SfxForegroundApp");
         foregroundApp.stop();
     }
 }

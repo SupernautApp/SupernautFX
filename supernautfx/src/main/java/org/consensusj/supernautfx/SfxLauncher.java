@@ -212,6 +212,11 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
     private void startBackgroundApp() {
         log.info("Instantiating appFactory");
         this.appFactory = appFactorySupplier.get();
+
+        /*
+         * Tell the foreground app thread that appFactory is initialized.
+         */
+        log.info("Release appFactoryInitializedLatch");
         appFactoryInitializedLatch.countDown();
 
         log.info("Instantiating backgroundApp class");
@@ -226,10 +231,6 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
 
         futureBackgroundApp.complete(backgroundApp);
 
-        /*
-         * Tell the foreground app thread that background app is initialized.
-         */
-        log.info("Release contextInitializedLatch");
 
         /*
          * Call the background app, so it can start its own threads
@@ -245,7 +246,7 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
     private void startForegroundApp(String[] args) {
         log.info("Calling Application.launch()");
         Application.launch(OpenJfxProxyApplication.class, args);
-        log.info("JfxApp/SkyApp exited.");
+        log.info("OpenJfxProxyApplication exited.");
     }
 
     private Thread startThread(String threadName, Runnable target) {
