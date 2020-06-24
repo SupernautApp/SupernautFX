@@ -14,6 +14,7 @@ plugins {
     id 'org.javamodularity.moduleplugin'    version '1.5.0'  apply false
     id 'org.openjfx.javafxplugin'           version '0.0.8'  apply false
     id 'org.beryx.jlink'                    version '2.17.3' apply false
+    id 'de.undercouch.download'             version '4.0.1'
 }
 
 buildScan {
@@ -24,6 +25,9 @@ buildScan {
     termsOfServiceUrl = 'https://gradle.com/terms-of-service'
     termsOfServiceAgree = 'yes'
 }
+
+rootProject.ext.signJPackageImages = signJPackageImages == "true" // create boolean in ext from property string
+logger.warn "rootProject.ext.signJPackageImages = ${rootProject.ext.signJPackageImages}"
 
 allprojects {
     apply plugin: 'java'
@@ -40,8 +44,7 @@ subprojects {
     apply plugin: 'groovy'
     /*
      * Supernaut will target recent JDK versions. For now library modules will
-     * target JDK 11 and sample apps will be built using JDK 13. We intend to migrate to
-     * JDK 14 shortly after it is final, since 14 should have `jpackage` included.
+     * target JDK 11 and sample apps will be built using JDK 14.
      * We want to focus on jpackaged apps and these should always use recent JDK.
      */
     sourceCompatibility = 11
@@ -70,6 +73,7 @@ subprojects {
 }
 
 apply from: 'gradle/bintray.gradle'
+apply from: 'gradle/downloadJPackage.gradle'
 
 task testReport(type: TestReport) {
     destinationDir = file("$buildDir/reports/allTests")
@@ -82,3 +86,26 @@ build.dependsOn subprojects.build
 task buildCI(dependsOn: [build, testReport,'supernautfx-hello:jlink'])
 
 task buildJPackages(dependsOn: [buildCI, 'supernautfx-hello:jpackage', 'supernautfx-testapp:jpackage'])
+
+/**
+ * Massage the version string based upon the current OS to be valid
+ * for the installer platforms for that OS. rpmbuild, MSI, and potentially
+ * others have restrictions on valid version strings.
+ *
+ * @param appVersion A typical Gradle version string
+ * @return a version string that should work for the currrent platform
+ */
+String normalizeAppVersion(final String appVersion) {
+    def os = org.gradle.internal.os.OperatingSystem.current()
+    if (os.linux) {
+        // Replace '-' with '.' for rpmbuild
+        return appVersion.replace('-', '.')
+    } else if (os.windows) {
+        // This is a hack attempt to assure the version conforms to MSI productVersion string rules
+        // See https://docs.microsoft.com/en-us/windows/win32/msi/productversion
+        // For now, we'll just remove '-SNAPSHOT' if present.
+        return appVersion.replaceAll('-SNAPSHOT$', '')
+    } else {
+        return appVersion
+    }
+}

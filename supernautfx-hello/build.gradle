@@ -1,10 +1,7 @@
 plugins {
-    id 'groovy'
     id 'application'
-    id 'de.undercouch.download'             version "4.0.4"
 }
 
-//apply plugin: "org.javamodularity.moduleplugin"
 apply plugin: "org.openjfx.javafxplugin"
 apply plugin: "org.beryx.jlink"
 
@@ -64,8 +61,7 @@ test {
     }
 }
 
-ext.os = org.gradle.internal.os.OperatingSystem.current()
-def signImage = false
+def os = org.gradle.internal.os.OperatingSystem.current()
 
 jlink {
     addExtraDependencies("javafx")
@@ -87,7 +83,7 @@ jlink {
         // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for
         // where the plugin's jpackage task finds the path to the jpackage tool by default
         if (Boolean.getBoolean('download.jpackage')) {
-            jpackageHome = downloadJPackage()
+            jpackageHome = rootProject.ext.jpackageHome
         }
         skipInstaller = false
 
@@ -99,7 +95,8 @@ jlink {
         installerOptions = ["--app-version", appVersionForJpackage]
         if (os.macOsX) {
             imageOptions += [ '--resource-dir', "${projectDir}/src/macos/resource-dir" ]
-            if (signImage) {
+            if (rootProject.ext.signJPackageImages) {
+                logger.warn "Setting --mac-sign in jpackage imageOptions"
                 imageOptions += [ '--mac-sign' ]
             }
         } else if (os.windows) {
@@ -109,71 +106,6 @@ jlink {
     }
 }
 
-/**
- * Massage the version string based upon the current OS to be valid
- * for the installer platforms for that OS. rpmbuild, MSI, and potentially
- * others have restrictions on valid version strings.
- *
- * @param appVersion A typical Gradle version string
- * @return a version string that should work for the currrent platform
- */
-String normalizeAppVersion(final String appVersion) {
-    if (os.linux) {
-        // Replace '-' with '.' for rpmbuild
-        return appVersion.replace('-', '.')
-    } else if (os.windows) {
-        // This is a hack attempt to assure the version conforms to MSI productVersion string rules
-        // See https://docs.microsoft.com/en-us/windows/win32/msi/productversion
-        // For now, we'll just remove '-SNAPSHOT' if present.
-        return appVersion.replaceAll('-SNAPSHOT$', '')
-    } else {
-        return appVersion
-    }
-}
-
-// #### The code below is needed only if you use the downloadJPackage() method to install the jpackage tool ####
-// Code copied from build.gradle in https://github.com/beryx/fxgl-sliding-puzzle/
-
-/** @return  [url, extension, directory] */
-String[] getJPackageCoordinates() {
-    // def jpackageBaseUrl = 'https://download.java.net/java/early_access/jdk14/34/GPL''
-    def jpackageBaseUrl = 'https://s3-us-west-2.amazonaws.com/static.msgilligan.com/jpackage'
-    def jpackageVersionString = 'openjdk-14-ea%2B34'
-
-    if(os.macOsX) return [
-            "${jpackageBaseUrl}/${jpackageVersionString}_osx-x64_bin.tar.gz",
-            'tar.gz',
-            'jdk-14.jdk/Contents/Home'
-    ]
-    if(os.windows) return [
-            "${jpackageBaseUrl}/${jpackageVersionString}_windows-x64_bin.zip",
-            'zip',
-            'jdk-14'
-    ]
-    return [
-            "${jpackageBaseUrl}/${jpackageVersionString}_linux-x64_bin.tar.gz",
-            'tar.gz',
-            'jdk-14'
-    ]
-}
-
-String downloadJPackage() {
-    def (url, extension, directory) = getJPackageCoordinates()
-    def downloadDir = "$buildDir/download"
-    tasks.jpackageImage.doFirst {
-        def execExt = os.windows ? '.exe' : ''
-        if(!file("$downloadDir/$directory/bin/jpackage$execExt").file) {
-            def jdkArchivePath = "$downloadDir/jdk-jpackage.$extension"
-            download {
-                src url
-                dest jdkArchivePath
-                overwrite false
-            }
-            copy {
-                from ((extension == 'tar.gz') ? tarTree(resources.gzip(jdkArchivePath)) : zipTree(jdkArchivePath))
-                into downloadDir
-            }
-        }
-    }
-    return "$downloadDir/$directory"
+if (Boolean.getBoolean('download.jpackage')) {
+    jpackage.dependsOn rootProject.expandJPackage
 }

@@ -1,13 +1,8 @@
 plugins {
-    id 'groovy'
     id 'application'
-//    id 'org.openjfx.javafxplugin'           version '0.0.8'
-//    id 'org.beryx.jlink'                    version '2.17.3'
 }
 
-//apply plugin: "org.javamodularity.moduleplugin"
 apply plugin: "org.openjfx.javafxplugin"
-apply plugin: "org.javamodularity.moduleplugin"
 apply plugin: "org.beryx.jlink"
 
 def appName = 'SupernautFXTestApp'
@@ -40,8 +35,7 @@ test {
     }
 }
 
-ext.os = org.gradle.internal.os.OperatingSystem.current()
-def signImage = false
+def os = org.gradle.internal.os.OperatingSystem.current()
 
 jlink {
     addExtraDependencies("javafx")
@@ -63,7 +57,7 @@ jlink {
         // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for
         // where the plugin's jpackage task finds the path to the jpackage tool by default
         if (Boolean.getBoolean('download.jpackage')) {
-            jpackageHome = downloadJPackage()
+            jpackageHome = rootProject.ext.jpackageHome
         }
         skipInstaller = false
 
@@ -75,7 +69,8 @@ jlink {
         installerOptions = ["--app-version", appVersionForJpackage]
         if (os.macOsX) {
             imageOptions += [ '--resource-dir', "${projectDir}/src/macos/resource-dir" ]
-            if (signImage) {
+            if (rootProject.ext.signJPackageImages) {
+                logger.warn "Setting --mac-sign in jpackage imageOptions"
                 imageOptions += [ '--mac-sign' ]
             }
         } else if (os.windows) {
@@ -85,24 +80,6 @@ jlink {
     }
 }
 
-/**
- * Massage the version string based upon the current OS to be valid
- * for the installer platforms for that OS. rpmbuild, MSI, and potentially
- * others have restrictions on valid version strings.
- *
- * @param appVersion A typical Gradle version string
- * @return a version string that should work for the currrent platform
- */
-String normalizeAppVersion(final String appVersion) {
-    if (os.linux) {
-        // Replace '-' with '.' for rpmbuild
-        return appVersion.replace('-', '.')
-    } else if (os.windows) {
-        // This is a hack attempt to assure the version conforms to MSI productVersion string rules
-        // See https://docs.microsoft.com/en-us/windows/win32/msi/productversion
-        // For now, we'll just remove '-SNAPSHOT' if present.
-        return appVersion.replaceAll('-SNAPSHOT$', '')
-    } else {
-        return appVersion
-    }
+if (Boolean.getBoolean('download.jpackage')) {
+    jpackage.dependsOn rootProject.expandJPackage
 }
