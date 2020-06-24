@@ -87,6 +87,15 @@ jlink {
         }
         skipInstaller = false
 
+        // Only make one installer type per OS (to save on CI costs)
+        if (os.linux) {
+            installerType = 'rpm'    // default is ['rpm', 'deb']
+        } else if (os.macOsX) {
+            installerType = 'dmg'   // default is ['pkg', 'dmg']
+        } else if (os.windows) {
+            installerType = 'exe'    // default is ['exe', 'msi']
+        }
+
         // Massage version string to be compatible with jpackage installers
         // for the current OS platform
         def appVersionForJpackage = normalizeAppVersion(version)
