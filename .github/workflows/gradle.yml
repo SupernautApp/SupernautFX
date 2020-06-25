@@ -22,8 +22,18 @@ jobs:
       uses: gradle/wrapper-validation-action@v1
     - name: Build with Gradle
       run: ./gradlew -D"download.jpackage"=true buildJPackages --scan --info --stacktrace
-    - name: Upload jpackage directory as artifact
-      uses: actions/upload-artifact@master
+    - name: Upload DMG as an artifact
+      uses: actions/upload-artifact@v2
       with:
         name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-jpackage
-        path: supernautfx-hello/build/jpackage
+        path: supernautfx-hello/build/jpackage/*.dmg
+    - name: Upload EXE as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-jpackage
+        path: supernautfx-hello/build/jpackage/*.exe
+    - name: Upload RPM as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-jpackage
+        path: supernautfx-hello/build/jpackage/*.rpm
