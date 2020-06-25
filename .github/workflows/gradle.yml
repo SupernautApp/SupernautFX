@@ -25,15 +25,15 @@ jobs:
     - name: Upload DMG as an artifact
       uses: actions/upload-artifact@v2
       with:
-        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-jpackage
+        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-dmg
         path: supernautfx-hello/build/jpackage/*.dmg
     - name: Upload EXE as an artifact
       uses: actions/upload-artifact@v2
       with:
-        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-jpackage
+        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-exe
         path: supernautfx-hello/build/jpackage/*.exe
     - name: Upload RPM as an artifact
       uses: actions/upload-artifact@v2
       with:
-        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-jpackage
+        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-rpm
         path: supernautfx-hello/build/jpackage/*.rpm
