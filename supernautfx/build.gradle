@@ -1,7 +1,5 @@
 plugins {
     id 'java-library'
-    //id 'org.openjfx.javafxplugin' version '0.0.8'
-    //id 'com.github.hierynomus.license'  version '0.15.0'
 }
 
 apply plugin: "org.openjfx.javafxplugin"
@@ -28,6 +26,4 @@ test {
     moduleOptions {
         runOnClasspath = true
     }
-}   
-
-
+}
