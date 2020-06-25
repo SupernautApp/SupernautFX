@@ -1,7 +1,7 @@
-= SupernautFX
+= Supernaut.FX
 Sean Gilligan <https://github.com/msgilligan>
 v0.0.6
-:description: SupernautFX DI Framework README.
+:description: Supernaut.FX DI Framework README.
 :supernautfx-version: 0.0.6
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -11,7 +11,7 @@ v0.0.6
 
 image:https://github.com/ConsensusJ/SupernautFX/workflows/Gradle%20Build/badge.svg["Build Status", link="https://github.com/ConsensusJ/SupernautFX/actions"] image:https://travis-ci.org/ConsensusJ/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.org/ConsensusJ/SupernautFX/"] image:https://api.bintray.com/packages/consensusj/maven/supernaut/images/download.svg[link="https://bintray.com/consensusj/maven/supernaut/_latestVersion"]
 
-SupernautFX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut] (provided by the `micronaut-inject-java` JAR.) It enables the use of dependency injection in application, controller, and service objects.
+Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut] (provided by the `micronaut-inject-java` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
 CAUTION:: This is an experimental framework in its very early stages. It is being used by a handful of applications in development and alpha-testing and seems to be working well so far.
 
@@ -23,7 +23,7 @@ Perhaps in the future it could be used as a component by other full-featured Jav
 
 == Minimal Dependencies
 
-SupernautFX introduces no new dependencies beyond what is required for JavaFX and Micronaut:
+Supernaut.FX introduces no new dependencies beyond what is required for JavaFX and Micronaut:
 
 * *JavaFX* (direct dependencies on `javafx-fxml` and `javafx-graphics`)
 * *Micronaut* (`micronaut-inject-java`)
@@ -53,19 +53,19 @@ There is no user guide or "Getting Started" document, yet. Fortunately the frame
 .. `./gradlew supernautfx-hello:jpackage`
 .. Open the `supernautfx-hello/build/jpackage` directory and launch the native application for your platform
 . Review the https://github.com/ConsensusJ/SupernautFX/tree/master/supernautfx-hello/src/main/java/org/consensusj/supernautfx/sample/hello[source code for the Hello app]
-. Review the https://github.com/ConsensusJ/SupernautFX/tree/master/supernautfx/src/main/java/org/consensusj/supernautfx[source code for SupernautFX]
+. Review the https://github.com/ConsensusJ/SupernautFX/tree/master/supernautfx/src/main/java/org/consensusj/supernautfx[source code for Supernaut.FX]
 . Start your own app!
 
 == Inspired By
 
-SupernautFX was inspired by two existing JavaFX DI frameworks, but is focused on JavaFX 11 and later and Micronaut. Thanks Adam Bien and Gluon for the inspiration.
+Supernaut.FX was inspired by two existing JavaFX DI frameworks, but is focused on JavaFX 11 and later and Micronaut. Thanks Adam Bien and Gluon for the inspiration.
 
 * Adam Bien's http://afterburner.adam-bien.com[afterburner.fx]
 * https://gluonhq.com/labs/ignite/[Gluon Ignite]
 
 == Relationship to ConsensusJ
 
-SupernautFX was developed for https://github.com/ConsensusJ/wallet-framework[ConsensusJ Wallet-Framework], but is general-purpose and can be used to add Micronaut-based DI to any JavaFX application.
+Supernaut.FX was developed for https://github.com/ConsensusJ/wallet-framework[ConsensusJ Wallet-Framework], but is general-purpose and can be used to add Micronaut-based DI to any JavaFX application.
 
 
 == Design Goals
