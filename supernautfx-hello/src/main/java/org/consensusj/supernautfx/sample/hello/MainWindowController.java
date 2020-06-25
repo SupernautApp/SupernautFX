@@ -37,7 +37,7 @@ import java.net.URI;
 @Singleton
 public class MainWindowController {
     private static final Logger log = LoggerFactory.getLogger(MainWindowController.class);
-    private static final URI githubRepoUri = URI.create("https://github.com/ConsensusJ/SupernautFX");
+    private static final URI githubRepoUri = URI.create("https://github.com/SupernautApp/supernaut");
     private final BrowserService browserService;
     private final GreetingService greetingService;
 

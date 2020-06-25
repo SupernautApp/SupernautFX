@@ -30,7 +30,7 @@
          <VBox.margin>
             <Insets bottom="20.0" top="20.0" />
          </VBox.margin></Label>
-      <Hyperlink fx:id="githubLink" onAction="#linkAction" text="Powered by ConsensusJ/SupernautFX">
+      <Hyperlink fx:id="githubLink" onAction="#linkAction" text="Powered by SupernautApp/supernaut">
          <VBox.margin>
             <Insets top="50.0" />
          </VBox.margin></Hyperlink>
