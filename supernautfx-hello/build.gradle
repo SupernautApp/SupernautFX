@@ -87,13 +87,13 @@ jlink {
         }
         skipInstaller = false
 
-        // Only make one installer type per OS (to save on CI costs)
+        // Which installers to make
         if (os.linux) {
-            installerType = 'rpm'    // default is ['rpm', 'deb']
+            installerType = ['rpm', 'deb']  // default is ['rpm', 'deb']
         } else if (os.macOsX) {
-            installerType = 'dmg'   // default is ['pkg', 'dmg']
+            installerType = 'dmg'           // default is ['pkg', 'dmg']
         } else if (os.windows) {
-            installerType = 'exe'    // default is ['exe', 'msi']
+            installerType = 'exe'           // default is ['exe', 'msi']
         }
 
         // Massage version string to be compatible with jpackage installers

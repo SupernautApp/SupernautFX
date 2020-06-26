@@ -32,6 +32,11 @@ jobs:
       with:
         name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-exe
         path: supernautfx-hello/build/jpackage/*.exe
+    - name: Upload DEB as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-deb
+        path: supernautfx-hello/build/jpackage/*.deb
     - name: Upload RPM as an artifact
       uses: actions/upload-artifact@v2
       with:
