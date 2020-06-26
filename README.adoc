@@ -9,7 +9,7 @@ v0.0.6
 :caution-caption: :fire:
 :warning-caption: :warning:
 
-image:https://github.com/ConsensusJ/SupernautFX/workflows/Gradle%20Build/badge.svg["Build Status", link="https://github.com/ConsensusJ/SupernautFX/actions"] image:https://travis-ci.org/ConsensusJ/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.org/ConsensusJ/SupernautFX/"] image:https://api.bintray.com/packages/consensusj/maven/supernaut/images/download.svg[link="https://bintray.com/consensusj/maven/supernaut/_latestVersion"]
+image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge.svg["Build Status", link="https://github.com/SupernautApp/SupernautFX/actions"] image:https://travis-ci.org/SupernautApp/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.org/SupernautApp/SupernautFX/"] image:https://api.bintray.com/packages/consensusj/maven/supernaut/images/download.svg[link="https://bintray.com/consensusj/maven/supernaut/_latestVersion"]
 
 Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut] (provided by the `micronaut-inject-java` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
@@ -39,7 +39,7 @@ Supernaut.FX introduces no new dependencies beyond what is required for JavaFX a
 * Application class need not extend `javafx.application.Application`
 * `BrowserService` abstraction for opening links in Web Browser (abstraction of JavaFX `HostServices`)
 * Ability to customize Micronaut `ApplicationContext`
-* Micronaut-powered application configuration via `.yml`, `.json`, or `.properties` files (forthcoming, see https://github.com/ConsensusJ/SupernautFX/issues/2)
+* Micronaut-powered application configuration via `.yml`, `.json`, or `.properties` files (forthcoming, see https://github.com/SupernautApp/SupernautFX/issues/2)
 
 == Getting Started
 
@@ -52,8 +52,8 @@ There is no user guide or "Getting Started" document, yet. Fortunately the frame
 .. Configure the `BADASS_JLINK_JPACKAGE_HOME` environment variable
 .. `./gradlew supernautfx-hello:jpackage`
 .. Open the `supernautfx-hello/build/jpackage` directory and launch the native application for your platform
-. Review the https://github.com/ConsensusJ/SupernautFX/tree/master/supernautfx-hello/src/main/java/org/consensusj/supernautfx/sample/hello[source code for the Hello app]
-. Review the https://github.com/ConsensusJ/SupernautFX/tree/master/supernautfx/src/main/java/org/consensusj/supernautfx[source code for Supernaut.FX]
+. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernautfx-hello/src/main/java/org/consensusj/supernautfx/sample/hello[source code for the Hello app]
+. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernautfx/src/main/java/org/consensusj/supernautfx[source code for Supernaut.FX]
 . Start your own app!
 
 == Inspired By
@@ -70,7 +70,7 @@ Supernaut.FX was developed for https://github.com/ConsensusJ/wallet-framework[Co
 
 == Design Goals
 
-NOTE: If a framework or library like this already exists, please https://github.com/ConsensusJ/SupernautFX/issues/3[let us know!]
+NOTE: If a framework or library like this already exists, please https://github.com/SupernautApp/SupernautFX/issues/3[let us know!]
 
 We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing JavaFX frameworks] and haven't found anything that seems well-suited for the following criteria:
 
