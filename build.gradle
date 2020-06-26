@@ -108,6 +108,6 @@ String normalizeAppVersion(final String appVersion) {
         // For now, we'll just remove '-SNAPSHOT' if present.
         return appVersion.replaceAll('-SNAPSHOT$', '')
     } else {
-        return appVersion
+        return appVersion.replaceAll('-SNAPSHOT$', '')
     }
 }

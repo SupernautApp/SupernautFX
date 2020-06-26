@@ -7,6 +7,7 @@ apply plugin: "org.beryx.jlink"
 
 def appName = 'SupernautFX Hello'
 mainClassName = "$moduleName/org.consensusj.supernautfx.sample.hello.HelloForegroundApp"
+version = helloAppVersion
 
 sourceCompatibility = 11
 targetCompatibility = 11
