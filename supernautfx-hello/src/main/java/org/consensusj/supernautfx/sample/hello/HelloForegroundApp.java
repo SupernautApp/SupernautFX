@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * A simple Supernaut.fx App implementing {@link SfxForegroundApp}.
+ * A simple Supernaut.FX App implementing {@link SfxForegroundApp}.
  */
 @Singleton
 public class HelloForegroundApp implements SfxForegroundApp {

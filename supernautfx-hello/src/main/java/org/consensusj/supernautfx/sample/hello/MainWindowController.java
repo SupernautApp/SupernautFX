@@ -30,14 +30,14 @@ import java.net.URI;
 
 /**
  * Main Window Controller
- * Uses JSR 330 dependency injection annotations to tell SupernautFX/Micronaut
+ * Uses JSR 330 dependency injection annotations to tell Supernaut.FX/Micronaut
  * what to inject in its constructor. @FXML annotations tell the FXMLLoader where
  * to inject objects from the FXML file.
  */
 @Singleton
 public class MainWindowController {
     private static final Logger log = LoggerFactory.getLogger(MainWindowController.class);
-    private static final URI githubRepoUri = URI.create("https://github.com/SupernautApp/supernaut");
+    private static final URI githubRepoUri = URI.create("https://github.com/SupernautApp/SupernautFX");
     private final BrowserService browserService;
     private final GreetingService greetingService;
 

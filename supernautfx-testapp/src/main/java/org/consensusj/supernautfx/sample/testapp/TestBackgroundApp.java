@@ -15,7 +15,6 @@
  */
 package org.consensusj.supernautfx.sample.testapp;
 
-import io.micronaut.context.annotation.Context;
 import org.consensusj.supernaut.BackgroundApp;
 
 import javax.inject.Singleton;
@@ -24,7 +23,6 @@ import javax.inject.Singleton;
  *
  */
 @Singleton
-@Context
 public class TestBackgroundApp implements BackgroundApp {
 
     @Override

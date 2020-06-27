@@ -38,7 +38,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
- * A simple Supernaut FX App implementing SupernautFxApp.
+ * A simple Supernaut FX App implementing {@link SfxForegroundApp}.
+ * This application parses command-line args to provide different options for starting
+ * and stopping for startup performance measurement.
  */
 @Singleton
 public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplicationAware {

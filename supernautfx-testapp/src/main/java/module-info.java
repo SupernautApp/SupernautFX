@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /**
- * Module descriptor for SupernautFX Hello Sample app
+ * Module descriptor for SupernautFX Test App
  */
-module org.consensusj.supernautfx.sample.hello {
+module org.consensusj.supernautfx.sample.testapp {
 
     requires javafx.graphics;
     requires javafx.controls;
@@ -28,7 +28,7 @@ module org.consensusj.supernautfx.sample.hello {
      * Needed for the @Factory annotation and for the Bean Definition classes generated
      * by the Micronaut annotation processor. Most classes in this module only use annotations
      * from javax.inject and do not import any Micronaut classes. In general controllers and services
-     * in a SupernautFX application should avoid dependencies on Micronaut and use javax.inject
+     * in a Supernaut.FX application should avoid dependencies on Micronaut and use javax.inject
      * annotations.
      */
     requires io.micronaut.inject;

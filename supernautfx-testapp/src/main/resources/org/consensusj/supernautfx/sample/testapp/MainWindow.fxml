@@ -27,7 +27,7 @@
             <Insets bottom="20.0" top="20.0" />
          </VBox.margin>
       </Button>
-      <Hyperlink fx:id="githubLink" onAction="#linkAction" text="Powered by Supernaut/FX">
+      <Hyperlink fx:id="githubLink" onAction="#linkAction" text="Powered by Supernaut.FX">
          <VBox.margin>
             <Insets top="50.0" />
          </VBox.margin>

@@ -29,14 +29,14 @@ import java.net.URI;
 
 /**
  * TestApp Main Window Controller
- * Uses JSR 330 dependency injection annotations to tell SupernautFX/Micronaut
+ * Uses JSR 330 dependency injection annotations to tell Supernaut.FX/Micronaut
  * what to inject in its constructor. @FXML annotations tell the FXMLLoader where
  * to inject JFX objects from the FXML file.
  */
 @Singleton
 public class MainWindowView {
     private static final Logger log = LoggerFactory.getLogger(MainWindowView.class);
-    private static final URI githubRepoUri = URI.create("https://github.com/ConsensusJ/SupernautFX");
+    private static final URI githubRepoUri = URI.create("https://github.com/SupernautApp/SupernautFX");
 
     @FXML
     private Hyperlink githubLink;
@@ -44,7 +44,10 @@ public class MainWindowView {
     @FXML
     private Button btn;
 
+    private BrowserService browserService;
+
     public MainWindowView(BrowserService browserService) {
+        this.browserService = browserService;
     }
 
     /**
@@ -62,6 +65,6 @@ public class MainWindowView {
 
     @FXML
     public void linkAction(ActionEvent actionEvent) {
-        //browserService.showDocument(githubRepoUri);
+        browserService.showDocument(githubRepoUri);
     }
 }
