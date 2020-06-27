@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- *
+ * Supernaut.FX module.
  */
 module org.consensusj.supernautfx {
     requires javafx.graphics;

@@ -16,7 +16,6 @@
 package org.consensusj.supernautfx.test;
 
 import javafx.application.Platform;
-import javafx.stage.Stage;
 import org.consensusj.supernautfx.SfxForegroundApp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

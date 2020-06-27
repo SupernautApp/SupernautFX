@@ -18,7 +18,7 @@ package org.consensusj.supernaut.test;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- *
+ * Simple class for recording timestamps for benchmarking
  */
 public class TimingMeasurements {
     public final long startTime = System.currentTimeMillis();
