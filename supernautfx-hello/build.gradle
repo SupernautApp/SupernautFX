@@ -6,8 +6,11 @@ apply plugin: "org.openjfx.javafxplugin"
 apply plugin: "org.beryx.jlink"
 
 def appName = 'SupernautFX Hello'
-mainClassName = "$moduleName/org.consensusj.supernautfx.sample.hello.HelloForegroundApp"
 version = helloAppVersion
+application {
+    mainModule = 'org.consensusj.supernautfx.sample.hello'
+    mainClass = 'org.consensusj.supernautfx.sample.hello.HelloForegroundApp'
+}
 
 sourceCompatibility = 11
 targetCompatibility = 11
