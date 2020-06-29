@@ -20,7 +20,7 @@ import org.consensusj.supernautfx.test.NoopSfxForegroundApp
 import spock.lang.Specification
 
 /**
- * Simple test of AppFactoryJfxLauncher.LambdaAppFactory
+ * Simple test of SfxLauncher.LambdaAppFactory
  */
 class AppFactoryLambdaTest extends Specification {
 
