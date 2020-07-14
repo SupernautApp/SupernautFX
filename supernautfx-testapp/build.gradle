@@ -41,6 +41,12 @@ test {
 
 def os = org.gradle.internal.os.OperatingSystem.current()
 
+task smokeTestJPackageApp(dependsOn: jpackage, type: Exec) {
+    if (os.macOsX) {
+        commandLine "build/jpackage/${appName}.app/Contents/MacOS/${appName}", "--test=quit"
+    }
+}
+
 jlink {
     addExtraDependencies("javafx")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
