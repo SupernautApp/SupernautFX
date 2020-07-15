@@ -47,7 +47,7 @@ task smokeTestJPackageApp(dependsOn: jpackage, type: Exec) {
     } else if (os.macOsX) {
         commandLine "build/jpackage/${appName}.app/Contents/MacOS/${appName}", "--test=quit"
     } else if (os.windows) {
-        commandLine "build/jpackage/${appName}.exe", "--test=quit"
+        commandLine "build\\jpackage\\${appName}.exe", "--test=quit"
     }
 }
 
