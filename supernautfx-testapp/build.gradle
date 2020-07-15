@@ -43,10 +43,12 @@ def os = org.gradle.internal.os.OperatingSystem.current()
 
 task smokeTestJPackageApp(dependsOn: jpackage, type: Exec) {
     if (os.linux) {
-        commandLine "build/jpackage/${appName}/bin/${appName}", "--test=exit_main_begin"
+//        commandLine "build/jpackage/${appName}/bin/${appName}", "--test=exit_main_begin"
+        commandLine "ls"
     } else if (os.macOsX) {
         commandLine "build/jpackage/${appName}.app/Contents/MacOS/${appName}", "--test=quit"
     } else if (os.windows) {
+//        commandLine "build/jpackage/${appName}.exe", "--test=quit"
         commandLine "dir"
     }
 }
