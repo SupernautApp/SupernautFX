@@ -29,18 +29,22 @@ jobs:
       with:
         name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-dmg
         path: supernautfx-hello/build/jpackage/*.dmg
+        if-no-files-found: ignore
     - name: Upload EXE as an artifact
       uses: actions/upload-artifact@v2
       with:
         name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-exe
         path: supernautfx-hello/build/jpackage/*.exe
+        if-no-files-found: ignore
     - name: Upload DEB as an artifact
       uses: actions/upload-artifact@v2
       with:
         name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-deb
         path: supernautfx-hello/build/jpackage/*.deb
+        if-no-files-found: ignore
     - name: Upload RPM as an artifact
       uses: actions/upload-artifact@v2
       with:
         name: supernautfx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-rpm
         path: supernautfx-hello/build/jpackage/*.rpm
+        if-no-files-found: ignore
