@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
-        java: [ '14.0.1', '15-ea' ] # Looks like JDK 14.0.2 breaks the macOS build
+        java: [ '14', '15-ea' ]
       fail-fast: false
     name: ${{ matrix.os }} JDK ${{ matrix.java }}
     steps:
