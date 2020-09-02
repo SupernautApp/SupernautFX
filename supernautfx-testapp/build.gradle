@@ -12,9 +12,6 @@ application {
     mainClass = 'org.consensusj.supernautfx.sample.testapp.TestApp'
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
-
 dependencies {
     implementation project (':supernautfx')
 

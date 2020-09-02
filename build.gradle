@@ -42,13 +42,6 @@ allprojects {
 
 subprojects {
     apply plugin: 'groovy'
-    /*
-     * Supernaut will target recent JDK versions. For now library modules will
-     * target JDK 11 and sample apps will be built using JDK 14.
-     * We want to focus on jpackaged apps and these should always use recent JDK.
-     */
-    sourceCompatibility = 11
-    targetCompatibility = 11
 
     dependencies {
         implementation "org.slf4j:slf4j-api:${slf4jVersion}"
@@ -64,6 +57,7 @@ subprojects {
     }
 
     compileJava {
+        options.release = 11
         options.compilerArgs << '-Xlint:deprecation' << '-Xlint:unchecked'
     }
 

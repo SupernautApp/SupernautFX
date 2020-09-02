@@ -12,9 +12,6 @@ application {
     mainClass = 'org.consensusj.supernautfx.sample.hello.HelloForegroundApp'
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
-
 configurations {
     // Add the 'toVerify' configuration so we can use the following Gradle command
     // `./gradlew --write-verification-metadata sha256 supernautfx-hello:dowloadJavaFXPlatformJars buildJPackages``
