@@ -13,20 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package app.supernaut.fx.micronaut;
+
+import io.micronaut.context.BeanContext;
+import app.supernaut.BackgroundApp;
+
 /**
- * Supernaut.FX module.
+ *  TODO: Use this somewhere to inject the context
  */
-module app.supernaut.fx {
-    requires transitive app.supernaut;
-
-    requires javafx.graphics;
-    requires javafx.fxml;
-
-    requires javax.inject;
-
-    requires org.slf4j;
-
-    exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
-    exports app.supernaut.fx.test;
+public interface MicronautContextAware extends BackgroundApp {
+    void setBeanFactory(BeanContext context);
 }

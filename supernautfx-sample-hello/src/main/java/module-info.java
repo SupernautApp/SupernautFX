@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /**
- * Module descriptor for SupernautFX Test App
+ * Module descriptor for SupernautFX Hello Sample app
  */
-module org.consensusj.supernautfx.sample.testapp {
+module org.consensusj.supernautfx.sample.hello {
 
     requires javafx.graphics;
     requires javafx.controls;
@@ -36,6 +36,7 @@ module org.consensusj.supernautfx.sample.testapp {
     requires org.slf4j;
     requires java.logging;
 
-    opens app.supernaut.fx.sample.testapp to javafx.graphics, javafx.fxml, java.base;
-    exports app.supernaut.fx.sample.testapp;
+    opens app.supernaut.fx.sample.hello to javafx.graphics, javafx.fxml, java.base;
+    exports app.supernaut.fx.sample.hello;
+    exports app.supernaut.fx.sample.hello.service;
 }

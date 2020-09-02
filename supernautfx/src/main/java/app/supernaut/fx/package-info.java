@@ -14,19 +14,6 @@
  * limitations under the License.
  */
 /**
- * Supernaut.FX module.
+ * Supernaut.FX: Classes and interfaces for building JavaFX apps
  */
-module app.supernaut.fx {
-    requires transitive app.supernaut;
-
-    requires javafx.graphics;
-    requires javafx.fxml;
-
-    requires javax.inject;
-
-    requires org.slf4j;
-
-    exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
-    exports app.supernaut.fx.test;
-}
+package app.supernaut.fx;

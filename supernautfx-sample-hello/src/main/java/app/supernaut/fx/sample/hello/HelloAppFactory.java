@@ -13,20 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package app.supernaut.fx.sample.hello;
+
+import io.micronaut.context.annotation.Factory;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
- * Supernaut.FX module.
+ * Micronaut Factory for our Hello application.
+ * (It might be nice to abstract these factory beans so they are not
+ * directly dependent on Micronaut, but at this point using the @Factory
+ * annotation seems to be the simplest way to do things.)
  */
-module app.supernaut.fx {
-    requires transitive app.supernaut;
+@Factory
+public class HelloAppFactory {
 
-    requires javafx.graphics;
-    requires javafx.fxml;
-
-    requires javax.inject;
-
-    requires org.slf4j;
-
-    exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
-    exports app.supernaut.fx.test;
+    @Singleton
+    @Named("PERSONNAME")
+    public String getPlanetName() {
+        return "Mars";
+    }
 }

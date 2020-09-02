@@ -13,20 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package app.supernaut.fx.sample.testapp;
+
+import app.supernaut.BackgroundApp;
+
+import javax.inject.Singleton;
+
 /**
- * Supernaut.FX module.
+ *
  */
-module app.supernaut.fx {
-    requires transitive app.supernaut;
+@Singleton
+public class TestBackgroundApp implements BackgroundApp {
 
-    requires javafx.graphics;
-    requires javafx.fxml;
+    @Override
+    public void init()
+    {
+        TestApp.measurements.add("Background app inited");
+    }
 
-    requires javax.inject;
+    @Override
+    public void start() {
+        TestApp.measurements.add("Background app started");
+    }
 
-    requires org.slf4j;
-
-    exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
-    exports app.supernaut.fx.test;
+    @Override
+    public void stop() {
+    }
 }

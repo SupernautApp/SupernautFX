@@ -1,0 +1,17 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    modularity.inferModulePath = true
+}
+
+compileJava {
+    // We're currently requiring Java 9 for module-info.java, but the intention
+    // is to allow this module to be used in "modern" Android libraries and apps.
+    options.release = 9
+}
+
+dependencies {
+    // No Dependencies!!
+}

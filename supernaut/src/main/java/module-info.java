@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 /**
- * Supernaut.FX module.
+ * Supernaut base module. This module should have no dependencies except the JDK.
  */
-module app.supernaut.fx {
-    requires transitive app.supernaut;
+module app.supernaut {
+    requires java.logging;
 
-    requires javafx.graphics;
-    requires javafx.fxml;
-
-    requires javax.inject;
-
-    requires org.slf4j;
-
-    exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
-    exports app.supernaut.fx.test;
+    exports app.supernaut;
+    exports app.supernaut.services;
+    exports app.supernaut.logging;
+    exports app.supernaut.test;
 }

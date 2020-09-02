@@ -13,20 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package app.supernaut.fx.test;
+
+import app.supernaut.BackgroundApp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.inject.Singleton;
+
 /**
- * Supernaut.FX module.
+ * A Noop background app for testing
  */
-module app.supernaut.fx {
-    requires transitive app.supernaut;
+@Singleton
+public class NoopBackgroundApp implements BackgroundApp {
+    private static final Logger log = LoggerFactory.getLogger(NoopBackgroundApp.class);
 
-    requires javafx.graphics;
-    requires javafx.fxml;
+    @Override
+    public void start() {
+        log.info("Start");
+    }
 
-    requires javax.inject;
-
-    requires org.slf4j;
-
-    exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
-    exports app.supernaut.fx.test;
+    @Override
+    public void stop() {
+        log.info("Stop");
+    }
 }

@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 /**
- * Supernaut.FX module.
+ * Hello World Sample app for SupernautFX
+ *
+ * This application uses javax.inject annotations for dependency injection and has no direct
+ * dependencies on Micronaut (with the exception of HelloAppFactory.java).
+ * However it's module descriptor does require the use of Micronaut since the annotation
+ * processor will generate
+ * classes that need it.
  */
-module app.supernaut.fx {
-    requires transitive app.supernaut;
-
-    requires javafx.graphics;
-    requires javafx.fxml;
-
-    requires javax.inject;
-
-    requires org.slf4j;
-
-    exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
-    exports app.supernaut.fx.test;
-}
+package app.supernaut.fx.sample.hello;

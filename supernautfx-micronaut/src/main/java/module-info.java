@@ -16,17 +16,21 @@
 /**
  * Supernaut.FX module.
  */
-module app.supernaut.fx {
-    requires transitive app.supernaut;
+module app.supernaut.fx.micronaut {
+    requires transitive app.supernaut.fx;
+
+    requires java.logging;
 
     requires javafx.graphics;
     requires javafx.fxml;
 
     requires javax.inject;
 
+    requires io.micronaut.inject;
     requires org.slf4j;
-
-    exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
-    exports app.supernaut.fx.test;
+    
+    exports app.supernaut.fx.micronaut;
+    /* TODO: Fix this */
+    /* We have to open this to so Micronaut (possibly in the merged module) can @Inject private fields in it */
+    opens app.supernaut.fx.micronaut;
 }
