@@ -16,7 +16,7 @@
 /**
  * Module descriptor for SupernautFX Test App
  */
-module org.consensusj.supernautfx.sample.testapp {
+module app.supernaut.fx.sample.testapp {
 
     requires javafx.graphics;
     requires javafx.controls;

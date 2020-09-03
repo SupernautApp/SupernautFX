@@ -1,4 +1,4 @@
-= ConsensusJ SupernautFX Release Process
+= SupernautFX Release Process
 
 == Requirements
 

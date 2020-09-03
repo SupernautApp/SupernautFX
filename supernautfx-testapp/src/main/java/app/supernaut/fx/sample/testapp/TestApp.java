@@ -54,7 +54,7 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         measurements.add("Entered main()");
-        JavaLoggingSupport.configure(TestApp.class, "org.consensusj.supernautfx.sample.testapp");
+        JavaLoggingSupport.configure(TestApp.class, "app.supernaut.fx.sample.testapp");
 
         if (args.length > 1 && args[0].equals("--sequential-launch")) {
             log.info("SEQUENTIAL LAUNCH");
@@ -74,7 +74,7 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
            Get a Future for a ForegroundApp app, then resolve the future
          */
         log.info("Calling launch");
-        CompletableFuture<ForegroundApp> futureForegroundApp = launcher.launchAsync(args);
+        CompletableFuture<ForegroundApp> futureForegroundApp = launcher.launchAsync(args, TestApp.class, TestBackgroundApp.class);
         log.info("We have a CompletableFuture<ForegroundApp>");
 
         ForegroundApp foregroundApp = futureForegroundApp.get();
@@ -97,7 +97,7 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
     }
 
     private static MicronautSfxLauncher getLauncher() {
-        return new MicronautSfxLauncher(TestBackgroundApp.class, TestApp.class, backgroundStart);
+        return new MicronautSfxLauncher(backgroundStart);
     }
 
     public TestApp(SfxFxmlLoaderFactory loaderFactory) {

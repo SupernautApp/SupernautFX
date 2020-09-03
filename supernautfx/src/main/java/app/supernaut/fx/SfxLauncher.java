@@ -23,6 +23,7 @@ import app.supernaut.fx.internal.OpenJfxProxyApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Supplier;
@@ -60,11 +61,10 @@ import java.util.function.Supplier;
  * </ol>
  *
  */
-public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLauncher {
+public class SfxLauncher implements FxLauncher {
     private static final Logger log = LoggerFactory.getLogger(SfxLauncher.class);
     private static final String backgroundAppLauncherThreadName = "SupernautFX-Background-Launcher";
     private static final String foregroundAppLauncherThreadName = "SupernautFX-JavaFX-Launcher";
-    private static SfxLauncher INSTANCE;
 
     private final boolean initializeBackgroundAppOnNewThread;
     private final Supplier<AppFactory> appFactorySupplier;
@@ -76,6 +76,8 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
     /* This future returns an initialized ForegroundApp */
     protected final CompletableFuture<ForegroundApp> futureForegroundApp = new CompletableFuture<>();
 
+    private Class<? extends SfxForegroundApp> foregroundAppClass;
+
     /**
      * Interface that can be used to create and pre-initialize {@link ForegroundApp} and {@link BackgroundApp}.
      * This interface can be implemented by subclasses (or direct callers of the constructor.) By "pre-initialize" we
@@ -84,38 +86,41 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
      * {@code MicronautSfxLauncher}.
      */
     public interface AppFactory {
-        BackgroundApp   createBackgroundApp();
-        SfxForegroundApp createForegroundApp(Application proxyApplication);
+        BackgroundApp   createBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass);
+        SfxForegroundApp createForegroundApp(Class<? extends SfxForegroundApp> foregroundAppClass, Application proxyApplication);
     }
 
     /**
-     * Flexible, lambda-friendly implementation of AppFactory using {@link Supplier}.
-     * Using {@link LambdaAppFactory LambdaAppFactory},
-     * implementations can be as simple as:
-     * <pre>{@code
-     *          var factory = new AppFactoryJfxLauncher.LambdaAppFactory(
-     *                 () -> new NoopBackgroundApp(),
-     *                 () -> new NoopJfxForegroundApp());
-     * }</pre>
+     * Default implementation of AppFactory.
      */
-    public static class LambdaAppFactory implements AppFactory {
-        private final Supplier<BackgroundApp> backgroundAppSupplier;
-        private final Supplier<SfxForegroundApp> foregroundAppSupplier;
-
-        public LambdaAppFactory(Supplier<BackgroundApp> backgroundAppSupplier,
-                                  Supplier<SfxForegroundApp> foregroundAppSupplier) {
-            this.backgroundAppSupplier = backgroundAppSupplier;
-            this.foregroundAppSupplier = foregroundAppSupplier;
+    public static class DefaultAppFactory implements AppFactory {
+        
+        @Override
+        public BackgroundApp createBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass) {
+            return newInstance(backgroundAppClass);
         }
 
         @Override
-        public BackgroundApp createBackgroundApp() {
-            return backgroundAppSupplier.get();
+        public SfxForegroundApp createForegroundApp(Class<? extends SfxForegroundApp> foregroundAppClass, Application proxyApplication) {
+            return newInstance(foregroundAppClass);
         }
 
-        @Override
-        public SfxForegroundApp createForegroundApp(Application proxyApplication) {
-            return foregroundAppSupplier.get();
+        /**
+         * newInstance without checked exceptions.
+         *
+         * @param clazz A Class object that must have a no-args constructor.
+         * @param <T> The type of the class
+         * @return A new instanceof the class
+         * @throws RuntimeException exceptions thrown by {@code newInstance()}.
+         */
+        private static <T> T newInstance(Class<T> clazz) {
+            T foregroundApp;
+            try {
+                foregroundApp = clazz.getDeclaredConstructor().newInstance();
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+            return foregroundApp;
         }
     }
 
@@ -127,52 +132,39 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
      *        {@code BackgroundApp} on new thread, if false start them on calling thread (typically the main thread)
      */
     public SfxLauncher(Supplier<AppFactory> appFactorySupplier, boolean initializeBackgroundAppOnNewThread) {
-        INSTANCE = this;
         this.appFactorySupplier = appFactorySupplier;
         this.initializeBackgroundAppOnNewThread = initializeBackgroundAppOnNewThread;
         appFactoryInitializedLatch = new CountDownLatch(1);
     }
-
-    /**
-     * This is a temporary hack. Should be replaced in the next release.
-     *
-     * @return The one-and-only instance
-     * @throws RuntimeException if called before the constructor is used.
-     */
-    public static SfxLauncher getInstance() throws RuntimeException {
-        if (INSTANCE == null) throw new RuntimeException("getInstance() called when INSTANCE is null");
-        return INSTANCE;
-    }
-
+    
     @Override
-    public CompletableFuture<ForegroundApp> launchAsync(String[] args) {
+    public CompletableFuture<ForegroundApp> launchAsync(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
         log.info("launchAsync...");
-        launchInternal(args, true);
+        launchInternal(args, foregroundAppClass, backgroundApp, true);
         return getForegroundApp();
     }
 
     @Override
-    public void launch(String[] args) {
+    public void launch(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
         log.info("launch...");
-        launchInternal(args, false);
+        launchInternal(args, foregroundAppClass, backgroundApp, false);
     }
-
 
     /**
      * Called by {@code OpenJfxProxyApplication} to create its delegate {@link SfxForegroundApp} object.
      * Waits on a {@link CountDownLatch} to make sure the {@link AppFactory AppFactory} is ready.
      * 
-     * @param proxyApplication The calling instance of {@link OpenJfxProxyApplication}
+     * @param proxyApplication The calling instance of {@code OpenJfxProxyApplication}
      * @return The newly constructed OpenJFX-compatible {@link SfxForegroundApp}
      */
     @Override
-    public SfxForegroundApp createForegroundApp(OpenJfxProxyApplication proxyApplication) {
+    public SfxForegroundApp createForegroundApp(Application proxyApplication) {
         try {
             appFactoryInitializedLatch.await();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        SfxForegroundApp foregroundApp = appFactory.createForegroundApp(proxyApplication);
+        SfxForegroundApp foregroundApp = appFactory.createForegroundApp(foregroundAppClass, proxyApplication);
         if (foregroundApp instanceof SfxForegroundApp.OpenJfxApplicationAware) {
             // If foregroundApp implements the interface, pass it the JfxApplication implementation
             ((SfxForegroundApp.OpenJfxApplicationAware) foregroundApp).setJfxApplication(proxyApplication);
@@ -198,32 +190,33 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
      * @param initForegroundOnNewThread If true, start OpenJFX on a new thread, if false start it on
      *                        calling thead (typically this will be the main thread)
      */
-    private void launchInternal(String[] args, boolean initForegroundOnNewThread) {
-        launchBackgroundApp();
-        launchForegroundApp(args, initForegroundOnNewThread);
+    private void launchInternal(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundAppClass, boolean initForegroundOnNewThread) {
+        Class<? extends SfxForegroundApp> sfxForegroundAppClass = (Class<? extends SfxForegroundApp>) foregroundAppClass;
+        launchBackgroundApp(backgroundAppClass);
+        launchForegroundApp(args, sfxForegroundAppClass, initForegroundOnNewThread);
     }
 
-    private void launchBackgroundApp() {
+    private void launchBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass) {
         if (initializeBackgroundAppOnNewThread) {
             log.info("Launching background app on {} thread", backgroundAppLauncherThreadName);
-            startThread(backgroundAppLauncherThreadName, this::startBackgroundApp);
+            startThread(backgroundAppLauncherThreadName,  () -> startBackgroundApp(backgroundAppClass));
         } else {
             log.info("Launching background app on caller's thread");
-            startBackgroundApp();
+            startBackgroundApp(backgroundAppClass);
         }
     }
 
-    private void launchForegroundApp(String[] args, boolean async) {
+    private void launchForegroundApp(String[] args, Class<? extends SfxForegroundApp> foregroundAppClass, boolean async) {
         if (async) {
             log.info("Launching on {} thread", foregroundAppLauncherThreadName);
-            startThread(foregroundAppLauncherThreadName, () -> startForegroundApp(args));
+            startThread(foregroundAppLauncherThreadName, () -> startForegroundApp(args, foregroundAppClass));
         } else {
             log.info("Launching on caller's thread");
-            startForegroundApp(args);
+            startForegroundApp(args, foregroundAppClass);
         }
     }
 
-    private void startBackgroundApp() {
+    private void startBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass) {
         log.info("Instantiating appFactory");
         this.appFactory = appFactorySupplier.get();
 
@@ -234,7 +227,7 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
         appFactoryInitializedLatch.countDown();
 
         log.info("Instantiating backgroundApp class");
-        BackgroundApp backgroundApp = createBackgroundApp();
+        BackgroundApp backgroundApp = appFactory.createBackgroundApp(backgroundAppClass);
 
         /*
          * Do any (hopefully minimal) background initialization that
@@ -251,13 +244,10 @@ public class SfxLauncher implements Launcher, OpenJfxProxyApplication.JfxLaunche
          */
         backgroundApp.start();
     }
-
-    private BackgroundApp createBackgroundApp() {
-        return appFactory.createBackgroundApp();
-    }
     
-
-    private void startForegroundApp(String[] args) {
+    private void startForegroundApp(String[] args, Class<? extends SfxForegroundApp> foregroundAppClass) {
+        OpenJfxProxyApplication.configuredLauncher = this;
+        this.foregroundAppClass = foregroundAppClass;
         log.info("Calling Application.launch()");
         Application.launch(OpenJfxProxyApplication.class, args);
         log.info("OpenJfxProxyApplication exited.");

@@ -13,22 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.supernaut.fx.sample;
+package app.supernaut.fx
 
-import app.supernaut.BackgroundApp;
-import app.supernaut.fx.SfxLauncher;
-import app.supernaut.fx.SfxForegroundApp;
-
-import java.util.function.Supplier;
+import app.supernaut.fx.test.NoopBackgroundApp
+import spock.lang.Specification
 
 /**
- * Demonstration Launcher that uses LambdaAppFactory.
+ * Simple test of SfxLauncher.DefaultAppFactory
  */
-public class SupplierJfxLauncher extends SfxLauncher {
+class DefaultAppFactoryTest extends Specification {
 
-    public SupplierJfxLauncher(Supplier<BackgroundApp> backgroundAppSupplier,
-                               Supplier<SfxForegroundApp> foregroundAppSupplier,
-                               boolean backgroundStart) {
-        super(() -> new LambdaAppFactory(backgroundAppSupplier, foregroundAppSupplier), backgroundStart);
+    def "Can create a DefaultAppFactory"() {
+        when:
+        def factory = new SfxLauncher.DefaultAppFactory()
+
+        then:
+        factory != null
+
+        when:
+        def backgroundApp = factory.createBackgroundApp(NoopBackgroundApp.class)
+
+        then:
+        backgroundApp != null
     }
 }

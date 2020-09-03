@@ -15,6 +15,7 @@
  */
 package app.supernaut.fx.sample.hello;
 
+import app.supernaut.fx.test.NoopBackgroundApp;
 import io.micronaut.context.annotation.Factory;
 
 import javax.inject.Named;
@@ -33,5 +34,10 @@ public class HelloAppFactory {
     @Named("PERSONNAME")
     public String getPlanetName() {
         return "Mars";
+    }
+
+    @Singleton
+    public NoopBackgroundApp getBackgroundApp() {
+        return new NoopBackgroundApp();
     }
 }

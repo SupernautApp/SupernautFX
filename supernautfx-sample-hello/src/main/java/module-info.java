@@ -16,12 +16,13 @@
 /**
  * Module descriptor for SupernautFX Hello Sample app
  */
-module org.consensusj.supernautfx.sample.hello {
+module app.supernaut.fx.sample.hello {
 
     requires javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
 
+    requires app.supernaut.fx;
     requires app.supernaut.fx.micronaut;
     requires javax.inject;
     /*

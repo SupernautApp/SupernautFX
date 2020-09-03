@@ -33,46 +33,31 @@ import org.slf4j.LoggerFactory;
 public class MicronautSfxLauncher extends SfxLauncher {
     private static final Logger log = LoggerFactory.getLogger(SfxLauncher.class);
 
-
     /**
      *
-     * @param backgroundAppClass The class object of the background app
-     * @param foregroundAppClass The class object of the foreground app
      * @param initializeBackgroundAppOnNewThread If true, initializes {@code appFactorySupplier} and
      *        {@code BackgroundApp} on new thread, if false start them on calling thread (typically the main thread)
      */
-    public MicronautSfxLauncher(Class<? extends BackgroundApp> backgroundAppClass,
-                                Class<? extends SfxForegroundApp> foregroundAppClass,
-                                boolean initializeBackgroundAppOnNewThread) {
-        super(() -> new MicronautAppFactory(backgroundAppClass, foregroundAppClass,  false), initializeBackgroundAppOnNewThread);
+    public MicronautSfxLauncher(boolean initializeBackgroundAppOnNewThread) {
+        super(() -> new MicronautAppFactory(false), initializeBackgroundAppOnNewThread);
     }
 
     /**
      *
-     * @param backgroundAppClass The class object of the background app
-     * @param foregroundAppClass The class object of the foreground app
      * @param initializeBackgroundAppOnNewThread If true, initializes {@code appFactorySupplier} and
      *        {@code BackgroundApp} on new thread, if false start them on calling thread (typically the main thread)
      * @param useApplicationContext If {@code true} creates and uses an {@link ApplicationContext},
      *                             if {@code false} creates and uses a {@link BeanContext}
      */
-    public MicronautSfxLauncher(Class<? extends BackgroundApp> backgroundAppClass,
-                                Class<? extends SfxForegroundApp> foregroundAppClass,
-                                boolean initializeBackgroundAppOnNewThread,
+    public MicronautSfxLauncher(boolean initializeBackgroundAppOnNewThread,
                                 boolean useApplicationContext) {
-        super(() -> new MicronautAppFactory(backgroundAppClass, foregroundAppClass, useApplicationContext), initializeBackgroundAppOnNewThread);
+        super(() -> new MicronautAppFactory(useApplicationContext), initializeBackgroundAppOnNewThread);
     }
 
     public static class MicronautAppFactory implements AppFactory {
-        private final Class<? extends SfxForegroundApp> foregroundAppClass;
-        private final Class<? extends BackgroundApp> backgroundAppClass;
         private final BeanContext context;
 
-        public MicronautAppFactory(Class<? extends BackgroundApp> backgroundAppClass,
-                                   Class<? extends SfxForegroundApp> foregroundAppClass,
-                                   boolean useApplicationContext) {
-            this.foregroundAppClass = foregroundAppClass;
-            this.backgroundAppClass = backgroundAppClass;
+        public MicronautAppFactory(boolean useApplicationContext) {
             if (useApplicationContext) {
                 log.info("Creating Micronaut ApplicationContext");
                 this.context = ApplicationContext.build(Environment.CLI).build();
@@ -86,12 +71,12 @@ public class MicronautSfxLauncher extends SfxLauncher {
         }
 
         @Override
-        public BackgroundApp createBackgroundApp() {
+        public BackgroundApp createBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass) {
             return context.getBean(backgroundAppClass);
         }
 
         @Override
-        public SfxForegroundApp createForegroundApp(Application proxyApplication) {
+        public SfxForegroundApp createForegroundApp(Class<? extends SfxForegroundApp> foregroundAppClass, Application proxyApplication) {
             return getForegroundAppBean(foregroundAppClass, proxyApplication);
         }
 

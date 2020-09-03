@@ -33,7 +33,7 @@ allprojects {
     apply plugin: 'java'
 
     version = supernautVersion     // set in gradle.properties
-    group = 'org.consensusj.supernaut'
+    group = 'app.supernaut'
 
     repositories {
         jcenter()

@@ -42,12 +42,12 @@ public class HelloForegroundApp implements SfxForegroundApp {
 
 
     public static void main(String[] args) {
-        JavaLoggingSupport.configure(HelloForegroundApp.class, "org.consensusj.supernautfx.sample.testapp");
-        getLauncher().launch(args);
+        JavaLoggingSupport.configure(HelloForegroundApp.class, "app.supernaut.fx.sample.testapp");
+        getLauncher().launch(args, HelloForegroundApp.class, NoopBackgroundApp.class);
     }
 
     private static Launcher getLauncher() {
-        return new MicronautSfxLauncher(NoopBackgroundApp.class, HelloForegroundApp.class, true);
+        return new MicronautSfxLauncher(true);
     }
 
     public HelloForegroundApp(SfxFxmlLoaderFactory loaderFactory) {

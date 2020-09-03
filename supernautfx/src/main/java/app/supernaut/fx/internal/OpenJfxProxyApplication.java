@@ -15,11 +15,10 @@
  */
 package app.supernaut.fx.internal;
 
+import app.supernaut.fx.FxLauncher;
 import app.supernaut.fx.SfxForegroundApp;
-import app.supernaut.fx.SfxLauncher;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import app.supernaut.Launcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,32 +38,19 @@ import org.slf4j.LoggerFactory;
  */
 public final class OpenJfxProxyApplication extends Application {
     private static final Logger log = LoggerFactory.getLogger(OpenJfxProxyApplication.class);
-    protected final JfxLauncher launcher;
+    public static FxLauncher configuredLauncher;  // Launcher must set this global before calling constructor
+    protected final FxLauncher launcher;
     protected final SfxForegroundApp foregroundApp;
-
-    /**
-     * Additional required methods for launching {@link SfxForegroundApp} instances that
-     * are proxied by {@link OpenJfxProxyApplication}.
-     */
-    public interface JfxLauncher extends Launcher {
-        /**
-         * Construct a {@link SfxForegroundApp} that is a delegate to {@link OpenJfxProxyApplication}.
-         * @param jfxApplication The OpenJfx "proxy" app instance
-         * @return A newly constructed (and possibly injected) foreground app
-         */
-        SfxForegroundApp createForegroundApp(OpenJfxProxyApplication jfxApplication);
-    }
-
+    
     /**
      * Create a JavaFX application that wraps a SfxForegroundApp
-     * Note that {@link SfxLauncher#createForegroundApp(OpenJfxProxyApplication)} will wait
+     * Note that {@link FxLauncher#createForegroundApp(Application)} will wait
      * on the background app initialized latch so this constructor
      * will block until the background app is created and initialized.
      * Constructed on the JavaFX application thread
      */
     public OpenJfxProxyApplication() {
-        // TODO: Use ServiceLoader to make launcher implementation configurable?
-        launcher = null; // MicronautSfxLauncher.getInstance();
+        launcher = configuredLauncher;
         foregroundApp = launcher.createForegroundApp(this);
     }
 
@@ -92,7 +78,6 @@ public final class OpenJfxProxyApplication extends Application {
         log.info("Starting SfxForegroundApp");
         foregroundApp.start(DefaultSfxMainView.of(primaryStage));
     }
-
 
     /**
      * SupernautFX implementation of Application#stop().

@@ -38,7 +38,7 @@ public interface Launcher {
      * Does not return until after foreground app closes.
      * @param args command-line args
      */
-    void launch(String[] args);
+    void launch(String[] args, Class<? extends ForegroundApp> foregroundApp, Class<? extends BackgroundApp> backgroundApp);
 
     /**
      * Launch and run the application on a newly created thread.
@@ -48,7 +48,7 @@ public interface Launcher {
      * @param args command-line args
      * @return A future that is completed when Foreground app is initialized
      */
-    CompletableFuture<ForegroundApp> launchAsync(String[] args);
+    CompletableFuture<ForegroundApp> launchAsync(String[] args, Class<? extends ForegroundApp> foregroundApp, Class<? extends BackgroundApp> backgroundApp);
 
     /**
      * Get a future that will be completed when the Foreground app

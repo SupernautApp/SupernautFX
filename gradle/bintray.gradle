@@ -41,9 +41,9 @@ allprojects {
             repo = 'maven'
             name = 'supernaut'
             desc = 'DI for JavaFX using Micronaut'
-            websiteUrl = 'https://github.com/ConsensusJ/SupernautFX'
-            issueTrackerUrl = 'https://github.com/ConsensusJ/SupernautFX/issues'
-            vcsUrl = 'https://github.com/ConsensusJ/SupernautFX.git'
+            websiteUrl = 'https://github.com/SupernautApp/SupernautFX'
+            issueTrackerUrl = 'https://github.com/SupernautApp/SupernautFX/issues'
+            vcsUrl = 'https://github.com/SupernautApp/SupernautFX.git'
             licenses = ['Apache-2.0']
             labels = ['java', 'jdk', 'openjdk', 'javafx', 'dependency-injection', 'micronaut', 'framework']
             version {
