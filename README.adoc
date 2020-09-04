@@ -30,6 +30,31 @@ Supernaut.FX introduces no new dependencies beyond what is required for JavaFX a
 * `javax.inject` (also used by Micronaut)
 * `slf4j-api` (also used by Micronaut)
 
+
+== Modules
+
+Supernaut.FX currently consists of 3 modules (JARs)
+
+|===
+|Module name | Purpose | Dependencies
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut/src/main/java/module-info.java[`app.supernaut`]
+| Interfaces for background components (no JavaFX)
+| *No dependencies!*
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernautfx/src/main/java/module-info.java[`app.supernaut.fx`]
+| JavaFX interfaces
+| JavaFX, `javax.inject`, `slf4j-api`
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernautfx-micronaut/src/main/java/module-info.java[`app.supernaut.fx.micronaut`]
+| Core interfaces for background components (no JavaFX)
+| `micronaut-inject-java`, `slf4j-api`
+|===
+
+Typical applications will have a compile-time dependency on `app.supernaut.fx` and a runtime dependency on `app.supernaut.fx.micronaut`.
+
+You may also develop library modules for services using only `app.supernaut`.
+
 == Features
 
 * JavaFX-compatible Dependency Injection
@@ -47,13 +72,13 @@ There is no user guide or "Getting Started" document, yet. Fortunately the frame
 
 . Clone the project
 . Run the sample Hello app
-.. `./gradlew supernautfx-hello:run`
+.. `./gradlew supernautfx-sample-hello:run`
 . Build a `jpackage`-ed Hello app
 .. Configure the `BADASS_JLINK_JPACKAGE_HOME` environment variable
-.. `./gradlew supernautfx-hello:jpackage`
-.. Open the `supernautfx-hello/build/jpackage` directory and launch the native application for your platform
-. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernautfx-hello/src/main/java/org/consensusj/supernautfx/sample/hello[source code for the Hello app]
-. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernautfx/src/main/java/org/consensusj/supernautfx[source code for Supernaut.FX]
+.. `./gradlew supernautfx-sample-hello:jpackage`
+.. Open the `supernautfx-sample-hello/build/jpackage` directory and launch the native application for your platform
+. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernautfx-sample-hello/src/main/java/app/supernaut/fx/sample/hello[source code for the Hello app]
+. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernautfx/src/main/java/app/supernaut/fx[source code for Supernaut.FX]
 . Start your own app!
 
 == Inspired By

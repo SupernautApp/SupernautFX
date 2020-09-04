@@ -58,7 +58,7 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
 
         if (args.length > 1 && args[0].equals("--sequential-launch")) {
             log.info("SEQUENTIAL LAUNCH");
-            backgroundStart = false; // This isn't currently used do to using the service loader for FxLauncher
+            backgroundStart = false; // This isn't currently used (due to using the service loader for FxLauncher)
         }
         if (args.length > 1 && args[0].equals("--test=exit_main_begin")) {
             System.exit(0);
