@@ -16,25 +16,25 @@
 package app.supernaut.fx.sample;
 
 import app.supernaut.BackgroundApp;
-import app.supernaut.fx.SfxLauncher;
-import app.supernaut.fx.SfxForegroundApp;
+import app.supernaut.fx.FxLauncherAbstract;
+import app.supernaut.fx.FxForegroundApp;
 
 /**
- * A simple {@link SfxLauncher} that uses {@link Class} objects to specify {@link BackgroundApp}
- * and {@link SfxForegroundApp}.
+ * A simple {@link FxLauncherAbstract} that uses {@link Class} objects to specify {@link BackgroundApp}
+ * and {@link FxForegroundApp}.
  */
-public final class SimpleJfxLauncher extends SfxLauncher {
+public final class SimpleFxLauncher extends FxLauncherAbstract {
 
-    public SimpleJfxLauncher() {
+    public SimpleFxLauncher() {
         this(true);
     }
     
-    public SimpleJfxLauncher(boolean backgroundStart) {
+    public SimpleFxLauncher(boolean backgroundStart) {
         super(DefaultAppFactory::new, backgroundStart);
     }
 
     @Override
     public String name() {
-        return "default";
+        return "simple";
     }
 }

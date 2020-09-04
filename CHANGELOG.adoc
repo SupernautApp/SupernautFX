@@ -14,7 +14,7 @@ Released: 2020.06.28
 ** `app.supernaut.fx` (currently `org.consensusj.supernautfx`)
 ** `app.supernaut.fx.micronaut` (currently `org.consensusj.supernautfx.micronaut`)
 * Interfaces in `org.consensusj.supernaut` create minimal abstraction layer above JavaFX
-* Dual-thread startup with `ForegroundApp`/`SfxForegroundApp` and `BackgroundApp`
+* Dual-thread startup with `ForegroundApp`/`FxForegroundApp` and `BackgroundApp`
 * `AppFactory` interface to create absraction layer for DI implementations
 * Upgrade to JavaFX 14.0.1
 * Upgrade to Micronaut 1.3.6

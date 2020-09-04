@@ -16,7 +16,7 @@
 package app.supernaut.fx.sample.hello;
 
 import app.supernaut.fx.FxLauncher;
-import app.supernaut.fx.SfxForegroundApp;
+import app.supernaut.fx.FxForegroundApp;
 import app.supernaut.fx.FxmlLoaderFactory;
 import app.supernaut.fx.test.NoopBackgroundApp;
 import javafx.fxml.FXMLLoader;
@@ -32,10 +32,10 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * A simple Supernaut.FX App implementing {@link SfxForegroundApp}.
+ * A simple Supernaut.FX App implementing {@link FxForegroundApp}.
  */
 @Singleton
-public class HelloForegroundApp implements SfxForegroundApp {
+public class HelloForegroundApp implements FxForegroundApp {
     private static final Logger log = LoggerFactory.getLogger(HelloForegroundApp.class);
     private final FxmlLoaderFactory loaderFactory;
 
@@ -56,9 +56,9 @@ public class HelloForegroundApp implements SfxForegroundApp {
     }
 
     @Override
-    public void start(SfxMainView mainView) throws IOException {
-        Stage primaryStage = mainView.optionalStage().orElseThrow();
+    public void start(FxMainView mainView) throws IOException {
         log.info("Starting Hello");
+        Stage primaryStage = mainView.optionalStage().orElseThrow();
         FXMLLoader loader = loaderFactory.get(getFXMLUrl("MainWindow.fxml"));
         log.debug("primaryStage root FXML: {}", loader.getLocation());
         Parent root = loader.load();

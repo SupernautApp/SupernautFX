@@ -15,7 +15,7 @@
  */
 package app.supernaut.fx.test;
 
-import app.supernaut.fx.SfxForegroundApp;
+import app.supernaut.fx.FxForegroundApp;
 import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +26,11 @@ import javax.inject.Singleton;
  * No-op ForegroundApp which exits immediately (used for testing)
  */
 @Singleton
-public final class NoopSfxForegroundApp implements SfxForegroundApp {
-    private static final Logger log = LoggerFactory.getLogger(NoopSfxForegroundApp.class);
+public final class NoopFxForegroundApp implements FxForegroundApp {
+    private static final Logger log = LoggerFactory.getLogger(NoopFxForegroundApp.class);
 
     @Override
-    public void start(SfxMainView mainView) {
+    public void start(FxMainView mainView) {
         log.info("Entered");
         mainView.show();
         noop();

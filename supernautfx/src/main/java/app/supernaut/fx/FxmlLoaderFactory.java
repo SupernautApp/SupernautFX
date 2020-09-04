@@ -20,7 +20,7 @@ import javafx.fxml.FXMLLoader;
 import java.net.URL;
 
 /**
- * Factory interface for providing FXMLLoaders that do full DI.
+ * Factory interface for providing DI-enabled instances of {@link FXMLLoader}
  */
 public interface FxmlLoaderFactory {
 

@@ -16,24 +16,24 @@
 package app.supernaut.fx.internal;
 
 import javafx.stage.Stage;
-import app.supernaut.fx.SfxForegroundApp;
+import app.supernaut.fx.FxForegroundApp;
 
 import java.util.Optional;
 
 /**
- * Default, Internal implementation of {@link SfxForegroundApp.SfxMainView}.
+ * Default, Internal implementation of {@link FxForegroundApp.FxMainView}.
  * Simply wraps a primary {@link Stage}.
- * TODO: For extra credit create a macOS-friendly implementation of SfxMainView with an invisible primaryStage
+ * TODO: For extra credit create a macOS-friendly implementation of FxMainView with an invisible primaryStage
  */
-public final class DefaultSfxMainView implements SfxForegroundApp.SfxMainView {
+public final class DefaultFxMainView implements FxForegroundApp.FxMainView {
     private final Stage primaryStage;
 
-    private DefaultSfxMainView(Stage primaryStage) {
+    private DefaultFxMainView(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
-    public static SfxForegroundApp.SfxMainView of(Stage primaryStage) {
-        return new DefaultSfxMainView(primaryStage);
+    public static FxForegroundApp.FxMainView of(Stage primaryStage) {
+        return new DefaultFxMainView(primaryStage);
     }
 
     @Override

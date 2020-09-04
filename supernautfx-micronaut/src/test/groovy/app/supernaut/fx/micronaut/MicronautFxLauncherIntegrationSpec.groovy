@@ -19,7 +19,7 @@ import app.supernaut.BackgroundApp
 import app.supernaut.ForegroundApp
 import app.supernaut.Launcher
 import app.supernaut.fx.test.NoopBackgroundApp
-import app.supernaut.fx.test.NoopSfxForegroundApp
+import app.supernaut.fx.test.NoopFxForegroundApp
 import spock.lang.Ignore
 import spock.lang.Specification
 
@@ -29,12 +29,12 @@ import java.util.concurrent.CompletableFuture
  *
  */
 @Ignore("Can only run one integration test that starts a JFX Application per JVM instance")
-class MicronautJfxLauncherIntegrationSpec extends Specification{
+class MicronautFxLauncherIntegrationSpec extends Specification{
     
     def "Can launch and stop an app with background start"() {
         when:
         Launcher launcher =  new MicronautFxLauncher(NoopBackgroundApp.class,
-                            NoopSfxForegroundApp.class,
+                            NoopFxForegroundApp.class,
                             true);
         CompletableFuture<ForegroundApp> futureForegroundApp = launcher.launchAsync("")
 
@@ -49,7 +49,7 @@ class MicronautJfxLauncherIntegrationSpec extends Specification{
         futureBackgroundApp != null
         foregroundApp != null
         foregroundApp instanceof ForegroundApp
-        foregroundApp instanceof NoopSfxForegroundApp
+        foregroundApp instanceof NoopFxForegroundApp
 
         when:
         BackgroundApp backgroundApp = futureBackgroundApp.get()

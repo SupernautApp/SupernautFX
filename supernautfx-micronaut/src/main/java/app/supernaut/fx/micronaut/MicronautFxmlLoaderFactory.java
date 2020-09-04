@@ -24,16 +24,16 @@ import java.net.URL;
 
 /**
  * Factory for providing FXMLLoaders that do full DI. This
- * singleton is added to the Micronaut ApplicationContext with ApplicationContext#registerSingleton.
+ * singleton is added to the Micronaut BeanContext with BeanContext#registerSingleton.
  */
 @Singleton
 public class MicronautFxmlLoaderFactory implements FxmlLoaderFactory {
     BeanContext context;
 
     /**
-     * Constructor that gets ApplicationContext of the SupernautFX application injected.
+     * Constructor that gets BeanContext of the SupernautFX application injected.
      *
-     * @param context The ApplicationContext of the SupernautFX application
+     * @param context The BeanContext of the SupernautFX application
      */
     public MicronautFxmlLoaderFactory(BeanContext context) {
         this.context = context;

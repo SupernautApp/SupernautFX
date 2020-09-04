@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.supernaut.fx.micronaut;
+package app.supernaut.fx.services;
 
 import javafx.application.HostServices;
 import app.supernaut.services.BrowserService;
@@ -21,17 +21,17 @@ import app.supernaut.services.BrowserService;
 import javax.inject.Singleton;
 
 /**
- * Default implementation of BrowserService using JavaFX HostServices.
+ * Implementation of {@link BrowserService} using JavaFX {@link HostServices}.
  */
 @Singleton
-public class SfxBrowserService implements BrowserService {
+public class FxBrowserService implements BrowserService {
     private final HostServices hostServices;
 
     /**
      * Constructor
      * @param hostServices HostServices object to wrap
      */
-    public SfxBrowserService(HostServices hostServices) {
+    public FxBrowserService(HostServices hostServices) {
         this.hostServices = hostServices;
     }
 

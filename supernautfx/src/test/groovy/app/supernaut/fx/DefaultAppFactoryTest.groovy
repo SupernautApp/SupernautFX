@@ -25,7 +25,7 @@ class DefaultAppFactoryTest extends Specification {
 
     def "Can create a DefaultAppFactory"() {
         when:
-        def factory = new SfxLauncher.DefaultAppFactory()
+        def factory = new FxLauncherAbstract.DefaultAppFactory()
 
         then:
         factory != null

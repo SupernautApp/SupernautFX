@@ -22,16 +22,16 @@ import java.util.NoSuchElementException;
 import java.util.ServiceLoader;
 
 /**
- * Additional required method for launching {@link SfxForegroundApp} instances that
+ * Additional required method for launching {@link FxForegroundApp} instances that
  * are proxied by {@code OpenJfxProxyApplication}.
  */
 public interface FxLauncher extends Launcher {
     /**
-     * Construct a {@link SfxForegroundApp} that is a delegate to {@code OpenJfxProxyApplication}.
+     * Construct a {@link FxForegroundApp} that is a delegate to {@code OpenJfxProxyApplication}.
      * @param jfxApplication The OpenJfx "proxy" app instance
      * @return A newly constructed (and possibly injected) foreground app
      */
-    SfxForegroundApp createForegroundApp(Application jfxApplication);
+    FxForegroundApp createForegroundApp(Application jfxApplication);
 
     String name();
 

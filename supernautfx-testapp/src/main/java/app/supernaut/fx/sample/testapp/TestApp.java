@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 import app.supernaut.BackgroundApp;
 import app.supernaut.ForegroundApp;
 import app.supernaut.logging.JavaLoggingSupport;
-import app.supernaut.fx.SfxForegroundApp;
+import app.supernaut.fx.FxForegroundApp;
 import app.supernaut.test.TimingMeasurements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,12 +38,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
- * A simple Supernaut FX App implementing {@link SfxForegroundApp}.
+ * A simple Supernaut FX App implementing {@link FxForegroundApp}.
  * This application parses command-line args to provide different options for starting
  * and stopping for startup performance measurement.
  */
 @Singleton
-public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplicationAware {
+public class TestApp implements FxForegroundApp, FxForegroundApp.OpenJfxApplicationAware {
     private static final Logger log = LoggerFactory.getLogger(TestApp.class);
     private static boolean backgroundStart = true;
     private final FxmlLoaderFactory loaderFactory;
@@ -125,7 +125,7 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
     }
 
     @Override
-    public void start(SfxMainView mainView) throws IOException {
+    public void start(FxMainView mainView) throws IOException {
         Stage primaryStage = mainView.optionalStage().orElseThrow();
         measurements.add("App started");
         log.info("Starting TestApp");

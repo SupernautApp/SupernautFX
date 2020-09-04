@@ -22,7 +22,7 @@ import app.supernaut.ForegroundApp;
 import java.util.Optional;
 
 /**
- * <b>Supernaut.fx</b> specialization of <b>Supernaut</b> {@link ForegroundApp}. Supernaut.fx {@link SfxForegroundApp}s
+ * <b>Supernaut.fx</b> specialization of <b>Supernaut</b> {@link ForegroundApp}. Supernaut.fx {@link FxForegroundApp}s
  * implement this interface instead of subclassing <b>OpenJFX</b> {@link Application}. This has several
  * advantages over directly extending {@link javafx.application.Application}:
  * <ol>
@@ -31,23 +31,23 @@ import java.util.Optional;
  *       This increases the testability and architectural flexibility of the application.
  *     </li>
  *     <li>
- *         Abstracts {@link Stage} with {@link SfxMainView}. This also helps with testing.
+ *         Abstracts {@link Stage} with {@link FxMainView}. This also helps with testing.
  *     </li>
  *     <li>
- *         Supports faster, multi-threaded launching with {@link SfxLauncher}.
+ *         Supports faster, multi-threaded launching with {@link FxLauncherAbstract}.
  *     </li>
  *     <li>
- *         Supports flexible construction of application object hierarchies with {@link SfxLauncher} and
- *         the {@link SfxLauncher.AppFactory} interface, including Dependency Injection with <b>Micronaut</b>
+ *         Supports flexible construction of application object hierarchies with {@link FxLauncherAbstract} and
+ *         the {@link FxLauncherAbstract.AppFactory} interface, including Dependency Injection with <b>Micronaut</b>
  *         and possibly other DI frameworks in the future.
  *     </li>
  * </ol>
  * 
- * Summary: Implement the {@link SfxForegroundApp} interface instead of subclassing OpenJFX {@link Application}. Your
+ * Summary: Implement the {@link FxForegroundApp} interface instead of subclassing OpenJFX {@link Application}. Your
  * apps will be faster and looser, but also tight. You can freely use and abuse inheritance as you please. You also
  * can get your constructor injected, which is always fun.
  */
-public interface SfxForegroundApp extends ForegroundApp {
+public interface FxForegroundApp extends ForegroundApp {
     /**
      * The application initialization method. This method is called from the JavaFX
      * init() method after the dependency injection context is initialized and the
@@ -65,19 +65,19 @@ public interface SfxForegroundApp extends ForegroundApp {
     default void init() throws Exception {};
 
     /**
-     * Adapt from OpenJFX-independent {@link ForegroundApp} to JFX-compatible {@link SfxForegroundApp}
+     * Adapt from OpenJFX-independent {@link ForegroundApp} to JFX-compatible {@link FxForegroundApp}
      * which requires a primary {@link Stage} to start.
      * 
-     * @param mainView Must be a {@link SfxMainView}
+     * @param mainView Must be a {@link FxMainView}
      * @throws Exception if something goes wrong
-     * @throws IllegalArgumentException if mainView isn't a {@link SfxMainView}
+     * @throws IllegalArgumentException if mainView isn't a {@link FxMainView}
      */
     @Override
     default void start(SupernautMainView mainView) throws Exception {
-        if (mainView instanceof SfxMainView) {
+        if (mainView instanceof FxMainView) {
             start(mainView);
         } else {
-            throw new IllegalArgumentException("Main view must be implementation of " + SfxMainView.class);
+            throw new IllegalArgumentException("Main view must be implementation of " + FxMainView.class);
         }
     }
 
@@ -92,7 +92,7 @@ public interface SfxForegroundApp extends ForegroundApp {
      * @param mainView A wrapper view containing the primary {@link Stage}
      * @throws java.lang.Exception if something goes wrong
      */
-    void start(SfxMainView mainView) throws Exception;
+    void start(FxMainView mainView) throws Exception;
     
     /**
      * This method is called when the application should stop, and provides a
@@ -111,7 +111,7 @@ public interface SfxForegroundApp extends ForegroundApp {
      * We are trying to make having a {@link Stage} optional, because in test environments (and perhaps <b>macOS</b> apps
      * if someday OpenJFX gets better <b>macOS</b> support) the Stage may not be present.
      */
-    interface SfxMainView extends SupernautMainView {
+    interface FxMainView extends SupernautMainView {
         void show();
 
         /**
@@ -123,13 +123,13 @@ public interface SfxForegroundApp extends ForegroundApp {
     /**
      * This interface makes converting from an instance of {@link Application} easier.
      * <p>Simply change</p>
-     * <p>{@code class MyJFXForegroundApp extends Application}</p>
+     * <p>{@code class MyFXForegroundApp extends Application}</p>
      * <p>to</p>
-     * <p>{@code class MyJFXForegroundApp implements SfxApplicationCompat}</p>
+     * <p>{@code class MyFXForegroundApp implements FxApplicationCompat}</p>
      */
-    interface SfxApplicationCompat extends SfxForegroundApp {
+    interface FxApplicationCompat extends FxForegroundApp {
         void start(Stage primaryStage);
-        default void start(SfxMainView mainView) {
+        default void start(FxMainView mainView) {
             start(mainView.optionalStage().orElseThrow());
         }
     }

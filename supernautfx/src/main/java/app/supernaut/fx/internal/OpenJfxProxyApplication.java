@@ -16,7 +16,7 @@
 package app.supernaut.fx.internal;
 
 import app.supernaut.fx.FxLauncher;
-import app.supernaut.fx.SfxForegroundApp;
+import app.supernaut.fx.FxForegroundApp;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -25,14 +25,14 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Internal <b>Supernaut.fx</b> implementation of {@link Application}. As a static proxy object for
- * {@link SfxForegroundApp}, it delegates OpenJFX {@link Application} lifecycle calls to {@link SfxForegroundApp}
+ * {@link FxForegroundApp}, it delegates OpenJFX {@link Application} lifecycle calls to {@link FxForegroundApp}
  * and makes it more independent of OpenJFX.
  * 
  * <p>Tagline: <q>
  *  We subclass {@link javafx.application.Application} so you don't have to.
  * </q></p>
  * <p>
- * To create a Supernaut.fx app, write a class that implements {@link SfxForegroundApp}.
+ * To create a Supernaut.fx app, write a class that implements {@link FxForegroundApp}.
  * </p>
  *
  */
@@ -40,7 +40,7 @@ public final class OpenJfxProxyApplication extends Application {
     private static final Logger log = LoggerFactory.getLogger(OpenJfxProxyApplication.class);
     public static FxLauncher configuredLauncher;  // Launcher must set this global before calling constructor
     protected final FxLauncher launcher;
-    protected final SfxForegroundApp foregroundApp;
+    protected final FxForegroundApp foregroundApp;
     
     /**
      * Create a JavaFX application that wraps a SfxForegroundApp
@@ -68,7 +68,7 @@ public final class OpenJfxProxyApplication extends Application {
 
     /**
      * Supernaut.fx implementation of {@link Application#start}.
-     * Calls the application's implementation of {@link SfxForegroundApp#start}
+     * Calls the application's implementation of {@link FxForegroundApp#start}
      *
      * @param primaryStage The primary Stage for the application
      * @throws Exception if something goes wrong
@@ -76,7 +76,7 @@ public final class OpenJfxProxyApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         log.info("Starting SfxForegroundApp");
-        foregroundApp.start(DefaultSfxMainView.of(primaryStage));
+        foregroundApp.start(DefaultFxMainView.of(primaryStage));
     }
 
     /**

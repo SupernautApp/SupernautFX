@@ -15,7 +15,7 @@
  */
 
 /**
- * Supernaut.FX module.
+ * Module implementing Supernaut.FX dependency injection with Micronaut
  */
 module app.supernaut.fx.micronaut {
     requires transitive app.supernaut.fx;
@@ -32,7 +32,7 @@ module app.supernaut.fx.micronaut {
     
     exports app.supernaut.fx.micronaut;
     /* TODO: Fix this */
-    /* We have to open this to so Micronaut (possibly in the merged module) can @Inject private fields in it */
+    /* We have to open this so Micronaut (possibly in the merged module) can @Inject private fields in it */
     opens app.supernaut.fx.micronaut;
 
     provides app.supernaut.fx.FxLauncher with app.supernaut.fx.micronaut.MicronautFxLauncher;

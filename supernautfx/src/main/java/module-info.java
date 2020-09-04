@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import app.supernaut.fx.sample.SimpleFxLauncher;
+
 /**
  * Supernaut.FX module.
  */
@@ -27,9 +30,10 @@ module app.supernaut.fx {
     requires org.slf4j;
 
     exports app.supernaut.fx;
-    exports app.supernaut.fx.internal to javafx.graphics;
+    exports app.supernaut.fx.services;
     exports app.supernaut.fx.test;
+    exports app.supernaut.fx.internal to javafx.graphics;
 
     uses app.supernaut.fx.FxLauncher;
-    provides app.supernaut.fx.FxLauncher with app.supernaut.fx.sample.SimpleJfxLauncher;
+    provides app.supernaut.fx.FxLauncher with SimpleFxLauncher;
 }

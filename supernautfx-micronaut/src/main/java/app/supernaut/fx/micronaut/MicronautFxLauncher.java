@@ -16,6 +16,7 @@
 package app.supernaut.fx.micronaut;
 
 import app.supernaut.fx.FxmlLoaderFactory;
+import app.supernaut.fx.services.FxBrowserService;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.BeanContext;
 import io.micronaut.context.env.Environment;
@@ -23,16 +24,16 @@ import javafx.application.Application;
 import javafx.application.HostServices;
 import app.supernaut.BackgroundApp;
 import app.supernaut.services.BrowserService;
-import app.supernaut.fx.SfxForegroundApp;
-import app.supernaut.fx.SfxLauncher;
+import app.supernaut.fx.FxForegroundApp;
+import app.supernaut.fx.FxLauncherAbstract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * A launcher that uses http://micronaut.io to instantiate the foreground and background applications.
  */
-public class MicronautFxLauncher extends SfxLauncher {
-    private static final Logger log = LoggerFactory.getLogger(SfxLauncher.class);
+public class MicronautFxLauncher extends FxLauncherAbstract {
+    private static final Logger log = LoggerFactory.getLogger(FxLauncherAbstract.class);
 
     public MicronautFxLauncher() {
         this(true);
@@ -86,20 +87,20 @@ public class MicronautFxLauncher extends SfxLauncher {
         }
 
         @Override
-        public SfxForegroundApp createForegroundApp(Class<? extends SfxForegroundApp> foregroundAppClass, Application proxyApplication) {
+        public FxForegroundApp createForegroundApp(Class<? extends FxForegroundApp> foregroundAppClass, Application proxyApplication) {
             return getForegroundAppBean(foregroundAppClass, proxyApplication);
         }
 
-        protected SfxForegroundApp getForegroundAppBean(Class<? extends SfxForegroundApp> clazz, Application proxyApplication) {
+        protected FxForegroundApp getForegroundAppBean(Class<? extends FxForegroundApp> clazz, Application proxyApplication) {
             log.info("getForegroundAppBean()");
-            // Since SupernautFXApp doesn't extend Application, an app that needs access to the
+            // Since FXForegroundApp doesn't extend Application, an app that needs access to the
             // Application object can have it injected.
             context.registerSingleton(Application.class, proxyApplication);
 
             // An app that needs HostServices can have it injected. For opening URLs in browsers
-            // the BrowserService class is preferred.
+            // the BrowserService interface is preferred.
             context.registerSingleton(HostServices.class, proxyApplication.getHostServices());
-            context.registerSingleton(BrowserService.class, new SfxBrowserService(proxyApplication.getHostServices()));
+            context.registerSingleton(BrowserService.class, new FxBrowserService(proxyApplication.getHostServices()));
 
             context.registerSingleton(FxmlLoaderFactory.class, new MicronautFxmlLoaderFactory(context));
             return context.getBean(clazz);
