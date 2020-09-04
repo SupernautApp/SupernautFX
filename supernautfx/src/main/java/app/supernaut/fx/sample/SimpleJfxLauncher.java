@@ -24,7 +24,17 @@ import app.supernaut.fx.SfxForegroundApp;
  * and {@link SfxForegroundApp}.
  */
 public final class SimpleJfxLauncher extends SfxLauncher {
+
+    public SimpleJfxLauncher() {
+        this(true);
+    }
+    
     public SimpleJfxLauncher(boolean backgroundStart) {
         super(DefaultAppFactory::new, backgroundStart);
+    }
+
+    @Override
+    public String name() {
+        return "default";
     }
 }

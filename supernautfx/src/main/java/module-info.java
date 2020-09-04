@@ -29,4 +29,7 @@ module app.supernaut.fx {
     exports app.supernaut.fx;
     exports app.supernaut.fx.internal to javafx.graphics;
     exports app.supernaut.fx.test;
+
+    uses app.supernaut.fx.FxLauncher;
+    provides app.supernaut.fx.FxLauncher with app.supernaut.fx.sample.SimpleJfxLauncher;
 }

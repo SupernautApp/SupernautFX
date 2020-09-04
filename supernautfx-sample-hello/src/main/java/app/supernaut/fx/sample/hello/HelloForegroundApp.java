@@ -15,15 +15,14 @@
  */
 package app.supernaut.fx.sample.hello;
 
+import app.supernaut.fx.FxLauncher;
 import app.supernaut.fx.SfxForegroundApp;
-import app.supernaut.fx.micronaut.MicronautSfxLauncher;
-import app.supernaut.fx.micronaut.SfxFxmlLoaderFactory;
+import app.supernaut.fx.FxmlLoaderFactory;
 import app.supernaut.fx.test.NoopBackgroundApp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import app.supernaut.Launcher;
 import app.supernaut.logging.JavaLoggingSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,19 +37,15 @@ import java.net.URL;
 @Singleton
 public class HelloForegroundApp implements SfxForegroundApp {
     private static final Logger log = LoggerFactory.getLogger(HelloForegroundApp.class);
-    private final SfxFxmlLoaderFactory loaderFactory;
+    private final FxmlLoaderFactory loaderFactory;
 
 
     public static void main(String[] args) {
         JavaLoggingSupport.configure(HelloForegroundApp.class, "app.supernaut.fx.sample.testapp");
-        getLauncher().launch(args, HelloForegroundApp.class, NoopBackgroundApp.class);
+        FxLauncher.byName("micronaut").launch(args, HelloForegroundApp.class, NoopBackgroundApp.class);
     }
-
-    private static Launcher getLauncher() {
-        return new MicronautSfxLauncher(true);
-    }
-
-    public HelloForegroundApp(SfxFxmlLoaderFactory loaderFactory) {
+    
+    public HelloForegroundApp(FxmlLoaderFactory loaderFactory) {
         log.info("Constructing Hello");
         this.loaderFactory = loaderFactory;
     }

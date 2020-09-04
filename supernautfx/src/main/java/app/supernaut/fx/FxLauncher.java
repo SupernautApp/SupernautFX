@@ -18,6 +18,9 @@ package app.supernaut.fx;
 import app.supernaut.Launcher;
 import javafx.application.Application;
 
+import java.util.NoSuchElementException;
+import java.util.ServiceLoader;
+
 /**
  * Additional required method for launching {@link SfxForegroundApp} instances that
  * are proxied by {@code OpenJfxProxyApplication}.
@@ -29,4 +32,22 @@ public interface FxLauncher extends Launcher {
      * @return A newly constructed (and possibly injected) foreground app
      */
     SfxForegroundApp createForegroundApp(Application jfxApplication);
+
+    String name();
+
+    /**
+     * Find a FxLauncher provider by name
+     *
+     * @param name Name (e.g. "micronaut")
+     * @return an FxLaunder instance
+     * @throws NoSuchElementException if not found
+     */
+    static FxLauncher byName(String name) {
+        ServiceLoader<FxLauncher> loaders = ServiceLoader.load(FxLauncher.class);
+        return loaders.stream()
+                .map(ServiceLoader.Provider::get)
+                .filter(launcher -> launcher.name().equals(name))
+                .findFirst()
+                .orElseThrow();
+    }
 }

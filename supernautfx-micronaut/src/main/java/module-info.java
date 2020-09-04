@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * Supernaut.FX module.
  */
@@ -33,4 +34,6 @@ module app.supernaut.fx.micronaut {
     /* TODO: Fix this */
     /* We have to open this to so Micronaut (possibly in the merged module) can @Inject private fields in it */
     opens app.supernaut.fx.micronaut;
+
+    provides app.supernaut.fx.FxLauncher with app.supernaut.fx.micronaut.MicronautFxLauncher;
 }

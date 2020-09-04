@@ -15,12 +15,11 @@
  */
 package app.supernaut;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 /**
  * Improved, asynchronous two-phase application launcher. It is logically-compatible with the JavaFX launcher.
- * A version that uses JavaFX is provided as an implementation.
+ * See subclass {@code FxLauncher} and its implementations for full JavaFX support.
  *
  * Uses threads to start a background app as quickly as possible and
  * possibly before the foreground app is started. This background app can make network
@@ -28,11 +27,6 @@ import java.util.concurrent.CompletableFuture;
  * the foreground app can be updated with live data as soon as possible.
  */
 public interface Launcher {
-    static Optional<Launcher> findFirst(String name) {
-        // TODO: Provide a static ServiceLoader method to load a launcher
-        return Optional.empty();
-    }
-
     /**
      * Launch and run the application on the current thread.
      * Does not return until after foreground app closes.

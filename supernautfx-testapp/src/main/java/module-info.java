@@ -22,7 +22,7 @@ module app.supernaut.fx.sample.testapp {
     requires javafx.controls;
     requires javafx.fxml;
 
-    requires app.supernaut.fx.micronaut;
+    requires app.supernaut.fx;
     requires javax.inject;
     /*
      * Needed for the @Factory annotation and for the Bean Definition classes generated
@@ -38,4 +38,6 @@ module app.supernaut.fx.sample.testapp {
 
     opens app.supernaut.fx.sample.testapp to javafx.graphics, javafx.fxml, java.base;
     exports app.supernaut.fx.sample.testapp;
+
+    uses app.supernaut.fx.FxLauncher;
 }

@@ -15,6 +15,7 @@
  */
 package app.supernaut.fx.micronaut;
 
+import app.supernaut.fx.FxmlLoaderFactory;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.BeanContext;
 import io.micronaut.context.env.Environment;
@@ -30,15 +31,19 @@ import org.slf4j.LoggerFactory;
 /**
  * A launcher that uses http://micronaut.io to instantiate the foreground and background applications.
  */
-public class MicronautSfxLauncher extends SfxLauncher {
+public class MicronautFxLauncher extends SfxLauncher {
     private static final Logger log = LoggerFactory.getLogger(SfxLauncher.class);
+
+    public MicronautFxLauncher() {
+        this(true);
+    }
 
     /**
      *
      * @param initializeBackgroundAppOnNewThread If true, initializes {@code appFactorySupplier} and
      *        {@code BackgroundApp} on new thread, if false start them on calling thread (typically the main thread)
      */
-    public MicronautSfxLauncher(boolean initializeBackgroundAppOnNewThread) {
+    public MicronautFxLauncher(boolean initializeBackgroundAppOnNewThread) {
         super(() -> new MicronautAppFactory(false), initializeBackgroundAppOnNewThread);
     }
 
@@ -49,9 +54,14 @@ public class MicronautSfxLauncher extends SfxLauncher {
      * @param useApplicationContext If {@code true} creates and uses an {@link ApplicationContext},
      *                             if {@code false} creates and uses a {@link BeanContext}
      */
-    public MicronautSfxLauncher(boolean initializeBackgroundAppOnNewThread,
-                                boolean useApplicationContext) {
+    public MicronautFxLauncher(boolean initializeBackgroundAppOnNewThread,
+                               boolean useApplicationContext) {
         super(() -> new MicronautAppFactory(useApplicationContext), initializeBackgroundAppOnNewThread);
+    }
+
+    @Override
+    public String name() {
+        return "micronaut";
     }
 
     public static class MicronautAppFactory implements AppFactory {
@@ -91,7 +101,7 @@ public class MicronautSfxLauncher extends SfxLauncher {
             context.registerSingleton(HostServices.class, proxyApplication.getHostServices());
             context.registerSingleton(BrowserService.class, new SfxBrowserService(proxyApplication.getHostServices()));
 
-            context.registerSingleton(SfxFxmlLoaderFactory.class, new SfxFxmlLoaderFactory(context));
+            context.registerSingleton(FxmlLoaderFactory.class, new MicronautFxmlLoaderFactory(context));
             return context.getBean(clazz);
         }
     }

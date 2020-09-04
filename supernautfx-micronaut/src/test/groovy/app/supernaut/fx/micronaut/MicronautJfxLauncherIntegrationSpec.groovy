@@ -33,7 +33,7 @@ class MicronautJfxLauncherIntegrationSpec extends Specification{
     
     def "Can launch and stop an app with background start"() {
         when:
-        Launcher launcher =  new MicronautSfxLauncher(NoopBackgroundApp.class,
+        Launcher launcher =  new MicronautFxLauncher(NoopBackgroundApp.class,
                             NoopSfxForegroundApp.class,
                             true);
         CompletableFuture<ForegroundApp> futureForegroundApp = launcher.launchAsync("")

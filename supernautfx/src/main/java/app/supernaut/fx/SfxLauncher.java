@@ -61,7 +61,7 @@ import java.util.function.Supplier;
  * </ol>
  *
  */
-public class SfxLauncher implements FxLauncher {
+public abstract class SfxLauncher implements FxLauncher {
     private static final Logger log = LoggerFactory.getLogger(SfxLauncher.class);
     private static final String backgroundAppLauncherThreadName = "SupernautFX-Background-Launcher";
     private static final String foregroundAppLauncherThreadName = "SupernautFX-JavaFX-Launcher";

@@ -28,15 +28,15 @@ class FxmlLoaderFactoryIntegrationSpecification extends Specification {
     def "Can create and find FXMLLoader factory"() {
         when:
         BeanContext ctx = BeanContext.build()
-        def loaderFactory = new SfxFxmlLoaderFactory(ctx);
-        ctx.registerSingleton(SfxFxmlLoaderFactory.class, loaderFactory);
+        def loaderFactory = new MicronautFxmlLoaderFactory(ctx);
+        ctx.registerSingleton(MicronautFxmlLoaderFactory.class, loaderFactory);
         ctx.start();
-        SfxFxmlLoaderFactory foundFactory = ctx.getBean(SfxFxmlLoaderFactory.class);
+        MicronautFxmlLoaderFactory foundFactory = ctx.getBean(MicronautFxmlLoaderFactory.class);
         FXMLLoader loader = foundFactory.get();
 
         then:
         foundFactory != null
-        foundFactory instanceof SfxFxmlLoaderFactory
+        foundFactory instanceof MicronautFxmlLoaderFactory
         loader != null
         loader instanceof FXMLLoader
     }
@@ -45,14 +45,14 @@ class FxmlLoaderFactoryIntegrationSpecification extends Specification {
     def "Can create an FXMLLoader factory and inject into test class"() {
         when:
         BeanContext ctx = BeanContext.build()
-        def loaderFactory = new SfxFxmlLoaderFactory(ctx)
-        ctx.registerSingleton(SfxFxmlLoaderFactory.class, loaderFactory)
+        def loaderFactory = new MicronautFxmlLoaderFactory(ctx)
+        ctx.registerSingleton(MicronautFxmlLoaderFactory.class, loaderFactory)
         //TestBean testBean = ctx.createBean(TestBean.class)
-        SfxFxmlLoaderFactory foundFactory = ctx.getBean(Provider.class)
+        MicronautFxmlLoaderFactory foundFactory = ctx.getBean(Provider.class)
 
 
         then:
         foundFactory != null
-        foundFactory instanceof SfxFxmlLoaderFactory
+        foundFactory instanceof MicronautFxmlLoaderFactory
     }
 }

@@ -15,6 +15,7 @@
  */
 package app.supernaut.fx.micronaut;
 
+import app.supernaut.fx.FxmlLoaderFactory;
 import io.micronaut.context.BeanContext;
 import javafx.fxml.FXMLLoader;
 
@@ -26,7 +27,7 @@ import java.net.URL;
  * singleton is added to the Micronaut ApplicationContext with ApplicationContext#registerSingleton.
  */
 @Singleton
-public class SfxFxmlLoaderFactory {
+public class MicronautFxmlLoaderFactory implements FxmlLoaderFactory {
     BeanContext context;
 
     /**
@@ -34,7 +35,7 @@ public class SfxFxmlLoaderFactory {
      *
      * @param context The ApplicationContext of the SupernautFX application
      */
-    public SfxFxmlLoaderFactory(BeanContext context) {
+    public MicronautFxmlLoaderFactory(BeanContext context) {
         this.context = context;
     }
 

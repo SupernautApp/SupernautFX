@@ -15,8 +15,8 @@
  */
 package app.supernaut.fx.sample.testapp;
 
-import app.supernaut.fx.micronaut.MicronautSfxLauncher;
-import app.supernaut.fx.micronaut.SfxFxmlLoaderFactory;
+import app.supernaut.fx.FxLauncher;
+import app.supernaut.fx.FxmlLoaderFactory;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -46,7 +46,7 @@ import java.util.concurrent.ExecutionException;
 public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplicationAware {
     private static final Logger log = LoggerFactory.getLogger(TestApp.class);
     private static boolean backgroundStart = true;
-    private final SfxFxmlLoaderFactory loaderFactory;
+    private final FxmlLoaderFactory loaderFactory;
     private Application fxApplication;
     private String testParam;
     final static TimingMeasurements measurements = new TimingMeasurements();
@@ -58,7 +58,7 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
 
         if (args.length > 1 && args[0].equals("--sequential-launch")) {
             log.info("SEQUENTIAL LAUNCH");
-            backgroundStart = false;
+            backgroundStart = false; // This isn't currently used do to using the service loader for FxLauncher
         }
         if (args.length > 1 && args[0].equals("--test=exit_main_begin")) {
             System.exit(0);
@@ -68,7 +68,7 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
            Get a Launcher. It should really come from a ServiceLoader
          */
         log.info("Entered main, getting launcher...");
-        MicronautSfxLauncher launcher = getLauncher();
+        FxLauncher launcher = getLauncher();
 
         /*
            Get a Future for a ForegroundApp app, then resolve the future
@@ -96,11 +96,12 @@ public class TestApp implements SfxForegroundApp, SfxForegroundApp.OpenJfxApplic
 
     }
 
-    private static MicronautSfxLauncher getLauncher() {
-        return new MicronautSfxLauncher(backgroundStart);
+    private static FxLauncher getLauncher() {
+        return FxLauncher.byName("micronaut");
+        //return new MicronautSfxLauncher(backgroundStart);
     }
 
-    public TestApp(SfxFxmlLoaderFactory loaderFactory) {
+    public TestApp(FxmlLoaderFactory loaderFactory) {
         measurements.add("App constructed");
         log.info("Constructing TestApp");
         this.loaderFactory = loaderFactory;

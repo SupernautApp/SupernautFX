@@ -15,7 +15,7 @@
  */
 package app.supernaut.fx
 
-
+import app.supernaut.fx.micronaut.MicronautFxmlLoaderFactory
 import io.micronaut.context.BeanContext
 import javafx.fxml.FXMLLoader
 import spock.lang.Ignore
@@ -28,15 +28,15 @@ class SupernautFxIntegrationSpec extends Specification {
     def "Can create and find an FXMLLoader provider/factory"() {
         when:
         BeanContext ctx = BeanContext.build()
-        def loaderFactory = new app.supernaut.fx.micronaut.SfxFxmlLoaderFactory(ctx);
-        ctx.registerSingleton(app.supernaut.fx.micronaut.SfxFxmlLoaderFactory.class, loaderFactory);
+        def loaderFactory = new MicronautFxmlLoaderFactory(ctx);
+        ctx.registerSingleton(MicronautFxmlLoaderFactory.class, loaderFactory);
         ctx.start();
-        app.supernaut.fx.micronaut.SfxFxmlLoaderFactory foundFactory = ctx.getBean(app.supernaut.fx.micronaut.SfxFxmlLoaderFactory.class);
+        MicronautFxmlLoaderFactory foundFactory = ctx.getBean(MicronautFxmlLoaderFactory.class);
         FXMLLoader loader = (FXMLLoader) foundFactory.get();
 
         then:
         foundFactory != null
-        foundFactory instanceof app.supernaut.fx.micronaut.SfxFxmlLoaderFactory
+        foundFactory instanceof MicronautFxmlLoaderFactory
         loader != null
         loader instanceof FXMLLoader
     }
@@ -45,15 +45,15 @@ class SupernautFxIntegrationSpec extends Specification {
     def "Can create an FXMLLoader factory and inject into test class"() {
         when:
         BeanContext ctx = BeanContext.build()
-        def loaderFactory = new app.supernaut.fx.micronaut.SfxFxmlLoaderFactory(ctx)
-        ctx.registerSingleton(app.supernaut.fx.micronaut.SfxFxmlLoaderFactory.class, loaderFactory)
+        def loaderFactory = new MicronautFxmlLoaderFactory(ctx)
+        ctx.registerSingleton(MicronautFxmlLoaderFactory.class, loaderFactory)
         app.supernaut.fx.sample.hello.HelloForegroundApp testBean = ctx.createBean(app.supernaut.fx.sample.hello.HelloForegroundApp.class)
-        app.supernaut.fx.micronaut.SfxFxmlLoaderFactory foundFactory = ctx.getBean(Provider.class)
+        MicronautFxmlLoaderFactory foundFactory = ctx.getBean(Provider.class)
 
 
         then:
         foundFactory != null
-        foundFactory instanceof app.supernaut.fx.micronaut.SfxFxmlLoaderFactory
+        foundFactory instanceof MicronautFxmlLoaderFactory
     }
 
 }
