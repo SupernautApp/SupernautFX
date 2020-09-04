@@ -1,7 +1,43 @@
-= SupernautFX Changes
-:homepage: https://github.com/ConensusJ/SupernautFX
+= Supernaut.FX Changes
+:homepage: https://github.com/SupernautApp/SupernautFX
 
 A high-level view of the changes in each SupernautFX release.
+
+== v0.0.8-SNAPSHOT
+
+Released: in development
+
+=== Library
+
+* Classes are refactored into three JMS modules (3 JARs):
+** `app.supernaut` (was package `org.consensusj.supernaut`)
+** `app.supernaut.fx` (was package  `org.consensusj.supernautfx`)
+** `app.supernaut.fx.micronaut` (was package  `org.consensusj.supernautfx.micronaut`)
+* Use `ServiceLoader` so most apps won't need compile-time dependency on `app.supernaut.fx.micronaut`
+* Additional class renaming and refactoring to make things more consistent
+* Launch methods take application `Class` objects (which were previously passed in Launcher constructors)
+
+=== Sample Apps
+
+* Updated to use new modules
+
+=== Dependency Upgrades
+
+* JavaFX 14.0.2.1
+* Micronaut 1.3.7
+
+=== Build/Test/CI
+
+* Gradle 6.6.1
+** Use Gradle `compileJava.options.release` feature
+* Gradle Enterprise Plugin 3.4
+* OpenJFX Gradle Plugin 0.0.9
+* Badass JLink Plugin 2.21.1
+* Groovy 3.0.5
+
+=== Known Issues
+
+* Gradle `:run` task not working for sample apps, see https://github.com/SupernautApp/SupernautFX/issues/6[Issue #6]
 
 == v0.0.7
 

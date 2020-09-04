@@ -91,6 +91,13 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
             return getForegroundAppBean(foregroundAppClass, proxyApplication);
         }
 
+        /**
+         * Subclass {@link MicronautAppFactory} and override this method to customize your {@link BeanContext}.
+         * <p>
+         * @param clazz The FXForegroundApp sub-class that we are creating and injecting
+         * @param proxyApplication The proxy implementation instance of {@link Application}
+         * @return A newly constructed and injected {@link FxForegroundApp} instance
+         */
         protected FxForegroundApp getForegroundAppBean(Class<? extends FxForegroundApp> clazz, Application proxyApplication) {
             log.info("getForegroundAppBean()");
             // Since FXForegroundApp doesn't extend Application, an app that needs access to the

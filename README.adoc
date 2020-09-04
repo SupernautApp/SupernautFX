@@ -1,8 +1,8 @@
 = Supernaut.FX
 Sean Gilligan <https://github.com/msgilligan>
-v0.0.7
+v0.0.8-SNAPSHOT
 :description: Supernaut.FX DI Framework README.
-:supernautfx-version: 0.0.7
+:supernautfx-version: 0.0.8-SNAPSHOT
 :tip-caption: :bulb:
 :note-caption: :information_source:
 :important-caption: :heavy_exclamation_mark:
@@ -53,7 +53,7 @@ Supernaut.FX currently consists of 3 modules (JARs)
 
 Typical applications will have a compile-time dependency on `app.supernaut.fx` and a runtime dependency on `app.supernaut.fx.micronaut`.
 
-You may also develop library modules for services using only `app.supernaut`.
+You may also develop library modules for services depending only on `app.supernaut`.
 
 == Features
 
@@ -63,7 +63,7 @@ You may also develop library modules for services using only `app.supernaut`.
 ** Service object dependency injection
 * Application class need not extend `javafx.application.Application`
 * `BrowserService` abstraction for opening links in Web Browser (abstraction of JavaFX `HostServices`)
-* Ability to customize Micronaut `ApplicationContext`
+* Ability to customize Micronaut `BeanContext` or `ApplicationContext`
 * Micronaut-powered application configuration via `.yml`, `.json`, or `.properties` files (forthcoming, see https://github.com/SupernautApp/SupernautFX/issues/2)
 
 == Getting Started
@@ -83,7 +83,7 @@ There is no user guide or "Getting Started" document, yet. Fortunately the frame
 
 == Inspired By
 
-Supernaut.FX was inspired by two existing JavaFX DI frameworks, but is focused on JavaFX 11 and later and Micronaut. Thanks Adam Bien and Gluon for the inspiration.
+Supernaut.FX was inspired by two existing JavaFX DI frameworks, but is focused on JavaFX 11 and later, Java Module System, `jlink`, `jpackage`, and Micronaut. Thanks Adam Bien and Gluon for the inspiration.
 
 * Adam Bien's http://afterburner.adam-bien.com[afterburner.fx]
 * https://gluonhq.com/labs/ignite/[Gluon Ignite]
@@ -113,9 +113,9 @@ We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing 
 ** Applications built with https://www.graalvm.org/[GraalVM] and https://github.com/gluonhq/substrate[Gluon Substrate] (future)
 * Agressively tracks latest JDK for JavaFX, recent Android versions
 ** JDK 11 or later for JavaFX components
-** JDK 8 (with multi-release JARs?) for base components and Android
+** JDK 9 (maybe JDK 8 multi-release JARs?) for base interfaces and possible Android support
 * Minimal dependencies, minimal transitive dependencies
-** Core components in pure Java (no additional language runtimes)
+** Core components in pure Java (no additional language runtime libraries)
 ** Keep packaged/bundled apps as small as possible
 ** Minimal dependencies simplifies security review
 ** Potential for use by other frameworks
