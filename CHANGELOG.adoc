@@ -23,7 +23,7 @@ Released: in development
 
 === Dependency Upgrades
 
-* JavaFX 14.0.2.1
+* JavaFX 15
 * Micronaut 1.3.7
 
 === Build/Test/CI
