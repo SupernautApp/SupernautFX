@@ -1,0 +1,98 @@
+plugins {
+    id 'application'
+}
+
+apply plugin: "org.openjfx.javafxplugin"
+apply plugin: "org.beryx.jlink"
+
+def appName = 'SupernautFX Minimal'
+version = helloAppVersion
+application {
+    mainModule = 'app.supernaut.fx.sample.minimal'
+    mainClass = 'app.supernaut.fx.sample.minimal.MinimalApp'
+}
+
+dependencies {
+    implementation project (':supernautfx-micronaut')
+
+    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
+
+    implementation "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+}
+
+patchModules.config = [
+        "java.annotation=jsr305-3.0.2.jar"
+]
+
+javafx {
+    version = javaFxVersion
+    modules = ['javafx.graphics', 'javafx.controls']
+}
+
+run {
+    moduleOptions {
+        addModules = ['app.supernaut.fx.micronaut']
+    }
+}
+
+test {
+    moduleOptions {
+        runOnClasspath = true
+    }
+}
+
+def os = org.gradle.internal.os.OperatingSystem.current()
+
+jlink {
+    addExtraDependencies("javafx")
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages', '--add-modules', 'app.supernaut.fx.micronaut']
+    launcher {
+        name = appName
+        jvmArgs = []
+    }
+    mergedModule {
+        requires 'java.logging'
+
+        requires 'javafx.graphics'
+        requires 'javafx.controls'
+
+        forceMerge 'org.slf4j'
+    }
+    jpackage {
+        // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for
+        // where the plugin's jpackage task finds the path to the jpackage tool by default
+        if (Boolean.getBoolean('download.jpackage')) {
+            jpackageHome = rootProject.ext.jpackageHome
+        }
+        skipInstaller = false
+
+        // Which installers to make
+        if (os.linux) {
+            installerType = null            // default is ['rpm', 'deb']
+        } else if (os.macOsX) {
+            installerType = 'dmg'           // default is ['pkg', 'dmg']
+        } else if (os.windows) {
+            installerType = 'exe'           // default is ['exe', 'msi']
+        }
+
+        // Massage version string to be compatible with jpackage installers
+        // for the current OS platform
+        def appVersionForJpackage = normalizeAppVersion(version)
+
+        imageOptions = ["--verbose", "--app-version", appVersionForJpackage]
+        installerOptions = ["--app-version", appVersionForJpackage]
+        if (os.macOsX) {
+            if (rootProject.ext.signJPackageImages) {
+                logger.warn "Setting --mac-sign in jpackage imageOptions"
+                imageOptions += [ '--mac-sign' ]
+            }
+        } else if (os.windows) {
+            installerOptions += ['--win-dir-chooser', '--win-menu', '--win-shortcut']
+        }
+
+    }
+}
+
+if (Boolean.getBoolean('download.jpackage')) {
+    jpackage.dependsOn rootProject.expandJPackage
+}
