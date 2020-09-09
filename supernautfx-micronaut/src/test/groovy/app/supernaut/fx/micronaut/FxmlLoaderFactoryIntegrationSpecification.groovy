@@ -15,44 +15,51 @@
  */
 package app.supernaut.fx.micronaut
 
-
+import app.supernaut.fx.FxmlLoaderFactory
+import app.supernaut.fx.micronaut.test.BaseFxmlForegroundApp
 import io.micronaut.context.BeanContext
 import javafx.fxml.FXMLLoader
-import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
  *
  */
 class FxmlLoaderFactoryIntegrationSpecification extends Specification {
-    def "Can create and find FXMLLoader factory"() {
-        when:
-        BeanContext ctx = BeanContext.build()
-        def loaderFactory = new MicronautFxmlLoaderFactory(ctx);
-        ctx.registerSingleton(MicronautFxmlLoaderFactory.class, loaderFactory);
-        ctx.start();
-        MicronautFxmlLoaderFactory foundFactory = ctx.getBean(MicronautFxmlLoaderFactory.class);
-        FXMLLoader loader = foundFactory.get();
+    def "Can create, find, and use an FxmlLoaderFactory in BeanContext"() {
+        given: "a BeanContext"
+        BeanContext ctx = BeanContext.run()
 
-        then:
+        when: "We create and register a MicronautFxmlLoaderFactory"
+        def loaderFactory = new MicronautFxmlLoaderFactory(ctx);
+        ctx.registerSingleton(FxmlLoaderFactory.class, loaderFactory);
+
+        and: "We retrieve it"
+        FxmlLoaderFactory foundFactory = ctx.getBean(FxmlLoaderFactory.class);
+
+        then: "It is successfully retrieved"
         foundFactory != null
         foundFactory instanceof MicronautFxmlLoaderFactory
+
+        when: "We use the FxmlLoaderFactory"
+        FXMLLoader loader = foundFactory.get();
+
+        then: "It creates an FXMLLoader"
         loader != null
         loader instanceof FXMLLoader
     }
 
-    @Ignore
-    def "Can create an FXMLLoader factory and inject into test class"() {
-        when:
-        BeanContext ctx = BeanContext.build()
+    def "Can create an FXMLLoader factory and inject into test application class"() {
+        given: "a BeanContext with a FxmlLoaderFactory singleton"
+        BeanContext ctx = BeanContext.run()
         def loaderFactory = new MicronautFxmlLoaderFactory(ctx)
-        ctx.registerSingleton(MicronautFxmlLoaderFactory.class, loaderFactory)
-        //TestBean testBean = ctx.createBean(TestBean.class)
-        MicronautFxmlLoaderFactory foundFactory = ctx.getBean(Provider.class)
+        ctx.registerSingleton(FxmlLoaderFactory.class, loaderFactory)
+
+        when: "We create an Application bean with a constructor that requires a FxmlLoaderFactory"
+        BaseFxmlForegroundApp testApp = ctx.createBean(BaseFxmlForegroundApp.class)
 
 
-        then:
-        foundFactory != null
-        foundFactory instanceof MicronautFxmlLoaderFactory
+        then: "The Application bean is successfully created and the FxmlLoaderFactory was injected. "
+        testApp != null
+        testApp.fxmlLoaderFactory == loaderFactory   // FXMLLoaderFactory was injected
     }
 }
