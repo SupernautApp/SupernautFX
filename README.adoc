@@ -43,7 +43,7 @@ Supernaut.FX currently consists of 3 modules (JARs)
 | *No dependencies!*
 
 |https://github.com/SupernautApp/SupernautFX/blob/master/supernautfx/src/main/java/module-info.java[`app.supernaut.fx`]
-| JavaFX application support
+| JavaFX application `javax.inject` support
 | `app.supernaut`, *JavaFX*, `javax.inject`, `slf4j-api`
 
 |https://github.com/SupernautApp/SupernautFX/blob/master/supernautfx-micronaut/src/main/java/module-info.java[`app.supernaut.fx.micronaut`]
