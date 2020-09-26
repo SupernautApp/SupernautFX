@@ -3,7 +3,7 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.0.8-SNAPSHOT
+== v0.0.9-SNAPSHOT
 
 Released: in development
 
@@ -38,6 +38,11 @@ Released: in development
 === Known Issues
 
 * Gradle `:run` task not working for sample apps, see https://github.com/SupernautApp/SupernautFX/issues/6[Issue #6]
+
+
+== v0.0.8
+
+There will be no 0.0.8 release. (That version was "used up" while learning that Github Packages does not support SNAPSHOT releases.)
 
 == v0.0.7
 
