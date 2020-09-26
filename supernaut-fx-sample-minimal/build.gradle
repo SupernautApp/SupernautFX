@@ -5,46 +5,19 @@ plugins {
 apply plugin: "org.openjfx.javafxplugin"
 apply plugin: "org.beryx.jlink"
 
-def appName = 'SupernautFX Hello'
+def appName = 'SupernautFX Minimal'
 version = helloAppVersion
 application {
-    mainModule = 'app.supernaut.fx.sample.hello'
-    mainClass = 'app.supernaut.fx.sample.hello.HelloForegroundApp'
-}
-
-configurations {
-    // Add the 'toVerify' configuration so we can use the following Gradle command
-    // `./gradlew --write-verification-metadata sha256 supernautfx-hello:dowloadJavaFXPlatformJars buildJPackages``
-    // to build `./gradle/verification-metadata.xml` for verify dependency checksums
-    toVerify
+    mainModule = 'app.supernaut.fx.sample.minimal'
+    mainClass = 'app.supernaut.fx.sample.minimal.MinimalApp'
 }
 
 dependencies {
-    implementation project (':supernautfx-micronaut')
+    implementation project (':supernaut-fx-micronaut')
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
     implementation "org.slf4j:slf4j-jdk14:${slf4jVersion}"
-
-    toVerify "org.openjfx:javafx-base:$javaFxVersion:mac"
-    toVerify "org.openjfx:javafx-graphics:$javaFxVersion:mac"
-    toVerify "org.openjfx:javafx-controls:$javaFxVersion:mac"
-    toVerify "org.openjfx:javafx-fxml:$javaFxVersion:mac"
-
-    toVerify "org.openjfx:javafx-base:$javaFxVersion:linux"
-    toVerify "org.openjfx:javafx-graphics:$javaFxVersion:linux"
-    toVerify "org.openjfx:javafx-controls:$javaFxVersion:linux"
-    toVerify "org.openjfx:javafx-fxml:$javaFxVersion:linux"
-
-    toVerify "org.openjfx:javafx-base:$javaFxVersion:win"
-    toVerify "org.openjfx:javafx-graphics:$javaFxVersion:win"
-    toVerify "org.openjfx:javafx-controls:$javaFxVersion:win"
-    toVerify "org.openjfx:javafx-fxml:$javaFxVersion:win"
-}
-
-task dowloadJavaFXPlatformJars(type: Copy) {
-    from configurations.toVerify
-    into "${buildDir}/verificationJars"
 }
 
 patchModules.config = [
@@ -53,7 +26,7 @@ patchModules.config = [
 
 javafx {
     version = javaFxVersion
-    modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
+    modules = ['javafx.graphics', 'javafx.controls']
 }
 
 run {
@@ -82,7 +55,6 @@ jlink {
 
         requires 'javafx.graphics'
         requires 'javafx.controls'
-        requires 'javafx.fxml'
 
         forceMerge 'org.slf4j'
     }
@@ -110,7 +82,6 @@ jlink {
         imageOptions = ["--verbose", "--app-version", appVersionForJpackage]
         installerOptions = ["--app-version", appVersionForJpackage]
         if (os.macOsX) {
-            imageOptions += [ '--resource-dir', "${projectDir}/src/macos/resource-dir" ]
             if (rootProject.ext.signJPackageImages) {
                 logger.warn "Setting --mac-sign in jpackage imageOptions"
                 imageOptions += [ '--mac-sign' ]

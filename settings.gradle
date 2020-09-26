@@ -3,8 +3,8 @@ plugins {
 }
 
 include 'supernaut'
-include 'supernautfx'
-include 'supernautfx-micronaut'
-include 'supernautfx-sample-hello'
-include 'supernautfx-sample-minimal'
-include 'supernautfx-testapp'
+include 'supernaut-fx'
+include 'supernaut-fx-micronaut'
+include 'supernaut-fx-sample-hello'
+include 'supernaut-fx-sample-minimal'
+include 'supernaut-fx-testapp'

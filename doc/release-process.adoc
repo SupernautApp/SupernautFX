@@ -61,5 +61,9 @@ Now you can make sure the build works and push the changes to the Git repo.
 .. `CHANGELOG.adoc`
 . Commit and push to master
 
+== Publish Snapshot release to Github Maven repo
+
+. `.gradlew clean buildCI publish`
+
 
 

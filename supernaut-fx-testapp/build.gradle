@@ -13,7 +13,7 @@ application {
 }
 
 dependencies {
-    implementation project (':supernautfx-micronaut')
+    implementation project (':supernaut-fx-micronaut')
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 

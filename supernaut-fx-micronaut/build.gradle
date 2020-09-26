@@ -10,7 +10,7 @@ javafx {
 }
 
 dependencies {
-    api project (':supernautfx')
+    api project (':supernaut-fx')
 
     api "io.micronaut:micronaut-inject-java:${micronautVersion}"
 

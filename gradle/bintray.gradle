@@ -1,31 +1,40 @@
 allprojects {
     apply plugin: 'com.jfrog.bintray'
-    //apply plugin: 'maven'
     apply plugin: 'maven-publish'
 
-    task sourceJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
+//    task sourceJar(type: Jar, dependsOn: classes) {
+//        classifier = 'sources'
+//        from sourceSets.main.allSource
+//    }
+//
+//    task javadocJar(type: Jar, dependsOn: javadoc) {
+//        classifier = 'javadoc'
+//        from javadoc.destinationDir
+//    }
 
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    artifacts {
-        archives sourceJar
-        archives javadocJar
-    }
+//    artifacts {
+//        archives sourceJar
+//        archives javadocJar
+//    }
 
     publishing {
+        repositories {
+            maven {
+                name = "SupernautAppGitHubPackages"
+                url = "https://maven.pkg.github.com/SupernautApp/SupernautFX"
+                credentials {
+                    username = project.findProperty("supernaut.github.user") ?: System.getenv("GITHUB_ACTOR")
+                    password = project.findProperty("supernaut.github.key") ?: System.getenv("GITHUB_TOKEN")
+                }
+            }
+        }
         publications {
             jar(MavenPublication) {
                 from components.java
 
-                artifact sourceJar {
-                    classifier "sources"
-                }
+//                artifact sourceJar {
+//                    classifier "sources"
+//                }
             }
 
         }                                                    
