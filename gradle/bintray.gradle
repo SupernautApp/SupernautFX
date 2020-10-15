@@ -41,12 +41,12 @@ allprojects {
     }
 
     bintray {
-        user = project.hasProperty("binTrayConsensusJAPIUser") ? binTrayConsensusJAPIUser : 'please set binTrayAPIUser'
-        key = project.hasProperty("binTrayConsensusJAPIKey") ? binTrayConsensusJAPIKey : 'please set binTrayAPIKey'
+        user = project.hasProperty("binTraySupernautAPIUser") ? binTraySupernautAPIUser : 'please set binTrayAPIUser'
+        key = project.hasProperty("binTraySupernautAPIKey") ? binTraySupernautAPIKey : 'please set binTrayAPIKey'
         dryRun = false // whether to run this as dry-run, without deploying
         publications = ['jar'] // When uploading Maven-based publication files
         pkg {
-            userOrg = 'consensusj'
+            userOrg = 'supernautapp'
             repo = 'maven'
             name = 'supernaut'
             desc = 'DI for JavaFX using Micronaut'
