@@ -33,7 +33,7 @@ Released: in development
 * Gradle Enterprise Plugin 3.4
 * OpenJFX Gradle Plugin 0.0.9
 * Badass JLink Plugin 2.21.1
-* Groovy 3.0.5
+* Groovy 3.0.6
 
 === Known Issues
 
