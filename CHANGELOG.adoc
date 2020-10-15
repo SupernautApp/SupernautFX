@@ -3,7 +3,7 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.0.9-SNAPSHOT
+== v0.0.9
 
 Released: 2020.10.14
 
