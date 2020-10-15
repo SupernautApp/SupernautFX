@@ -2,8 +2,8 @@
 
 == Requirements
 
-* OpenJDK 11 or later (OpenJDK 14 is recommended: `sdk use java 14.0.1.hs-adpt`)
-* JDK 14 `jpackage` installed and `BADASS_JLINK_JPACKAGE_HOME` configured (if building sample apps with `jpackage`)
+* OpenJDK 11 or later (OpenJDK 15 is recommended: `sdk use java 15.0.0.hs-adpt`)
+* JDK 15 `jpackage` installed and `BADASS_JLINK_JPACKAGE_HOME` configured (if building sample apps with `jpackage`)
 
 == Main Release Process
 

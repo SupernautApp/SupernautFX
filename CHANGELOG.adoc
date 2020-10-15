@@ -5,7 +5,7 @@ A high-level view of the changes in each SupernautFX release.
 
 == v0.0.9-SNAPSHOT
 
-Released: in development
+Released: 2020.10.14
 
 === Library
 
@@ -13,7 +13,7 @@ Released: in development
 ** `app.supernaut` (was package `org.consensusj.supernaut`)
 ** `app.supernaut.fx` (was package  `org.consensusj.supernautfx`)
 ** `app.supernaut.fx.micronaut` (was package  `org.consensusj.supernautfx.micronaut`)
-* Use `ServiceLoader` so most apps won't need compile-time dependency on `app.supernaut.fx.micronaut`
+* Use `ServiceLoader` for `FxLauncher` so most apps won't need compile-time dependency on `app.supernaut.fx.micronaut`
 * Additional class renaming and refactoring to make things more consistent
 * Launch methods take application `Class` objects (which were previously passed in Launcher constructors)
 
