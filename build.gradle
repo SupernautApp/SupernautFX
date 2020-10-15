@@ -78,9 +78,11 @@ task testReport(type: TestReport) {
 
 build.dependsOn subprojects.build
 
-task buildCI(dependsOn: [build, testReport,'supernaut-fx-sample-hello:jlink', 'supernaut-fx-testapp:jlink'])
+task buildCI(dependsOn: [build, testReport,
+                         'supernaut-fx-sample-hello:jlink', 'supernaut-fx-sample-minimal:jlink', 'supernaut-fx-testapp:jlink'])
 
-task buildJPackages(dependsOn: [buildCI, 'supernaut-fx-sample-hello:jpackage', 'supernaut-fx-testapp:jpackage'])
+task buildJPackages(dependsOn: [buildCI,
+                        'supernaut-fx-sample-hello:jpackage', 'supernaut-fx-sample-minimal:jpackage', 'supernaut-fx-testapp:jpackage'])
 
 /**
  * Massage the version string based upon the current OS to be valid
