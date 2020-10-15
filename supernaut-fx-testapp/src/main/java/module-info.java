@@ -36,8 +36,8 @@ module app.supernaut.fx.testapp {
     requires org.slf4j;
     requires java.logging;
 
-    opens app.supernaut.fx.sample.testapp to javafx.graphics, javafx.fxml, java.base;
-    exports app.supernaut.fx.sample.testapp;
+    opens app.supernaut.fx.testapp to javafx.graphics, javafx.fxml, java.base;
+    exports app.supernaut.fx.testapp;
 
     uses app.supernaut.fx.FxLauncher;
 }

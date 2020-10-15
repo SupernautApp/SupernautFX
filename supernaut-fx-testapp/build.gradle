@@ -8,8 +8,8 @@ apply plugin: "org.beryx.jlink"
 def appName = 'SupernautFXTestApp'
 version = testAppVersion
 application {
-    mainModule = 'app.supernaut.fx.sample.testapp'
-    mainClass = 'app.supernaut.fx.sample.testapp.TestApp'
+    mainModule = 'app.supernaut.fx.testapp'
+    mainClass = 'app.supernaut.fx.testapp.TestApp'
 }
 
 dependencies {
