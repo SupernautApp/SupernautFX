@@ -7,6 +7,17 @@ A high-level view of the changes in each SupernautFX release.
 
 Released: In development
 
+=== Library
+
+* Upgrade to Micronaut 2.1.1
+* Change `api` dependency in `app.supernaut.fx.micronaut` from `micronaut-inject-java` to `micronaut-inject` (reduces transitive dependencies)
+
+=== Sample Apps
+
+* Finer-grained dependencies in apps (see https://github.com/SupernautApp/SupernautFX/commit/3723c1397a34b08e9922ecc2a8321f627cf4c74f[3723c13])
+* Upgrade to BadAss JLink Plugin 2.22.1
+
+
 == v0.0.9
 
 Released: 2020.10.14
