@@ -13,7 +13,9 @@ application {
 }
 
 dependencies {
-    implementation project (':supernaut-fx-micronaut')
+    implementation project (':supernaut-fx')
+    implementation "io.micronaut:micronaut-inject:${micronautVersion}"  // For Micronaut generated code
+    runtimeOnly project (':supernaut-fx-micronaut')                     // To provide the ServiceLoader implementation of FxLauncher
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
