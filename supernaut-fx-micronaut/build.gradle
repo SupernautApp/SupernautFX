@@ -16,7 +16,7 @@ dependencies {
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
-    testImplementation "io.micronaut.test:micronaut-test-spock:1.2.0"
+    testImplementation "io.micronaut.test:micronaut-test-spock:${micronautVersion}"
 }
 
 patchModules.config = [
