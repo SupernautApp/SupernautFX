@@ -3,8 +3,8 @@ plugins {
 }
 
 apply plugin: 'org.javamodularity.moduleplugin'
-
-def platform = getJfxPlatform()
+apply plugin: app.supernaut.gradle.JavaFXPlatformPlugin
+def platform = ext.jfxPlatform
 
 dependencies {
     api project (':supernaut-fx')
@@ -35,23 +35,3 @@ test {
 patchModules.config = [
         "java.annotation=jsr305-3.0.2.jar"
 ]
-
-static String getJfxPlatform() {
-    def osName = System.getProperty("os.name").toLowerCase()
-    def platform
-    switch (osName) {
-        case ~/mac.*/:
-            platform = "mac"
-            break
-        case ~/windows.*/:
-            platform = "win"
-            break
-        case ~/linux.*/:
-            platform = "linux"
-            break
-        default:
-            platform = "unknown"
-            break
-    }
-    return platform
-}

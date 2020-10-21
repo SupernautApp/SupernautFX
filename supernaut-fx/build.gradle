@@ -2,11 +2,12 @@ plugins {
     id 'java-library'
 }
 
+apply plugin: app.supernaut.gradle.JavaFXPlatformPlugin
+def platform = ext.jfxPlatform
+
 java {
     modularity.inferModulePath = true
 }
-
-def platform = getJfxPlatform()
 
 dependencies {
     api project (':supernaut')
@@ -23,24 +24,4 @@ dependencies {
     testImplementation "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
     testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
     testImplementation "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
-}
-
-static String getJfxPlatform() {
-    def osName = System.getProperty("os.name").toLowerCase()
-    def platform
-    switch (osName) {
-        case ~/mac.*/:
-            platform = "mac"
-            break
-        case ~/windows.*/:
-            platform = "win"
-            break
-        case ~/linux.*/:
-            platform = "linux"
-            break
-        default:
-            platform = "unknown"
-            break
-    }
-    return platform
 }
