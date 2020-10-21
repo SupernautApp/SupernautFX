@@ -28,7 +28,7 @@ patchModules.config = [
 
 javafx {
     version = javaFxVersion
-    modules = ['javafx.graphics', 'javafx.controls']
+    modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
 }
 
 run {
@@ -57,6 +57,7 @@ jlink {
 
         requires 'javafx.graphics'
         requires 'javafx.controls'
+        requires 'javafx.fxml'  // Transitive dependency of app.supernaut.fx even though minimal App has no FXML
 
         forceMerge 'org.slf4j'
     }

@@ -11,7 +11,7 @@ v0.0.9
 
 image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge.svg["Build Status", link="https://github.com/SupernautApp/SupernautFX/actions"] image:https://travis-ci.org/SupernautApp/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.org/SupernautApp/SupernautFX/"] image:https://api.bintray.com/packages/supernautapp/maven/supernaut/images/download.svg[link="https://bintray.com/supernautapp/maven/supernaut/_latestVersion"]
 
-Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut] (provided by the `micronaut-inject-java` JAR.) It enables the use of dependency injection in application, controller, and service objects.
+Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
 CAUTION:: This is an experimental framework in its very early stages. It is being used by a handful of applications in development and alpha-testing and seems to be working well so far.
 
@@ -26,8 +26,7 @@ Perhaps in the future it could be used as a component by other full-featured Jav
 Supernaut.FX introduces no new dependencies beyond what is required for JavaFX and Micronaut:
 
 * *JavaFX* (direct dependencies on `javafx-fxml` and `javafx-graphics`)
-* *Micronaut* (`micronaut-inject-java`)
-* `javax.inject` (also used by Micronaut)
+* *Micronaut* (`micronaut-inject`)
 * `slf4j-api` (also used by Micronaut)
 
 
@@ -43,12 +42,12 @@ Supernaut.FX currently consists of 3 modules (JARs)
 | *No dependencies!*
 
 |https://github.com/SupernautApp/SupernautFX/blob/master/supernautfx/src/main/java/module-info.java[`app.supernaut.fx`]
-| JavaFX application `javax.inject` support
-| `app.supernaut`, *JavaFX*, `javax.inject`, `slf4j-api`
+| JavaFX application dependency injection support
+| `app.supernaut`, *JavaFX*, `slf4j-api`
 
 |https://github.com/SupernautApp/SupernautFX/blob/master/supernautfx-micronaut/src/main/java/module-info.java[`app.supernaut.fx.micronaut`]
 | App Launcher with Micronaut dependency injection
-| `app.supernaut.fx`, `micronaut-inject-java`
+| `app.supernaut.fx`, `micronaut-inject`
 |===
 
 Typical applications will have a compile-time dependency on `app.supernaut.fx` and a runtime dependency on `app.supernaut.fx.micronaut`.
@@ -109,7 +108,7 @@ We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing 
 ** Initially Micronaut-only
 ** Possibly in the future could use an abstraction to allow other similar DI frameworks (help wanted with this issue)
 * Designed for Java apps shipped with a bundled runtime
-** Applications built with JDK 14 https://jdk.java.net/jpackage/[jpackage] (implemented)
+** Applications built with JDK 15+ https://jdk.java.net/jpackage/[jpackage] (implemented)
 ** Applications built with https://www.graalvm.org/[GraalVM] and https://github.com/gluonhq/substrate[Gluon Substrate] (future)
 * Agressively tracks latest JDK for JavaFX, recent Android versions
 ** JDK 11 or later for JavaFX components

@@ -2,22 +2,27 @@ plugins {
     id 'java-library'
 }
 
-apply plugin: "org.openjfx.javafxplugin"
+apply plugin: 'org.javamodularity.moduleplugin'
 
-javafx {
-    version = javaFxVersion
-    modules = [ 'javafx.graphics', 'javafx.fxml' ]
-}
+def platform = getJfxPlatform()
 
 dependencies {
     api project (':supernaut-fx')
-
+    api "org.openjfx:javafx-graphics:${javaFxVersion}"
+    api "org.openjfx:javafx-fxml:${javaFxVersion}"
     api "io.micronaut:micronaut-inject:${micronautVersion}"
+
+    compileOnly "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
+    compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
+    compileOnly "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
 
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
+    testImplementation "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
+    testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
+    testImplementation "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
     testImplementation "io.micronaut.test:micronaut-test-spock:${micronautVersion}"
 }
 
@@ -25,8 +30,22 @@ patchModules.config = [
         "java.annotation=jsr305-3.0.2.jar"
 ]
 
-test {
-    moduleOptions {
-        runOnClasspath = true
+static String getJfxPlatform() {
+    def osName = System.getProperty("os.name").toLowerCase()
+    def platform
+    switch (osName) {
+        case ~/mac.*/:
+            platform = "mac"
+            break
+        case ~/windows.*/:
+            platform = "win"
+            break
+        case ~/linux.*/:
+            platform = "linux"
+            break
+        default:
+            platform = "unknown"
+            break
     }
+    return platform
 }

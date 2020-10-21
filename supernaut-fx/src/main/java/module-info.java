@@ -25,8 +25,6 @@ module app.supernaut.fx {
     requires javafx.graphics;
     requires javafx.fxml;
 
-    requires javax.inject;
-
     requires org.slf4j;
 
     exports app.supernaut.fx;

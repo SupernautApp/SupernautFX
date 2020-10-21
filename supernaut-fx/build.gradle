@@ -2,22 +2,45 @@ plugins {
     id 'java-library'
 }
 
-apply plugin: "org.openjfx.javafxplugin"
-
-javafx {
-    version = javaFxVersion
-    modules = [ 'javafx.graphics', 'javafx.fxml' ]
+java {
+    modularity.inferModulePath = true
 }
+
+def platform = getJfxPlatform()
 
 dependencies {
     api project (':supernaut')
 
-    api "javax.inject:javax.inject:1"
+    api "org.openjfx:javafx-graphics:${javaFxVersion}"
+    api "org.openjfx:javafx-fxml:${javaFxVersion}"
+
+    compileOnly "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
+    compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
+    compileOnly "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
+
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    testImplementation "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
+    testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
+    testImplementation "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
 }
 
-test {
-    moduleOptions {
-        runOnClasspath = true
+static String getJfxPlatform() {
+    def osName = System.getProperty("os.name").toLowerCase()
+    def platform
+    switch (osName) {
+        case ~/mac.*/:
+            platform = "mac"
+            break
+        case ~/windows.*/:
+            platform = "win"
+            break
+        case ~/linux.*/:
+            platform = "linux"
+            break
+        default:
+            platform = "unknown"
+            break
     }
+    return platform
 }

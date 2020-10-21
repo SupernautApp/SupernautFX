@@ -18,12 +18,9 @@ package app.supernaut.fx.services;
 import javafx.application.HostServices;
 import app.supernaut.services.BrowserService;
 
-import javax.inject.Singleton;
-
 /**
  * Implementation of {@link BrowserService} using JavaFX {@link HostServices}.
  */
-@Singleton
 public class FxBrowserService implements BrowserService {
     private final HostServices hostServices;
 

@@ -35,4 +35,8 @@ public class BaseFxmlForegroundApp implements FxForegroundApp {
     public void start(FxMainView mainView) throws Exception {
 
     }
+
+    public FxmlLoaderFactory getFxmlLoaderFactory() {
+        return fxmlLoaderFactory;
+    }
 }
