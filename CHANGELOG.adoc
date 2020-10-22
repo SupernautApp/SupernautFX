@@ -3,9 +3,9 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.1.0-SNAPSHOT
+== v0.1.0
 
-Released: In development
+Released: 2020.10.21
 
 === app.supernaut
 

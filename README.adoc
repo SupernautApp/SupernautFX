@@ -1,8 +1,8 @@
 = Supernaut.FX
 Sean Gilligan <https://github.com/msgilligan>
-v0.0.9
+v0.1.0
 :description: Supernaut.FX DI Framework README.
-:supernautfx-version: 0.0.9
+:supernautfx-version: 0.1.0
 :tip-caption: :bulb:
 :note-caption: :information_source:
 :important-caption: :heavy_exclamation_mark:
