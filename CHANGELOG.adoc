@@ -18,7 +18,7 @@ Released: In development
 
 === app.supernaut.fx.micronaut
 
-* Upgrade to Micronaut 2.1.1
+* Upgrade to Micronaut 2.1.2
 * Remove dependency on JavaFX :mac JARs from POMs. (JavaFX Gradle Plugin does this unintentionally)
 * Change `api` dependency from `micronaut-inject-java` to `micronaut-inject` (reduces transitive dependencies)
 

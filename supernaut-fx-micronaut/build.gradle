@@ -23,7 +23,7 @@ dependencies {
     testImplementation "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
     testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
     testImplementation "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
-    testImplementation "io.micronaut.test:micronaut-test-spock:${micronautVersion}"
+    testImplementation "io.micronaut.test:micronaut-test-spock:${micronautTestSpockVersion}"
 }
 
 test {
