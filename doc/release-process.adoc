@@ -9,7 +9,7 @@
 
 . Update `CHANGELOG.adoc`
 . Set/verify versions in:
-.. `gradle.properties`
+.. `gradle.properties` (including bump of app versions -- TODO: Don't publish sample apps to bintray)
 .. `README.adoc`
 . Commit version bump and changelog.
 . Full build, test
