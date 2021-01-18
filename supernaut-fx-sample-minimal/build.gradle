@@ -26,6 +26,9 @@ patchModules.config = [
         "java.annotation=jsr305-3.0.2.jar"
 ]
 
+// Workaround for https://github.com/SupernautApp/SupernautFX/issues/6
+modularity.disableEffectiveArgumentsAdjustment()
+
 javafx {
     version = javaFxVersion
     modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
