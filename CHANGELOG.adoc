@@ -11,6 +11,7 @@ Released: Under development
 
 * JavaFX 15.0.1
 * Micronaut 2.2.3
+* Gradle 6.8
 
 === Build
 
