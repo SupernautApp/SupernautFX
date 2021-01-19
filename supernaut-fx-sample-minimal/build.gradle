@@ -49,6 +49,7 @@ test {
 def os = org.gradle.internal.os.OperatingSystem.current()
 
 jlink {
+    javaHome = findDefaultToolchainJavaHome()
     addExtraDependencies("javafx")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages', '--add-modules', 'app.supernaut.fx.micronaut']
     launcher {
@@ -69,6 +70,8 @@ jlink {
         // where the plugin's jpackage task finds the path to the jpackage tool by default
         if (Boolean.getBoolean('download.jpackage')) {
             jpackageHome = rootProject.ext.jpackageHome
+        } else {
+            jpackageHome = findDefaultToolchainJavaHome()
         }
         skipInstaller = false
 

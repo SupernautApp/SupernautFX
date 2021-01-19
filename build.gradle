@@ -65,6 +65,8 @@ subprojects {
     compileJava {
         options.release = 11
         options.compilerArgs << '-Xlint:deprecation' << '-Xlint:unchecked'
+        // FOR JDK 16
+        options.forkOptions.jvmArgs.addAll( ['--add-opens', 'jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED'] )
     }
 
     test {
@@ -89,6 +91,14 @@ task buildCI(dependsOn: [build, testReport,
 
 task buildJPackages(dependsOn: [buildCI,
                         'supernaut-fx-sample-hello:jpackage', 'supernaut-fx-sample-minimal:jpackage', 'supernaut-fx-testapp:jpackage'])
+
+
+// Use the Gradle default Java Toolchain to find the JDK Home for the JLink Plugin
+String findDefaultToolchainJavaHome() {
+    def defaultToolchain = project.getExtensions().getByType(JavaPluginExtension.class).toolchain
+    JavaToolchainService service = project.getExtensions().getByType(JavaToolchainService.class)
+    return service.launcherFor(defaultToolchain).get().metadata.installationPath.asFile.absolutePath
+}
 
 /**
  * Massage the version string based upon the current OS to be valid
