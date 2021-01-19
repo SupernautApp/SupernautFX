@@ -15,8 +15,9 @@ Released: Under development
 
 === Build
 
-* Travis CI: Update Linux distro to `focal` (Ubuntu 20.04 LTS)
+* Use `languageVersion = JavaLanguageVersion.of(15)` to require JDK 15
 * Github Actions: Build with JDK 15 (drop 14, prepare to add 16.ea)
+* Travis CI: Update Linux distro to `focal` (Ubuntu 20.04 LTS)
 
 == v0.1.0
 

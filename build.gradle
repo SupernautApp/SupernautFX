@@ -38,6 +38,14 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    java {
+        toolchain {
+            // A full build requires JDK 15 for the (incubating) `jpackage` tool
+            // When JDK 16 is final, we will upgrade to JDK 16 for a non-incubating `jpackage`
+            languageVersion = JavaLanguageVersion.of(15)
+        }
+    }
 }
 
 subprojects {
