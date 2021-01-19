@@ -15,8 +15,8 @@ Released: Under development
 
 === Build
 
-* Use `languageVersion = JavaLanguageVersion.of(15)` to require JDK 15
-* Github Actions: Build with JDK 15 (drop 14, prepare to add 16.ea)
+* Use `languageVersion = JavaLanguageVersion.of(16)` in `build.gradle` to require JDK 16 toolchain for build/test
+* Github Actions: Build with JDK 16 (but run Gradle with JDK 15)
 * Travis CI: Update Linux distro to `focal` (Ubuntu 20.04 LTS)
 
 == v0.1.0

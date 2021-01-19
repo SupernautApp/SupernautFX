@@ -9,15 +9,19 @@ v0.1.0
 :caution-caption: :fire:
 :warning-caption: :warning:
 
-image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge.svg["Build Status", link="https://github.com/SupernautApp/SupernautFX/actions"] image:https://travis-ci.org/SupernautApp/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.org/SupernautApp/SupernautFX/"] image:https://api.bintray.com/packages/supernautapp/maven/supernaut/images/download.svg[link="https://bintray.com/supernautapp/maven/supernaut/_latestVersion"]
+image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge.svg["Build Status", link="https://github.com/SupernautApp/SupernautFX/actions"] image:https://api.bintray.com/packages/supernautapp/maven/supernaut/images/download.svg[link="https://bintray.com/supernautapp/maven/supernaut/_latestVersion"]
+
+// Hide Travis and Gitlab build badges until those builds are fixed (or removed).
+// image:https://gitlab.com/SupernautApp/SupernautFX/badges/master/pipeline.svg[link="https://gitlab.com/SupernautApp/SupernautFX/pipelines",title="pipeline status"]
+// image:https://travis-ci.org/SupernautApp/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.org/SupernautApp/SupernautFX/"]
 
 Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
-CAUTION:: This is an experimental framework in its very early stages. It is being used by a handful of applications in development and alpha-testing and seems to be working well so far.
+CAUTION:: This is an experimental framework in early stage development. It is being used by a handful of applications in development and alpha-testing and seems to be working well so far.
 
 == Simple and Lightweight
 
-Although it does prescribe a certain structure for an application in order to enable the injection of dependencies, it aspires to be a component library for your application with the sole concern of enabling dependency injection.
+Although Supernaut.FX does prescribe a certain structure for an application in order to enable the injection of dependencies, it aspires to be a component library for your application with the sole concern of enabling dependency injection.
 
 Perhaps in the future it could be used as a component by other full-featured JavaFX frameworks.
 
@@ -50,34 +54,35 @@ Supernaut.FX currently consists of 3 modules (JARs)
 | `app.supernaut.fx`, `micronaut-inject`
 |===
 
-Typical applications will have a compile-time dependency on `app.supernaut.fx` and a runtime dependency on `app.supernaut.fx.micronaut`.
+Typical applications will have a *compile-time* dependency on `app.supernaut.fx` and a *runtime* dependency on `app.supernaut.fx.micronaut`.
 
 You may also develop library modules for services depending only on `app.supernaut`.
 
 == Features
 
 * JavaFX-compatible Dependency Injection
-** Main application class is dependency injected
-** JavaFX FXML controllers are dependency injected
+** Main application class is dependency-injected
+** JavaFX FXML controllers are dependency-injected
 ** Service object dependency injection
-* Application class need not extend `javafx.application.Application`
+* Your main "application" class need not extend `javafx.application.Application`
 * `BrowserService` abstraction for opening links in Web Browser (abstraction of JavaFX `HostServices`)
 * Ability to customize Micronaut `BeanContext` or `ApplicationContext`
 * Micronaut-powered application configuration via `.yml`, `.json`, or `.properties` files (forthcoming, see https://github.com/SupernautApp/SupernautFX/issues/2)
 
 == Getting Started
 
-There is no user guide or "Getting Started" document, yet. Fortunately the framework is very simple -- currently only 5 (relatively simple) classes. To get started do the following:
+There is no user guide or "Getting Started" document, yet. Fortunately the framework is very simple -- currently only a handful of relatively simple classes. To get started do the following:
 
 . Clone the project
+. Make sure your `JAVA_HOME` points to a JDK 11 or newer (but not greater than 15, Gradle doesn't support that yet)
+. Configure a `JDK16` environment to point to a JDK 16 (currently in early access) installation
 . Run the sample Hello app
 .. `./gradlew supernautfx-sample-hello:run`
 . Build a `jpackage`-ed Hello app
-.. Configure the `BADASS_JLINK_JPACKAGE_HOME` environment variable
 .. `./gradlew supernautfx-sample-hello:jpackage`
 .. Open the `supernautfx-sample-hello/build/jpackage` directory and launch the native application for your platform
-. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernautfx-sample-hello/src/main/java/app/supernaut/fx/sample/hello[source code for the Hello app]
-. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernautfx/src/main/java/app/supernaut/fx[source code for Supernaut.FX]
+. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernaut-fx-sample-hello/src/main/java/app/supernaut/fx/sample/hello[source code for the Hello app]
+. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernaut-fx/src/main/java/app/supernaut/fx[source code for Supernaut.FX]
 . Start your own app!
 
 == Inspired By

@@ -2,8 +2,8 @@
 
 == Requirements
 
-* OpenJDK 11 or later (OpenJDK 15 is recommended: `sdk use java 15.0.0.hs-adpt`)
-* JDK 15 `jpackage` installed and `BADASS_JLINK_JPACKAGE_HOME` configured (if building sample apps with `jpackage`)
+* `JAVA_HOME` set to OpenJDK 11 or later (OpenJDK 15 is recommended: `sdk use java 15.0.2.hs-adpt`)
+* `JDK16` set to a JDK 16 (currently in early access) JDK.
 
 == Main Release Process
 
