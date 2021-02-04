@@ -12,7 +12,7 @@ plugins {
     id 'org.asciidoctor.jvm.convert'        version '2.2.0'
     id 'com.jfrog.bintray'                  version '1.8.4'
     id 'org.openjfx.javafxplugin'           version '0.0.9'  apply false
-    id 'org.beryx.jlink'                    version '2.22.1' apply false
+    id 'org.beryx.jlink'                    version '2.23.3' apply false
     id 'de.undercouch.download'             version '4.0.1'
     id 'com.github.hierynomus.license'      version '0.15.0' apply false
 }
@@ -93,14 +93,6 @@ task buildCI(dependsOn: [build, testReport,
 
 task buildJPackages(dependsOn: [buildCI,
                         'supernaut-fx-sample-hello:jpackage', 'supernaut-fx-sample-minimal:jpackage', 'supernaut-fx-testapp:jpackage'])
-
-
-// Use the Gradle default Java Toolchain to find the JDK Home for the JLink Plugin
-String findDefaultToolchainJavaHome() {
-    def defaultToolchain = project.getExtensions().getByType(JavaPluginExtension.class).toolchain
-    JavaToolchainService service = project.getExtensions().getByType(JavaToolchainService.class)
-    return service.launcherFor(defaultToolchain).get().metadata.installationPath.asFile.absolutePath
-}
 
 /**
  * Massage the version string based upon the current OS to be valid
