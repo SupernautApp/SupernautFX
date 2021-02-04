@@ -10,15 +10,21 @@ Released: Under development
 === Dependency Upgrades
 
 * JavaFX 15.0.1
-* Micronaut 2.3.0
+* Micronaut 2.3.1
+
+=== Sample Apps
+
+* Use new Supernaut Icon for MacOS builds (Linux, Windows icon config TBD)
 
 === Build
 
-* Use `languageVersion = JavaLanguageVersion.of(16)` in `build.gradle` to require JDK 16 toolchain for build/test
+* Use `languageVersion = JavaLanguageVersion.of` in `build.gradle` and use JDK 16 toolchain for build/test
 * Github Actions: Build with JDK 16 (but run Gradle with JDK 15)
 * Travis CI: Update Linux distro to `focal` (Ubuntu 20.04 LTS)
 * Gradle 6.8
+* Badass JLink Plugin 2.23.3
 * Spock 2.0-M4-groovy-3.0
+* Micronaut Test Spock micronaut-test-spock 2.3.2
 * Groovy 3.0.7
 
 == v0.1.0
