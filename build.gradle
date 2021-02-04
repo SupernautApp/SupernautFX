@@ -1,7 +1,4 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
     dependencies {
         classpath "org.asciidoctor:asciidoctorj:${asciidoctorjVersion}"
         //classpath "org.asciidoctor:asciidoctorj-diagram:${asciidoctorjDiagramVersion}"
@@ -36,7 +33,7 @@ allprojects {
     group = 'app.supernaut'
 
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     java {
