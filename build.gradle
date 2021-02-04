@@ -41,8 +41,11 @@ allprojects {
 
     java {
         toolchain {
-            // A full build requires JDK 16 (Currently in early access) for the `jpackage` tool
-            languageVersion = JavaLanguageVersion.of(16)
+            // `languageVersion` is used to configure the "Java Toolchain" used for the build. This includes `javac`,
+            // `jlink`, and the `jpackage` tool.
+            //  See `gradle.properties` for the setting of `javaToolchainVersion` and other setting that are used
+            // to find and/or download JDK versions.
+            languageVersion = JavaLanguageVersion.of(javaToolchainVersion)
         }
     }
 }
