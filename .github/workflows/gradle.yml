@@ -40,7 +40,7 @@ jobs:
       run: ./gradlew buildJPackages --scan --info --stacktrace
       env:
         JAVA_HOME: ${{ env.JAVA_HOME_15_x64 }}
-        JDK16: ${{ env.JAVA_HOME_16_0_0_EA_33_X64 }}
+        JDK16: ${{ env.JAVA_HOME_16_0_0_EA_34_X64 }}
     - name: Upload DMG as an artifact
       uses: actions/upload-artifact@v2
       with:
