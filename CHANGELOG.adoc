@@ -7,6 +7,10 @@ A high-level view of the changes in each SupernautFX release.
 
 Released: Under development
 
+=== API Changes
+
+* Add `Launcher.launch` overload that doesn't require a BackgroundApp `Class`.
+
 === Dependency Upgrades
 
 * JavaFX 15.0.1

@@ -37,6 +37,14 @@ public interface Launcher {
     void launch(String[] args, Class<? extends ForegroundApp> foregroundApp, Class<? extends BackgroundApp> backgroundApp);
 
     /**
+     * Launch and run the application on the current thread. Uses default/no-op background application.
+     * Does not return until after foreground app closes.
+     * @param args command-line args
+     * @param foregroundApp class object for ForegroundApp
+     */
+    void launch(String[] args, Class<? extends ForegroundApp> foregroundApp);
+
+    /**
      * Launch and run the application on a newly created thread.
      * This method is useful for testing and possibly for other
      * application startup scenarios.

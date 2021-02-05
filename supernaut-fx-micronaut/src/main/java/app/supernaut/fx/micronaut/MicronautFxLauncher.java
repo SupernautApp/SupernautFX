@@ -17,6 +17,7 @@ package app.supernaut.fx.micronaut;
 
 import app.supernaut.fx.FxmlLoaderFactory;
 import app.supernaut.fx.services.FxBrowserService;
+import app.supernaut.fx.test.NoopBackgroundApp;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.BeanContext;
 import io.micronaut.context.env.Environment;
@@ -83,7 +84,12 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
 
         @Override
         public BackgroundApp createBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass) {
-            return context.getBean(backgroundAppClass);
+            if (backgroundAppClass.equals(NoopBackgroundApp.class)) {
+                // Special case for NoopBackgroundApp which is not an (annotated) Micronaut Bean
+                return new NoopBackgroundApp();
+            } else {
+                return context.getBean(backgroundAppClass);
+            }
         }
 
         @Override

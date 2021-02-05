@@ -15,6 +15,7 @@
  */
 package app.supernaut.fx;
 
+import app.supernaut.fx.test.NoopBackgroundApp;
 import javafx.application.Application;
 import app.supernaut.BackgroundApp;
 import app.supernaut.ForegroundApp;
@@ -149,6 +150,11 @@ public abstract class FxLauncherAbstract implements FxLauncher {
     public void launch(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
         log.info("launch...");
         launchInternal(args, foregroundAppClass, backgroundApp, false);
+    }
+
+    @Override
+    public void launch(String[] args, Class<? extends ForegroundApp> foregroundAppClass) {
+        launch(args, foregroundAppClass, NoopBackgroundApp.class);
     }
 
     /**

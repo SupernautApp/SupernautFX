@@ -15,7 +15,6 @@
  */
 package app.supernaut.fx.sample.minimal;
 
-import app.supernaut.BackgroundApp;
 import app.supernaut.fx.FxLauncher;
 import app.supernaut.fx.FxForegroundApp;
 import javafx.scene.Scene;
@@ -33,7 +32,7 @@ public class MinimalApp implements FxForegroundApp {
     private final String appName;
 
     public static void main(String[] args) {
-        FxLauncher.byName("micronaut").launch(args, MinimalApp.class, MinimalBackgroundApp.class);
+        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
     }
     
     public MinimalApp(AppConfig config) {
@@ -49,22 +48,6 @@ public class MinimalApp implements FxForegroundApp {
         primaryStage.setScene(scene);
         primaryStage.setTitle("SupernautFX Minimal App");
         primaryStage.show();
-    }
-
-    /**
-     * Background application that runs without UI (JavaFX)
-     */
-    @Singleton
-    static class MinimalBackgroundApp implements BackgroundApp {
-        private final String appName;
-
-        MinimalBackgroundApp(AppConfig config) {
-            appName = config.appName;
-        }
-
-        @Override
-        public void start() {
-        }
     }
 
     /**
