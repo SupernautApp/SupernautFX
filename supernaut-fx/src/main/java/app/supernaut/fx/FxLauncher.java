@@ -48,6 +48,6 @@ public interface FxLauncher extends Launcher {
                 .map(ServiceLoader.Provider::get)
                 .filter(launcher -> launcher.name().equals(name))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new NoSuchElementException("Launcher '" + name + "' not found."));
     }
 }
