@@ -14,6 +14,7 @@ allprojects {
         }
         ext.year = '2019-2020'
         ext.name = 'M. Sean Gilligan'
+        exclude "**/*.json"
         exclude "**/build/*"
         exclude "**/out/*"
         exclude "**/.gradle/*"
