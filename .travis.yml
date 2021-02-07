@@ -3,7 +3,7 @@ dist: focal
 language: java
 matrix:
   include:
-  - jdk: openjdk11
+  - jdk: openjdk15
 install: true
 script:
-  - ./gradlew -PjavaToolchainVersion=11 clean buildCI
+  - ./gradlew -PjavaToolchainVersion=15 clean buildCI
