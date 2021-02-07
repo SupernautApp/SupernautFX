@@ -9,11 +9,10 @@ v0.1.0
 :caution-caption: :fire:
 :warning-caption: :warning:
 
-image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge.svg["Build Status", link="https://github.com/SupernautApp/SupernautFX/actions"] image:https://api.bintray.com/packages/supernautapp/maven/supernaut/images/download.svg[link="https://bintray.com/supernautapp/maven/supernaut/_latestVersion"]
+image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge.svg["Build Status", link="https://github.com/SupernautApp/SupernautFX/actions"]  image:https://travis-ci.com/SupernautApp/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.com/github/SupernautApp/SupernautFX/"] image:https://api.bintray.com/packages/supernautapp/maven/supernaut/images/download.svg[link="https://bintray.com/supernautapp/maven/supernaut/_latestVersion"]
 
-// Hide Travis and Gitlab build badges until those builds are fixed (or removed).
+// Hide Gitlab build badge until build is fixed (or removed).
 // image:https://gitlab.com/SupernautApp/SupernautFX/badges/master/pipeline.svg[link="https://gitlab.com/SupernautApp/SupernautFX/pipelines",title="pipeline status"]
-// image:https://travis-ci.org/SupernautApp/SupernautFX.svg?branch=master["Build Status", link="https://travis-ci.org/SupernautApp/SupernautFX/"]
 
 Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
