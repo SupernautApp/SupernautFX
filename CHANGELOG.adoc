@@ -3,9 +3,9 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.1.1-SNAPSHOT
+== v0.1.1
 
-Released: Under development
+Released: 2020.02.07
 
 === New Features
 
@@ -15,6 +15,12 @@ Released: Under development
 === API Changes
 
 * Add `Launcher.launch` overload that doesn't require a BackgroundApp `Class`.
+
+=== Documentation
+
+* README.adoc updated
+* Sample Gradle application in standalone project/repository.
+* Sample Maven application in standalone project/repository.
 
 === Dependency Upgrades
 

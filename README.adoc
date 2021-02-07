@@ -1,8 +1,8 @@
 = Supernaut.FX
 Sean Gilligan <https://github.com/msgilligan>
-v0.1.0
+v0.1.1
 :description: Supernaut.FX DI Framework README.
-:supernautfx-version: 0.1.0
+:supernautfx-version: 0.1.1
 :tip-caption: :bulb:
 :note-caption: :information_source:
 :important-caption: :heavy_exclamation_mark:
@@ -66,23 +66,61 @@ You may also develop library modules for services depending only on `app.superna
 * Your main "application" class need not extend `javafx.application.Application`
 * `BrowserService` abstraction for opening links in Web Browser (abstraction of JavaFX `HostServices`)
 * Ability to customize Micronaut `BeanContext` or `ApplicationContext`
-* Micronaut-powered application configuration via `.yml`, `.json`, or `.properties` files (forthcoming, see https://github.com/SupernautApp/SupernautFX/issues/2)
 
 == Getting Started
 
-There is no user guide or "Getting Started" document, yet. Fortunately the framework is very simple -- currently only a handful of relatively simple classes. To get started do the following:
+There is no user guide or "Getting Started" document, yet. Fortunately the framework is very simple -- currently only a handful of relatively simple classes. To get started, use either the sample Gradle or Maven project.
 
-. Clone the project
+=== Gradle Sample Project
+
+The https://github.com/SupernautApp/supernaut-fx-sample-gradle[Gradle sample project] currently supports running your application via Gradle and building a jlink'ed and jpackage'd application via the https://github.com/beryx/badass-jlink-plugin[Badass Gradle JLink Plugin].
+
+To build the jpackage'd app:
+
+. `git clone git@github.com:SupernautApp/supernaut-fx-sample-gradle.git`
+. `cd supernaut-fx-sample-gradle`
+. `./gradlew jpackage`
+. Open the `build/jpackage` directory and launch the native application for your platform.
+
+Or to run the app directly from Gradle:
+
+. `./gradlew run`
+
+=== Maven Sample Project
+
+The https://github.com/SupernautApp/supernaut-fx-sample-maven[Maven sample project] currently supports running your application via Maven and building a natively-compiled application via https://www.graalvm.org[GraalVM] and https://github.com/gluonhq/client-maven-plugin[Gluon Client Maven Plugin].
+
+To build a GraalVM native-image:
+
+. `git clone git@github.com:SupernautApp/supernaut-fx-sample-maven.git`
+. `cd supernaut-fx-sample-maven`
+. `mvn client:build`
+. `mvn client:run` or open the `target/client` directory and launch the native application for your platform
+
+Or to run the app directly from Maven:
+
+. `mvn javafx:run`
+
+== Building Supernaut
+
+. Clone the repository
 . Make sure your `JAVA_HOME` points to a JDK 11 or newer (but not greater than 15, Gradle doesn't support that yet)
 . Configure a `JDK16` environment to point to a JDK 16 (currently in early access) installation
+. `./gradlew buildCI buildJPackages`
+
+The official builds are using JDK16 (early access) for the Java Toolchain, but if you want to build with JDK15, you can use:
+
+. `./gradlew -PjavaToolchainVersion=15 buildCI buildJPackages`
+
+
+To test one of the included sample apps:
+
 . Run the sample Hello app
-.. `./gradlew supernautfx-sample-hello:run`
+.. `./gradlew supernaut-fx-sample-hello:run`
 . Build a `jpackage`-ed Hello app
-.. `./gradlew supernautfx-sample-hello:jpackage`
+.. `./gradlew supernaut-fx-sample-hello:jpackage`
 .. Open the `supernautfx-sample-hello/build/jpackage` directory and launch the native application for your platform
-. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernaut-fx-sample-hello/src/main/java/app/supernaut/fx/sample/hello[source code for the Hello app]
-. Review the https://github.com/SupernautApp/SupernautFX/tree/master/supernaut-fx/src/main/java/app/supernaut/fx[source code for Supernaut.FX]
-. Start your own app!
+
 
 == Inspired By
 
