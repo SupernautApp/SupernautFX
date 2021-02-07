@@ -7,6 +7,11 @@ A high-level view of the changes in each SupernautFX release.
 
 Released: Under development
 
+=== New Features
+
+* Add support for GraalVM native image
+* Provide non-modular ServiceLoader support for `MicronautFXLaunder`
+
 === API Changes
 
 * Add `Launcher.launch` overload that doesn't require a BackgroundApp `Class`.
