@@ -1,4 +1,3 @@
-# configuration for https://travis-ci.org/bitcoinj/bitcoinj
 sudo: false
 dist: focal
 language: java
@@ -7,4 +6,4 @@ matrix:
   - jdk: openjdk11
 install: true
 script:
-  - ./gradlew clean buildCI
+  - ./gradlew -PjavaToolchainVersion=11 clean buildCI
