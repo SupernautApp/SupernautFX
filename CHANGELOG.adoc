@@ -11,6 +11,10 @@ Released: Not yet
 
 * Micronaut 2.3.2
 
+=== GraalVM native-image Support
+
+* Move Graal native-image reflection configuration resources to `app.supernaut/<artifact>/reflect-config.json`.
+
 === Build
 
 * Gradle 6.8.2
