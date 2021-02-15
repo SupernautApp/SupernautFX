@@ -7,6 +7,10 @@ A high-level view of the changes in each SupernautFX release.
 
 Released: Not yet
 
+=== Dependency Upgrades
+
+* Micronaut 2.3.2
+
 === Build
 
 * Github Actions: Use JDK 16 EA 36
