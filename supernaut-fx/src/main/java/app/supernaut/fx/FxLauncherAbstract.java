@@ -198,9 +198,23 @@ public abstract class FxLauncherAbstract implements FxLauncher {
      *                        calling thead (typically this will be the main thread)
      */
     private void launchInternal(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundAppClass, boolean initForegroundOnNewThread) {
-        Class<? extends FxForegroundApp> sfxForegroundAppClass = (Class<? extends FxForegroundApp>) foregroundAppClass;
         launchBackgroundApp(backgroundAppClass);
-        launchForegroundApp(args, sfxForegroundAppClass, initForegroundOnNewThread);
+        launchForegroundApp(args, castFxForegroundApp(foregroundAppClass), initForegroundOnNewThread);
+    }
+
+    /**
+     * Cast {@link ForegroundApp} to {@link FxForegroundApp}
+     *
+     * @param foregroundAppClass A {@link ForegroundApp} implementation that is expected to be an implementation of {@code FxForegroundApp}
+     * @throws IllegalArgumentException if foregroundAppClass doesn't implement {@code FxForegroundApp}
+     * @return The passed in reference, but cast to {@link FxForegroundApp}
+     */
+    @SuppressWarnings("unchecked")
+    private Class<? extends FxForegroundApp> castFxForegroundApp(Class<? extends ForegroundApp> foregroundAppClass) {
+        if (!FxForegroundApp.class.isAssignableFrom(foregroundAppClass)) {
+            throw new IllegalArgumentException("foregroundAppClass must be an implementation of FxForegroundApp");
+        }
+        return (Class<? extends FxForegroundApp>) foregroundAppClass;
     }
 
     private void launchBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass) {
