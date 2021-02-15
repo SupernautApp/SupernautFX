@@ -7,6 +7,9 @@ A high-level view of the changes in each SupernautFX release.
 
 Released: Not yet
 
+=== Build
+
+* Github Actions: Use JDK 16 EA 36
 
 == v0.1.1
 
