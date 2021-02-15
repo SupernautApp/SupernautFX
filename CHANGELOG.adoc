@@ -13,6 +13,7 @@ Released: Not yet
 
 === Build
 
+* Gradle 6.8.2
 * Github Actions: Use JDK 16 EA 36
 
 == v0.1.1
