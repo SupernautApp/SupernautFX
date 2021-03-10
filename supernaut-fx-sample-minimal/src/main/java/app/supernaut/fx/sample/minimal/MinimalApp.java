@@ -22,7 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 /**
  * A minimal (Single-Class) Supernaut.FX App implementing {@link FxForegroundApp}.

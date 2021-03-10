@@ -24,7 +24,7 @@
  * so that {@code jlink} will include it. See the {@code options} configuration in the {@code jlink} block in
  * this applications {@code build.gradle}.
  * <p>
- * In general, you should prefer the {@link javax.inject} annotations for portability reasons.
+ * In general, you should prefer the {@link jakarta.inject} annotations for portability reasons.
  *
  *
  * @uses app.supernaut.fx.FxLauncher You must provide the {@code app.supernaut.fx.micronaut} implementation at runtime.
@@ -35,7 +35,7 @@ module app.supernaut.fx.sample.minimal {
     requires javafx.controls;
 
     requires app.supernaut.fx;
-    requires javax.inject;
+    requires jakarta.inject;
 
     /* Not needed see module JavaDoc comment above */
     //requires app.supernaut.fx.micronaut;

@@ -19,7 +19,7 @@ import app.supernaut.fx.FxmlLoaderFactory;
 import io.micronaut.context.BeanContext;
 import javafx.fxml.FXMLLoader;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import java.net.URL;
 
 /**

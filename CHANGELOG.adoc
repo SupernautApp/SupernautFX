@@ -10,7 +10,8 @@ Released: Not yet
 === Dependency Upgrades
 
 * JavaFX 16
-* Micronaut 2.3.4
+* Micronaut 2.4.0
+* javax.inject -> jakarta.inject 2.0.0
 
 === GraalVM native-image Support
 

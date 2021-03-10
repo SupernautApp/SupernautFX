@@ -15,8 +15,8 @@
  */
 package app.supernaut.fx.sample.hello.service;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import java.time.format.DateTimeFormatter;
 
 /**

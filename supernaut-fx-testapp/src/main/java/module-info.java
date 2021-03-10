@@ -23,12 +23,12 @@ module app.supernaut.fx.testapp {
     requires javafx.fxml;
 
     requires app.supernaut.fx;
-    requires javax.inject;
+    requires jakarta.inject;
     /*
      * Needed for the @Factory annotation and for the Bean Definition classes generated
      * by the Micronaut annotation processor. Most classes in this module only use annotations
-     * from javax.inject and do not import any Micronaut classes. In general controllers and services
-     * in a Supernaut.FX application should avoid dependencies on Micronaut and use javax.inject
+     * from jakarta.inject and do not import any Micronaut classes. In general controllers and services
+     * in a Supernaut.FX application should avoid dependencies on Micronaut and use jakarta.inject
      * annotations.
      */
     requires io.micronaut.inject;

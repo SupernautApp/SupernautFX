@@ -17,7 +17,7 @@ package app.supernaut.fx.testapp;
 
 import app.supernaut.BackgroundApp;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 /**
  *

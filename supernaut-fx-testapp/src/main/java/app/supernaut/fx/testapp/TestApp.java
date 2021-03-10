@@ -31,7 +31,7 @@ import app.supernaut.test.TimingMeasurements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;

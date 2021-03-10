@@ -18,7 +18,7 @@ package app.supernaut.fx.micronaut.test;
 import app.supernaut.fx.FxForegroundApp;
 import app.supernaut.fx.FxmlLoaderFactory;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 /**
  * FxForegroundApp with constructor that expects a {@link FxmlLoaderFactory}

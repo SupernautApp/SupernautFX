@@ -21,6 +21,7 @@ configurations {
 
 dependencies {
     implementation project (':supernaut-fx')
+    implementation 'jakarta.inject:jakarta.inject-api:2.0.0'
     implementation "io.micronaut:micronaut-inject:${micronautVersion}"  // For Micronaut annotations eg. @Factory and generated code
     runtimeOnly project (':supernaut-fx-micronaut')                     // To provide the ServiceLoader implementation of FxLauncher
 
