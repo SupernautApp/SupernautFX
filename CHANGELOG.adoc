@@ -9,7 +9,8 @@ Released: Not yet
 
 === Dependency Upgrades
 
-* Micronaut 2.3.2
+* JavaFX 16
+* Micronaut 2.3.4
 
 === GraalVM native-image Support
 
