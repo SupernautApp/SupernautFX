@@ -12,7 +12,7 @@ allprojects {
             kts    = 'SLASHSTAR_STYLE'
             fxml   = 'XML_STYLE'
         }
-        ext.year = '2019-2020'
+        ext.year = '2019-2021'
         ext.name = 'M. Sean Gilligan'
         exclude "**/*.json"
         exclude "**/build/*"
