@@ -16,9 +16,8 @@ jobs:
       uses: actions/checkout@v1
     - name: Set up JDK (via matrix) for Gradle Java toolchain
       id: setupjdk
-      uses: actions/setup-java@v2-preview
+      uses: actions/setup-java@v1
       with:
-        distribution: 'adopt' # See 'Supported distributions' for available options
         java-version: ${{ matrix.java }}
     - name: Echo JAVA_HOME (after setup-java/AdoptOpenJDK)
       run: echo $JAVA_HOME
@@ -38,7 +37,7 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
     - name: Build with Gradle
-      run: ./gradlew buildCI buildJPackages --scan --info --stacktrace
+      run: ./gradlew -PjavaToolchainVendor= buildCI buildJPackages --scan --info --stacktrace
       env:
         JAVA_HOME: ${{ env.JAVA_HOME_15_x64 }}
         JDK16: ${{ env.JAVA_HOME_16_0_0_X64 }}
