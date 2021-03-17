@@ -18,6 +18,19 @@ Supernaut.FX is a lightweight dependency injection framework for JavaFX applicat
 
 CAUTION:: This is an experimental framework in early stage development. It is being used by a handful of applications in development and alpha-testing and seems to be working well so far.
 
+== Features
+
+* JavaFX-compatible Dependency Injection
+** Main application class is dependency-injected
+** JavaFX FXML controllers are dependency-injected
+** Service object dependency injection
+* Your main "application" class need not extend `javafx.application.Application`
+* `BrowserService` abstraction for opening links in Web Browser (abstraction of JavaFX `HostServices`)
+
+== Modern
+
+Supernaut.Fx is designed for _modern_ JavaFX applications that use the latest version of JavaFX (currently 16) and are built for distribution using either the `jpackage` tool of JDK 16 or as native images using GraalVM JDK 11 (using native-image and Gluon Substrate)
+
 == Simple and Lightweight
 
 Although Supernaut.FX does prescribe a certain structure for an application in order to enable the injection of dependencies, it aspires to be a component library for your application with the sole concern of enabling dependency injection.
@@ -57,14 +70,6 @@ Typical applications will have a *compile-time* dependency on `app.supernaut.fx`
 
 You may also develop library modules for services depending only on `app.supernaut`.
 
-== Features
-
-* JavaFX-compatible Dependency Injection
-** Main application class is dependency-injected
-** JavaFX FXML controllers are dependency-injected
-** Service object dependency injection
-* Your main "application" class need not extend `javafx.application.Application`
-* `BrowserService` abstraction for opening links in Web Browser (abstraction of JavaFX `HostServices`)
 * Ability to customize Micronaut `BeanContext` or `ApplicationContext`
 
 == Getting Started
