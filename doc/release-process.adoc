@@ -3,7 +3,7 @@
 == Requirements
 
 * `JAVA_HOME` set to OpenJDK 11 or later (OpenJDK 15 is recommended: `sdk use java 15.0.2.hs-adpt`)
-* `JDK16` set to a JDK 16 (currently in early access) JDK.
+* `JDK16` set to a JDK 16 instance.
 
 == Main Release Process
 
@@ -63,7 +63,7 @@ Now you can make sure the build works and push the changes to the Git repo.
 
 == Publish Snapshot release to Github Maven repo
 
-. `.gradlew clean buildCI publish`
+. `./gradlew clean buildCI publish`
 
 
 == Publish Snapshot release to LOCAL Maven repo
