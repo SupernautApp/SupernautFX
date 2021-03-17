@@ -6,4 +6,4 @@ matrix:
   - jdk: openjdk15
 install: true
 script:
-  - ./gradlew -PjavaToolchainVersion=15 clean buildCI
+  - ./gradlew -PjavaToolchainVersion=15 -PjavaToolchainVendor= clean buildCI
