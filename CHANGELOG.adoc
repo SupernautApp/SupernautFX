@@ -7,6 +7,15 @@ A high-level view of the changes in each SupernautFX release.
 
 Released: Not yet
 
+=== Dependency Upgrades
+
+* Micronaut 2.4.1
+
+=== Build
+
+* Specify `adoptopenjdk` as default `JvmVendorSpec`, but allow override via
+  `gradle.properties` or command-line `-P` option.
+
 == v0.1.2
 
 Released: 2021.03.17

@@ -19,6 +19,7 @@
 . Publish to Bintray:
 .. `./gradlew bintrayUpload`
 .. Confirm publish of artifacts in Bintray Web UI.
+. Create Github Release
 
 == Updating Gradle Dependency Verification configuration
 
