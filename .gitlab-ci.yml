@@ -1,5 +1,8 @@
 image: ubuntu:focal
 
+# Note: You can test changes to this file locally with:
+# gitlab-runner exec docker --docker-privileged build
+
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   UBUNTU_CODENAME: "focal"
@@ -9,17 +12,17 @@ before_script:
   - echo $GRADLE_OPTS
   - apt-get update
   - apt-get -y upgrade
-  - apt-get install wget apt-transport-https gnupg curl rpm fakeroot
-  - wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+  - DEBIAN_FRONTEND=noninteractive apt-get -y install wget apt-transport-https gnupg curl binutils rpm fakeroot
+  - wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
   - echo "deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/adoptopenjdk.list
   - apt-get update
-  - apt-get install $JDK_PACKAGE
+  - apt-get -y install $JDK_PACKAGE
   - jpackage --version
 
 build:
   script:
     - java -version
-    - ./gradlew buildCI --info --stacktrace
+    - ./gradlew -PjavaToolchainVersion=15 buildCI --info --stacktrace
   artifacts:
     paths:
       - supernautfx/build/libs
