@@ -1,25 +1,25 @@
-image: ubuntu:disco
+image: ubuntu:focal
 
 variables:
-  JDK14_FILENAME: "openjdk-14-jpackage+8_linux-x64_bin.tar.gz"
-  JDK14_URL: "https://download.java.net/java/early_access/jpackage/8/$JDK14_FILENAME"
-  BADASS_JLINK_JPACKAGE_HOME: "$CI_PROJECT_DIR/jdk-14"
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  UBUNTU_CODENAME: "focal"
+  JDK_PACKAGE: "adoptopenjdk-15-hotspot"
 
 before_script:
-  - echo $BADASS_JLINK_JPACKAGE_HOME
   - echo $GRADLE_OPTS
   - apt-get update
   - apt-get -y upgrade
-  - apt-get -y install openjdk-12-jdk curl rpm fakeroot
-  - curl --silent --show-error -O $JDK14_URL
-  - tar xf $JDK14_FILENAME
-  - $BADASS_JLINK_JPACKAGE_HOME/bin/jpackage --version
+  - apt-get install wget apt-transport-https gnupg curl rpm fakeroot
+  - wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+  - echo "deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/adoptopenjdk.list
+  - apt-get update
+  - apt-get install $JDK_PACKAGE
+  - jpackage --version
 
 build:
   script:
     - java -version
-    - ./gradlew buildCI --stacktrace
+    - ./gradlew buildCI --info --stacktrace
   artifacts:
     paths:
       - supernautfx/build/libs
