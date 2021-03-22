@@ -75,7 +75,6 @@ subprojects {
 }
 
 apply from: 'gradle/bintray.gradle'
-apply from: 'gradle/downloadJPackage.gradle'
 apply from: 'gradle/licenseCheck.gradle'
 
 task testReport(type: TestReport) {

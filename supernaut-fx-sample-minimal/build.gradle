@@ -62,9 +62,6 @@ jlink {
     jpackage {
         // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for
         // where the plugin's jpackage task finds the path to the jpackage tool by default
-        if (Boolean.getBoolean('download.jpackage')) {
-            jpackageHome = rootProject.ext.jpackageHome
-        }
         skipInstaller = false
 
         // Which installers to make
@@ -92,8 +89,4 @@ jlink {
         }
 
     }
-}
-
-if (Boolean.getBoolean('download.jpackage')) {
-    jpackage.dependsOn rootProject.expandJPackage
 }
