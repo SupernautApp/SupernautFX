@@ -14,28 +14,18 @@ jobs:
     steps:
     - name: Git checkout
       uses: actions/checkout@v1
-    - name: Set up JDK (via matrix) for Gradle Java toolchain
+    - name: Set up JDK (via matrix) for Gradle Java Toolchain
       id: setupjdk-toolchain
       uses: actions/setup-java@v2-preview
       with:
         distribution: 'adopt'
         java-version: ${{ matrix.java }}
-    - name: Save JAVA_HOME (toolchain)
-      id: java-home-toolchain
-      run: echo "::set-output name=path::$JAVA_HOME"
-    - name: Echo JAVA_HOME (after setup-java/matrix)
-      run: echo $JAVA_HOME
     - name: Setup JDK 15 for Gradle JVM
       id: setupjdk-gradle
       uses: actions/setup-java@v2-preview
       with:
         distribution: 'adopt'
         java-version: '15'
-    - name: Save JAVA_HOME (gradle)
-      id: java-home-gradle
-      run: echo "::set-output name=path::$JAVA_HOME"
-    - name: Echo JAVA_HOME (after setup-jdk '15')
-      run: echo $JAVA_HOME
     - name: Verify Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1
     - name: Cache Gradle packages
