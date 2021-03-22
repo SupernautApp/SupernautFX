@@ -20,6 +20,9 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: ${{ matrix.java }}
+    - name: Save JAVA_HOME (toolchain)
+      id: java-home-toolchain
+      run: echo "::set-output name=path::$JAVA_HOME"
     - name: Echo JAVA_HOME (after setup-java/matrix)
       run: echo $JAVA_HOME
     - name: Setup JDK 15 for Gradle JVM
@@ -27,6 +30,9 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '15'
+    - name: Save JAVA_HOME (gradle)
+      id: java-home-gradle
+      run: echo "::set-output name=path::$JAVA_HOME"
     - name: Echo JAVA_HOME (after setup-jdk '15')
       run: echo $JAVA_HOME
     - name: Verify Gradle Wrapper
@@ -38,10 +44,10 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
     - name: Build with Gradle
-      run: ./gradlew -PjavaToolchainVersion=15 -PjavaToolchainVendor= buildCI buildJPackages --scan --info --stacktrace
+      run: ./gradlew buildCI buildJPackages --scan --info --stacktrace
       env:
-        JAVA_HOME: ${{ env.JAVA_HOME_15_x64 }}
-        JDK16: ${{ env.JAVA_HOME_16_0_0_X64 }}
+        JAVA_HOME: ${{ steps.java-home-gradle.outputs.$JAVA_HOME }}"
+        JDK16: ${{ steps.rjava-home-toolchain.outputs.$JAVA_HOME }}"
     - name: Upload DMG as an artifact
       uses: actions/upload-artifact@v2
       with:
