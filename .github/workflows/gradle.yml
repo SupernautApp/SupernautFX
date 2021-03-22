@@ -25,7 +25,7 @@ jobs:
       uses: actions/setup-java@v2-preview
       with:
         distribution: 'adopt'
-        java-version: '15'
+        java-version: '16.0.0'
     - name: Verify Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1
     - name: Cache Gradle packages

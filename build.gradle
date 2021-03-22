@@ -11,7 +11,7 @@ plugins {
     id 'org.openjfx.javafxplugin'           version '0.0.9'  apply false
     id 'org.beryx.jlink'                    version '2.23.4' apply false
     id 'de.undercouch.download'             version '4.0.1'
-    id 'com.github.hierynomus.license'      version '0.15.0' apply false
+//    id 'com.github.hierynomus.license'      version '0.15.0' apply false
 }
 
 buildScan {
@@ -76,7 +76,7 @@ subprojects {
 
 apply from: 'gradle/bintray.gradle'
 apply from: 'gradle/downloadJPackage.gradle'
-apply from: 'gradle/licenseCheck.gradle'
+//apply from: 'gradle/licenseCheck.gradle'
 
 task testReport(type: TestReport) {
     destinationDir = file("$buildDir/reports/allTests")
