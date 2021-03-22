@@ -14,20 +14,18 @@ jobs:
     steps:
     - name: Git checkout
       uses: actions/checkout@v1
-    - name: Set up JDK (via matrix) for Gradle Java toolchain
-      id: setupjdk
-      uses: actions/setup-java@v1
+    - name: Set up JDK (via matrix) for Gradle Java Toolchain
+      id: setupjdk-toolchain
+      uses: actions/setup-java@v2-preview
       with:
+        distribution: 'adopt'
         java-version: ${{ matrix.java }}
-    - name: Echo JAVA_HOME (after setup-java/AdoptOpenJDK)
-      run: echo $JAVA_HOME
-    - name: Setup JDK 15 (AdoptOpenJDK) for Gradle JVM
-      uses: joschi/setup-jdk@v2
+    - name: Setup JDK 15 for Gradle JVM
+      id: setupjdk-gradle
+      uses: actions/setup-java@v2-preview
       with:
-        java-version: 15
-        architecture: x64
-    - name: Echo JAVA_HOME (after setup-jdk/Zulu)
-      run: echo $JAVA_HOME
+        distribution: 'adopt'
+        java-version: '15'
     - name: Verify Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1
     - name: Cache Gradle packages
@@ -37,10 +35,10 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
     - name: Build with Gradle
-      run: ./gradlew -PjavaToolchainVendor= buildCI buildJPackages --scan --info --stacktrace
+      run: ./gradlew buildCI buildJPackages --scan --info --stacktrace
       env:
-        JAVA_HOME: ${{ env.JAVA_HOME_15_x64 }}
-        JDK16: ${{ env.JAVA_HOME_16_0_0_X64 }}
+        JAVA_HOME: ${{ steps.setupjdk-gradle.outputs.path }}
+        JDK16: ${{ steps.setupjdk-toolchain.outputs.path }}
     - name: Upload DMG as an artifact
       uses: actions/upload-artifact@v2
       with:
