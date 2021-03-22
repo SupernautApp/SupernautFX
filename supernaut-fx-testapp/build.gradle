@@ -58,12 +58,6 @@ jlink {
     }
     mergedModule {
         requires 'java.logging'
-
-        requires 'javafx.graphics'
-        requires 'javafx.controls'
-        requires 'javafx.fxml'
-
-        forceMerge 'org.slf4j'
     }
     jpackage {
         // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for
