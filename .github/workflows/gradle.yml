@@ -38,7 +38,7 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
     - name: Build with Gradle
-      run: ./gradlew -PjavaToolchainVendor= buildCI buildJPackages --scan --info --stacktrace
+      run: ./gradlew -PjavaToolchainVersion=15 -PjavaToolchainVendor= buildCI buildJPackages --scan --info --stacktrace
       env:
         JAVA_HOME: ${{ env.JAVA_HOME_15_x64 }}
         JDK16: ${{ env.JAVA_HOME_16_0_0_X64 }}
