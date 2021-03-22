@@ -15,7 +15,7 @@ jobs:
     - name: Git checkout
       uses: actions/checkout@v1
     - name: Set up JDK (via matrix) for Gradle Java toolchain
-      id: setupjdk
+      id: setupjdk-toolchain
       uses: actions/setup-java@v2-preview
       with:
         distribution: 'adopt'
@@ -26,6 +26,7 @@ jobs:
     - name: Echo JAVA_HOME (after setup-java/matrix)
       run: echo $JAVA_HOME
     - name: Setup JDK 15 for Gradle JVM
+      id: setupjdk-gradle
       uses: actions/setup-java@v2-preview
       with:
         distribution: 'adopt'
@@ -46,8 +47,8 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew buildCI buildJPackages --scan --info --stacktrace
       env:
-        JAVA_HOME: ${{ steps.java-home-gradle.outputs.path }}
-        JDK16: ${{ steps.java-home-toolchain.outputs.path }}
+        JAVA_HOME: ${{ steps.setupjdk-gradle.outputs.path }}
+        JDK16: ${{ steps.setupjdk-toolchain.outputs.path }}
     - name: Upload DMG as an artifact
       uses: actions/upload-artifact@v2
       with:
