@@ -46,8 +46,8 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew buildCI buildJPackages --scan --info --stacktrace
       env:
-        JAVA_HOME: ${{ steps.java-home-gradle.outputs.$JAVA_HOME }}"
-        JDK16: ${{ steps.rjava-home-toolchain.outputs.$JAVA_HOME }}"
+        JAVA_HOME: ${{ steps.java-home-gradle.outputs.JAVA_HOME }}"
+        JDK16: ${{ steps.java-home-toolchain.outputs.JAVA_HOME }}"
     - name: Upload DMG as an artifact
       uses: actions/upload-artifact@v2
       with:
