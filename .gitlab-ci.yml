@@ -17,11 +17,11 @@ before_script:
   - echo "deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/adoptopenjdk.list
   - apt-get update
   - apt-get -y install $JDK_PACKAGE
+  - java -version
   - jpackage --version
 
 build:
   script:
-    - java -version
     - ./gradlew -PjavaToolchainVersion=15 buildCI buildJPackages --scan --info --stacktrace
   artifacts:
     paths:
