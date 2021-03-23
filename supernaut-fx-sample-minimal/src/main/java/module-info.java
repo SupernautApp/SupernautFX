@@ -35,13 +35,10 @@ module app.supernaut.fx.sample.minimal {
     requires javafx.controls;
 
     requires app.supernaut.fx;
-    requires jakarta.inject;
-
-    /* Not needed see module JavaDoc comment above */
-    //requires app.supernaut.fx.micronaut;
-
+    requires static jakarta.inject;
+    
     /* Needed for Micronaut-generated classes, see JavaDoc comment above */
-    requires io.micronaut.inject;
+    requires static io.micronaut.inject;
 
     requires org.slf4j;
     requires java.logging;
