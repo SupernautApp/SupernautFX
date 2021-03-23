@@ -10,7 +10,6 @@ plugins {
     id 'com.jfrog.bintray'                  version '1.8.4'
     id 'org.openjfx.javafxplugin'           version '0.0.9'  apply false
     id 'org.beryx.jlink'                    version '2.23.4' apply false
-    id 'de.undercouch.download'             version '4.0.1'
     id 'com.github.hierynomus.license'      version '0.15.0' apply false
 }
 
@@ -28,12 +27,24 @@ logger.warn "rootProject.ext.signJPackageImages = ${rootProject.ext.signJPackage
 
 allprojects {
     apply plugin: 'java'
+    apply plugin: 'groovy'
 
     version = supernautVersion     // set in gradle.properties
     group = 'app.supernaut'
 
     repositories {
         mavenCentral()
+    }
+
+    dependencies {
+        testImplementation "org.codehaus.groovy:groovy:${groovyVersion}:"
+        testImplementation("org.spockframework:spock-core:${spockVersion}") {
+            exclude module: "groovy-all"
+        }
+
+        testRuntimeOnly "net.bytebuddy:byte-buddy:1.10.9"                 // allows Spock to mock classes (in addition to interfaces)
+        testRuntimeOnly "org.objenesis:objenesis:3.1"                     // Allow Spock to mock classes with constructor arguments
+        testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"           // Runtime implementation of slf4j
     }
 
     java {
@@ -45,21 +56,6 @@ allprojects {
             languageVersion = JavaLanguageVersion.of(javaToolchainVersion)
             vendor = JvmVendorSpec.matching(javaToolchainVendor)
         }
-    }
-}
-
-subprojects {
-    apply plugin: 'groovy'
-
-    dependencies {
-        testImplementation "org.codehaus.groovy:groovy:${groovyVersion}:"
-        testImplementation("org.spockframework:spock-core:${spockVersion}") {
-            exclude module: "groovy-all"
-        }
-
-        testRuntimeOnly "net.bytebuddy:byte-buddy:1.10.9"                 // allows Spock to mock classes (in addition to interfaces)
-        testRuntimeOnly "org.objenesis:objenesis:3.1"                     // Allow Spock to mock classes with constructor arguments
-        testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"           // Runtime implementation of slf4j
     }
 
     compileJava {
@@ -85,11 +81,13 @@ task testReport(type: TestReport) {
 
 build.dependsOn subprojects.build
 
-task buildCI(dependsOn: [build, testReport,
-                         'supernaut-fx-sample-hello:jlink', 'supernaut-fx-sample-minimal:jlink', 'supernaut-fx-testapp:jlink'])
+task buildCI {
+    dependsOn build, testReport, subprojects.collect { it.tasks.matching { it.name == 'jlink'} }
+}
 
-task buildJPackages(dependsOn: [buildCI,
-                        'supernaut-fx-sample-hello:jpackage', 'supernaut-fx-sample-minimal:jpackage', 'supernaut-fx-testapp:jpackage'])
+task buildJPackages {
+    dependsOn buildCI, subprojects.collect { it.tasks.matching { it.name == 'jpackage'} }
+}
 
 /**
  * Massage the version string based upon the current OS to be valid
