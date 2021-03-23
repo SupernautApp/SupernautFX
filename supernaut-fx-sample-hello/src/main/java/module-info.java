@@ -36,13 +36,10 @@ module app.supernaut.fx.sample.hello {
     requires javafx.fxml;
 
     requires app.supernaut.fx;
-    requires jakarta.inject;
 
-    /* Not needed see module JavaDoc comment above */
-    //requires app.supernaut.fx.micronaut;
-
-    /* Needed for Factory annotation and Micronaut generated classes, see JavaDoc comment above */
-    requires io.micronaut.inject;
+    requires static jakarta.inject;
+    /* Needed for Factory annotation and Micronaut-generated classes, see JavaDoc comment above */
+    requires static io.micronaut.inject;
 
     requires org.slf4j;
     requires java.logging;
