@@ -72,7 +72,7 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
         public MicronautAppFactory(boolean useApplicationContext) {
             if (useApplicationContext) {
                 log.info("Creating Micronaut ApplicationContext");
-                this.context = ApplicationContext.build(Environment.CLI).build();
+                this.context = ApplicationContext.builder(Environment.CLI).build();
             } else {
                 log.info("Creating Micronaut BeanContext");
                 this.context = BeanContext.build();
