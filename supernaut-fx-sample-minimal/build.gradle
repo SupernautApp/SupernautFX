@@ -15,17 +15,15 @@ application {
 dependencies {
     implementation project (':supernaut-fx')
     implementation 'jakarta.inject:jakarta.inject-api:2.0.0'
-    implementation "io.micronaut:micronaut-inject:${micronautVersion}"  // For Micronaut generated code
+    implementation ("io.micronaut:micronaut-inject:${micronautVersion}") {  // For Micronaut annotations eg. @Factory and generated code {
+        exclude group: "com.google.code.findbugs", module: "jsr305" // Exclude until Micronaut removes transitive dependency
+    }
     runtimeOnly project (':supernaut-fx-micronaut')                     // To provide the ServiceLoader implementation of FxLauncher
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
     implementation "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 }
-
-patchModules.config = [
-        "java.annotation=jsr305-3.0.2.jar"
-]
 
 // Workaround for https://github.com/SupernautApp/SupernautFX/issues/6
 modularity.disableEffectiveArgumentsAdjustment()

@@ -11,7 +11,9 @@ dependencies {
     api "org.openjfx:javafx-graphics:${javaFxVersion}"
     api "org.openjfx:javafx-fxml:${javaFxVersion}"
     api 'jakarta.inject:jakarta.inject-api:2.0.0'
-    api "io.micronaut:micronaut-inject:${micronautVersion}"
+    api ("io.micronaut:micronaut-inject:${micronautVersion}") {
+        exclude group: "com.google.code.findbugs", module: "jsr305" // Exclude until Micronaut removes transitive dependency
+    }
 
     compileOnly "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
     compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
@@ -32,7 +34,3 @@ test {
         runOnClasspath = true
     }
 }
-
-patchModules.config = [
-        "java.annotation=jsr305-3.0.2.jar"
-]
