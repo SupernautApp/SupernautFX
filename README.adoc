@@ -175,7 +175,7 @@ We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing 
 ** First-class platform integration
 ** *macOS* integration
 *** Support for https://developer.apple.com/app-sandboxing/[App Sandbox]  and Mac App Store
-*** Native-looking  https://developer.apple.com/design/human-interface-guidelines/macos/menus/menu-bar-menus/[macOS Menu Bar Menus] (with help from https://github.com/codecentric/NSMenuFX[NSMenuFX])
+*** Native-looking  https://developer.apple.com/design/human-interface-guidelines/macos/menus/menu-bar-menus/[macOS Menu Bar Menus] (with help from https://github.com/0x4a616e/NSMenuFX[NSMenuFX])
 *** Integration with Apple's https://developer.apple.com/documentation/os/logging[unified logging system].
 ** May use additional libraries (e.g. NSMenuFX) on a specific platform
 * Non-goal: reusable UI on desktop and mobile
