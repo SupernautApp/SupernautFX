@@ -19,13 +19,11 @@
  */
 module app.supernaut.fx.micronaut {
     requires transitive app.supernaut.fx;
-
-    requires java.logging;
-
+    
     requires javafx.graphics;
     requires javafx.fxml;
 
-    requires jakarta.inject;
+    requires static jakarta.inject;
 
     requires io.micronaut.inject;
     requires org.slf4j;

@@ -15,6 +15,7 @@ Released: Not yet
 
 * Specify `adoptopenjdk` as default `JvmVendorSpec`, but allow override via
   `gradle.properties` or command-line `-P` option.
+* Badass JLink Plugin 2.23.5
 
 == v0.1.2
 
