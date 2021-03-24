@@ -1,5 +1,10 @@
 buildscript {
+    repositories {
+        maven { url 'https://jitpack.io' } // For siordache-forks license plugin
+    }
     dependencies {
+        // Use siordache-forks license plugin until a version supporting Gradle 7 is released
+        classpath "com.github.siordache-forks:license-gradle-plugin:v0.16.1"
         classpath "org.asciidoctor:asciidoctorj:${asciidoctorjVersion}"
         //classpath "org.asciidoctor:asciidoctorj-diagram:${asciidoctorjDiagramVersion}"
     }
@@ -10,7 +15,8 @@ plugins {
     id 'com.jfrog.bintray'                  version '1.8.4'
     id 'org.openjfx.javafxplugin'           version '0.0.9'  apply false
     id 'org.beryx.jlink'                    version '2.23.5' apply false
-    id 'com.github.hierynomus.license'      version '0.15.0' apply false
+//  Waiting for new release of license plugin that supports Gradle 7
+//    id 'com.github.hierynomus.license'      version '0.15.0' apply false
 }
 
 buildScan {
