@@ -109,14 +109,8 @@ Or to run the app directly from Maven:
 == Building Supernaut
 
 . Clone the repository
-. Make sure your `JAVA_HOME` points to a JDK 11 or newer (but not greater than 15, Gradle doesn't support that yet)
-. Configure the `JDK16` environment variable to point to a JDK 16 installation
+. Make sure your `JAVA_HOME` points to a JDK 16 or newer
 . `./gradlew buildCI buildJPackages`
-
-The official builds are using JDK16 for the Java Toolchain, but if you want to build with JDK15, you can use:
-
-. `./gradlew -PjavaToolchainVersion=15 buildCI buildJPackages`
-
 
 To test one of the included sample apps:
 
