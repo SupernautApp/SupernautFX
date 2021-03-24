@@ -9,7 +9,7 @@ plugins {
     id 'org.asciidoctor.jvm.convert'        version '2.2.0'
     id 'com.jfrog.bintray'                  version '1.8.4'
     id 'org.openjfx.javafxplugin'           version '0.0.9'  apply false
-    id 'org.beryx.jlink'                    version '2.23.4' apply false
+    id 'org.beryx.jlink'                    version '2.23.5' apply false
 //    id 'com.github.hierynomus.license'      version '0.15.0' apply false
 }
 
