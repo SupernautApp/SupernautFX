@@ -20,7 +20,7 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: ${{ matrix.java }}
-    - name: Setup JDK 15 for Gradle JVM
+    - name: Setup JDK for Gradle JVM
       id: setupjdk-gradle
       uses: actions/setup-java@v2-preview
       with:
