@@ -67,8 +67,6 @@ allprojects {
     compileJava {
         options.release = 11
         options.compilerArgs << '-Xlint:deprecation' << '-Xlint:unchecked'
-        // FOR JDK 16
-        options.forkOptions.jvmArgs.addAll( ['--add-opens', 'jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED'] )
     }
 
     test {
