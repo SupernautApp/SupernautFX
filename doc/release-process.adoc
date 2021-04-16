@@ -72,3 +72,24 @@ Now you can make sure the build works and push the changes to the Git repo.
 . `./gradlew clean buildCI publishToMavenLocal`
 
 
+== macOS signing and verification
+
+=== Signing Configuration
+
+TBD.
+
+=== Verification
+
+See https://www.macissues.com/2015/11/06/how-to-verify-app-signatures-in-os-x/
+
+----
+codesign --verify --verbose </path/to/dot.app>
+spctl --assess --verbose </path/to/dot.app>
+----
+
+to display signing info
+
+----
+codesign --display --verbose=6 </path/to/dot.app>
+----
+
