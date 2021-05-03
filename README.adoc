@@ -14,7 +14,7 @@ image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge
 // Hide Gitlab build badge until build is fixed (or removed).
 // image:https://gitlab.com/SupernautApp/SupernautFX/badges/master/pipeline.svg[link="https://gitlab.com/SupernautApp/SupernautFX/pipelines",title="pipeline status"]
 
-Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
+Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut® framework] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
 CAUTION:: This is an experimental framework in early stage development. It is being used by a handful of applications in development and alpha-testing and seems to be working well so far.
 
@@ -39,11 +39,11 @@ Perhaps in the future it could be used as a component by other full-featured Jav
 
 == Minimal Dependencies
 
-Supernaut.FX introduces no new dependencies beyond what is required for JavaFX and Micronaut:
+Supernaut.FX introduces no new dependencies beyond what is required for JavaFX and Micronaut framework:
 
 * *JavaFX* (direct dependencies on `javafx-fxml` and `javafx-graphics`)
-* *Micronaut* (`micronaut-inject`)
-* `slf4j-api` (also used by Micronaut)
+* *Micronaut* framework (`micronaut-inject`)
+* `slf4j-api` (also used by Micronaut framework)
 
 
 == Modules
@@ -62,7 +62,7 @@ Supernaut.FX currently consists of 3 modules (JARs)
 | `app.supernaut`, *JavaFX*, `slf4j-api`
 
 |https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx-micronaut/src/main/java/module-info.java[`app.supernaut.fx.micronaut`]
-| App Launcher with Micronaut dependency injection
+| App Launcher with dependency injection provided by Micronaut framework
 | `app.supernaut.fx`, `micronaut-inject`
 |===
 
@@ -70,7 +70,7 @@ Typical applications will have a *compile-time* dependency on `app.supernaut.fx`
 
 You may also develop library modules for services depending only on `app.supernaut`.
 
-* Ability to customize Micronaut `BeanContext` or `ApplicationContext`
+* Ability to customize Micronaut framework `BeanContext` or `ApplicationContext`
 
 == Getting Started
 
@@ -123,14 +123,14 @@ To test one of the included sample apps:
 
 == Inspired By
 
-Supernaut.FX was inspired by two existing JavaFX DI frameworks, but is focused on JavaFX 11 and later, Java Module System, `jlink`, `jpackage`, and Micronaut. Thanks Adam Bien and Gluon for the inspiration.
+Supernaut.FX was inspired by two existing JavaFX DI frameworks, but is focused on JavaFX 11 and later, Java Module System, `jlink`, `jpackage`, and Micronaut framework. Thanks Adam Bien and Gluon for the inspiration.
 
 * Adam Bien's http://afterburner.adam-bien.com[afterburner.fx]
 * https://gluonhq.com/labs/ignite/[Gluon Ignite]
 
 == Relationship to ConsensusJ
 
-Supernaut.FX was developed for https://github.com/ConsensusJ/wallet-framework[ConsensusJ Wallet-Framework], but is general-purpose and can be used to add Micronaut-based DI to any JavaFX application.
+Supernaut.FX was developed for https://github.com/ConsensusJ/wallet-framework[ConsensusJ Wallet-Framework], but is general-purpose and can be used to add Micronaut framework-based DI to any JavaFX application.
 
 
 == Design Goals
@@ -145,8 +145,8 @@ We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing 
 ** Avoids imposing architectural patterns (as much as possible with DI)
 ** Try to be more of a library than a framework
 * Fast application launch
-* Provides support for compile-time dependency injection (e.g. https://micronaut.io[Micronaut])
-** Initially Micronaut-only
+* Provides support for compile-time dependency injection (e.g. via https://micronaut.io[Micronaut framework])
+** Initial releases are for Micronaut framework only
 ** Possibly in the future could use an abstraction to allow other similar DI frameworks (help wanted with this issue)
 * Designed for Java apps shipped with a bundled runtime
 ** Applications built with JDK 16+ https://docs.oracle.com/en/java/javase/16/docs/specs/man/jpackage.html[jpackage] (implemented)
