@@ -1,24 +1,20 @@
-allprojects {
-    apply plugin: 'com.jfrog.bintray'
+subprojects {
     apply plugin: 'maven-publish'
-
-//    task sourceJar(type: Jar, dependsOn: classes) {
-//        classifier = 'sources'
-//        from sourceSets.main.allSource
-//    }
-//
-//    task javadocJar(type: Jar, dependsOn: javadoc) {
-//        classifier = 'javadoc'
-//        from javadoc.destinationDir
-//    }
-
-//    artifacts {
-//        archives sourceJar
-//        archives javadocJar
-//    }
 
     publishing {
         repositories {
+            def supernautGitlabProjectId = "26584840"
+            maven {
+                url "https://gitlab.com/api/v4/projects/${supernautGitlabProjectId}/packages/maven"
+                name "GitLab"
+                credentials(HttpHeaderCredentials) {
+                    name = 'Private-Token'
+                    value = project.findProperty("gitLabMavenToken")
+                }
+                authentication {
+                    header(HttpHeaderAuthentication)
+                }
+            }
             maven {
                 name = "SupernautAppGitHubPackages"
                 url = "https://maven.pkg.github.com/SupernautApp/SupernautFX"
@@ -38,29 +34,5 @@ allprojects {
             }
 
         }                                                    
-    }
-
-    bintray {
-        user = project.hasProperty("binTraySupernautAPIUser") ? binTraySupernautAPIUser : 'please set binTrayAPIUser'
-        key = project.hasProperty("binTraySupernautAPIKey") ? binTraySupernautAPIKey : 'please set binTrayAPIKey'
-        dryRun = false // whether to run this as dry-run, without deploying
-        publications = ['jar'] // When uploading Maven-based publication files
-        pkg {
-            userOrg = 'supernautapp'
-            repo = 'maven'
-            name = 'supernaut'
-            desc = 'DI for JavaFX using Micronaut'
-            websiteUrl = 'https://github.com/SupernautApp/SupernautFX'
-            issueTrackerUrl = 'https://github.com/SupernautApp/SupernautFX/issues'
-            vcsUrl = 'https://github.com/SupernautApp/SupernautFX.git'
-            licenses = ['Apache-2.0']
-            labels = ['java', 'jdk', 'openjdk', 'javafx', 'dependency-injection', 'micronaut', 'framework']
-            version {
-                name = supernautVersion
-                desc = 'Proof-of-concept release.'
-                released  = new Date()
-                vcsTag = 'none'
-            }
-        }
     }
 }

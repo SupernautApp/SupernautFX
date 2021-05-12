@@ -2,23 +2,22 @@
 
 == Requirements
 
-* `JAVA_HOME` set to OpenJDK 11 or later (OpenJDK 15 is recommended: `sdk use java 15.0.2.hs-adpt`)
+* `JAVA_HOME` set to OpenJDK 11 or later (OpenJDK 16 is recommended: `sdk use java 16.0.1.hs-adpt`)
 * `JDK16` set to a JDK 16 instance.
 
 == Main Release Process
 
 . Update `CHANGELOG.adoc`
 . Set/verify versions in:
-.. `gradle.properties` (including bump of app versions -- TODO: Don't publish sample apps to bintray)
+.. `gradle.properties` (including bump of app versions)
 .. `README.adoc`
 . Commit version bump and changelog.
 . Full build, test
 .. `./gradlew clean buildCI buildJPackages`
 . Tag: `git tag -a v0.x.y -m "Release 0.x.y"`
 . Push: `git push --tags origin master`
-. Publish to Bintray:
-.. `./gradlew bintrayUpload`
-.. Confirm publish of artifacts in Bintray Web UI.
+. Publish to Gitlab (and Github) Maven repos:
+.. `./gradlew publish`
 . Create Github Release
 
 == Updating Gradle Dependency Verification configuration
@@ -62,7 +61,7 @@ Now you can make sure the build works and push the changes to the Git repo.
 .. `CHANGELOG.adoc`
 . Commit and push to master
 
-== Publish Snapshot release to Github Maven repo
+== Publish Snapshot release to Gitlab & Github Maven repos
 
 . `./gradlew clean buildCI publish`
 
