@@ -3,19 +3,23 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.1.3-SNAPSHOT
+== v0.1.3
 
-Released: Not yet
+Released: 2021.05.11
 
 === Dependency Upgrades
 
-* Micronaut 2.4.1
+* Micronaut 2.5.1
+* Groovy 3.0.8
 
 === Build
 
-* Specify `adoptopenjdk` as default `JvmVendorSpec`, but allow override via
-  `gradle.properties` or command-line `-P` option.
-* Badass JLink Plugin 2.23.5
+* Use JDK 16
+* Gradle 7.0
+* Specify `""` as default `JvmVendorSpec` in `gradle.properties`, but allow override via command-line `-P` option.
+* Publish Maven JARs to *GitLab Packages* (now that Bintray is gone)
+* Badass JLink Plugin 2.23.6
+* Spock 2.0-M5
 
 == v0.1.2
 
