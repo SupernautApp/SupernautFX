@@ -118,7 +118,7 @@ Add the following to your `pom.xml`:
 ----
 <repositories>
   <repository>
-    <id>gitlab-maven</id>
+    <id>gitlab-supernaut-maven</id>
     <url>https://gitlab.com/api/v4/projects/26584840/packages/maven</url>
   </repository>
 </repositories>
@@ -130,7 +130,7 @@ Add the following to the `repositories` section of your `build.gradle`:
 
 [source]
 ----
-    maven { url 'https://gitlab.com/api/v4/projects/26584840/packages/maven' }
+    maven { url 'https://gitlab.com/api/v4/projects/26584840/packages/maven' /* gitlab-supernaut-maven */ } 
 ----
 
 
