@@ -3,6 +3,18 @@
 
 A high-level view of the changes in each SupernautFX release.
 
+== v0.1.4-SNAPSHOT
+
+Released: Under development
+
+=== Dependency Upgrades
+
+* TBD
+
+=== Build
+
+* TBD
+
 == v0.1.3
 
 Released: 2021.05.11
