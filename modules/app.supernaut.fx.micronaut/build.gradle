@@ -13,9 +13,7 @@ dependencies {
     api project (':modules:app.supernaut.fx')
     api "org.openjfx:javafx-graphics:${javaFxVersion}"
     api "org.openjfx:javafx-fxml:${javaFxVersion}"
-    api ("io.micronaut:micronaut-inject:${micronautVersion}") {
-        exclude group: "com.google.code.findbugs", module: "jsr305" // Exclude until Micronaut removes transitive dependency
-    }
+    api "io.micronaut:micronaut-inject:${micronautVersion}"
 
     compileOnly "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
     compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"

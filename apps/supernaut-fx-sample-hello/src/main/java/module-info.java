@@ -38,8 +38,8 @@ module app.supernaut.fx.sample.hello {
     requires app.supernaut.fx;
 
     requires static jakarta.inject;
-    /* Needed for Factory annotation and Micronaut-generated classes, see JavaDoc comment above */
-    requires static io.micronaut.inject;
+    requires static io.micronaut.inject; // Needed for Factory annotation and Micronaut-generated classes, see JavaDoc comment above
+    requires jakarta.annotation;
 
     requires org.slf4j;
 

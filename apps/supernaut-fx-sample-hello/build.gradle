@@ -24,9 +24,7 @@ dependencies {
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
     compileOnly "jakarta.inject:jakarta.inject-api:${jakartaInjectVersion}"
-    compileOnly ("io.micronaut:micronaut-inject:${micronautVersion}") {  // For Micronaut annotations eg. @Factory and generated code {
-        exclude group: "com.google.code.findbugs", module: "jsr305" // Exclude until Micronaut removes transitive dependency
-    }
+    compileOnly "io.micronaut:micronaut-inject:${micronautVersion}"  // For Micronaut annotations eg. @Factory and generated code
 
     runtimeOnly project (':modules:app.supernaut.fx.micronaut')     // Implementation of FxLauncher
     runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
@@ -85,6 +83,7 @@ jlink {
     }
     mergedModule {
         requires 'org.slf4j'
+        requires 'jakarta.annotation'
     }
     jpackage {
         // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for
