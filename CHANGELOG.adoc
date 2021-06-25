@@ -9,11 +9,14 @@ Released: Under development
 
 === Dependency Upgrades
 
-* TBD
+* Micronaut 2.5.6
+* SLF4J 1.7.31
 
 === Build
 
-* TBD
+* Badass JLink Plugin 2.24.0
+* Spock 2.0-M5
+* Micronaut Test Spock 2.3.7
 
 == v0.1.3
 
