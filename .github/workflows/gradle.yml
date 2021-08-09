@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v1
     - name: Set up JDK (via matrix) for Gradle and Gradle Java Toolchain
       id: setupjdk
-      uses: actions/setup-java@main
+      uses: actions/setup-java@v2.2.0
       with:
         distribution: 'temurin'
         java-version: ${{ matrix.java }}
