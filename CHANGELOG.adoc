@@ -9,15 +9,16 @@ Released: Under development
 
 === Dependency Upgrades
 
-* Micronaut 2.5.11
+* Micronaut 2.5.13
 * SLF4J 1.7.32
 
 === Build
 
 * Use JDK 16.0.2 Eclipse Temurin
 * Gradle 7.1.1
-* Badass JLink Plugin 2.24.0
-* Spock 2.0-M5
+* Badass JLink Plugin 2.24.1
+* Groovy 3.0.9
+* Spock 2.0
 * Micronaut Test Spock 2.3.7
 
 == v0.1.3
