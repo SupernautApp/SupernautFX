@@ -78,13 +78,13 @@ def os = org.gradle.internal.os.OperatingSystem.current()
 
 jlink {
     addExtraDependencies("javafx")
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages', '--add-modules', 'app.supernaut.fx.micronaut']
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages', '--add-modules', 'app.supernaut.fx.micronaut,org.slf4j.jul']
     launcher {
         name = appName
         jvmArgs = []
     }
     mergedModule {
-        requires 'java.logging'
+        requires 'org.slf4j'
     }
     jpackage {
         // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for

@@ -28,7 +28,6 @@ module app.supernaut.fx.testapp {
     requires static io.micronaut.inject;
 
     requires org.slf4j;
-    requires java.logging;
 
     opens app.supernaut.fx.testapp to javafx.graphics, javafx.fxml, java.base;
     exports app.supernaut.fx.testapp;
