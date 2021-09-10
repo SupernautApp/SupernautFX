@@ -13,20 +13,17 @@ Released: Under development
 
 === JavaFX 17
 
-This release of Supernaut.FX is compatible with JavaFX 17. However, because of build issues that can occur in projects using Supernaut.FX we are leaving our transitive dependency on JavaFX 16 for the time being.
-
-If you are building with **Gradle** you can simply override the version of JavaFX and your build should work fine.
-
-If you are building with **Maven**, you will need to wait for a workaround release of the JavaFX Maven Plugin (0.0.7?) or a new release (17.0.1?) of JavaFX.
+This release of Supernaut.FX is compatible with JavaFX 17. We recommend using JavaFX 17.0.0.1 or later in your projects.
 
 === Dependency Upgrades
 
+* JavaFX 17.0.0.1
 * Micronaut 2.5.13
 * SLF4J 2.0.0-alpha5 (True modular version with module-info.java)
 
 === Build
 
-* Use JDK 17 (currently using Zulu EA-17)
+* Use JDK 17
 * Gradle 7.2
 * Badass JLink Plugin 2.24.1
 * JavaFX Gradle Plugin 0.0.10
