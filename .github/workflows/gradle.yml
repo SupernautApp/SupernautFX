@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
-        java: [ '16.0.2']
+        java: [ '17-ea']
       fail-fast: false
     name: ${{ matrix.os }} JDK ${{ matrix.java }}
     steps:
@@ -18,7 +18,7 @@ jobs:
       id: setupjdk
       uses: actions/setup-java@v2.2.0
       with:
-        distribution: 'temurin'
+        distribution: 'zulu'
         java-version: ${{ matrix.java }}
     - name: Verify Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1
