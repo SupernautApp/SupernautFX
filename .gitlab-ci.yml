@@ -22,7 +22,7 @@ before_script:
 
 build:
   script:
-    - ./gradlew buildCI buildJPackages --scan --info --stacktrace
+    - ./gradlew -PjavaToolchainVersion=16 buildCI buildJPackages --scan --info --stacktrace
   artifacts:
     paths:
       - supernautfx/build/libs
