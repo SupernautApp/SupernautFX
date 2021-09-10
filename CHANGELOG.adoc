@@ -15,7 +15,7 @@ Released: Under development
 === Build
 
 * Use JDK 16.0.2 Eclipse Temurin
-* Gradle 7.1.1
+* Gradle 7.2
 * Badass JLink Plugin 2.24.1
 * Groovy 3.0.9
 * Spock 2.0
