@@ -42,7 +42,6 @@ module app.supernaut.fx.sample.hello {
     requires static io.micronaut.inject;
 
     requires org.slf4j;
-    requires java.logging;
 
     opens app.supernaut.fx.sample.hello to javafx.graphics, javafx.fxml, java.base;
     exports app.supernaut.fx.sample.hello;

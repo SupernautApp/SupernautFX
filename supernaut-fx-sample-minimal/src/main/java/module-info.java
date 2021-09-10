@@ -41,7 +41,6 @@ module app.supernaut.fx.sample.minimal {
     requires static io.micronaut.inject;
 
     requires org.slf4j;
-    requires java.logging;
 
     opens app.supernaut.fx.sample.minimal to javafx.graphics, java.base;
     exports app.supernaut.fx.sample.minimal;
