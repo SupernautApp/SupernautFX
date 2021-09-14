@@ -29,7 +29,7 @@ CAUTION:: Supernaut.FX is a new framework. It is being used by a handful of appl
 
 == Modern
 
-Supernaut.Fx is designed for _modern_ JavaFX applications that use the latest version of JavaFX (currently 16) and are built for distribution using either the https://docs.oracle.com/en/java/javase/16/docs/specs/man/jpackage.html[jpackage] tool of JDK 16 or as native images using GraalVM JDK 11 (using https://www.graalvm.org/reference-manual/native-image/[native-image] and https://github.com/gluonhq/substrate[Gluon Substrate])
+Supernaut.Fx is designed for _modern_ JavaFX applications that use the latest version of JavaFX (currently 17) and are built for distribution using either the https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html[jpackage] tool of JDK 17 or as native images using GraalVM JDK 11 (using https://www.graalvm.org/reference-manual/native-image/[native-image] and https://github.com/gluonhq/substrate[Gluon Substrate])
 
 == Simple and Lightweight
 
@@ -137,7 +137,7 @@ Add the following to the `repositories` section of your `build.gradle`:
 == Building Supernaut
 
 . Clone the repository
-. Make sure your `JAVA_HOME` points to a JDK 16 or newer
+. Make sure your `JAVA_HOME` points to a JDK 17 or newer
 . `./gradlew buildCI buildJPackages`
 
 To test one of the included sample apps:
@@ -177,7 +177,7 @@ We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing 
 ** Initial releases are for Micronaut framework only
 ** Possibly in the future could use an abstraction to allow other similar DI frameworks (help wanted with this issue)
 * Designed for Java apps shipped with a bundled runtime
-** Applications built with JDK 16+ https://docs.oracle.com/en/java/javase/16/docs/specs/man/jpackage.html[jpackage] (implemented)
+** Applications built with JDK 17+ https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html[jpackage] (implemented)
 ** Applications built with https://www.graalvm.org/[GraalVM] and https://github.com/gluonhq/substrate[Gluon Substrate] (future)
 * Agressively tracks latest JDK for JavaFX, recent Android versions
 ** JDK 11 or later for JavaFX components
