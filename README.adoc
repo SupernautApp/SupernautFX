@@ -16,7 +16,7 @@ image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge
 
 Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut® framework] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
-CAUTION:: This is an experimental framework in early stage development. It is being used by a handful of applications in development and alpha-testing and seems to be working well so far.
+CAUTION:: Supernaut.FX is a new framework. It is being used by a handful of applications in development and alpha-testing and is working well.
 
 == Features
 

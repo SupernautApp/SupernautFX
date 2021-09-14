@@ -3,14 +3,26 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.1.4-SNAPSHOT
+== v0.2.0-SNAPSHOT
 
 Released: Under development
+
+=== Breaking Changes
+
+* The upgrade to SLF4J 2.0.0-alpha5 may require changes to your build configuration. (You should be able to override the transitive dependency and force the usage of the SLF4J 1.7.x if you really need to.) Since building fully-modular apps is a major goal of this framework, we decided to upgrade to SLF4J 2.0.0 even though it is technically still "alpha".
+
+=== JavaFX 17
+
+This release of Supernaut.FX is compatible with JavaFX 17. However, because of build issues that can occur in projects using Supernaut.FX we are leaving our transitive dependency on JavaFX 16 for the time being.
+
+If you are building with **Gradle** you can simply override the version of JavaFX and your build should work fine.
+
+If you are building with **Maven**, you will need to wait for a workaround release of the JavaFX Maven Plugin (0.0.7?) or a new release (17.0.1?) of JavaFX.
 
 === Dependency Upgrades
 
 * Micronaut 2.5.13
-* SLF4J 1.7.32
+* SLF4J 2.0.0-alpha5 (True modular version with module-info.java)
 
 === Build
 
@@ -19,6 +31,7 @@ Released: Under development
 * Badass JLink Plugin 2.24.1
 * JavaFX Gradle Plugin 0.0.10
 * Java Modularity Gradle Plugin 1.8.9
+* Gradle License Plugin 0.16.1
 * Groovy 3.0.9
 * Spock 2.0
 * Micronaut Test Spock 2.3.7
