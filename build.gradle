@@ -68,7 +68,7 @@ allprojects {
     }
 }
 
-apply from: 'gradle/bintray.gradle'
+apply from: 'gradle/maven-publish.gradle'
 apply from: 'gradle/licenseCheck.gradle'
 
 task testReport(type: TestReport) {
