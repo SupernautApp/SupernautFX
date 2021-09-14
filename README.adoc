@@ -163,10 +163,7 @@ Supernaut.FX was developed for https://github.com/ConsensusJ/wallet-framework[Co
 
 == Design Goals
 
-NOTE: If a framework or library like this already exists, please https://github.com/SupernautApp/SupernautFX/issues/3[let us know!]
-
 We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing JavaFX frameworks] and haven't found anything that seems well-suited for the following criteria:
-
 
 * Simple
 ** Minimizes abstraction and inheritance
