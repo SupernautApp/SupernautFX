@@ -7,8 +7,8 @@ buildscript {
 
 plugins {
     id 'org.asciidoctor.jvm.convert'        version '2.2.0'
-    id 'org.javamodularity.moduleplugin'    version '1.8.9' apply false
-    id 'org.openjfx.javafxplugin'           version '0.0.10'  apply false
+    id 'org.javamodularity.moduleplugin'    version '1.8.9'  apply false
+    id 'org.openjfx.javafxplugin'           version '0.0.10' apply false
     id 'org.beryx.jlink'                    version '2.24.1' apply false
     id 'com.github.hierynomus.license'      version '0.16.1' apply false
 }
@@ -22,7 +22,7 @@ buildScan {
     termsOfServiceAgree = 'yes'
 }
 
-rootProject.ext.signJPackageImages = signJPackageImages == "true" // create boolean in ext from property string
+rootProject.ext.signJPackageImages = signJPackageImages.toBoolean() // create boolean in ext from property string
 logger.warn "rootProject.ext.signJPackageImages = ${rootProject.ext.signJPackageImages}"
 
 allprojects {
