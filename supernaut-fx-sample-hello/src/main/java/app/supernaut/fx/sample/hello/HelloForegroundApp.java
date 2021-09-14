@@ -56,7 +56,7 @@ public class HelloForegroundApp implements FxForegroundApp {
 
     public static void main(String[] args) {
         JavaLoggingSupport.configure(HelloForegroundApp.class, "app.supernaut.fx.sample.hello");
-        FxLauncher.byName("micronaut").launch(args, HelloForegroundApp.class, NoopBackgroundApp.class);
+        FxLauncher.byName("micronaut").launch(args, HelloForegroundApp.class);
     }
     
     public HelloForegroundApp(FxmlLoaderFactory loaderFactory) {
