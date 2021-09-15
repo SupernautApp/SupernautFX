@@ -32,6 +32,7 @@ import java.util.logging.Logger;
  * TODO: Create a command-line option to set finer-grained log levels
  */
 public class JavaLoggingSupport {
+    /** The default path of the logging properties file */
     public static final String DEFAULT_PROPERTIES_PATH = "/logging.properties";
     private static String loggerName;
 
@@ -58,12 +59,19 @@ public class JavaLoggingSupport {
         JavaLoggingSupport.loggerName = loggerName;
     }
 
+    /**
+     * Configure logging using default resource file/path
+     *
+     * @param rootClass root class for calling {@code }getResourceAsStream()}
+     * @param loggerName The logger name
+     */
     public static void configure(Class<?> rootClass, String loggerName) {
         configure(rootClass, DEFAULT_PROPERTIES_PATH, loggerName);
     }
-        /**
-         * Change log level (eg. as a result of `-v` command-line option)
-         */
+
+    /**
+     * Change log level (eg. as a result of `-v` command-line option)
+     */
     public static void setVerbose() {
         final Logger app = Logger.getLogger(loggerName);
         app.setLevel(Level.FINE);

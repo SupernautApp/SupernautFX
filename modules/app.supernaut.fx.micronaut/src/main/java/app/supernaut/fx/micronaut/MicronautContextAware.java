@@ -22,5 +22,9 @@ import app.supernaut.BackgroundApp;
  *  TODO: Use this somewhere to inject the context
  */
 public interface MicronautContextAware extends BackgroundApp {
+    /**
+     * Implement this method to have the BeanContext injected
+     * @param context injected BeanContext
+     */
     void setBeanFactory(BeanContext context);
 }

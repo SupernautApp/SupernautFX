@@ -25,14 +25,24 @@ import app.supernaut.fx.FxForegroundApp;
  */
 public final class SimpleFxLauncher extends FxLauncherAbstract {
 
+    /**
+     * Default constructor using background start
+     */
     public SimpleFxLauncher() {
         this(true);
     }
-    
+
+    /**
+     * Constructor that lets you choose background start or not
+     * @param backgroundStart  true to start on background
+     */
     public SimpleFxLauncher(boolean backgroundStart) {
         super(DefaultAppFactory::new, backgroundStart);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String name() {
         return "simple";

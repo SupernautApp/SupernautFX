@@ -32,15 +32,27 @@ public final class DefaultFxMainView implements FxForegroundApp.FxMainView {
         this.primaryStage = primaryStage;
     }
 
+    /**
+     * Convenience method for constructing {@link app.supernaut.fx.FxForegroundApp.FxMainView} from a {@link Stage}
+     * @param primaryStage the primary stage
+     * @return Wrapper view
+     */
     public static FxForegroundApp.FxMainView of(Stage primaryStage) {
         return new DefaultFxMainView(primaryStage);
     }
 
+    /**
+     * Show the primary stage
+     */
     @Override
     public void show() {
         primaryStage.show();
     }
 
+    /**
+     * Accessor method that indicates that having a stage is optional
+     * @return An optional that is empty if there is no primary stage
+     */
     @Override
     public Optional<Stage> optionalStage() {
         return Optional.of(primaryStage);

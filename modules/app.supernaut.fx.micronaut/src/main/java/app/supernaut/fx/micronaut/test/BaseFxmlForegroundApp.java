@@ -19,23 +19,39 @@ import app.supernaut.fx.FxForegroundApp;
 import app.supernaut.fx.FxmlLoaderFactory;
 
 import jakarta.inject.Singleton;
+import javafx.stage.Stage;
 
 /**
  * FxForegroundApp with constructor that expects a {@link FxmlLoaderFactory}
  */
 @Singleton
 public class BaseFxmlForegroundApp implements FxForegroundApp {
+    /** {@link FxmlLoaderFactory} for subclass access */
     protected final FxmlLoaderFactory fxmlLoaderFactory;
 
+    /**
+     * Constructor that gets an {@link FxmlLoaderFactory} injected
+     *
+     * @param fxmlLoaderFactory the injected factory
+     */
     public BaseFxmlForegroundApp(FxmlLoaderFactory fxmlLoaderFactory) {
         this.fxmlLoaderFactory = fxmlLoaderFactory;
     }
 
+    /**
+     * No-op start method (can be overridden)
+     * 
+     * @param mainView A wrapper view containing the primary {@link Stage}
+     * @throws Exception An exception occurred
+     */
     @Override
     public void start(FxMainView mainView) throws Exception {
-
     }
 
+    /**
+     * Accessor for injected {@link FxmlLoaderFactory}
+     * @return the injected factory
+     */
     public FxmlLoaderFactory getFxmlLoaderFactory() {
         return fxmlLoaderFactory;
     }

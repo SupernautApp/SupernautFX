@@ -33,6 +33,10 @@ public interface FxLauncher extends Launcher {
      */
     FxForegroundApp createForegroundApp(Application jfxApplication);
 
+    /**
+     * Implementations must implement this method to return a unique name
+     * @return A unique name for this DI-capable {@link Launcher} implementation
+     */
     String name();
 
     /**

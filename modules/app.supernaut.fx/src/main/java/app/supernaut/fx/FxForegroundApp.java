@@ -112,6 +112,9 @@ public interface FxForegroundApp extends ForegroundApp {
      * if someday OpenJFX gets better <b>macOS</b> support) the Stage may not be present.
      */
     interface FxMainView extends SupernautMainView {
+        /**
+         * Show the stage/view
+         */
         void show();
 
         /**
@@ -128,6 +131,11 @@ public interface FxForegroundApp extends ForegroundApp {
      * <p>{@code class MyFXForegroundApp implements FxApplicationCompat}</p>
      */
     interface FxApplicationCompat extends FxForegroundApp {
+        /**
+         * Start method compatible with OpenJFX start method
+         *
+         * @param primaryStage primary stage (unwrapped)
+         */
         void start(Stage primaryStage);
         default void start(FxMainView mainView) {
             start(mainView.optionalStage().orElseThrow());
@@ -138,6 +146,10 @@ public interface FxForegroundApp extends ForegroundApp {
      * Implement this interface if you need access to the {@link Application} object instance
      */
     interface OpenJfxApplicationAware extends ForegroundApp {
+        /**
+         * Setter that will receive the {@link Application} instance
+         * @param application reference to the OpenJFX application
+         */
         void setJfxApplication(Application application);
     }
 }

@@ -38,9 +38,10 @@ import org.slf4j.LoggerFactory;
  */
 public final class OpenJfxProxyApplication extends Application {
     private static final Logger log = LoggerFactory.getLogger(OpenJfxProxyApplication.class);
-    public static FxLauncher configuredLauncher;  // Launcher must set this global before calling constructor
-    protected final FxLauncher launcher;
-    protected final FxForegroundApp foregroundApp;
+    /** Launcher must set this global before calling constructor */
+    public static FxLauncher configuredLauncher;
+    private final FxLauncher launcher;
+    private final FxForegroundApp foregroundApp;
     
     /**
      * Create a JavaFX application that wraps a SfxForegroundApp

@@ -21,11 +21,27 @@ package app.supernaut;
  *  with JavaFX, an implementation using JavaFX is provided.
  */
 public interface ForegroundApp {
+    /**
+     * Initialize the application
+     *
+     * @throws Exception an exception occurred
+     */
     default void init() throws Exception {
     }
 
+    /**
+     * Start the application
+     * 
+     * @param view Abstracted main view for the applicatino
+     * @throws Exception an exception occurred
+     */
     void start(SupernautMainView view) throws Exception;
 
+    /**
+     * Stop the application
+     *
+     * @throws Exception an exception occurred
+     */
     default void stop() throws Exception {
     }
 

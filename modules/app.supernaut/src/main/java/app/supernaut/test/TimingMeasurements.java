@@ -21,13 +21,22 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * Simple class for recording timestamps for benchmarking
  */
 public class TimingMeasurements {
+    /** starting time */
     public final long startTime = System.currentTimeMillis();
+    /** measurements data */
     public final ConcurrentLinkedQueue<Measurement> measurements = new ConcurrentLinkedQueue<>();
 
+    /**
+     * Add a measurement
+     * @param desc description of the measurement
+     */
     public void add(String desc) {
         measurements.add(new Measurement(desc));
     }
 
+    /**
+     * print all measurements
+     */
     public void dump() {
         measurements.forEach(this::printOne);
     }
@@ -36,10 +45,19 @@ public class TimingMeasurements {
         System.out.println(m.timestamp + " " + m.description);
     }
 
+    /**
+     * One measurement
+     */
     public class Measurement {
+        /** timestamp in milliseconds */
         public final long timestamp;
+        /** measurement description */
         public final String description;
 
+        /**
+         * Create a measurement with the given description and the current time
+         * @param desc measurement description
+         */
         public Measurement(String desc) {
             timestamp = System.currentTimeMillis() - startTime;
             description = desc;

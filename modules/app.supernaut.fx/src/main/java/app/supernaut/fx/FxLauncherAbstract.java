@@ -72,9 +72,9 @@ public abstract class FxLauncherAbstract implements FxLauncher {
     private final CountDownLatch appFactoryInitializedLatch;
     private AppFactory appFactory;
 
-    /* This future returns an initialized BackgroundApp */
+    /** This future returns an initialized BackgroundApp */
     protected final CompletableFuture<BackgroundApp> futureBackgroundApp = new CompletableFuture<>();
-    /* This future returns an initialized ForegroundApp */
+    /** This future returns an initialized ForegroundApp */
     protected final CompletableFuture<ForegroundApp> futureForegroundApp = new CompletableFuture<>();
 
     /* Temporary storage of foregroundAppClass for interaction with OpenJfxProxyApplication */
@@ -88,7 +88,19 @@ public abstract class FxLauncherAbstract implements FxLauncher {
      * {@code MicronautSfxLauncher}.
      */
     public interface AppFactory {
+        /**
+         * Create the background class instance from a {@link Class} object
+         * @param backgroundAppClass the class to create
+         * @return application instance
+         */
         BackgroundApp   createBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass);
+
+        /**
+         * Create the background class instance from a {@link Class} object
+         * @param foregroundAppClass  the class to create
+         * @param proxyApplication a reference to the proxy {@link Application} created by Supernaut.FX
+         * @return application instance
+         */
         FxForegroundApp createForegroundApp(Class<? extends FxForegroundApp> foregroundAppClass, Application proxyApplication);
     }
 
@@ -138,7 +150,10 @@ public abstract class FxLauncherAbstract implements FxLauncher {
         this.initializeBackgroundAppOnNewThread = initializeBackgroundAppOnNewThread;
         appFactoryInitializedLatch = new CountDownLatch(1);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CompletableFuture<ForegroundApp> launchAsync(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
         log.info("launchAsync...");
@@ -146,12 +161,18 @@ public abstract class FxLauncherAbstract implements FxLauncher {
         return getForegroundApp();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void launch(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
         log.info("launch...");
         launchInternal(args, foregroundAppClass, backgroundApp, false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void launch(String[] args, Class<? extends ForegroundApp> foregroundAppClass) {
         launch(args, foregroundAppClass, NoopBackgroundApp.class);
@@ -181,11 +202,17 @@ public abstract class FxLauncherAbstract implements FxLauncher {
         return foregroundApp;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CompletableFuture<ForegroundApp> getForegroundApp() {
         return futureForegroundApp;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CompletableFuture<BackgroundApp> getBackgroundApp() {
         return futureBackgroundApp;

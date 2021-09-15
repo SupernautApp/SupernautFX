@@ -36,6 +36,9 @@ import org.slf4j.LoggerFactory;
 public class MicronautFxLauncher extends FxLauncherAbstract {
     private static final Logger log = LoggerFactory.getLogger(FxLauncherAbstract.class);
 
+    /**
+     * Default constructor that initializes the background app on its own thread.
+     */
     public MicronautFxLauncher() {
         this(true);
     }
@@ -61,14 +64,24 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
         super(() -> new MicronautAppFactory(useApplicationContext), initializeBackgroundAppOnNewThread);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String name() {
         return "micronaut";
     }
 
+    /**
+     * Implement of AppFactory using either a Micronaut {@link BeanContext} or {@link ApplicationContext}
+     */
     public static class MicronautAppFactory implements AppFactory {
         private final BeanContext context;
 
+        /**
+         * Constructor for Micronaut implementation of AppFactory
+         * @param useApplicationContext create {@link ApplicationContext} if true, {@link BeanContext} if false
+         */
         public MicronautAppFactory(boolean useApplicationContext) {
             if (useApplicationContext) {
                 log.info("Creating Micronaut ApplicationContext");
@@ -82,6 +95,9 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
             context.start();
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public BackgroundApp createBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass) {
             if (backgroundAppClass.equals(NoopBackgroundApp.class)) {
@@ -92,6 +108,9 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public FxForegroundApp createForegroundApp(Class<? extends FxForegroundApp> foregroundAppClass, Application proxyApplication) {
             return getForegroundAppBean(foregroundAppClass, proxyApplication);
@@ -99,7 +118,7 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
 
         /**
          * Subclass {@link MicronautAppFactory} and override this method to customize your {@link BeanContext}.
-         * <p>
+         *
          * @param clazz The FXForegroundApp sub-class that we are creating and injecting
          * @param proxyApplication The proxy implementation instance of {@link Application}
          * @return A newly constructed and injected {@link FxForegroundApp} instance
