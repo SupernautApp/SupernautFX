@@ -44,8 +44,12 @@ public class MainWindowView {
     @FXML
     private Button btn;
 
-    private BrowserService browserService;
+    private final BrowserService browserService;
 
+    /**
+     *
+     * @param browserService service to open browser windows for links
+     */
     public MainWindowView(BrowserService browserService) {
         this.browserService = browserService;
     }
@@ -56,13 +60,20 @@ public class MainWindowView {
     @FXML
     public void initialize() {
     }
-    
+
+    /**
+     * @param event the event
+     */
     @FXML
     public void buttonAction(ActionEvent event) {
         log.info("buttonAction: quit, calling Platform.exit()");
         Platform.exit();
     }
 
+    /**
+     *
+     * @param actionEvent the event
+     */
     @FXML
     public void linkAction(ActionEvent actionEvent) {
         browserService.showDocument(githubRepoUri);

@@ -26,7 +26,11 @@ import java.time.format.DateTimeFormatter;
 public class GreetingService {
     private final String planetName;
 
-    public GreetingService(@Named("PERSONNAME") String planetName) {
+    /**
+     * Constructor
+     * @param planetName Name of the planet to greet. Injected.
+     */
+    public GreetingService(@Named("PLANETNAME") String planetName) {
         this.planetName = planetName;
     }
 

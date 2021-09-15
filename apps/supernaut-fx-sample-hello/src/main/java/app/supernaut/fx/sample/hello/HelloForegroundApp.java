@@ -54,21 +54,35 @@ public class HelloForegroundApp implements FxForegroundApp {
     private final FxmlLoaderFactory loaderFactory;
 
 
+    /**
+     * Main method that calls launcher
+     * @param args command-line args
+     */
     public static void main(String[] args) {
         JavaLoggingSupport.configure(HelloForegroundApp.class, "app.supernaut.fx.sample.hello");
         FxLauncher.byName("micronaut").launch(args, HelloForegroundApp.class);
     }
-    
+
+    /**
+     * Constructor
+     * @param loaderFactory injected FXMLLoaderFactory
+     */
     public HelloForegroundApp(FxmlLoaderFactory loaderFactory) {
         log.info("Constructing Hello");
         this.loaderFactory = loaderFactory;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init() {
         log.info("Initializing Hello");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(FxMainView mainView) throws IOException {
         log.info("Starting Hello");
@@ -82,12 +96,18 @@ public class HelloForegroundApp implements FxForegroundApp {
         primaryStage.show();
     }
 
+    /**
+     * @return the planet name to great
+     */
     @Singleton
-    @Named("PERSONNAME")
+    @Named("PLANETNAME")
     public String getPlanetName() {
         return "Mars";
     }
 
+    /**
+     * @return A "noop" background app
+     */
     @Singleton
     public NoopBackgroundApp getBackgroundApp() {
         return new NoopBackgroundApp();

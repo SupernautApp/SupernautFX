@@ -50,6 +50,11 @@ public class MainWindowController {
     @FXML
     private Button btn;
 
+    /**
+     * Constructor
+     * @param browserService injected browser service for launching browser windows
+     * @param greetingService injected greeting service for getting the planet name
+     */
     public MainWindowController(BrowserService browserService, GreetingService greetingService) {
         this.greetingService = greetingService;
         this.browserService = browserService;
@@ -64,7 +69,11 @@ public class MainWindowController {
         btn.setText("Say Hello to " + planet);
 
     }
-    
+
+    /**
+     * Button action
+     * @param event the event
+     */
     @FXML
     public void buttonAction(ActionEvent event) {
         var greeting = greetingService.greeting();
@@ -72,6 +81,10 @@ public class MainWindowController {
         message.setText(greetingService.greeting());
     }
 
+    /**
+     * Link action
+     * @param actionEvent the event
+     */
     @FXML
     public void linkAction(ActionEvent actionEvent) {
         browserService.showDocument(githubRepoUri);

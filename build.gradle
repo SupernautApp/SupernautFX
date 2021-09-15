@@ -56,6 +56,8 @@ allprojects {
             languageVersion = JavaLanguageVersion.of(javaToolchainVersion)
             vendor = JvmVendorSpec.matching(javaToolchainVendor)
         }
+        withJavadocJar()
+        withSourcesJar()
     }
 
     compileJava {

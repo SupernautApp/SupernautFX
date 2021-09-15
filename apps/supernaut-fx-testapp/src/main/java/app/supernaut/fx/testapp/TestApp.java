@@ -52,6 +52,13 @@ public class TestApp implements FxForegroundApp, FxForegroundApp.OpenJfxApplicat
     final static TimingMeasurements measurements = new TimingMeasurements();
 
 
+    /**
+     * Main method
+     *
+     * @param args command-line arguments
+     * @throws ExecutionException oops
+     * @throws InterruptedException oops
+     */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         measurements.add("Entered main()");
         JavaLoggingSupport.configure(TestApp.class, "app.supernaut.fx.sample.testapp");
@@ -101,6 +108,9 @@ public class TestApp implements FxForegroundApp, FxForegroundApp.OpenJfxApplicat
         //return new MicronautSfxLauncher(backgroundStart);
     }
 
+    /**
+     * @param loaderFactory FXML loader factory
+     */
     public TestApp(FxmlLoaderFactory loaderFactory) {
         measurements.add("App constructed");
         log.info("Constructing TestApp");

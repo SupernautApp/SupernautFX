@@ -31,14 +31,25 @@ import jakarta.inject.Singleton;
 public class MinimalApp implements FxForegroundApp {
     private final String appName;
 
+    /**
+     * Main method that calls launcher
+     * @param args command-line args
+     */
     public static void main(String[] args) {
         FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
     }
-    
+
+    /**
+     * Constructor
+     * @param config injected app configuration
+     */
     public MinimalApp(AppConfig config) {
         appName = config.appName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(FxMainView mainView) {
         Stage primaryStage = mainView.optionalStage().orElseThrow();
@@ -51,10 +62,11 @@ public class MinimalApp implements FxForegroundApp {
     }
 
     /**
-     * And example object that is constructed by the DI framework and injected.
+     * An example object that is constructed by the DI framework and injected.
      */
     @Singleton
-    static class AppConfig {
+    public static class AppConfig {
+        /** the application name */
         public final String appName = "Minimal";
     }
 }
