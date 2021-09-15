@@ -9,3 +9,18 @@ ext.javadocSpec = {
 allprojects {
     javadoc javadocSpec
 }
+
+task mergedJavadoc(type: Javadoc) {
+    def mergedNames = ['app.supernaut','app.supernaut.fx','app.supernaut.fx.micronaut']
+    def mergedProjects = project.subprojects.findAll {p -> mergedNames.contains(p.name)}
+    source mergedProjects.collect {project -> project.sourceSets.main.allJava }
+    classpath = files(mergedProjects.collect {project -> project.sourceSets.main.compileClasspath})
+}
+
+mergedJavadoc javadocSpec << {
+    options.addStringOption("-module-source-path", "./modules/*/src/main/java/")
+}
+
+mergedJavadoc.doLast {
+    logger.info "Merged JavaDoc generated at <file://${mergedJavadoc.destinationDir}/index.html>"
+}

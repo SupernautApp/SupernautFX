@@ -82,7 +82,7 @@ build.dependsOn subprojects.build
 
 task buildCI {
     dependsOn build, testReport,
-            subprojects.collect { it.tasks.matching { it.name == 'javadoc'} },
+            mergedJavadoc,
             subprojects.collect { it.tasks.matching { it.name == 'jlink'} }
 }
 

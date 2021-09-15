@@ -13,7 +13,7 @@ application {
 }
 
 dependencies {
-    implementation project (':supernaut-fx')
+    implementation project (':modules:app.supernaut.fx')
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
     compileOnly 'jakarta.inject:jakarta.inject-api:2.0.0'
@@ -21,7 +21,7 @@ dependencies {
         exclude group: "com.google.code.findbugs", module: "jsr305" // Exclude until Micronaut removes transitive dependency
     }
 
-    runtimeOnly project (':supernaut-fx-micronaut')     // Implementation of FxLauncher
+    runtimeOnly project (':modules:app.supernaut.fx.micronaut')     // Implementation of FxLauncher
     runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
     annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"

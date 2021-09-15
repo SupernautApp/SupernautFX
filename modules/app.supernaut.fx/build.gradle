@@ -2,18 +2,18 @@ plugins {
     id 'java-library'
 }
 
-apply plugin: 'org.javamodularity.moduleplugin'
 apply plugin: app.supernaut.gradle.JavaFXPlatformPlugin
 def platform = ext.jfxPlatform
 
+java {
+    modularity.inferModulePath = true
+}
+
 dependencies {
-    api project (':supernaut-fx')
+    api project (':modules:app.supernaut')
+
     api "org.openjfx:javafx-graphics:${javaFxVersion}"
     api "org.openjfx:javafx-fxml:${javaFxVersion}"
-    api 'jakarta.inject:jakarta.inject-api:2.0.0'
-    api ("io.micronaut:micronaut-inject:${micronautVersion}") {
-        exclude group: "com.google.code.findbugs", module: "jsr305" // Exclude until Micronaut removes transitive dependency
-    }
 
     compileOnly "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
     compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
@@ -21,16 +21,7 @@ dependencies {
 
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
-    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
-
     testImplementation "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
     testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
     testImplementation "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
-    testImplementation "io.micronaut.test:micronaut-test-spock:${micronautTestSpockVersion}"
-}
-
-test {
-    moduleOptions {
-        runOnClasspath = true
-    }
 }

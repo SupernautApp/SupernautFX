@@ -2,9 +2,9 @@ plugins {
     id "com.gradle.enterprise" version "3.4"
 }
 
-include 'supernaut'
-include 'supernaut-fx'
-include 'supernaut-fx-micronaut'
+include 'modules:app.supernaut'
+include 'modules:app.supernaut.fx'
+include 'modules:app.supernaut.fx.micronaut'
 include 'supernaut-fx-sample-hello'
 include 'supernaut-fx-sample-minimal'
 include 'supernaut-fx-testapp'
