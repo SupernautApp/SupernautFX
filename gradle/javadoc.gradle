@@ -24,3 +24,5 @@ mergedJavadoc javadocSpec << {
 mergedJavadoc.doLast {
     logger.info "Merged JavaDoc generated at <file://${mergedJavadoc.destinationDir}/index.html>"
 }
+
+javadocJar.dependsOn mergedJavadoc
