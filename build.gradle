@@ -1,12 +1,6 @@
-buildscript {
-    dependencies {
-        classpath "org.asciidoctor:asciidoctorj:${asciidoctorjVersion}"
-        //classpath "org.asciidoctor:asciidoctorj-diagram:${asciidoctorjDiagramVersion}"
-    }
-}
-
 plugins {
-    id 'org.asciidoctor.jvm.convert'        version '2.2.0'
+    id 'org.asciidoctor.jvm.convert'        version '3.3.2'
+    id 'org.ajoberstar.git-publish'         version '3.0.0'
     id 'org.javamodularity.moduleplugin'    version '1.8.9'  apply false
     id 'org.openjfx.javafxplugin'           version '0.0.10' apply false
     id 'org.beryx.jlink'                    version '2.24.1' apply false
@@ -70,8 +64,10 @@ allprojects {
     }
 }
 
-apply from: 'gradle/javadoc.gradle'
 apply from: 'gradle/licenseCheck.gradle'
+apply from: 'gradle/javadoc.gradle'
+apply from: 'gradle/asciidoctor.gradle'
+apply from: 'gradle/github-pages.gradle'
 apply from: 'gradle/maven-publish.gradle'
 
 task testReport(type: TestReport) {
