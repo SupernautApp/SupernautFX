@@ -30,7 +30,7 @@ If you are building with **Maven**, you will need to wait for a workaround relea
 * Gradle 7.2
 * Badass JLink Plugin 2.24.1
 * JavaFX Gradle Plugin 0.0.10
-* Java Modularity Gradle Plugin 1.8.9
+* Java Modularity Gradle Plugin 1.8.10
 * Gradle License Plugin 0.16.1
 * Groovy 3.0.9
 * Spock 2.0
