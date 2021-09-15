@@ -1,0 +1,14 @@
+module:app.supernaut
+app.supernaut
+app.supernaut.logging
+app.supernaut.services
+app.supernaut.test
+module:app.supernaut.fx
+app.supernaut.fx
+app.supernaut.fx.internal
+app.supernaut.fx.sample
+app.supernaut.fx.services
+app.supernaut.fx.test
+module:app.supernaut.fx.micronaut
+app.supernaut.fx.micronaut
+app.supernaut.fx.micronaut.test
