@@ -16,103 +16,38 @@ image:https://github.com/SupernautApp/SupernautFX/workflows/Gradle%20Build/badge
 
 Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut® framework] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
-CAUTION:: Supernaut.FX is a new framework. It is being used by a handful of applications in development and alpha-testing and is working well.
-
 == Features
 
 * JavaFX-compatible Dependency Injection
 ** Main application class is dependency-injected
 ** JavaFX FXML controllers are dependency-injected
 ** Service object dependency injection
-* Your main "application" class need not extend `javafx.application.Application`
+* Your main application class need not extend `javafx.application.Application`
 * `BrowserService` abstraction for opening links in Web Browser (abstraction of JavaFX `HostServices`)
 
-== Modern
+Simple:: Supernaut.FX aspires to be a component library for your application with the _sole concern_ of enabling dependency injection.
 
-Supernaut.Fx is designed for _modern_ JavaFX applications that use the latest version of JavaFX (currently 17) and are built for distribution using either the https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html[jpackage] tool of JDK 17 or as native images using GraalVM JDK 11 (using https://www.graalvm.org/reference-manual/native-image/[native-image] and https://github.com/gluonhq/substrate[Gluon Substrate])
+Modern:: Supernaut.Fx is designed for _modern_ JavaFX applications that use the latest version of JavaFX (currently 17) and are built for distribution using either the https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html[jpackage] tool of JDK 17 or as native images using GraalVM JDK 11 (using https://www.graalvm.org/reference-manual/native-image/[native-image] and https://github.com/gluonhq/substrate[Gluon Substrate])
 
-== Simple and Lightweight
-
-Although Supernaut.FX does prescribe a certain structure for an application in order to enable the injection of dependencies, it aspires to be a component library for your application with the sole concern of enabling dependency injection.
-
-Perhaps in the future it could be used as a component by other full-featured JavaFX frameworks.
-
-== Minimal Dependencies
-
-Supernaut.FX introduces no new dependencies beyond what is required for JavaFX and Micronaut framework:
-
-* *JavaFX* (direct dependencies on `javafx-fxml` and `javafx-graphics`)
-* *Micronaut* framework (`micronaut-inject`)
-* `slf4j-api` (also used by Micronaut framework)
-
-
-== Modules
-
-Supernaut.FX currently consists of 3 modules (JARs)
-
-|===
-|Module name | Purpose | Dependencies
-
-|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut/src/main/java/module-info.java[`app.supernaut`]
-| Interfaces for background components (no JavaFX)
-| *No dependencies!*
-
-|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx/src/main/java/module-info.java[`app.supernaut.fx`]
-| JavaFX application dependency injection support
-| `app.supernaut`, *JavaFX*, `slf4j-api`
-
-|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx-micronaut/src/main/java/module-info.java[`app.supernaut.fx.micronaut`]
-| App Launcher with dependency injection provided by Micronaut framework
-| `app.supernaut.fx`, `micronaut-inject`
-|===
-
-Typical applications will have a *compile-time* dependency on `app.supernaut.fx` and a *runtime* dependency on `app.supernaut.fx.micronaut`.
-
-You may also develop library modules for services depending only on `app.supernaut`.
-
-* Ability to customize Micronaut framework `BeanContext` or `ApplicationContext`
+Lightweight:: Supernaut.FX introduces no new dependencies beyond what is required for JavaFX and the `micronaut-inject` component of Micronaut® framework.
 
 == Getting Started
 
-There is no user guide or "Getting Started" document, yet. Fortunately the framework is very simple -- currently only a handful of relatively simple classes. To get started, use either the sample Gradle or Maven project.
+See the _Getting Started_ section in the https://www.supernaut.app/SupernautFX/supernaut-user-guide.html[Supernaut.FX User's Guide].
 
-=== Gradle Sample Project
+A sample, "hello world"-style project is available for cloning in both https://github.com/SupernautApp/supernaut-fx-sample-maven[Maven] and https://github.com/SupernautApp/supernaut-fx-sample-gradle[Gradle] flavors.
 
-The https://github.com/SupernautApp/supernaut-fx-sample-gradle[Gradle sample project] currently supports running your application via Gradle and building a jlink'ed and jpackage'd application via the https://github.com/beryx/badass-jlink-plugin[Badass Gradle JLink Plugin].
+== API Documentation
 
-To build the jpackage'd app:
+https://www.supernaut.app/SupernautFX/apidoc/[Supernaut.FX JavaDoc] is available on GitHub Pages.
 
-. `git clone git@github.com:SupernautApp/supernaut-fx-sample-gradle.git`
-. `cd supernaut-fx-sample-gradle`
-. `./gradlew jpackage`
-. Open the `build/jpackage` directory and launch the native application for your platform.
+== Binaries
 
-Or to run the app directly from Gradle:
+Although the API may change, binary packages are available on https://gitlab.com/SupernautApp/SupernautFX/-/packages[GitLab.com]. You can download JARs or use the provided Maven coordinates to link to them directly from your `pom.xml` or `build.gradle`.
 
-. `./gradlew run`
+=== Maven
 
-=== Maven Sample Project
-
-The https://github.com/SupernautApp/supernaut-fx-sample-maven[Maven sample project] currently supports running your application via Maven and building a natively-compiled application via https://www.graalvm.org[GraalVM] and https://github.com/gluonhq/client-maven-plugin[Gluon Client Maven Plugin].
-
-To build a GraalVM native-image:
-
-. `git clone git@github.com:SupernautApp/supernaut-fx-sample-maven.git`
-. `cd supernaut-fx-sample-maven`
-. `mvn client:build`
-. `mvn client:run` or open the `target/client` directory and launch the native application for your platform
-
-Or to run the app directly from Maven:
-
-. `mvn javafx:run`
-
-=== Binaries
-
-Although the API may change, binary packages are available on https://gitlab.com/SupernautApp/SupernautFX/-/packages[Gitlab.com]. You can download JARs or use the provided Maven coordinates to link to them directly from your `pom.xml` or `build.gradle`.
-
-==== Maven
-
-Add the following to your `pom.xml`:
+To access our GitLab Maven repository, add the following to your `pom.xml`:
 
 [source]
 ----
@@ -124,15 +59,52 @@ Add the following to your `pom.xml`:
 </repositories>
 ----
 
-==== Gradle
+See the https://github.com/SupernautApp/supernaut-fx-sample-maven[Maven sample application] for the details of setting up your `pom.xml`.
 
-Add the following to the `repositories` section of your `build.gradle`:
+=== Gradle
+
+To access our GitLab Maven repository, add the following to the `repositories` section of your `build.gradle`:
 
 [source]
 ----
-    maven { url 'https://gitlab.com/api/v4/projects/26584840/packages/maven' /* gitlab-supernaut-maven */ } 
+maven {
+    url 'https://gitlab.com/api/v4/projects/26584840/packages/maven'
+}
 ----
 
+See the https://github.com/SupernautApp/supernaut-fx-sample-gradle[Gradle sample application] for the details of setting up your `build.gradle`.
+
+
+== Modules
+
+Supernaut.FX currently consists of 3 Java modules (JARs)
+
+[cols="2, 2, 2a"]
+|===
+|Module name | Purpose | Dependencies
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut/src/main/java/module-info.java[`app.supernaut`]
+| Interfaces for background components (no JavaFX)
+| *No dependencies!*
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx/src/main/java/module-info.java[`app.supernaut.fx`]
+| JavaFX application dependency injection support
+|
+* `app.supernaut`
+* *JavaFX*
+* `slf4j-api`
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx-micronaut/src/main/java/module-info.java[`app.supernaut.fx.micronaut`]
+| App Launcher with dependency injection provided by Micronaut framework
+|
+* `app.supernaut.fx`
+* `micronaut-inject`
+
+|===
+
+Typical applications will have a _compile-time_ dependency on `app.supernaut.fx` and a _runtime_ dependency on `app.supernaut.fx.micronaut`.
+
+You may also develop library modules for services depending only on `app.supernaut`.
 
 == Building Supernaut
 
@@ -143,10 +115,10 @@ Add the following to the `repositories` section of your `build.gradle`:
 To test one of the included sample apps:
 
 . Run the sample Hello app
-.. `./gradlew supernaut-fx-sample-hello:run`
+.. `./gradlew :apps:supernaut-fx-sample-hello:run`
 . Build a `jpackage`-ed Hello app
-.. `./gradlew supernaut-fx-sample-hello:jpackage`
-.. Open the `supernautfx-sample-hello/build/jpackage` directory and launch the native application for your platform
+.. `./gradlew :apps:supernaut-fx-sample-hello:jpackage`
+.. Open the `apps/supernaut-fx-sample-hello/build/jpackage` directory and launch the native application for your platform
 
 
 == Inspired By
@@ -155,11 +127,6 @@ Supernaut.FX was inspired by two existing JavaFX DI frameworks, but is focused o
 
 * Adam Bien's http://afterburner.adam-bien.com[afterburner.fx]
 * https://gluonhq.com/labs/ignite/[Gluon Ignite]
-
-== Relationship to ConsensusJ
-
-Supernaut.FX was developed for https://github.com/ConsensusJ/wallet-framework[ConsensusJ Wallet-Framework], but is general-purpose and can be used to add Micronaut framework-based DI to any JavaFX application.
-
 
 == Design Goals
 
@@ -174,9 +141,9 @@ We have researched https://github.com/mhrimaz/AwesomeJavaFX#frameworks[existing 
 ** Initial releases are for Micronaut framework only
 ** Possibly in the future could use an abstraction to allow other similar DI frameworks (help wanted with this issue)
 * Designed for Java apps shipped with a bundled runtime
-** Applications built with JDK 17+ https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html[jpackage] (implemented)
-** Applications built with https://www.graalvm.org/[GraalVM] and https://github.com/gluonhq/substrate[Gluon Substrate] (future)
-* Agressively tracks latest JDK for JavaFX, recent Android versions
+** Applications built with JDK 17+ https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html[jpackage]
+** Applications built with https://www.graalvm.org/[GraalVM] and https://github.com/gluonhq/substrate[Gluon Substrate]
+* Aggressively tracks the latest JDK and JavaFX, recent Android versions
 ** JDK 11 or later for JavaFX components
 ** JDK 9 (maybe JDK 8 multi-release JARs?) for base interfaces and possible Android support
 * Minimal dependencies, minimal transitive dependencies
