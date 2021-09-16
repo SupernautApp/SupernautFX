@@ -19,7 +19,7 @@
 . Publish to GitLab (and GitHub) Maven repos:
 .. `./gradlew publish`
 . Publish User Guide and JavaDoc to GitHub Pages
-.. `./gradlew sitePublish`
+.. `./gradlew publishSite`
 . Create GitHub Release
 
 == Updating Gradle Dependency Verification configuration
