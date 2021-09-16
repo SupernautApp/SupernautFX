@@ -3,9 +3,9 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.2.0-SNAPSHOT
+== v0.2.0
 
-Released: Under development
+Released: 2021.09.16
 
 === Breaking Changes
 

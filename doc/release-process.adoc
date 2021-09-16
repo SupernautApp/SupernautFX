@@ -2,8 +2,8 @@
 
 == Requirements
 
-* `JAVA_HOME` set to OpenJDK 11 or later (OpenJDK 16 is recommended: `sdk use java 16.0.1.hs-adpt`)
-* `JDK16` set to a JDK 16 instance.
+* `JAVA_HOME` set to OpenJDK 17 or later (`sdk use java 17-open`)
+* `JDK17` set to a JDK 17 instance.
 
 == Main Release Process
 
@@ -16,17 +16,17 @@
 .. `./gradlew clean buildCI buildJPackages`
 . Tag: `git tag -a v0.x.y -m "Release 0.x.y"`
 . Push: `git push --tags origin master`
-. Publish to Gitlab (and Github) Maven repos:
+. Publish to GitLab (and GitHub) Maven repos:
 .. `./gradlew publish`
-. Publish User Guide and JavaDoc to Github Pages
+. Publish User Guide and JavaDoc to GitHub Pages
 .. `./gradlew sitePublish`
-. Create Github Release
+. Create GitHub Release
 
 == Updating Gradle Dependency Verification configuration
 
 NOTE:: We are not using Dependency Verification yet, but we did try to use it.
 
-We are using Gradle's https://docs.gradle.org/current/userguide/dependency_verification.html[dependency verification] feature to verify dependencies used during the build. For now, we are verifying their "checksums" (actually SHA-256 hashes.) For now we are using a "Trust on First Use" (ToFU) approach when we first use or update a dependency. So this means verification will detect any unexpected changes after the expected checksum is set in `gradle/verification-metadata.xml`.
+We are using Gradle's https://docs.gradle.org/current/userguide/dependency_verification.html[dependency verification] feature to verify dependencies used during the build. For now, we are verifying their "checksums" (actually SHA-256 hashes.) For now, we are using a "Trust on First Use" (ToFU) approach when we first use or update a dependency. So this means verification will detect any unexpected changes after the expected checksum is set in `gradle/verification-metadata.xml`.
 
 After adding or updating a dependency, first set the `verify-metadata` flag in `gradle/verification-metadata.xml` to false, by editing the line to like this:
 
@@ -63,7 +63,7 @@ Now you can make sure the build works and push the changes to the Git repo.
 .. `CHANGELOG.adoc`
 . Commit and push to master
 
-== Publish Snapshot release to Gitlab & Github Maven repos
+== Publish Snapshot release to GitLab & GitHub Maven repos
 
 . `./gradlew clean buildCI publish`
 

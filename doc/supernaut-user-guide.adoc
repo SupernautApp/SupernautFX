@@ -1,13 +1,13 @@
 = Supernaut.FX User's Guide
 Sean Gilligan
-v0.2, September 15, 2021: First draft
+v0.2, September 16, 2021: First draft
 :numbered:
 :toc:
 :toclevels: 2
 
 == Introduction
 
-Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut® framework] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
+Supernaut.FX is a lightweight dependency injection framework for https://openjfx.io[JavaFX] applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut® framework] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
 
 This early-draft User's Guide provides an introduction to the concepts and major classes and interfaces in the Supernaut.FX framework.
 
@@ -236,7 +236,34 @@ Unfortunately, most real-world applications will need to use some of the Microna
 
 === Java Modules
 
-TBD
+Supernaut.FX currently consists of 3 Java modules (JARs)
+
+[cols="2, 2, 2a"]
+|===
+|Module name | Purpose | Dependencies
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut/src/main/java/module-info.java[`app.supernaut`]
+| Interfaces for background components (no JavaFX)
+| *No dependencies!*
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx/src/main/java/module-info.java[`app.supernaut.fx`]
+| JavaFX application dependency injection support
+|
+* `app.supernaut`
+* *JavaFX*
+* `slf4j-api`
+
+|https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx-micronaut/src/main/java/module-info.java[`app.supernaut.fx.micronaut`]
+| App Launcher with dependency injection provided by Micronaut framework
+|
+* `app.supernaut.fx`
+* `micronaut-inject`
+
+|===
+
+Typical applications will have a _compile-time_ dependency on `app.supernaut.fx` and a _runtime_ dependency on `app.supernaut.fx.micronaut`.
+
+You may also develop library modules for services depending only on `app.supernaut`.
 
 == Multi-threaded Startup
 
