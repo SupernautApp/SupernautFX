@@ -3,7 +3,7 @@ plugins {
     id 'org.ajoberstar.git-publish'         version '3.0.0'
     id 'org.javamodularity.moduleplugin'    version '1.8.10'  apply false
     id 'org.openjfx.javafxplugin'           version '0.0.10' apply false
-    id 'org.beryx.jlink'                    version '2.24.1' apply false
+    id 'org.beryx.jlink'                    version '2.24.2' apply false
     id 'com.github.hierynomus.license'      version '0.16.1' apply false
 }
 
@@ -36,8 +36,8 @@ allprojects {
             exclude module: "groovy-all"
         }
 
-        testRuntimeOnly "net.bytebuddy:byte-buddy:1.10.9"                 // allows Spock to mock classes (in addition to interfaces)
-        testRuntimeOnly "org.objenesis:objenesis:3.1"                     // Allow Spock to mock classes with constructor arguments
+        testRuntimeOnly "net.bytebuddy:byte-buddy:1.11.15"                 // allows Spock to mock classes (in addition to interfaces)
+        testRuntimeOnly "org.objenesis:objenesis:3.2"                     // Allow Spock to mock classes with constructor arguments
         testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"           // Runtime implementation of slf4j
     }
 

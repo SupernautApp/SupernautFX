@@ -11,6 +11,12 @@ Released: Under development
 
 Released: 2021.09.16
 
+=== Build
+
+* Badass JLink Plugin 2.24.2
+* Byte Buddy 1.11.15 (use by Spock)
+* Objenesis 3.2 (used by Spock)
+
 === Breaking Changes
 
 * The Maven artifact filenames have changed:
