@@ -18,6 +18,8 @@
 . Push: `git push --tags origin master`
 . Publish to Gitlab (and Github) Maven repos:
 .. `./gradlew publish`
+. Publish User Guide and JavaDoc to Github Pages
+.. `./gradlew sitePublish`
 . Create Github Release
 
 == Updating Gradle Dependency Verification configuration
