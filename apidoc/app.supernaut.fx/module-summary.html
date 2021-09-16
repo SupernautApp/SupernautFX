@@ -43,7 +43,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#module-description">Description</a>&nbsp;|&nbsp;</li>
 <li><a href="#modules-summary">Modules</a>&nbsp;|&nbsp;</li>
 <li><a href="#packages-summary">Packages</a>&nbsp;|&nbsp;</li>
-<li>Services</li>
+<li><a href="#services-summary">Services</a></li>
 </ul>
 </div>
 <div class="nav-list-search"><label for="search-input">SEARCH:</label>
@@ -63,7 +63,13 @@ loadScripts(document, 'script');</script>
 <div class="module-signature">module <span class="element-name">app.supernaut.fx</span></div>
 <section class="module-description" id="module-description">
 <!-- ============ MODULE DESCRIPTION =========== -->
-<div class="block">Supernaut.FX module.</div>
+<div class="block">Defines the core classes and interfaces used by <b>Supernaut.FX</b> applications. These
+ interface extend the more abstract interfaces in <a href="../app.supernaut/app/supernaut/package-summary.html"><code>app.supernaut</code></a>. In general,
+ applications should not depend on classes defined in the <code>app.supernaut.fx.micronaut</code> module.
+ <p>
+ If you are writing a Supernaut.FX there are two main classes you need to know about: <a href="app/supernaut/fx/FxForegroundApp.html" title="interface in app.supernaut.fx"><code>FxForegroundApp</code></a>
+ and <a href="app/supernaut/fx/FxLauncher.html" title="interface in app.supernaut.fx"><code>FxLauncher</code></a>. See <a href="app/supernaut/fx/FxForegroundApp.html" title="interface in app.supernaut.fx"><code>FxForegroundApp</code></a> for an example app and how to get
+ started or read the User's Guide (TBD).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -109,7 +115,22 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color">transitive</div>
 <div class="col-second even-row-color"><a href="../app.supernaut/module-summary.html">app.supernaut</a></div>
 <div class="col-last even-row-color">
-<div class="block">Supernaut base module.</div>
+<div class="block">Defines foundational interfaces for <b>Supernaut</b> that are independent of JavaFX.</div>
+</div>
+</div>
+</section>
+</li>
+<li>
+<section class="services-summary" id="services-summary">
+<!-- ============ SERVICES SUMMARY =========== -->
+<h2>Services</h2>
+<div class="caption"><span>Uses</span></div>
+<div class="details-table two-column-summary">
+<div class="table-header col-first">Type</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><a href="app/supernaut/fx/FxLauncher.html" title="interface in app.supernaut.fx">FxLauncher</a></div>
+<div class="col-last even-row-color">
+<div class="block">To launch applications with an implementing provider.</div>
 </div>
 </div>
 </section>

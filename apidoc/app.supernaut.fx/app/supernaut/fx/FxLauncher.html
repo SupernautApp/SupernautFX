@@ -82,10 +82,12 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="FxLauncherAbstract.html" title="class in app.supernaut.fx">FxLauncherAbstract</a></code>, <code><a href="../../../../app.supernaut.fx.micronaut/app/supernaut/fx/micronaut/MicronautFxLauncher.html" title="class in app.supernaut.fx.micronaut">MicronautFxLauncher</a></code>, <code><a href="sample/SimpleFxLauncher.html" title="class in app.supernaut.fx.sample">SimpleFxLauncher</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxLauncher.html#line-28">FxLauncher</a></span><span class="extends-implements">
+<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxLauncher.html#line-30">FxLauncher</a></span><span class="extends-implements">
 extends <a href="../../../../app.supernaut/app/supernaut/Launcher.html" title="interface in app.supernaut">Launcher</a></span></div>
-<div class="block">Additional required method for launching <a href="FxForegroundApp.html" title="interface in app.supernaut.fx"><code>FxForegroundApp</code></a> instances that
- are proxied by <code>OpenJfxProxyApplication</code>.</div>
+<div class="block">Launcher for Supernaut.FX (JavaFX) applications. By using this launcher, your applications
+ can <i>implement</i> the <a href="FxForegroundApp.html" title="interface in app.supernaut.fx"><code>FxForegroundApp</code></a> interface instead of <i>extending</i>
+ <code>Application</code> and have their constructor dependency injected -- see <a href="FxForegroundApp.html" title="interface in app.supernaut.fx"><code>FxForegroundApp</code></a> for
+ an explanation of the advantages and details of this approach.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -135,7 +137,7 @@ extends <a href="../../../../app.supernaut/app/supernaut/Launcher.html" title="i
 <li>
 <section class="detail" id="createForegroundApp(javafx.application.Application)">
 <h3>createForegroundApp</h3>
-<div class="member-signature"><span class="return-type"><a href="FxForegroundApp.html" title="interface in app.supernaut.fx">FxForegroundApp</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxLauncher.html#line-34">createForegroundApp</a></span><wbr><span class="parameters">(javafx.application.Application&nbsp;jfxApplication)</span></div>
+<div class="member-signature"><span class="return-type"><a href="FxForegroundApp.html" title="interface in app.supernaut.fx">FxForegroundApp</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxLauncher.html#line-36">createForegroundApp</a></span><wbr><span class="parameters">(javafx.application.Application&nbsp;jfxApplication)</span></div>
 <div class="block">Construct a <a href="FxForegroundApp.html" title="interface in app.supernaut.fx"><code>FxForegroundApp</code></a> that is a delegate to <code>OpenJfxProxyApplication</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -148,7 +150,7 @@ extends <a href="../../../../app.supernaut/app/supernaut/Launcher.html" title="i
 <li>
 <section class="detail" id="name()">
 <h3>name</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxLauncher.html#line-40">name</a></span>()</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxLauncher.html#line-42">name</a></span>()</div>
 <div class="block">Implementations must implement this method to return a unique name</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -159,7 +161,7 @@ extends <a href="../../../../app.supernaut/app/supernaut/Launcher.html" title="i
 <li>
 <section class="detail" id="byName(java.lang.String)">
 <h3>byName</h3>
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="FxLauncher.html" title="interface in app.supernaut.fx">FxLauncher</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxLauncher.html#line-49">byName</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="FxLauncher.html" title="interface in app.supernaut.fx">FxLauncher</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxLauncher.html#line-51">byName</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
 <div class="block">Find a FxLauncher provider by name</div>
 <dl class="notes">
 <dt>Parameters:</dt>

@@ -36,33 +36,31 @@
 <span class="source-line-no">023</span><span id="line-23"> * Factory interface for providing DI-enabled instances of {@link FXMLLoader}</span>
 <span class="source-line-no">024</span><span id="line-24"> */</span>
 <span class="source-line-no">025</span><span id="line-25">public interface FxmlLoaderFactory {</span>
-<span class="source-line-no">026</span><span id="line-26"></span>
-<span class="source-line-no">027</span><span id="line-27"></span>
-<span class="source-line-no">028</span><span id="line-28">    /**</span>
-<span class="source-line-no">029</span><span id="line-29">     * Get the FXML controller (from a DI context)</span>
-<span class="source-line-no">030</span><span id="line-30">     *</span>
-<span class="source-line-no">031</span><span id="line-31">     * @param clazz The controller class we are looking for</span>
-<span class="source-line-no">032</span><span id="line-32">     * @param &lt;T&gt; The class type of the controller</span>
-<span class="source-line-no">033</span><span id="line-33">     * @return A controller instance</span>
-<span class="source-line-no">034</span><span id="line-34">     */</span>
-<span class="source-line-no">035</span><span id="line-35">    &lt;T&gt; T getControllerFactory(Class&lt;T&gt; clazz);</span>
-<span class="source-line-no">036</span><span id="line-36"></span>
-<span class="source-line-no">037</span><span id="line-37">    /**</span>
-<span class="source-line-no">038</span><span id="line-38">     * Get an FXMLLoader without setting a location</span>
-<span class="source-line-no">039</span><span id="line-39">     *</span>
-<span class="source-line-no">040</span><span id="line-40">     * @return An FXMLLoader</span>
-<span class="source-line-no">041</span><span id="line-41">     */</span>
-<span class="source-line-no">042</span><span id="line-42">    FXMLLoader get();</span>
-<span class="source-line-no">043</span><span id="line-43"></span>
-<span class="source-line-no">044</span><span id="line-44">    /**</span>
-<span class="source-line-no">045</span><span id="line-45">     * Get an FXMLLoader for the given location</span>
-<span class="source-line-no">046</span><span id="line-46">     *</span>
-<span class="source-line-no">047</span><span id="line-47">     * @param location The location of the FXML resource</span>
-<span class="source-line-no">048</span><span id="line-48">     * @return An FXMLLoader</span>
-<span class="source-line-no">049</span><span id="line-49">     */</span>
-<span class="source-line-no">050</span><span id="line-50">    FXMLLoader get(URL location);</span>
-<span class="source-line-no">051</span><span id="line-51"></span>
-<span class="source-line-no">052</span><span id="line-52">}</span>
+<span class="source-line-no">026</span><span id="line-26">    /**</span>
+<span class="source-line-no">027</span><span id="line-27">     * Get the FXML controller (from a DI context)</span>
+<span class="source-line-no">028</span><span id="line-28">     *</span>
+<span class="source-line-no">029</span><span id="line-29">     * @param clazz The controller class we are looking for</span>
+<span class="source-line-no">030</span><span id="line-30">     * @param &lt;T&gt; The class type of the controller</span>
+<span class="source-line-no">031</span><span id="line-31">     * @return A controller instance</span>
+<span class="source-line-no">032</span><span id="line-32">     */</span>
+<span class="source-line-no">033</span><span id="line-33">    &lt;T&gt; T getControllerFactory(Class&lt;T&gt; clazz);</span>
+<span class="source-line-no">034</span><span id="line-34"></span>
+<span class="source-line-no">035</span><span id="line-35">    /**</span>
+<span class="source-line-no">036</span><span id="line-36">     * Get an FXMLLoader without setting a location</span>
+<span class="source-line-no">037</span><span id="line-37">     *</span>
+<span class="source-line-no">038</span><span id="line-38">     * @return An FXMLLoader</span>
+<span class="source-line-no">039</span><span id="line-39">     */</span>
+<span class="source-line-no">040</span><span id="line-40">    FXMLLoader get();</span>
+<span class="source-line-no">041</span><span id="line-41"></span>
+<span class="source-line-no">042</span><span id="line-42">    /**</span>
+<span class="source-line-no">043</span><span id="line-43">     * Get an FXMLLoader for the given location</span>
+<span class="source-line-no">044</span><span id="line-44">     *</span>
+<span class="source-line-no">045</span><span id="line-45">     * @param location The location of the FXML resource</span>
+<span class="source-line-no">046</span><span id="line-46">     * @return An FXMLLoader</span>
+<span class="source-line-no">047</span><span id="line-47">     */</span>
+<span class="source-line-no">048</span><span id="line-48">    FXMLLoader get(URL location);</span>
+<span class="source-line-no">049</span><span id="line-49"></span>
+<span class="source-line-no">050</span><span id="line-50">}</span>
 
 
 

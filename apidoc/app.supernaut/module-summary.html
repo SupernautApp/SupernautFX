@@ -63,7 +63,9 @@ loadScripts(document, 'script');</script>
 <div class="module-signature">module <span class="element-name">app.supernaut</span></div>
 <section class="module-description" id="module-description">
 <!-- ============ MODULE DESCRIPTION =========== -->
-<div class="block">Supernaut base module. This module should have no dependencies except the JDK.</div>
+<div class="block">Defines foundational interfaces for <b>Supernaut</b> that are independent of JavaFX.
+ In theory they be used for creating command-line applications, Android applications, etc.
+ They are extended in the <code>app.supernaut.fx</code> module.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -78,7 +80,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color package-summary-table package-summary-table-tab1"><a href="app/supernaut/package-summary.html">app.supernaut</a></div>
 <div class="col-last even-row-color package-summary-table package-summary-table-tab1">
-<div class="block">Core Supernaut interfaces that do not depend on JavaFX or Micronaut</div>
+<div class="block">Foundational Supernaut interfaces for defining applications at an abstraction layer
+ above JavaFX or Micronaut.</div>
 </div>
 <div class="col-first odd-row-color package-summary-table package-summary-table-tab1"><a href="app/supernaut/logging/package-summary.html">app.supernaut.logging</a></div>
 <div class="col-last odd-row-color package-summary-table package-summary-table-tab1">
@@ -86,7 +89,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color package-summary-table package-summary-table-tab1"><a href="app/supernaut/services/package-summary.html">app.supernaut.services</a></div>
 <div class="col-last even-row-color package-summary-table package-summary-table-tab1">
-<div class="block">Interface(s) for injectable services</div>
+<div class="block">Interfaces for injectable services that are independent of JavaFX</div>
 </div>
 <div class="col-first odd-row-color package-summary-table package-summary-table-tab1"><a href="app/supernaut/test/package-summary.html">app.supernaut.test</a></div>
 <div class="col-last odd-row-color package-summary-table package-summary-table-tab1">

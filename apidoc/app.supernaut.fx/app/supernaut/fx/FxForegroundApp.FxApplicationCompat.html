@@ -82,13 +82,13 @@ loadScripts(document, 'script');</script>
 <dd><a href="FxForegroundApp.html" title="interface in app.supernaut.fx">FxForegroundApp</a></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public static interface </span><span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxForegroundApp.html#line-133">FxForegroundApp.FxApplicationCompat</a></span><span class="extends-implements">
+<div class="type-signature"><span class="modifiers">public static interface </span><span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxForegroundApp.html#line-129">FxForegroundApp.FxApplicationCompat</a></span><span class="extends-implements">
 extends <a href="FxForegroundApp.html" title="interface in app.supernaut.fx">FxForegroundApp</a></span></div>
 <div class="block">This interface makes converting from an instance of <code>Application</code> easier.
- <p>Simply change</p>
- <p><code>class MyFXForegroundApp extends Application</code></p>
- <p>to</p>
- <p><code>class MyFXForegroundApp implements FxApplicationCompat</code></p></div>
+ <p>Simply change:
+ <p><code>class MyFXForegroundApp extends Application</code>
+ <p>to
+ <p><code>class MyFXForegroundApp implements FxApplicationCompat</code></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -145,7 +145,7 @@ extends <a href="FxForegroundApp.html" title="interface in app.supernaut.fx">FxF
 <li>
 <section class="detail" id="start(javafx.stage.Stage)">
 <h3>start</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxForegroundApp.FxApplicationCompat.html#line-139">start</a></span><wbr><span class="parameters">(javafx.stage.Stage&nbsp;primaryStage)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxForegroundApp.FxApplicationCompat.html#line-135">start</a></span><wbr><span class="parameters">(javafx.stage.Stage&nbsp;primaryStage)</span></div>
 <div class="block">Start method compatible with OpenJFX start method</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -156,14 +156,12 @@ extends <a href="FxForegroundApp.html" title="interface in app.supernaut.fx">FxF
 <li>
 <section class="detail" id="start(app.supernaut.fx.FxForegroundApp.FxMainView)">
 <h3>start</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxForegroundApp.FxApplicationCompat.html#line-140">start</a></span><wbr><span class="parameters">(<a href="FxForegroundApp.FxMainView.html" title="interface in app.supernaut.fx">FxForegroundApp.FxMainView</a>&nbsp;mainView)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/app.supernaut.fx/app/supernaut/fx/FxForegroundApp.FxApplicationCompat.html#line-136">start</a></span><wbr><span class="parameters">(<a href="FxForegroundApp.FxMainView.html" title="interface in app.supernaut.fx">FxForegroundApp.FxMainView</a>&nbsp;mainView)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="FxForegroundApp.html#start(app.supernaut.fx.FxForegroundApp.FxMainView)">FxForegroundApp</a></code></span></div>
-<div class="block">The main entry point for Supernaut.fx applications. Called from the OpenJFX
- start() method.  At a minimum, you must implement this method.
-
+<div class="block">The main entry point for Supernaut.fx applications. Called from <code>Application.start(Stage)</code>.
+ At a minimum, you must implement this method.
  <p>
- NOTE: This method is called on the JavaFX Application Thread.
- </p></div>
+ NOTE: This method is called on the JavaFX Application Thread.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="FxForegroundApp.html#start(app.supernaut.fx.FxForegroundApp.FxMainView)">start</a></code>&nbsp;in interface&nbsp;<code><a href="FxForegroundApp.html" title="interface in app.supernaut.fx">FxForegroundApp</a></code></dd>

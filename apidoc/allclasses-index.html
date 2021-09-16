@@ -98,7 +98,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="app.supernaut.fx/app/supernaut/fx/FxForegroundApp.html" title="interface in app.supernaut.fx">FxForegroundApp</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block"><b>Supernaut.fx</b> specialization of <b>Supernaut</b> <a href="app.supernaut/app/supernaut/ForegroundApp.html" title="interface in app.supernaut"><code>ForegroundApp</code></a>.</div>
+<div class="block"><b>Supernaut.FX</b> applications must implement this interface.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="app.supernaut.fx/app/supernaut/fx/FxForegroundApp.FxApplicationCompat.html" title="interface in app.supernaut.fx">FxForegroundApp.FxApplicationCompat</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
@@ -106,7 +106,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="app.supernaut.fx/app/supernaut/fx/FxForegroundApp.FxMainView.html" title="interface in app.supernaut.fx">FxForegroundApp.FxMainView</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">A OpenJfx-compatible <a href="app.supernaut/app/supernaut/ForegroundApp.SupernautMainView.html" title="interface in app.supernaut"><code>ForegroundApp.SupernautMainView</code></a> that potentially contains a <code>Stage</code>.</div>
+<div class="block">A OpenJFX-compatible <a href="app.supernaut/app/supernaut/ForegroundApp.SupernautMainView.html" title="interface in app.supernaut"><code>ForegroundApp.SupernautMainView</code></a> that potentially contains a <code>Stage</code>.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="app.supernaut.fx/app/supernaut/fx/FxForegroundApp.OpenJfxApplicationAware.html" title="interface in app.supernaut.fx">FxForegroundApp.OpenJfxApplicationAware</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
@@ -114,12 +114,11 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="app.supernaut.fx/app/supernaut/fx/FxLauncher.html" title="interface in app.supernaut.fx">FxLauncher</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Additional required method for launching <a href="app.supernaut.fx/app/supernaut/fx/FxForegroundApp.html" title="interface in app.supernaut.fx"><code>FxForegroundApp</code></a> instances that
- are proxied by <code>OpenJfxProxyApplication</code>.</div>
+<div class="block">Launcher for Supernaut.FX (JavaFX) applications.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="app.supernaut.fx/app/supernaut/fx/FxLauncherAbstract.html" title="class in app.supernaut.fx">FxLauncherAbstract</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">JavaFX implementation of <a href="app.supernaut.fx/app/supernaut/fx/FxLauncher.html" title="interface in app.supernaut.fx"><code>FxLauncher</code></a>.</div>
+<div class="block">Base JavaFX implementation of <a href="app.supernaut.fx/app/supernaut/fx/FxLauncher.html" title="interface in app.supernaut.fx"><code>FxLauncher</code></a>.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="app.supernaut.fx/app/supernaut/fx/FxLauncherAbstract.AppFactory.html" title="interface in app.supernaut.fx">FxLauncherAbstract.AppFactory</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
@@ -151,7 +150,8 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="app.supernaut.fx.micronaut/app/supernaut/fx/micronaut/MicronautFxLauncher.html" title="class in app.supernaut.fx.micronaut">MicronautFxLauncher</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">A launcher that uses http://micronaut.io to instantiate the foreground and background applications.</div>
+<div class="block">A launcher that uses <a href="https://micronaut.io">Micronaut@ framework</a> to instantiate and Dependency Inject
+ the foreground and background applications.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="app.supernaut.fx.micronaut/app/supernaut/fx/micronaut/MicronautFxLauncher.MicronautAppFactory.html" title="class in app.supernaut.fx.micronaut">MicronautFxLauncher.MicronautAppFactory</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
