@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 /**
- * Core Supernaut interfaces that do not depend on JavaFX or Micronaut
+ * Foundational Supernaut interfaces for defining applications at an abstraction layer
+ * above JavaFX or Micronaut.
  */
 package app.supernaut;

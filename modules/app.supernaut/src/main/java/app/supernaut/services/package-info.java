@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 /**
- * Interface(s) for injectable services
+ * Interfaces for injectable services that are independent of JavaFX
  */
 package app.supernaut.services;

@@ -21,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
  * Improved, asynchronous two-phase application launcher. It is logically-compatible with the JavaFX launcher.
  * See subclass {@code FxLauncher} and its implementations for full JavaFX support.
  *
- * Uses threads to start a background app as quickly as possible and
+ * It uses threads to start a background app as quickly as possible and
  * possibly before the foreground app is started. This background app can make network
  * requests while the foreground app is starting up, so that views in
  * the foreground app can be updated with live data as soon as possible.

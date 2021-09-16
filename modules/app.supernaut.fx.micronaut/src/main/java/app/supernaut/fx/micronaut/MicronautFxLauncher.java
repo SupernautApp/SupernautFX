@@ -31,7 +31,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A launcher that uses http://micronaut.io to instantiate the foreground and background applications.
+ * A launcher that uses <a href="https://micronaut.io">Micronaut@ framework</a> to instantiate and Dependency Inject
+ * the foreground and background applications.
  */
 public class MicronautFxLauncher extends FxLauncherAbstract {
     private static final Logger log = LoggerFactory.getLogger(FxLauncherAbstract.class);

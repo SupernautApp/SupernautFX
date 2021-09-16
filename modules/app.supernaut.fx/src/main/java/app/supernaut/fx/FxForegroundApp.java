@@ -22,8 +22,10 @@ import app.supernaut.ForegroundApp;
 import java.util.Optional;
 
 /**
- * <b>Supernaut.fx</b> specialization of <b>Supernaut</b> {@link ForegroundApp}. Supernaut.fx {@link FxForegroundApp}s
- * implement this interface instead of subclassing <b>OpenJFX</b> {@link Application}. This has several
+ * <b>Supernaut.FX</b> applications must implement this interface.
+ * <p>
+ * This is the <b>Supernaut.FX</b> specialization of <b>Supernaut</b> {@link ForegroundApp}. Supernaut.FX {@link FxForegroundApp}s
+ * implement this interface instead of subclassing <b>JavaFX</b> {@link Application}. This has several
  * advantages over directly extending {@link javafx.application.Application}:
  * <ol>
  *     <li>
@@ -34,18 +36,15 @@ import java.util.Optional;
  *         Abstracts {@link Stage} with {@link FxMainView}. This also helps with testing.
  *     </li>
  *     <li>
- *         Supports faster, multi-threaded launching with {@link FxLauncherAbstract}.
+ *         Supports faster, multi-threaded launching with the {@link FxLauncher} interface.
  *     </li>
  *     <li>
- *         Supports flexible construction of application object hierarchies with {@link FxLauncherAbstract} and
- *         the {@link FxLauncherAbstract.AppFactory} interface, including Dependency Injection with <b>Micronaut</b>
- *         and possibly other DI frameworks in the future.
+ *         Supports flexible construction of application object hierarchies using Dependency Injection provided
+ *         by <b>Micronaut®</b> framework and possibly other D.I. frameworks in the future.
  *     </li>
  * </ol>
- * 
- * Summary: Implement the {@link FxForegroundApp} interface instead of subclassing OpenJFX {@link Application}. Your
- * apps will be faster and looser, but also tight. You can freely use and abuse inheritance as you please. You also
- * can get your constructor injected, which is always fun.
+ * If you don't care to use the {@link FxMainView} abstraction, you can implement {@link FxApplicationCompat} and
+ * implement the {@link FxApplicationCompat#start(Stage)} method which is compatible with {@link Application#start(Stage)}.
  */
 public interface FxForegroundApp extends ForegroundApp {
     /**
@@ -82,12 +81,10 @@ public interface FxForegroundApp extends ForegroundApp {
     }
 
     /**
-     * The main entry point for Supernaut.fx applications. Called from the OpenJFX
-     * start() method.  At a minimum, you must implement this method.
-     *
+     * The main entry point for Supernaut.fx applications. Called from {@link Application#start(Stage)}.
+     * At a minimum, you must implement this method.
      * <p>
      * NOTE: This method is called on the JavaFX Application Thread.
-     * </p>
      *
      * @param mainView A wrapper view containing the primary {@link Stage}
      * @throws java.lang.Exception if something goes wrong
@@ -97,17 +94,16 @@ public interface FxForegroundApp extends ForegroundApp {
     /**
      * This method is called when the application should stop, and provides a
      * convenient place to prepare for application exit and destroy resources.
-     *
      * <p>
      * NOTE: This method is called on the JavaFX Application Thread.
-     * </p>
+     *
      * @throws java.lang.Exception if something goes wrong
      */
     @Override
     default void stop() throws Exception {};
 
     /**
-     * A OpenJfx-compatible {@link SupernautMainView} that potentially contains a {@link Stage}.
+     * A OpenJFX-compatible {@link SupernautMainView} that potentially contains a {@link Stage}.
      * We are trying to make having a {@link Stage} optional, because in test environments (and perhaps <b>macOS</b> apps
      * if someday OpenJFX gets better <b>macOS</b> support) the Stage may not be present.
      */
@@ -125,10 +121,10 @@ public interface FxForegroundApp extends ForegroundApp {
 
     /**
      * This interface makes converting from an instance of {@link Application} easier.
-     * <p>Simply change</p>
-     * <p>{@code class MyFXForegroundApp extends Application}</p>
-     * <p>to</p>
-     * <p>{@code class MyFXForegroundApp implements FxApplicationCompat}</p>
+     * <p>Simply change:
+     * <p>{@code class MyFXForegroundApp extends Application}
+     * <p>to
+     * <p>{@code class MyFXForegroundApp implements FxApplicationCompat}
      */
     interface FxApplicationCompat extends FxForegroundApp {
         /**

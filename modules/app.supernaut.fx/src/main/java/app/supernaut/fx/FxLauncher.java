@@ -22,8 +22,10 @@ import java.util.NoSuchElementException;
 import java.util.ServiceLoader;
 
 /**
- * Additional required method for launching {@link FxForegroundApp} instances that
- * are proxied by {@code OpenJfxProxyApplication}.
+ * Launcher for Supernaut.FX (JavaFX) applications. By using this launcher, your applications
+ * can <i>implement</i> the {@link FxForegroundApp} interface instead of <i>extending</i>
+ * {@link Application} and have their constructor dependency injected -- see {@link FxForegroundApp} for
+ * an explanation of the advantages and details of this approach.
  */
 public interface FxLauncher extends Launcher {
     /**

@@ -16,6 +16,8 @@
 
 /**
  * Module implementing Supernaut.FX dependency injection with Micronaut
+ *
+ * @provides app.supernaut.fx.FxLauncher with {@link app.supernaut.fx.micronaut.MicronautFxLauncher}
  */
 module app.supernaut.fx.micronaut {
     requires transitive app.supernaut.fx;

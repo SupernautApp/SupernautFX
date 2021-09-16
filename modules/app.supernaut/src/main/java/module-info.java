@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 /**
- * Supernaut base module. This module should have no dependencies except the JDK.
+ * Defines foundational interfaces for <b>Supernaut</b> that are independent of JavaFX.
+ * In theory they be used for creating command-line applications, Android applications, etc.
+ * They are extended in the {@code app.supernaut.fx} module.
  */
 module app.supernaut {
     requires java.logging;

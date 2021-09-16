@@ -30,7 +30,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.function.Supplier;
 
 /**
- * JavaFX implementation of {@link FxLauncher}. This implementation provides the following functionality:
+ * Base JavaFX implementation of {@link FxLauncher}. This implementation provides the following functionality:
  * <ol>
  *     <li>
  *      Starts OpenJFX applications.
