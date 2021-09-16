@@ -10,9 +10,10 @@ allprojects {
     javadoc javadocSpec
 }
 
+def mergedNames = ['app.supernaut','app.supernaut.fx','app.supernaut.fx.micronaut']
+def mergedProjects = project.subprojects.findAll {p -> mergedNames.contains(p.name)}
+
 task mergedJavadoc(type: Javadoc) {
-    def mergedNames = ['app.supernaut','app.supernaut.fx','app.supernaut.fx.micronaut']
-    def mergedProjects = project.subprojects.findAll {p -> mergedNames.contains(p.name)}
     source mergedProjects.collect {project -> project.sourceSets.main.allJava }
     classpath = files(mergedProjects.collect {project -> project.sourceSets.main.compileClasspath})
 }
@@ -24,5 +25,7 @@ mergedJavadoc javadocSpec << {
 mergedJavadoc.doLast {
     logger.info "Merged JavaDoc generated at <file://${mergedJavadoc.destinationDir}/index.html>"
 }
+
+mergedJavadoc.dependsOn(mergedProjects.collect(p -> p.tasks.withType(Javadoc)))
 
 javadocJar.dependsOn mergedJavadoc
