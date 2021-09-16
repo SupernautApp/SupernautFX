@@ -442,8 +442,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Supernaut.FX User&#8217;s Guide</h1>
 <div class="details">
 <span id="author" class="author">Sean Gilligan</span><br>
-<span id="revnumber">version 0.2.0-SNAPSHOT,</span>
-<span id="revdate">September 15, 2021</span>
+<span id="revnumber">version 0.2.0,</span>
+<span id="revdate">September 16, 2021</span>
 <br><span id="revremark">First draft</span>
 </div>
 <div id="toc" class="toc">
@@ -478,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_introduction">1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of <a href="https://micronaut.io">Micronaut® framework</a> (provided by the <code>micronaut-inject</code> JAR.) It enables the use of dependency injection in application, controller, and service objects.</p>
+<p>Supernaut.FX is a lightweight dependency injection framework for <a href="https://openjfx.io">JavaFX</a> applications. It is a wrapper around the core dependency injection capability of <a href="https://micronaut.io">Micronaut® framework</a> (provided by the <code>micronaut-inject</code> JAR.) It enables the use of dependency injection in application, controller, and service objects.</p>
 </div>
 <div class="paragraph">
 <p>This early-draft User&#8217;s Guide provides an introduction to the concepts and major classes and interfaces in the Supernaut.FX framework.</p>
@@ -800,7 +800,67 @@ public class MinimalApp implements FxForegroundApp {
 <div class="sect2">
 <h3 id="_java_modules">3.9. Java Modules</h3>
 <div class="paragraph">
-<p>TBD</p>
+<p>Supernaut.FX currently consists of 3 Java modules (JARs)</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Module name</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">Dependencies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/SupernautApp/SupernautFX/blob/master/supernaut/src/main/java/module-info.java"><code>app.supernaut</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interfaces for background components (no JavaFX)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>No dependencies!</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx/src/main/java/module-info.java"><code>app.supernaut.fx</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaFX application dependency injection support</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>app.supernaut</code></p>
+</li>
+<li>
+<p><strong>JavaFX</strong></p>
+</li>
+<li>
+<p><code>slf4j-api</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/SupernautApp/SupernautFX/blob/master/supernaut-fx-micronaut/src/main/java/module-info.java"><code>app.supernaut.fx.micronaut</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">App Launcher with dependency injection provided by Micronaut framework</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>app.supernaut.fx</code></p>
+</li>
+<li>
+<p><code>micronaut-inject</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Typical applications will have a <em>compile-time</em> dependency on <code>app.supernaut.fx</code> and a <em>runtime</em> dependency on <code>app.supernaut.fx.micronaut</code>.</p>
+</div>
+<div class="paragraph">
+<p>You may also develop library modules for services depending only on <code>app.supernaut</code>.</p>
 </div>
 </div>
 </div>
@@ -880,8 +940,8 @@ public class MinimalApp implements FxForegroundApp {
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.2.0-SNAPSHOT<br>
-Last updated 2021-09-15 22:46:46 -0700
+Version 0.2.0<br>
+Last updated 2021-09-16 13:00:13 -0700
 </div>
 </div>
 </body>

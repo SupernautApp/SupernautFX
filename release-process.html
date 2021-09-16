@@ -440,7 +440,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>SupernautFX Release Process</h1>
 <div class="details">
-<span id="revnumber">version 0.2.0-SNAPSHOT</span>
+<span id="revnumber">version 0.2.0</span>
 </div>
 </div>
 <div id="content">
@@ -450,10 +450,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><code>JAVA_HOME</code> set to OpenJDK 11 or later (OpenJDK 16 is recommended: <code>sdk use java 16.0.1.hs-adpt</code>)</p>
+<p><code>JAVA_HOME</code> set to OpenJDK 17 or later (<code>sdk use java 17-open</code>)</p>
 </li>
 <li>
-<p><code>JDK16</code> set to a JDK 16 instance.</p>
+<p><code>JDK17</code> set to a JDK 17 instance.</p>
 </li>
 </ul>
 </div>
@@ -500,7 +500,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Push: <code>git push --tags origin master</code></p>
 </li>
 <li>
-<p>Publish to Gitlab (and Github) Maven repos:</p>
+<p>Publish to GitLab (and GitHub) Maven repos:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -510,17 +510,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p>Publish User Guide and JavaDoc to Github Pages</p>
+<p>Publish User Guide and JavaDoc to GitHub Pages</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><code>./gradlew sitePublish</code></p>
+<p><code>./gradlew publishSite</code></p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Create Github Release</p>
+<p>Create GitHub Release</p>
 </li>
 </ol>
 </div>
@@ -538,7 +538,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </dl>
 </div>
 <div class="paragraph">
-<p>We are using Gradle&#8217;s <a href="https://docs.gradle.org/current/userguide/dependency_verification.html">dependency verification</a> feature to verify dependencies used during the build. For now, we are verifying their "checksums" (actually SHA-256 hashes.) For now we are using a "Trust on First Use" (ToFU) approach when we first use or update a dependency. So this means verification will detect any unexpected changes after the expected checksum is set in <code>gradle/verification-metadata.xml</code>.</p>
+<p>We are using Gradle&#8217;s <a href="https://docs.gradle.org/current/userguide/dependency_verification.html">dependency verification</a> feature to verify dependencies used during the build. For now, we are verifying their "checksums" (actually SHA-256 hashes.) For now, we are using a "Trust on First Use" (ToFU) approach when we first use or update a dependency. So this means verification will detect any unexpected changes after the expected checksum is set in <code>gradle/verification-metadata.xml</code>.</p>
 </div>
 <div class="paragraph">
 <p>After adding or updating a dependency, first set the <code>verify-metadata</code> flag in <code>gradle/verification-metadata.xml</code> to false, by editing the line to like this:</p>
@@ -607,7 +607,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_publish_snapshot_release_to_gitlab_github_maven_repos">Publish Snapshot release to Gitlab &amp; Github Maven repos</h2>
+<h2 id="_publish_snapshot_release_to_gitlab_github_maven_repos">Publish Snapshot release to GitLab &amp; GitHub Maven repos</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -664,8 +664,8 @@ spctl --assess --verbose &lt;/path/to/dot.app&gt;</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.2.0-SNAPSHOT<br>
-Last updated 2021-09-15 23:05:20 -0700
+Version 0.2.0<br>
+Last updated 2021-09-16 13:41:09 -0700
 </div>
 </div>
 </body>
