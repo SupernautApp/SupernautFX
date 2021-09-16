@@ -1,7 +1,246 @@
-= Supernaut/FX
+= Supernaut.FX User's Guide
+Sean Gilligan
+v0.2, September 15, 2021: First draft
+:numbered:
+:toc:
+:toclevels: 2
+
+== Introduction
+
+Supernaut.FX is a lightweight dependency injection framework for JavaFX applications. It is a wrapper around the core dependency injection capability of https://micronaut.io[Micronaut® framework] (provided by the `micronaut-inject` JAR.) It enables the use of dependency injection in application, controller, and service objects.
+
+This early-draft User's Guide provides an introduction to the concepts and major classes and interfaces in the Supernaut.FX framework.
+
+== Features and Benefits
+
+TBD. (See the README for now.)
+
+== Getting Started
+
+This getting started section assumes you are already familiar with the basics of writing a JavaFX application.
+
+=== Sample/Starter Projects on GitHub
+
+The fastest way to get started is to clone or download one of the two sample "Hello World" projects on GitHub. There is one project that uses the Maven build system and one that uses Gradle. Currently -- due to the state of the available plugins and my limited knowledge of how to use them -- the options for deploying your applications are different on Gradle vs. Maven.
 
 
-== Startup
+==== Gradle Sample
+
+Using https://github.com/SupernautApp/supernaut-fx-sample-gradle[supernaut-fx-sample-gradle], via the Badass JLink Plugin, you can build native-looking macOS, Windows, and Linux applications with a bundled Java Runtime.
+
+The Badass JLink Plugin performs an important role in converting non-modular jars (especially the Micronaut jars) to work in a modular environment.
+
+==== Maven Sample
+
+Using https://github.com/SupernautApp/supernaut-fx-sample-maven[supernaut-fx-sample-maven], via the GluonFX Maven Plugin, you can build natively-compiled macOS, Windows, and Linux applications using the GraalVM native-image tool.
+
+==== Comparison Matrix
+
+Eventually, you should be able to build both types of packages with either build tool.
+
+.Supernaut.FX Gradle vs Maven Comparison
+[cols="1, 3a, 3a"]
+|===
+|Build System |Features |Plugins
+
+|Gradle
+|
+
+* build jar
+* run
+* build native-looking app with bundled JRE with `jpackage`
+|
+
+* `micronaut-inject-java` annotation processor
+* Java Modularity Plugin
+* JavaFX Gradle Plugin
+* Badass JLink Plugin
+
+|Maven
+|
+
+* build jar
+* run
+* build GraalVM natively-compiled image with GluonFX
+
+|
+
+* `micronaut-maven-plugin`
+* `javafx-maven-plugin`
+* `gluonfx-maven-plugin`
+
+|===
+
+
+=== Converting a simple JavaFX Application to Supernaut.FX
+
+The following listing shows a simple hello-world style JavaFX program.
+
+[source, java]
+----
+public class MinimalApp extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(FxMainView mainView) {
+        Stage primaryStage = mainView.optionalStage().orElseThrow();
+
+        var label = new Label("Hello, Earth!");
+        var scene = new Scene(new StackPane(label), 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("JavaFX Minimal App");
+        primaryStage.show();
+    }
+}
+----
+
+By simply replacing `extends Application` with `implements FxForegroundApp.FxApplicationCompat` and using the `launch()` method of the `FXLauncher` service with the name `micronaut`, it becomes a Java.FX application. Also note that the `jakarta.inject` `@Singleton` annotation has been added.
+
+[source, java]
+----
+@Singleton
+public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
+
+    public static void main(String[] args) {
+        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        var label = new Label("Hello, Earth!");
+        var scene = new Scene(new StackPane(label), 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("SupernautFX Minimal App");
+        primaryStage.show();
+    }
+}
+----
+
+This allows you to begin using Dependency Inject to configure your application. You can define an `AppConfig` class  as follows:
+
+[source, java]
+----
+@Singleton
+    @Singleton
+    public static class AppConfig {
+        /** the application name */
+        public final String planetName = "Mars";
+    }
+----
+
+and inject it into an added constructor of `MinimalApp`:
+
+[source, java]
+----
+@Singleton
+public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
+    private final static String planetName;
+
+    public static void main(String[] args) {
+        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
+    }
+
+    public MinimalApp(AppConfig config) {
+        planetName = config.planetName;
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        var label = new Label("Hello, " + planetName + "!");
+        var scene = new Scene(new StackPane(label), 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("SupernautFX Minimal App");
+        primaryStage.show();
+    }
+}
+----
+
+=== Using the FxForegroundApp class
+
+The `FxForegroundApp.FxApplicationCompat` interface is provided for easy conversion from a standard JavaFX application that is a subclass of `Application`. However, the `FxForegroundApp` interface is the recommended interface to extend as it provides (the beginnings of) a layer of abstraction from JavaFX `Stage`.
+
+[source, java]
+----
+@Singleton
+public class MinimalApp implements FxForegroundApp {
+    private final static String planetName;
+
+    public static void main(String[] args) {
+        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
+    }
+
+    public MinimalApp(AppConfig config) {
+        planetName = config.planetName;
+    }
+
+    @Override
+    public void start(FxMainView mainView) {
+        Stage primaryStage = mainView.optionalStage().orElseThrow();
+
+        var label = new Label("Hello, " + planetName + "!");
+        var scene = new Scene(new StackPane(label), 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("SupernautFX Minimal App");
+        primaryStage.show();
+    }
+}
+----
+
+
+=== Dependency Injecting FXML Controllers
+
+To load a dependency-inject FXML controller, simply add a `FxmlLoaderFactory` to one of your injected controllers, like this:
+
+----
+    public MinimalApp(AppConfig config, FxmlLoaderFactory injectedLoaderFactory) {
+        planetName = config.planetName;
+        loaderFactory = injectedLoaderFactory;
+    }
+----
+
+and then use it to load you FXML-based windows and contollers.
+
+[source, java]
+----
+        FXMLLoader loader = loaderFactory.get(getFXMLUrl("MainWindow.fxml"));
+        Parent root = loader.load();
+----
+
+See `HelloForegroundApp` and `MainWindowController` (links TBD) for a fully-functioning example.
+
+=== Injecting Service Objects
+
+See `GreetingService` (link TBD) for a functioning example.
+
+=== Built-in Injectable Services
+
+TBD.
+
+* `FxmlLoaderFactory`
+* `BrowserService`
+* `HostServices`
+* `Application`
+
+=== Using jakarta.inject Annotations
+
+`jakarta.inject` annotations, such as `@Singleton` and `@Named` are the preferred type of annotations to use for injection as they are equivalent to and replace the older `javax.inject` annotation.
+
+These annotations can work with multiple dependency injection frameworks and will help you write more portable code.
+
+=== Using Micronaut Annotations
+
+Unfortunately, most real-world applications will need to use some of the Micronaut-provided annotations, such as `@Factory`.
+
+=== Java Modules
+
+TBD
+
+== Multi-threaded Startup
+
+NOTE:: This section is for advanced users only. The parallel, asynchronous launch features should be considered experimental.
 
 Supernaut allows you to initialize _background_ services *in parallel* with the initialization of JavaFX and your _foreground_ application running on the JavaFX Application Thread. This allows you to make network requests as early as possible so that their results will be available before or shortly after display of the application main Window.
 
