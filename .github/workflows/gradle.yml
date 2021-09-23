@@ -9,7 +9,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
         java: ['17']
-        distribution: ['zulu']
+        distribution: ['temurin']
       fail-fast: false
     name: ${{ matrix.os }} JDK ${{ matrix.distribution }} ${{ matrix.java }}
     steps:
