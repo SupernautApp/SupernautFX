@@ -194,6 +194,7 @@ public class MinimalApp implements FxForegroundApp {
 
 To load a dependency-inject FXML controller, simply add a `FxmlLoaderFactory` to one of your injected controllers, like this:
 
+[source, java]
 ----
     public MinimalApp(AppConfig config, FxmlLoaderFactory injectedLoaderFactory) {
         planetName = config.planetName;
