@@ -16,7 +16,7 @@ dependencies {
     implementation project (':modules:app.supernaut.fx')
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
-    compileOnly 'jakarta.inject:jakarta.inject-api:2.0.0'
+    compileOnly "jakarta.inject:jakarta.inject-api:${jakartaInjectVersion}"
     compileOnly ("io.micronaut:micronaut-inject:${micronautVersion}") {  // For Micronaut annotations eg. @Factory and generated code {
         exclude group: "com.google.code.findbugs", module: "jsr305" // Exclude until Micronaut removes transitive dependency
     }
