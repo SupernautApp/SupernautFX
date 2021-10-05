@@ -7,6 +7,10 @@ A high-level view of the changes in each SupernautFX release.
 
 Released: Under development
 
+=== Dependency Upgrades
+
+* jakarta.inject-api 2.0.1.RC1 (now with `module-info.java`)
+
 == v0.2.0
 
 Released: 2021.09.16
