@@ -2,9 +2,12 @@ plugins {
     id 'java-library'
 }
 
-apply plugin: 'org.javamodularity.moduleplugin'
 apply plugin: app.supernaut.gradle.JavaFXPlatformPlugin
 def platform = ext.jfxPlatform
+
+java {
+    modularity.inferModulePath = true
+}
 
 dependencies {
     api project (':modules:app.supernaut.fx')
@@ -24,10 +27,4 @@ dependencies {
     testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
     testImplementation "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
     testImplementation "io.micronaut.test:micronaut-test-spock:${micronautTestSpockVersion}"
-}
-
-test {
-    moduleOptions {
-        runOnClasspath = true
-    }
 }
