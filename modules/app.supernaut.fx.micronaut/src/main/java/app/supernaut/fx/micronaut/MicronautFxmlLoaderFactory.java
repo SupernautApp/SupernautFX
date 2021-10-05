@@ -19,14 +19,12 @@ import app.supernaut.fx.FxmlLoaderFactory;
 import io.micronaut.context.BeanContext;
 import javafx.fxml.FXMLLoader;
 
-import jakarta.inject.Singleton;
 import java.net.URL;
 
 /**
  * Factory for providing FXMLLoaders that do full DI. This
  * singleton is added to the Micronaut BeanContext with BeanContext#registerSingleton.
  */
-@Singleton
 public class MicronautFxmlLoaderFactory implements FxmlLoaderFactory {
     BeanContext context;
 

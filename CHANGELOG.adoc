@@ -9,7 +9,12 @@ Released: Under development
 
 === Dependency Upgrades
 
-* jakarta.inject-api 2.0.1.RC1 (now with `module-info.java`)
+* Remove Gradle `api` and `module-info.java` dependency on `jakarta.inject(-api)`
+* Use jakarta.inject-api 2.0.1.RC1 (now with `module-info.java`) in sample/test apps
+
+=== Breaking Changes
+
+* Apps using `jakarta.inject-api` may need to add it to their Maven/Gradle build configuration
 
 == v0.2.0
 

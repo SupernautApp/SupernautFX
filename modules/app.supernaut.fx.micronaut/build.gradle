@@ -10,7 +10,6 @@ dependencies {
     api project (':modules:app.supernaut.fx')
     api "org.openjfx:javafx-graphics:${javaFxVersion}"
     api "org.openjfx:javafx-fxml:${javaFxVersion}"
-    api "jakarta.inject:jakarta.inject-api:${jakartaInjectVersion}"
     api ("io.micronaut:micronaut-inject:${micronautVersion}") {
         exclude group: "com.google.code.findbugs", module: "jsr305" // Exclude until Micronaut removes transitive dependency
     }
@@ -20,8 +19,6 @@ dependencies {
     compileOnly "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
 
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
-
-    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
     testImplementation "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
     testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"

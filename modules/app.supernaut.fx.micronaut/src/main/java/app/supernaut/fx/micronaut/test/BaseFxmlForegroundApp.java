@@ -18,13 +18,11 @@ package app.supernaut.fx.micronaut.test;
 import app.supernaut.fx.FxForegroundApp;
 import app.supernaut.fx.FxmlLoaderFactory;
 
-import jakarta.inject.Singleton;
 import javafx.stage.Stage;
 
 /**
  * FxForegroundApp with constructor that expects a {@link FxmlLoaderFactory}
  */
-@Singleton
 public class BaseFxmlForegroundApp implements FxForegroundApp {
     /** {@link FxmlLoaderFactory} for subclass access */
     protected final FxmlLoaderFactory fxmlLoaderFactory;
