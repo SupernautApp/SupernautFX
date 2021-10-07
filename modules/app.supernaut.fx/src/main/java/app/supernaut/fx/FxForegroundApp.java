@@ -15,7 +15,6 @@
  */
 package app.supernaut.fx;
 
-import app.supernaut.fx.internal.DefaultFxMainView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import app.supernaut.ForegroundApp;
@@ -34,9 +33,6 @@ import java.util.Optional;
  *       This increases the testability and architectural flexibility of the application.
  *     </li>
  *     <li>
- *         Abstracts {@link Stage} with {@link FxMainView}. This also helps with testing.
- *     </li>
- *     <li>
  *         Supports faster, multi-threaded launching with the {@link FxLauncher} interface.
  *     </li>
  *     <li>
@@ -44,8 +40,6 @@ import java.util.Optional;
  *         by <b>Micronaut®</b> framework and possibly other D.I. frameworks in the future.
  *     </li>
  * </ol>
- * If you don't care to use the {@link FxMainView} abstraction, you can implement {@link FxApplicationCompat} and
- * implement the {@link FxApplicationCompat#start(Stage)} method which is compatible with {@link Application#start(Stage)}.
  */
 public interface FxForegroundApp extends ForegroundApp {
     /**
@@ -65,48 +59,15 @@ public interface FxForegroundApp extends ForegroundApp {
     default void init() throws Exception {};
 
     /**
-     * Adapt from OpenJFX-independent {@link ForegroundApp} to JFX-compatible {@link FxForegroundApp}
-     * which requires a primary {@link Stage} to start.
-     * 
-     * @param mainView Must be a {@link FxMainView}
-     * @throws Exception if something goes wrong
-     * @throws IllegalArgumentException if mainView isn't a {@link FxMainView}
-     */
-    @Override
-    default void start(Object mainView) throws Exception {
-        if (mainView instanceof FxMainView) {
-            start((FxMainView) mainView);
-        } else if (mainView instanceof Stage) {
-            start((Stage) mainView);
-        } else {
-            throw new IllegalArgumentException("Main view must be implementation of: " + Stage.class);
-        }
-    }
-
-    /**
      * The main entry point for Supernaut.fx applications. Called from {@link Application#start(Stage)}.
      * At a minimum, you must implement this method.
      * <p>
      * NOTE: This method is called on the JavaFX Application Thread.
      *
-     * @param mainView A wrapper view containing the primary {@link Stage}
-     * @throws java.lang.Exception if something goes wrong
-     * @deprecated use {@link FxForegroundApp#start(Stage)}
-     */
-    @Deprecated
-    default void start(FxMainView mainView) throws Exception {
-        start((Object) mainView);
-    }
-
-    /**
-     * You should override this method, it will become abstract in the future
-     *
      * @param primaryStage the primary stage
      * @throws Exception something went wrong
      */
-    default void start(Stage primaryStage) throws Exception {
-        start(DefaultFxMainView.of(primaryStage));
-    }
+    void start(Stage primaryStage) throws Exception;
     
     /**
      * This method is called when the application should stop, and provides a
@@ -118,57 +79,4 @@ public interface FxForegroundApp extends ForegroundApp {
      */
     @Override
     default void stop() throws Exception {};
-
-    /**
-     * A OpenJFX-compatible {@link SupernautMainView} that potentially contains a {@link Stage}.
-     * We are trying to make having a {@link Stage} optional, because in test environments (and perhaps <b>macOS</b> apps
-     * if someday OpenJFX gets better <b>macOS</b> support) the Stage may not be present.
-     * @deprecated We're eliminating the concept of abstracted views, use {@link Stage} directly
-     */
-    @Deprecated
-    interface FxMainView extends SupernautMainView {
-        /**
-         * Show the stage/view
-         */
-        void show();
-
-        /**
-         * @return The {@link Stage} this view is contained in (if any)
-         */
-        Optional<Stage> optionalStage();
-    }
-
-    /**
-     * This interface makes converting from an instance of {@link Application} easier.
-     * <p>Simply change:
-     * <p>{@code class MyFXForegroundApp extends Application}
-     * <p>to
-     * <p>{@code class MyFXForegroundApp implements FxApplicationCompat}
-     * @deprecated {@link FxForegroundApp} should be used directly
-     */
-    @Deprecated
-    interface FxApplicationCompat extends FxForegroundApp {
-        /**
-         * Start method compatible with OpenJFX start method
-         *
-         * @param primaryStage primary stage (unwrapped)
-         */
-        void start(Stage primaryStage);
-        default void start(FxMainView mainView) {
-            start(mainView.optionalStage().orElseThrow());
-        }
-    }
-
-    /**
-     * Implement this interface if you need access to the {@link Application} object instance
-     * @deprecated If you need {@link Application} inject it in your constructor
-     */
-    @Deprecated
-    interface OpenJfxApplicationAware extends ForegroundApp {
-        /**
-         * Setter that will receive the {@link Application} instance
-         * @param application reference to the OpenJFX application
-         */
-        void setJfxApplication(Application application);
-    }
 }

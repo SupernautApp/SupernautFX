@@ -3,6 +3,15 @@
 
 A high-level view of the changes in each SupernautFX release.
 
+== v0.2.2-SNAPSHOT
+
+Released: under development
+
+=== Breaking Changes
+
+* The deprecated `SupernautView`, `SupernautMainView`, and `FxMainView` abstraction interfaces have been removed. Just use `Stage`.
+* The deprecated `OpenJfxApplicationAware` has been removed. If you need an `Application` add it to your constructor and it will be injected there.
+
 == v0.2.1
 
 Released: 2021.10.07

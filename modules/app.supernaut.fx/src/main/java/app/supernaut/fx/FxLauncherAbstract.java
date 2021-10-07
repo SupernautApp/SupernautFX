@@ -193,10 +193,6 @@ public abstract class FxLauncherAbstract implements FxLauncher {
             throw new RuntimeException(e);
         }
         FxForegroundApp foregroundApp = appFactory.createForegroundApp(foregroundAppClass, proxyApplication);
-        if (foregroundApp instanceof FxForegroundApp.OpenJfxApplicationAware) {
-            // If foregroundApp implements the interface, pass it the JfxApplication implementation
-            ((FxForegroundApp.OpenJfxApplicationAware) foregroundApp).setJfxApplication(proxyApplication);
-        }
         // TODO: Create a LauncherAware interface for injecting the launcher into apps?
         futureForegroundApp.complete(foregroundApp);
         return foregroundApp;
