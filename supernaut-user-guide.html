@@ -442,7 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Supernaut.FX User&#8217;s Guide</h1>
 <div class="details">
 <span id="author" class="author">Sean Gilligan</span><br>
-<span id="revnumber">version 0.2.0,</span>
+<span id="revnumber">version 0.2.1,</span>
 <span id="revdate">September 16, 2021</span>
 <br><span id="revremark">First draft</span>
 </div>
@@ -455,13 +455,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_samplestarter_projects_on_github">3.1. Sample/Starter Projects on GitHub</a></li>
 <li><a href="#_converting_a_simple_javafx_application_to_supernaut_fx">3.2. Converting a simple JavaFX Application to Supernaut.FX</a></li>
-<li><a href="#_using_the_fxforegroundapp_class">3.3. Using the FxForegroundApp class</a></li>
-<li><a href="#_dependency_injecting_fxml_controllers">3.4. Dependency Injecting FXML Controllers</a></li>
-<li><a href="#_injecting_service_objects">3.5. Injecting Service Objects</a></li>
-<li><a href="#_built_in_injectable_services">3.6. Built-in Injectable Services</a></li>
-<li><a href="#_using_jakarta_inject_annotations">3.7. Using jakarta.inject Annotations</a></li>
-<li><a href="#_using_micronaut_annotations">3.8. Using Micronaut Annotations</a></li>
-<li><a href="#_java_modules">3.9. Java Modules</a></li>
+<li><a href="#_dependency_injecting_fxml_controllers">3.3. Dependency Injecting FXML Controllers</a></li>
+<li><a href="#_injecting_service_objects">3.4. Injecting Service Objects</a></li>
+<li><a href="#_built_in_injectable_services">3.5. Built-in Injectable Services</a></li>
+<li><a href="#_using_jakarta_inject_annotations">3.6. Using jakarta.inject Annotations</a></li>
+<li><a href="#_using_micronaut_annotations">3.7. Using Micronaut Annotations</a></li>
+<li><a href="#_java_modules">3.8. Java Modules</a></li>
 </ul>
 </li>
 <li><a href="#_multi_threaded_startup">4. Multi-threaded Startup</a>
@@ -618,9 +617,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     }
 
     @Override
-    public void start(FxMainView mainView) {
-        Stage primaryStage = mainView.optionalStage().orElseThrow();
-
+    public void start(Stage primaryStage) {
         var label = new Label("Hello, Earth!");
         var scene = new Scene(new StackPane(label), 300, 200);
         primaryStage.setScene(scene);
@@ -631,12 +628,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>By simply replacing <code>extends Application</code> with <code>implements FxForegroundApp.FxApplicationCompat</code> and using the <code>launch()</code> method of the <code>FXLauncher</code> service with the name <code>micronaut</code>, it becomes a Java.FX application. Also note that the <code>jakarta.inject</code> <code>@Singleton</code> annotation has been added.</p>
+<p>By simply replacing <code>extends Application</code> with <code>implements FxForegroundApp</code> and using the <code>launch()</code> method of the <code>FXLauncher</code> service with the name <code>micronaut</code>, it becomes a Java.FX application. Also note that the <code>jakarta.inject</code> <code>@Singleton</code> annotation has been added.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-java" data-lang="java">@Singleton
-public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
+public class MinimalApp implements FxForegroundApp {
 
     public static void main(String[] args) {
         FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
@@ -659,11 +656,10 @@ public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-java" data-lang="java">@Singleton
-    @Singleton
-    public static class AppConfig {
-        /** the application name */
-        public final String planetName = "Mars";
-    }</code></pre>
+public static class AppConfig {
+    /** the application name */
+    public final String planetName = "Mars";
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -672,7 +668,7 @@ public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-java" data-lang="java">@Singleton
-public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
+public class MinimalApp implements FxForegroundApp {
     private final static String planetName;
 
     public static void main(String[] args) {
@@ -696,49 +692,16 @@ public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_the_fxforegroundapp_class">3.3. Using the FxForegroundApp class</h3>
-<div class="paragraph">
-<p>The <code>FxForegroundApp.FxApplicationCompat</code> interface is provided for easy conversion from a standard JavaFX application that is a subclass of <code>Application</code>. However, the <code>FxForegroundApp</code> interface is the recommended interface to extend as it provides (the beginnings of) a layer of abstraction from JavaFX <code>Stage</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Singleton
-public class MinimalApp implements FxForegroundApp {
-    private final static String planetName;
-
-    public static void main(String[] args) {
-        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
-    }
-
-    public MinimalApp(AppConfig config) {
-        planetName = config.planetName;
-    }
-
-    @Override
-    public void start(FxMainView mainView) {
-        Stage primaryStage = mainView.optionalStage().orElseThrow();
-
-        var label = new Label("Hello, " + planetName + "!");
-        var scene = new Scene(new StackPane(label), 300, 200);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("SupernautFX Minimal App");
-        primaryStage.show();
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_dependency_injecting_fxml_controllers">3.4. Dependency Injecting FXML Controllers</h3>
+<h3 id="_dependency_injecting_fxml_controllers">3.3. Dependency Injecting FXML Controllers</h3>
 <div class="paragraph">
 <p>To load a dependency-inject FXML controller, simply add a <code>FxmlLoaderFactory</code> to one of your injected controllers, like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    public MinimalApp(AppConfig config, FxmlLoaderFactory injectedLoaderFactory) {
+<pre class="highlight"><code class="language-java" data-lang="java">    public MinimalApp(AppConfig config, FxmlLoaderFactory injectedLoaderFactory) {
         planetName = config.planetName;
         loaderFactory = injectedLoaderFactory;
-    }</pre>
+    }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -755,13 +718,13 @@ public class MinimalApp implements FxForegroundApp {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_injecting_service_objects">3.5. Injecting Service Objects</h3>
+<h3 id="_injecting_service_objects">3.4. Injecting Service Objects</h3>
 <div class="paragraph">
 <p>See <code>GreetingService</code> (link TBD) for a functioning example.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_built_in_injectable_services">3.6. Built-in Injectable Services</h3>
+<h3 id="_built_in_injectable_services">3.5. Built-in Injectable Services</h3>
 <div class="paragraph">
 <p>TBD.</p>
 </div>
@@ -783,7 +746,7 @@ public class MinimalApp implements FxForegroundApp {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_jakarta_inject_annotations">3.7. Using jakarta.inject Annotations</h3>
+<h3 id="_using_jakarta_inject_annotations">3.6. Using jakarta.inject Annotations</h3>
 <div class="paragraph">
 <p><code>jakarta.inject</code> annotations, such as <code>@Singleton</code> and <code>@Named</code> are the preferred type of annotations to use for injection as they are equivalent to and replace the older <code>javax.inject</code> annotation.</p>
 </div>
@@ -792,13 +755,13 @@ public class MinimalApp implements FxForegroundApp {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_micronaut_annotations">3.8. Using Micronaut Annotations</h3>
+<h3 id="_using_micronaut_annotations">3.7. Using Micronaut Annotations</h3>
 <div class="paragraph">
 <p>Unfortunately, most real-world applications will need to use some of the Micronaut-provided annotations, such as <code>@Factory</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_java_modules">3.9. Java Modules</h3>
+<h3 id="_java_modules">3.8. Java Modules</h3>
 <div class="paragraph">
 <p>Supernaut.FX currently consists of 3 Java modules (JARs)</p>
 </div>
@@ -940,8 +903,8 @@ public class MinimalApp implements FxForegroundApp {
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.2.0<br>
-Last updated 2021-09-16 13:00:13 -0700
+Version 0.2.1<br>
+Last updated 2021-10-07 11:20:21 -0700
 </div>
 </div>
 </body>

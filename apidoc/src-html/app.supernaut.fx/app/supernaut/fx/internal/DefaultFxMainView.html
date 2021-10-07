@@ -38,39 +38,40 @@
 <span class="source-line-no">025</span><span id="line-25"> * Simply wraps a primary {@link Stage}.</span>
 <span class="source-line-no">026</span><span id="line-26"> * TODO: For extra credit create a macOS-friendly implementation of FxMainView with an invisible primaryStage</span>
 <span class="source-line-no">027</span><span id="line-27"> */</span>
-<span class="source-line-no">028</span><span id="line-28">public final class DefaultFxMainView implements FxForegroundApp.FxMainView {</span>
-<span class="source-line-no">029</span><span id="line-29">    private final Stage primaryStage;</span>
-<span class="source-line-no">030</span><span id="line-30"></span>
-<span class="source-line-no">031</span><span id="line-31">    private DefaultFxMainView(Stage primaryStage) {</span>
-<span class="source-line-no">032</span><span id="line-32">        this.primaryStage = primaryStage;</span>
-<span class="source-line-no">033</span><span id="line-33">    }</span>
-<span class="source-line-no">034</span><span id="line-34"></span>
-<span class="source-line-no">035</span><span id="line-35">    /**</span>
-<span class="source-line-no">036</span><span id="line-36">     * Convenience method for constructing {@link app.supernaut.fx.FxForegroundApp.FxMainView} from a {@link Stage}</span>
-<span class="source-line-no">037</span><span id="line-37">     * @param primaryStage the primary stage</span>
-<span class="source-line-no">038</span><span id="line-38">     * @return Wrapper view</span>
-<span class="source-line-no">039</span><span id="line-39">     */</span>
-<span class="source-line-no">040</span><span id="line-40">    public static FxForegroundApp.FxMainView of(Stage primaryStage) {</span>
-<span class="source-line-no">041</span><span id="line-41">        return new DefaultFxMainView(primaryStage);</span>
-<span class="source-line-no">042</span><span id="line-42">    }</span>
-<span class="source-line-no">043</span><span id="line-43"></span>
-<span class="source-line-no">044</span><span id="line-44">    /**</span>
-<span class="source-line-no">045</span><span id="line-45">     * Show the primary stage</span>
-<span class="source-line-no">046</span><span id="line-46">     */</span>
-<span class="source-line-no">047</span><span id="line-47">    @Override</span>
-<span class="source-line-no">048</span><span id="line-48">    public void show() {</span>
-<span class="source-line-no">049</span><span id="line-49">        primaryStage.show();</span>
-<span class="source-line-no">050</span><span id="line-50">    }</span>
-<span class="source-line-no">051</span><span id="line-51"></span>
-<span class="source-line-no">052</span><span id="line-52">    /**</span>
-<span class="source-line-no">053</span><span id="line-53">     * Accessor method that indicates that having a stage is optional</span>
-<span class="source-line-no">054</span><span id="line-54">     * @return An optional that is empty if there is no primary stage</span>
-<span class="source-line-no">055</span><span id="line-55">     */</span>
-<span class="source-line-no">056</span><span id="line-56">    @Override</span>
-<span class="source-line-no">057</span><span id="line-57">    public Optional&lt;Stage&gt; optionalStage() {</span>
-<span class="source-line-no">058</span><span id="line-58">        return Optional.of(primaryStage);</span>
-<span class="source-line-no">059</span><span id="line-59">    }</span>
-<span class="source-line-no">060</span><span id="line-60">}</span>
+<span class="source-line-no">028</span><span id="line-28">@Deprecated</span>
+<span class="source-line-no">029</span><span id="line-29">public final class DefaultFxMainView implements FxForegroundApp.FxMainView {</span>
+<span class="source-line-no">030</span><span id="line-30">    private final Stage primaryStage;</span>
+<span class="source-line-no">031</span><span id="line-31"></span>
+<span class="source-line-no">032</span><span id="line-32">    private DefaultFxMainView(Stage primaryStage) {</span>
+<span class="source-line-no">033</span><span id="line-33">        this.primaryStage = primaryStage;</span>
+<span class="source-line-no">034</span><span id="line-34">    }</span>
+<span class="source-line-no">035</span><span id="line-35"></span>
+<span class="source-line-no">036</span><span id="line-36">    /**</span>
+<span class="source-line-no">037</span><span id="line-37">     * Convenience method for constructing {@link app.supernaut.fx.FxForegroundApp.FxMainView} from a {@link Stage}</span>
+<span class="source-line-no">038</span><span id="line-38">     * @param primaryStage the primary stage</span>
+<span class="source-line-no">039</span><span id="line-39">     * @return Wrapper view</span>
+<span class="source-line-no">040</span><span id="line-40">     */</span>
+<span class="source-line-no">041</span><span id="line-41">    public static FxForegroundApp.FxMainView of(Stage primaryStage) {</span>
+<span class="source-line-no">042</span><span id="line-42">        return new DefaultFxMainView(primaryStage);</span>
+<span class="source-line-no">043</span><span id="line-43">    }</span>
+<span class="source-line-no">044</span><span id="line-44"></span>
+<span class="source-line-no">045</span><span id="line-45">    /**</span>
+<span class="source-line-no">046</span><span id="line-46">     * Show the primary stage</span>
+<span class="source-line-no">047</span><span id="line-47">     */</span>
+<span class="source-line-no">048</span><span id="line-48">    @Override</span>
+<span class="source-line-no">049</span><span id="line-49">    public void show() {</span>
+<span class="source-line-no">050</span><span id="line-50">        primaryStage.show();</span>
+<span class="source-line-no">051</span><span id="line-51">    }</span>
+<span class="source-line-no">052</span><span id="line-52"></span>
+<span class="source-line-no">053</span><span id="line-53">    /**</span>
+<span class="source-line-no">054</span><span id="line-54">     * Accessor method that indicates that having a stage is optional</span>
+<span class="source-line-no">055</span><span id="line-55">     * @return An optional that is empty if there is no primary stage</span>
+<span class="source-line-no">056</span><span id="line-56">     */</span>
+<span class="source-line-no">057</span><span id="line-57">    @Override</span>
+<span class="source-line-no">058</span><span id="line-58">    public Optional&lt;Stage&gt; optionalStage() {</span>
+<span class="source-line-no">059</span><span id="line-59">        return Optional.of(primaryStage);</span>
+<span class="source-line-no">060</span><span id="line-60">    }</span>
+<span class="source-line-no">061</span><span id="line-61">}</span>
 
 
 

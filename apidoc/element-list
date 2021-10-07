@@ -9,6 +9,7 @@ app.supernaut.fx.internal
 app.supernaut.fx.sample
 app.supernaut.fx.services
 app.supernaut.fx.test
+app.supernaut.fx.util
 module:app.supernaut.fx.micronaut
 app.supernaut.fx.micronaut
 app.supernaut.fx.micronaut.test

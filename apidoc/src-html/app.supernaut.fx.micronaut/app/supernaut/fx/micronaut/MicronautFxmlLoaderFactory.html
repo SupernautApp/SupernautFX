@@ -32,59 +32,57 @@
 <span class="source-line-no">019</span><span id="line-19">import io.micronaut.context.BeanContext;</span>
 <span class="source-line-no">020</span><span id="line-20">import javafx.fxml.FXMLLoader;</span>
 <span class="source-line-no">021</span><span id="line-21"></span>
-<span class="source-line-no">022</span><span id="line-22">import jakarta.inject.Singleton;</span>
-<span class="source-line-no">023</span><span id="line-23">import java.net.URL;</span>
-<span class="source-line-no">024</span><span id="line-24"></span>
-<span class="source-line-no">025</span><span id="line-25">/**</span>
-<span class="source-line-no">026</span><span id="line-26"> * Factory for providing FXMLLoaders that do full DI. This</span>
-<span class="source-line-no">027</span><span id="line-27"> * singleton is added to the Micronaut BeanContext with BeanContext#registerSingleton.</span>
-<span class="source-line-no">028</span><span id="line-28"> */</span>
-<span class="source-line-no">029</span><span id="line-29">@Singleton</span>
-<span class="source-line-no">030</span><span id="line-30">public class MicronautFxmlLoaderFactory implements FxmlLoaderFactory {</span>
-<span class="source-line-no">031</span><span id="line-31">    BeanContext context;</span>
-<span class="source-line-no">032</span><span id="line-32"></span>
-<span class="source-line-no">033</span><span id="line-33">    /**</span>
-<span class="source-line-no">034</span><span id="line-34">     * Constructor that gets BeanContext of the SupernautFX application injected.</span>
-<span class="source-line-no">035</span><span id="line-35">     *</span>
-<span class="source-line-no">036</span><span id="line-36">     * @param context The BeanContext of the SupernautFX application</span>
-<span class="source-line-no">037</span><span id="line-37">     */</span>
-<span class="source-line-no">038</span><span id="line-38">    public MicronautFxmlLoaderFactory(BeanContext context) {</span>
-<span class="source-line-no">039</span><span id="line-39">        this.context = context;</span>
-<span class="source-line-no">040</span><span id="line-40">    }</span>
-<span class="source-line-no">041</span><span id="line-41"></span>
-<span class="source-line-no">042</span><span id="line-42">    /**</span>
-<span class="source-line-no">043</span><span id="line-43">     * Get the FXML controller from the BeanContext</span>
-<span class="source-line-no">044</span><span id="line-44">     *</span>
-<span class="source-line-no">045</span><span id="line-45">     * @param clazz The controller class we are looking for</span>
-<span class="source-line-no">046</span><span id="line-46">     * @param &lt;T&gt; The class type of the controller</span>
-<span class="source-line-no">047</span><span id="line-47">     * @return A controller instance</span>
-<span class="source-line-no">048</span><span id="line-48">     */</span>
-<span class="source-line-no">049</span><span id="line-49">    public &lt;T&gt; T getControllerFactory(Class&lt;T&gt; clazz) {</span>
-<span class="source-line-no">050</span><span id="line-50">        return context.getBean(clazz);</span>
-<span class="source-line-no">051</span><span id="line-51">    }</span>
-<span class="source-line-no">052</span><span id="line-52"></span>
-<span class="source-line-no">053</span><span id="line-53">    /**</span>
-<span class="source-line-no">054</span><span id="line-54">     * Get an FXMLLoader without setting a location</span>
-<span class="source-line-no">055</span><span id="line-55">     *</span>
-<span class="source-line-no">056</span><span id="line-56">     * @return An FXMLLoader</span>
-<span class="source-line-no">057</span><span id="line-57">     */</span>
-<span class="source-line-no">058</span><span id="line-58">    public FXMLLoader get() {</span>
-<span class="source-line-no">059</span><span id="line-59">        return get(null);</span>
-<span class="source-line-no">060</span><span id="line-60">    }</span>
-<span class="source-line-no">061</span><span id="line-61"></span>
-<span class="source-line-no">062</span><span id="line-62">    /**</span>
-<span class="source-line-no">063</span><span id="line-63">     * Get an FXMLLoader for the given location</span>
-<span class="source-line-no">064</span><span id="line-64">     *</span>
-<span class="source-line-no">065</span><span id="line-65">     * @param location The location of the FXML resource</span>
-<span class="source-line-no">066</span><span id="line-66">     * @return An FXMLLoader</span>
-<span class="source-line-no">067</span><span id="line-67">     */</span>
-<span class="source-line-no">068</span><span id="line-68">    public FXMLLoader get(URL location) {</span>
-<span class="source-line-no">069</span><span id="line-69">        FXMLLoader loader = new FXMLLoader(location);</span>
-<span class="source-line-no">070</span><span id="line-70">        loader.setControllerFactory(this::getControllerFactory);</span>
-<span class="source-line-no">071</span><span id="line-71">        return loader;</span>
-<span class="source-line-no">072</span><span id="line-72">    }</span>
-<span class="source-line-no">073</span><span id="line-73"></span>
-<span class="source-line-no">074</span><span id="line-74">}</span>
+<span class="source-line-no">022</span><span id="line-22">import java.net.URL;</span>
+<span class="source-line-no">023</span><span id="line-23"></span>
+<span class="source-line-no">024</span><span id="line-24">/**</span>
+<span class="source-line-no">025</span><span id="line-25"> * Factory for providing FXMLLoaders that do full DI. This</span>
+<span class="source-line-no">026</span><span id="line-26"> * singleton is added to the Micronaut BeanContext with BeanContext#registerSingleton.</span>
+<span class="source-line-no">027</span><span id="line-27"> */</span>
+<span class="source-line-no">028</span><span id="line-28">public class MicronautFxmlLoaderFactory implements FxmlLoaderFactory {</span>
+<span class="source-line-no">029</span><span id="line-29">    BeanContext context;</span>
+<span class="source-line-no">030</span><span id="line-30"></span>
+<span class="source-line-no">031</span><span id="line-31">    /**</span>
+<span class="source-line-no">032</span><span id="line-32">     * Constructor that gets BeanContext of the SupernautFX application injected.</span>
+<span class="source-line-no">033</span><span id="line-33">     *</span>
+<span class="source-line-no">034</span><span id="line-34">     * @param context The BeanContext of the SupernautFX application</span>
+<span class="source-line-no">035</span><span id="line-35">     */</span>
+<span class="source-line-no">036</span><span id="line-36">    public MicronautFxmlLoaderFactory(BeanContext context) {</span>
+<span class="source-line-no">037</span><span id="line-37">        this.context = context;</span>
+<span class="source-line-no">038</span><span id="line-38">    }</span>
+<span class="source-line-no">039</span><span id="line-39"></span>
+<span class="source-line-no">040</span><span id="line-40">    /**</span>
+<span class="source-line-no">041</span><span id="line-41">     * Get the FXML controller from the BeanContext</span>
+<span class="source-line-no">042</span><span id="line-42">     *</span>
+<span class="source-line-no">043</span><span id="line-43">     * @param clazz The controller class we are looking for</span>
+<span class="source-line-no">044</span><span id="line-44">     * @param &lt;T&gt; The class type of the controller</span>
+<span class="source-line-no">045</span><span id="line-45">     * @return A controller instance</span>
+<span class="source-line-no">046</span><span id="line-46">     */</span>
+<span class="source-line-no">047</span><span id="line-47">    public &lt;T&gt; T getControllerFactory(Class&lt;T&gt; clazz) {</span>
+<span class="source-line-no">048</span><span id="line-48">        return context.getBean(clazz);</span>
+<span class="source-line-no">049</span><span id="line-49">    }</span>
+<span class="source-line-no">050</span><span id="line-50"></span>
+<span class="source-line-no">051</span><span id="line-51">    /**</span>
+<span class="source-line-no">052</span><span id="line-52">     * Get an FXMLLoader without setting a location</span>
+<span class="source-line-no">053</span><span id="line-53">     *</span>
+<span class="source-line-no">054</span><span id="line-54">     * @return An FXMLLoader</span>
+<span class="source-line-no">055</span><span id="line-55">     */</span>
+<span class="source-line-no">056</span><span id="line-56">    public FXMLLoader get() {</span>
+<span class="source-line-no">057</span><span id="line-57">        return get(null);</span>
+<span class="source-line-no">058</span><span id="line-58">    }</span>
+<span class="source-line-no">059</span><span id="line-59"></span>
+<span class="source-line-no">060</span><span id="line-60">    /**</span>
+<span class="source-line-no">061</span><span id="line-61">     * Get an FXMLLoader for the given location</span>
+<span class="source-line-no">062</span><span id="line-62">     *</span>
+<span class="source-line-no">063</span><span id="line-63">     * @param location The location of the FXML resource</span>
+<span class="source-line-no">064</span><span id="line-64">     * @return An FXMLLoader</span>
+<span class="source-line-no">065</span><span id="line-65">     */</span>
+<span class="source-line-no">066</span><span id="line-66">    public FXMLLoader get(URL location) {</span>
+<span class="source-line-no">067</span><span id="line-67">        FXMLLoader loader = new FXMLLoader(location);</span>
+<span class="source-line-no">068</span><span id="line-68">        loader.setControllerFactory(this::getControllerFactory);</span>
+<span class="source-line-no">069</span><span id="line-69">        return loader;</span>
+<span class="source-line-no">070</span><span id="line-70">    }</span>
+<span class="source-line-no">071</span><span id="line-71"></span>
+<span class="source-line-no">072</span><span id="line-72">}</span>
 
 
 

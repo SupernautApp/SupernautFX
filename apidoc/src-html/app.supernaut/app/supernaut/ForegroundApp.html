@@ -45,10 +45,10 @@
 <span class="source-line-no">032</span><span id="line-32">    /**</span>
 <span class="source-line-no">033</span><span id="line-33">     * Start the application</span>
 <span class="source-line-no">034</span><span id="line-34">     * </span>
-<span class="source-line-no">035</span><span id="line-35">     * @param view Abstracted main view for the applicatino</span>
+<span class="source-line-no">035</span><span id="line-35">     * @param view Abstracted main view/window/stage for the application</span>
 <span class="source-line-no">036</span><span id="line-36">     * @throws Exception an exception occurred</span>
 <span class="source-line-no">037</span><span id="line-37">     */</span>
-<span class="source-line-no">038</span><span id="line-38">    void start(SupernautMainView view) throws Exception;</span>
+<span class="source-line-no">038</span><span id="line-38">    void start(Object view) throws Exception;</span>
 <span class="source-line-no">039</span><span id="line-39"></span>
 <span class="source-line-no">040</span><span id="line-40">    /**</span>
 <span class="source-line-no">041</span><span id="line-41">     * Stop the application</span>
@@ -61,16 +61,18 @@
 <span class="source-line-no">048</span><span id="line-48">    /**</span>
 <span class="source-line-no">049</span><span id="line-49">     * Marker interface for a view. In JavaFX this is a JavaFX "controller".</span>
 <span class="source-line-no">050</span><span id="line-50">     */</span>
-<span class="source-line-no">051</span><span id="line-51">    interface SupernautView {</span>
-<span class="source-line-no">052</span><span id="line-52">    }</span>
-<span class="source-line-no">053</span><span id="line-53"></span>
-<span class="source-line-no">054</span><span id="line-54">    /**</span>
-<span class="source-line-no">055</span><span id="line-55">     * Marker interface for Main View. In JavaFX this is the view contained</span>
-<span class="source-line-no">056</span><span id="line-56">     * in the primary {@code Stage}.</span>
-<span class="source-line-no">057</span><span id="line-57">     */</span>
-<span class="source-line-no">058</span><span id="line-58">    interface SupernautMainView extends SupernautView {</span>
-<span class="source-line-no">059</span><span id="line-59">    }</span>
-<span class="source-line-no">060</span><span id="line-60">}</span>
+<span class="source-line-no">051</span><span id="line-51">    @Deprecated</span>
+<span class="source-line-no">052</span><span id="line-52">    interface SupernautView {</span>
+<span class="source-line-no">053</span><span id="line-53">    }</span>
+<span class="source-line-no">054</span><span id="line-54"></span>
+<span class="source-line-no">055</span><span id="line-55">    /**</span>
+<span class="source-line-no">056</span><span id="line-56">     * Marker interface for Main View. In JavaFX this is the view contained</span>
+<span class="source-line-no">057</span><span id="line-57">     * in the primary {@code Stage}.</span>
+<span class="source-line-no">058</span><span id="line-58">     */</span>
+<span class="source-line-no">059</span><span id="line-59">    @Deprecated</span>
+<span class="source-line-no">060</span><span id="line-60">    interface SupernautMainView extends SupernautView {</span>
+<span class="source-line-no">061</span><span id="line-61">    }</span>
+<span class="source-line-no">062</span><span id="line-62">}</span>
 
 
 
