@@ -1,6 +1,6 @@
 = Supernaut.FX User's Guide
 Sean Gilligan
-v0.2, September 16, 2021: First draft
+v0.2, October 7, 2021: Preliminary draft
 :numbered:
 :toc:
 :toclevels: 2
