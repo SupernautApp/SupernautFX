@@ -2,8 +2,7 @@
 
 == Requirements
 
-* `JAVA_HOME` set to OpenJDK 17 or later (`sdk use java 17-open`)
-* `JDK17` set to a JDK 17 instance.
+* `JAVA_HOME` set to OpenJDK 17 or later (`sdk use java 17.0.0-tem`)
 
 == Main Release Process
 
