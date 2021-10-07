@@ -3,33 +3,40 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.2.1-SNAPSHOT
+== v0.2.1
 
-Released: Under development
+Released: 2021.10.07
 
 === Deprecations
 
-* The `SupernautView`, `SupernautMainView`, and `FxMainView` abstraction interfaces are deprecated. Just use `Stage` directly. This abstraction added complexity without any value. I think Supernaut.FX should focus on implementing  dependency injection for JavaFX applications as simply as possible.
+* The `SupernautView`, `SupernautMainView`, and `FxMainView` abstraction interfaces are deprecated (and will be removed in the next release.) Just use `Stage` directly. This abstraction added complexity without any value. I think Supernaut.FX should focus on implementing  dependency injection for JavaFX applications as simply as possible.
 * `OpenJfxApplicationAware` is also deprecated. If you need an `Application` add it to your constructor and it will be injected there.
+
+=== Module changes
+
+* Remove `opens app.supernaut.fx.micronaut` (nothing should have been using this)
 
 === Breaking Changes
 
-* Apps using `jakarta.inject-api` may need to add it to their Maven/Gradle build configuration
+* Remove Gradle `api` and `module-info.java` dependency on `jakarta.inject(-api)`
+* Apps using `jakarta.inject-api` _may_ need to add it to their Maven/Gradle build configuration
 
 === Dependency Upgrades
 
-* Remove Gradle `api` and `module-info.java` dependency on `jakarta.inject(-api)`
 * Use jakarta.inject-api 2.0.1.RC1 (now with `module-info.java`) in sample/test apps
+
+=== Build
+
+* GitHub Actions: Use Temurin distro of JDK 17
+* Use built-in Gradle module support for compiling all 3 modules (a.s.fx.micronaut was still
+  using the Java Modularity plugin and the three apps continue to use it)
+* Badass JLink Plugin 2.24.2
+* Byte Buddy 1.11.15 (used by Spock)
+* Objenesis 3.2 (used by Spock)
 
 == v0.2.0
 
 Released: 2021.09.16
-
-=== Build
-
-* Badass JLink Plugin 2.24.2
-* Byte Buddy 1.11.15 (use by Spock)
-* Objenesis 3.2 (used by Spock)
 
 === Breaking Changes
 
