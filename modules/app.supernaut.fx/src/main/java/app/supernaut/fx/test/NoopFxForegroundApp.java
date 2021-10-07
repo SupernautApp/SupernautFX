@@ -17,6 +17,7 @@ package app.supernaut.fx.test;
 
 import app.supernaut.fx.FxForegroundApp;
 import javafx.application.Platform;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,9 +28,9 @@ public final class NoopFxForegroundApp implements FxForegroundApp {
     private static final Logger log = LoggerFactory.getLogger(NoopFxForegroundApp.class);
 
     @Override
-    public void start(FxMainView mainView) {
+    public void start(Stage primaryStage) {
         log.info("Entered");
-        mainView.show();
+        primaryStage.show();
         noop();
     }
     

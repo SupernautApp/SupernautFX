@@ -25,6 +25,7 @@ import java.util.Optional;
  * Simply wraps a primary {@link Stage}.
  * TODO: For extra credit create a macOS-friendly implementation of FxMainView with an invisible primaryStage
  */
+@Deprecated
 public final class DefaultFxMainView implements FxForegroundApp.FxMainView {
     private final Stage primaryStage;
 

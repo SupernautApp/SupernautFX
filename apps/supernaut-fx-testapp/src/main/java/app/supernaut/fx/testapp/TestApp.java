@@ -43,7 +43,7 @@ import java.util.concurrent.ExecutionException;
  * and stopping for startup performance measurement.
  */
 @Singleton
-public class TestApp implements FxForegroundApp, FxForegroundApp.OpenJfxApplicationAware {
+public class TestApp implements FxForegroundApp {
     private static final Logger log = LoggerFactory.getLogger(TestApp.class);
     private static boolean backgroundStart = true;
     private final FxmlLoaderFactory loaderFactory;
@@ -109,17 +109,14 @@ public class TestApp implements FxForegroundApp, FxForegroundApp.OpenJfxApplicat
     }
 
     /**
+     * @param application the JavaFX application
      * @param loaderFactory FXML loader factory
      */
-    public TestApp(FxmlLoaderFactory loaderFactory) {
+    public TestApp(Application application, FxmlLoaderFactory loaderFactory) {
         measurements.add("App constructed");
         log.info("Constructing TestApp");
-        this.loaderFactory = loaderFactory;
-    }
-
-    @Override
-    public void setJfxApplication(Application application) {
         this.fxApplication = application;
+        this.loaderFactory = loaderFactory;
     }
 
     @Override
@@ -135,8 +132,7 @@ public class TestApp implements FxForegroundApp, FxForegroundApp.OpenJfxApplicat
     }
 
     @Override
-    public void start(FxMainView mainView) throws IOException {
-        Stage primaryStage = mainView.optionalStage().orElseThrow();
+    public void start(Stage primaryStage) throws IOException {
         measurements.add("App started");
         log.info("Starting TestApp");
 

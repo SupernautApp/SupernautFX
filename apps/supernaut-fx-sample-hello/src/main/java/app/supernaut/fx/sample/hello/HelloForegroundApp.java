@@ -84,9 +84,8 @@ public class HelloForegroundApp implements FxForegroundApp {
      * {@inheritDoc}
      */
     @Override
-    public void start(FxMainView mainView) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
         log.info("Starting Hello");
-        Stage primaryStage = mainView.optionalStage().orElseThrow();
         FXMLLoader loader = loaderFactory.get(getFXMLUrl("MainWindow.fxml"));
         log.debug("primaryStage root FXML: {}", loader.getLocation());
         Parent root = loader.load();

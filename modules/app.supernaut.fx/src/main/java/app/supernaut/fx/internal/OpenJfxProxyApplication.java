@@ -77,7 +77,7 @@ public final class OpenJfxProxyApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         log.info("Starting SfxForegroundApp");
-        foregroundApp.start(DefaultFxMainView.of(primaryStage));
+        foregroundApp.start(primaryStage);
     }
 
     /**

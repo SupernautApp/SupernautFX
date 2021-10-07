@@ -15,6 +15,7 @@
  */
 package app.supernaut.fx;
 
+import app.supernaut.fx.internal.DefaultFxMainView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import app.supernaut.ForegroundApp;
@@ -72,11 +73,13 @@ public interface FxForegroundApp extends ForegroundApp {
      * @throws IllegalArgumentException if mainView isn't a {@link FxMainView}
      */
     @Override
-    default void start(SupernautMainView mainView) throws Exception {
+    default void start(Object mainView) throws Exception {
         if (mainView instanceof FxMainView) {
-            start(mainView);
+            start((FxMainView) mainView);
+        } else if (mainView instanceof Stage) {
+            start((Stage) mainView);
         } else {
-            throw new IllegalArgumentException("Main view must be implementation of " + FxMainView.class);
+            throw new IllegalArgumentException("Main view must be implementation of: " + Stage.class);
         }
     }
 
@@ -88,8 +91,22 @@ public interface FxForegroundApp extends ForegroundApp {
      *
      * @param mainView A wrapper view containing the primary {@link Stage}
      * @throws java.lang.Exception if something goes wrong
+     * @deprecated use {@link FxForegroundApp#start(Stage)}
      */
-    void start(FxMainView mainView) throws Exception;
+    @Deprecated
+    default void start(FxMainView mainView) throws Exception {
+        start((Object) mainView);
+    }
+
+    /**
+     * You should override this method, it will become abstract in the future
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception something went wrong
+     */
+    default void start(Stage primaryStage) throws Exception {
+        start(DefaultFxMainView.of(primaryStage));
+    }
     
     /**
      * This method is called when the application should stop, and provides a
@@ -106,7 +123,9 @@ public interface FxForegroundApp extends ForegroundApp {
      * A OpenJFX-compatible {@link SupernautMainView} that potentially contains a {@link Stage}.
      * We are trying to make having a {@link Stage} optional, because in test environments (and perhaps <b>macOS</b> apps
      * if someday OpenJFX gets better <b>macOS</b> support) the Stage may not be present.
+     * @deprecated We're eliminating the concept of abstracted views, use {@link Stage} directly
      */
+    @Deprecated
     interface FxMainView extends SupernautMainView {
         /**
          * Show the stage/view
@@ -125,7 +144,9 @@ public interface FxForegroundApp extends ForegroundApp {
      * <p>{@code class MyFXForegroundApp extends Application}
      * <p>to
      * <p>{@code class MyFXForegroundApp implements FxApplicationCompat}
+     * @deprecated {@link FxForegroundApp} should be used directly
      */
+    @Deprecated
     interface FxApplicationCompat extends FxForegroundApp {
         /**
          * Start method compatible with OpenJFX start method
@@ -140,7 +161,9 @@ public interface FxForegroundApp extends ForegroundApp {
 
     /**
      * Implement this interface if you need access to the {@link Application} object instance
+     * @deprecated If you need {@link Application} inject it in your constructor
      */
+    @Deprecated
     interface OpenJfxApplicationAware extends ForegroundApp {
         /**
          * Setter that will receive the {@link Application} instance

@@ -32,10 +32,10 @@ public interface ForegroundApp {
     /**
      * Start the application
      * 
-     * @param view Abstracted main view for the applicatino
+     * @param view Abstracted main view/window/stage for the application
      * @throws Exception an exception occurred
      */
-    void start(SupernautMainView view) throws Exception;
+    void start(Object view) throws Exception;
 
     /**
      * Stop the application
@@ -48,6 +48,7 @@ public interface ForegroundApp {
     /**
      * Marker interface for a view. In JavaFX this is a JavaFX "controller".
      */
+    @Deprecated
     interface SupernautView {
     }
 
@@ -55,6 +56,7 @@ public interface ForegroundApp {
      * Marker interface for Main View. In JavaFX this is the view contained
      * in the primary {@code Stage}.
      */
+    @Deprecated
     interface SupernautMainView extends SupernautView {
     }
 }
