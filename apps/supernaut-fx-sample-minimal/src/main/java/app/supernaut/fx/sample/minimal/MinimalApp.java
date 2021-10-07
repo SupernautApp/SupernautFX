@@ -51,9 +51,7 @@ public class MinimalApp implements FxForegroundApp {
      * {@inheritDoc}
      */
     @Override
-    public void start(FxMainView mainView) {
-        Stage primaryStage = mainView.optionalStage().orElseThrow();
-
+    public void start(Stage primaryStage) {
         var label = new Label("Hello, " + appName + " app!");
         var scene = new Scene(new StackPane(label), 300, 200);
         primaryStage.setScene(scene);

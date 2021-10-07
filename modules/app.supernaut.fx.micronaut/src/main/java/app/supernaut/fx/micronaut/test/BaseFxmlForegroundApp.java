@@ -39,11 +39,11 @@ public class BaseFxmlForegroundApp implements FxForegroundApp {
     /**
      * No-op start method (can be overridden)
      * 
-     * @param mainView A wrapper view containing the primary {@link Stage}
+     * @param primaryStage primary {@link Stage}
      * @throws Exception An exception occurred
      */
     @Override
-    public void start(FxMainView mainView) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
     }
 
     /**

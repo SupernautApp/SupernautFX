@@ -85,9 +85,7 @@ public class MinimalApp extends Application {
     }
 
     @Override
-    public void start(FxMainView mainView) {
-        Stage primaryStage = mainView.optionalStage().orElseThrow();
-
+    public void start(Stage primaryStage) {
         var label = new Label("Hello, Earth!");
         var scene = new Scene(new StackPane(label), 300, 200);
         primaryStage.setScene(scene);
@@ -97,12 +95,12 @@ public class MinimalApp extends Application {
 }
 ----
 
-By simply replacing `extends Application` with `implements FxForegroundApp.FxApplicationCompat` and using the `launch()` method of the `FXLauncher` service with the name `micronaut`, it becomes a Java.FX application. Also note that the `jakarta.inject` `@Singleton` annotation has been added.
+By simply replacing `extends Application` with `implements FxForegroundApp` and using the `launch()` method of the `FXLauncher` service with the name `micronaut`, it becomes a Java.FX application. Also note that the `jakarta.inject` `@Singleton` annotation has been added.
 
 [source, java]
 ----
 @Singleton
-public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
+public class MinimalApp implements FxForegroundApp {
 
     public static void main(String[] args) {
         FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
@@ -124,11 +122,10 @@ This allows you to begin using Dependency Inject to configure your application. 
 [source, java]
 ----
 @Singleton
-    @Singleton
-    public static class AppConfig {
-        /** the application name */
-        public final String planetName = "Mars";
-    }
+public static class AppConfig {
+    /** the application name */
+    public final String planetName = "Mars";
+}
 ----
 
 and inject it into an added constructor of `MinimalApp`:
@@ -136,7 +133,7 @@ and inject it into an added constructor of `MinimalApp`:
 [source, java]
 ----
 @Singleton
-public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
+public class MinimalApp implements FxForegroundApp {
     private final static String planetName;
 
     public static void main(String[] args) {
@@ -157,38 +154,6 @@ public class MinimalApp implements FxForegroundApp.FxApplicationCompat {
     }
 }
 ----
-
-=== Using the FxForegroundApp class
-
-The `FxForegroundApp.FxApplicationCompat` interface is provided for easy conversion from a standard JavaFX application that is a subclass of `Application`. However, the `FxForegroundApp` interface is the recommended interface to extend as it provides (the beginnings of) a layer of abstraction from JavaFX `Stage`.
-
-[source, java]
-----
-@Singleton
-public class MinimalApp implements FxForegroundApp {
-    private final static String planetName;
-
-    public static void main(String[] args) {
-        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
-    }
-
-    public MinimalApp(AppConfig config) {
-        planetName = config.planetName;
-    }
-
-    @Override
-    public void start(FxMainView mainView) {
-        Stage primaryStage = mainView.optionalStage().orElseThrow();
-
-        var label = new Label("Hello, " + planetName + "!");
-        var scene = new Scene(new StackPane(label), 300, 200);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("SupernautFX Minimal App");
-        primaryStage.show();
-    }
-}
-----
-
 
 === Dependency Injecting FXML Controllers
 
