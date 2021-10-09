@@ -16,12 +16,12 @@
 package app.supernaut.fx.sample;
 
 import app.supernaut.BackgroundApp;
+import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncherAbstract;
-import app.supernaut.fx.FxForegroundApp;
 
 /**
  * A simple {@link FxLauncherAbstract} that uses {@link Class} objects to specify {@link BackgroundApp}
- * and {@link FxForegroundApp}.
+ * and {@link ApplicationDelegate}.
  */
 public final class SimpleFxLauncher extends FxLauncherAbstract {
 

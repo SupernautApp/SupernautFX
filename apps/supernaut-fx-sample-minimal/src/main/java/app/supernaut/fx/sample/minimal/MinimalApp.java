@@ -15,8 +15,8 @@
  */
 package app.supernaut.fx.sample.minimal;
 
+import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
-import app.supernaut.fx.FxForegroundApp;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -25,10 +25,10 @@ import javafx.stage.Stage;
 import jakarta.inject.Singleton;
 
 /**
- * A minimal (Single-Class) Supernaut.FX App implementing {@link FxForegroundApp}.
+ * A minimal (Single-Class) Supernaut.FX App implementing {@link ApplicationDelegate}.
  */
 @Singleton
-public class MinimalApp implements FxForegroundApp {
+public class MinimalApp implements ApplicationDelegate {
     private final String appName;
 
     /**

@@ -15,8 +15,8 @@
  */
 package app.supernaut.fx.sample.hello;
 
+import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
-import app.supernaut.fx.FxForegroundApp;
 import app.supernaut.fx.FxmlLoaderFactory;
 import app.supernaut.fx.test.NoopBackgroundApp;
 import io.micronaut.context.annotation.Factory;
@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * A simple Supernaut.FX App implementing {@link FxForegroundApp}.
+ * A simple Supernaut.FX App implementing {@link ApplicationDelegate}.
  *
  * If is also annotated to be Micronaut {@link Factory}. This allows it to
  * create the {@link Named} {@code String} instance and to specify inclusion
@@ -49,7 +49,7 @@ import java.net.URL;
 
 @Singleton
 @Factory
-public class HelloForegroundApp implements FxForegroundApp {
+public class HelloForegroundApp implements ApplicationDelegate {
     private static final Logger log = LoggerFactory.getLogger(HelloForegroundApp.class);
     private final FxmlLoaderFactory loaderFactory;
 

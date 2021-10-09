@@ -17,8 +17,7 @@ package app.supernaut;
 
 /**
  *  An abstraction of a User Interface application that is separated
- *  into a foreground app and a background app. It is logically-compatible
- *  with JavaFX, an implementation using JavaFX is provided.
+ *  into a foreground app and a background app. Currently, it is <b>unused for JavaFX</b>.
  */
 public interface ForegroundApp {
     /**
@@ -26,33 +25,19 @@ public interface ForegroundApp {
      *
      * @throws Exception an exception occurred
      */
-    default void init() throws Exception {
-    }
+    void init() throws Exception;
 
     /**
      * Start the application
      *
      * @throws Exception an exception occurred
      */
-    default void start() throws Exception {
-    }
-
-    /**
-     * Start the application
-     * 
-     * @param view Abstracted main view/window/stage for the application
-     * @throws Exception an exception occurred
-     * @deprecated use {@link ForegroundApp#start}
-     */
-    @Deprecated
-    default void start(Object view) throws Exception {
-    }
-
+    default void start() throws Exception {}
+    
     /**
      * Stop the application
      *
      * @throws Exception an exception occurred
      */
-    default void stop() throws Exception {
-    }
+    void stop() throws Exception;
 }

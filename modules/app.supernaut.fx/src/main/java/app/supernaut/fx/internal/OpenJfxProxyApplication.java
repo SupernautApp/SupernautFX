@@ -15,8 +15,8 @@
  */
 package app.supernaut.fx.internal;
 
+import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
-import app.supernaut.fx.FxForegroundApp;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -25,14 +25,14 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Internal <b>Supernaut.fx</b> implementation of {@link Application}. As a static proxy object for
- * {@link FxForegroundApp}, it delegates OpenJFX {@link Application} lifecycle calls to {@link FxForegroundApp}
+ * {@link ApplicationDelegate}, it delegates OpenJFX {@link Application} lifecycle calls to {@link ApplicationDelegate}
  * and makes it more independent of OpenJFX.
  * 
  * <p>Tagline: <q>
  *  We subclass {@link javafx.application.Application} so you don't have to.
  * </q></p>
  * <p>
- * To create a Supernaut.fx app, write a class that implements {@link FxForegroundApp}.
+ * To create a Supernaut.fx app, write a class that implements {@link ApplicationDelegate}.
  * </p>
  *
  */
@@ -41,7 +41,7 @@ public final class OpenJfxProxyApplication extends Application {
     /** Launcher must set this global before calling constructor */
     public static FxLauncher configuredLauncher;
     private final FxLauncher launcher;
-    private final FxForegroundApp foregroundApp;
+    private final ApplicationDelegate foregroundApp;
     
     /**
      * Create a JavaFX application that wraps a SfxForegroundApp
@@ -69,7 +69,7 @@ public final class OpenJfxProxyApplication extends Application {
 
     /**
      * Supernaut.fx implementation of {@link Application#start}.
-     * Calls the application's implementation of {@link FxForegroundApp#start}
+     * Calls the application's implementation of {@link ApplicationDelegate#start}
      *
      * @param primaryStage The primary Stage for the application
      * @throws Exception if something goes wrong

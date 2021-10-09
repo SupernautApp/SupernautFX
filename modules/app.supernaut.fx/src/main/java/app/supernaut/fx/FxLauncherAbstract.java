@@ -18,8 +18,6 @@ package app.supernaut.fx;
 import app.supernaut.fx.test.NoopBackgroundApp;
 import javafx.application.Application;
 import app.supernaut.BackgroundApp;
-import app.supernaut.ForegroundApp;
-import app.supernaut.Launcher;
 import app.supernaut.fx.internal.OpenJfxProxyApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,19 +35,19 @@ import java.util.function.Supplier;
  *     </li>
  *     <li>
  *      Constructor provides an option to start {@link BackgroundApp} on a new thread (this allows
- *      the {@code BackgroundApp} and the OpenJFX {@link FxForegroundApp} to initialize in parallel.)
+ *      the {@code BackgroundApp} and the OpenJFX {@link ApplicationDelegate} to initialize in parallel.)
  *     </li>
  *     <li>
- *      Implements {@link Launcher#launchAsync} which initializes the OpenJFX {@link FxForegroundApp} on
+ *      Implements {@link FxLauncher#launchAsync} which initializes the OpenJFX {@link ApplicationDelegate} on
  *      a new thread. This is not needed for a typical, packaged OpenJFX application
- *      which can just call {@link Launcher#launch} from its {@code static main()}, but is useful
+ *      which can just call {@link FxLauncher#launch} from its {@code static main()}, but is useful
  *      in various testing scenarios.
  *     </li>
  *     <li>
- *      Defines the {@link AppFactory} interface for constructing the {@link BackgroundApp} and {@link FxForegroundApp}.
+ *      Defines the {@link AppFactory} interface for constructing the {@link BackgroundApp} and {@link ApplicationDelegate}.
  *      This allows subclasses (or callers) to provide their own implementation of the application creation logic. The
  *      AppFactory interface was designed to allow usage of Dependency Injection frameworks like <b>Micronaut</b>
- *      to create dependency-injected implementations of {@link FxForegroundApp} and {@link BackgroundApp}. The {@link AppFactory AppFactory}
+ *      to create dependency-injected implementations of {@link ApplicationDelegate} and {@link BackgroundApp}. The {@link AppFactory AppFactory}
  *      interface was also designed to be lazily-instantiated so the {@link AppFactory AppFactory} (dependency-injection framework)
  *      can initialize in parallel to OpenJFX.
  *     </li>
@@ -75,13 +73,13 @@ public abstract class FxLauncherAbstract implements FxLauncher {
     /** This future returns an initialized BackgroundApp */
     protected final CompletableFuture<BackgroundApp> futureBackgroundApp = new CompletableFuture<>();
     /** This future returns an initialized ForegroundApp */
-    protected final CompletableFuture<ForegroundApp> futureForegroundApp = new CompletableFuture<>();
+    protected final CompletableFuture<ApplicationDelegate> futureForegroundApp = new CompletableFuture<>();
 
     /* Temporary storage of foregroundAppClass for interaction with OpenJfxProxyApplication */
-    private Class<? extends FxForegroundApp> foregroundAppClass;
+    private Class<? extends ApplicationDelegate> foregroundAppClass;
 
     /**
-     * Interface that can be used to create and pre-initialize {@link ForegroundApp} and {@link BackgroundApp}.
+     * Interface that can be used to create and pre-initialize {@link ApplicationDelegate} and {@link BackgroundApp}.
      * This interface can be implemented by subclasses (or direct callers of the constructor.) By "pre-initialize" we
      * mean call implementation-dependent methods prior to {@code init()} or {@code start()}.
      * This interface is designed to support using Dependency Injection frameworks like Micronaut, see
@@ -101,7 +99,7 @@ public abstract class FxLauncherAbstract implements FxLauncher {
          * @param proxyApplication a reference to the proxy {@link Application} created by Supernaut.FX
          * @return application instance
          */
-        FxForegroundApp createForegroundApp(Class<? extends FxForegroundApp> foregroundAppClass, Application proxyApplication);
+        ApplicationDelegate createForegroundApp(Class<? extends ApplicationDelegate> foregroundAppClass, Application proxyApplication);
     }
 
     /**
@@ -115,7 +113,7 @@ public abstract class FxLauncherAbstract implements FxLauncher {
         }
 
         @Override
-        public FxForegroundApp createForegroundApp(Class<? extends FxForegroundApp> foregroundAppClass, Application proxyApplication) {
+        public ApplicationDelegate createForegroundApp(Class<? extends ApplicationDelegate> foregroundAppClass, Application proxyApplication) {
             return newInstance(foregroundAppClass);
         }
 
@@ -155,7 +153,7 @@ public abstract class FxLauncherAbstract implements FxLauncher {
      * {@inheritDoc}
      */
     @Override
-    public CompletableFuture<ForegroundApp> launchAsync(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
+    public CompletableFuture<ApplicationDelegate> launchAsync(String[] args, Class<? extends ApplicationDelegate> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
         log.info("launchAsync...");
         launchInternal(args, foregroundAppClass, backgroundApp, true);
         return getForegroundApp();
@@ -165,7 +163,7 @@ public abstract class FxLauncherAbstract implements FxLauncher {
      * {@inheritDoc}
      */
     @Override
-    public void launch(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
+    public void launch(String[] args, Class<? extends ApplicationDelegate> foregroundAppClass, Class<? extends BackgroundApp> backgroundApp) {
         log.info("launch...");
         launchInternal(args, foregroundAppClass, backgroundApp, false);
     }
@@ -174,25 +172,25 @@ public abstract class FxLauncherAbstract implements FxLauncher {
      * {@inheritDoc}
      */
     @Override
-    public void launch(String[] args, Class<? extends ForegroundApp> foregroundAppClass) {
+    public void launch(String[] args, Class<? extends ApplicationDelegate> foregroundAppClass) {
         launch(args, foregroundAppClass, NoopBackgroundApp.class);
     }
 
     /**
-     * Called by {@code OpenJfxProxyApplication} to create its delegate {@link FxForegroundApp} object.
+     * Called by {@code OpenJfxProxyApplication} to create its delegate {@link ApplicationDelegate} object.
      * Waits on a {@link CountDownLatch} to make sure the {@link AppFactory AppFactory} is ready.
      * 
      * @param proxyApplication The calling instance of {@code OpenJfxProxyApplication}
-     * @return The newly constructed OpenJFX-compatible {@link FxForegroundApp}
+     * @return The newly constructed OpenJFX-compatible {@link ApplicationDelegate}
      */
     @Override
-    public FxForegroundApp createForegroundApp(Application proxyApplication) {
+    public ApplicationDelegate createForegroundApp(Application proxyApplication) {
         try {
             appFactoryInitializedLatch.await();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        FxForegroundApp foregroundApp = appFactory.createForegroundApp(foregroundAppClass, proxyApplication);
+        ApplicationDelegate foregroundApp = appFactory.createForegroundApp(foregroundAppClass, proxyApplication);
         // TODO: Create a LauncherAware interface for injecting the launcher into apps?
         futureForegroundApp.complete(foregroundApp);
         return foregroundApp;
@@ -202,7 +200,7 @@ public abstract class FxLauncherAbstract implements FxLauncher {
      * {@inheritDoc}
      */
     @Override
-    public CompletableFuture<ForegroundApp> getForegroundApp() {
+    public CompletableFuture<ApplicationDelegate> getForegroundApp() {
         return futureForegroundApp;
     }
 
@@ -220,24 +218,9 @@ public abstract class FxLauncherAbstract implements FxLauncher {
      * @param initForegroundOnNewThread If true, start OpenJFX on a new thread, if false start it on
      *                        calling thead (typically this will be the main thread)
      */
-    private void launchInternal(String[] args, Class<? extends ForegroundApp> foregroundAppClass, Class<? extends BackgroundApp> backgroundAppClass, boolean initForegroundOnNewThread) {
+    private void launchInternal(String[] args, Class<? extends ApplicationDelegate> foregroundAppClass, Class<? extends BackgroundApp> backgroundAppClass, boolean initForegroundOnNewThread) {
         launchBackgroundApp(backgroundAppClass);
-        launchForegroundApp(args, castFxForegroundApp(foregroundAppClass), initForegroundOnNewThread);
-    }
-
-    /**
-     * Cast {@link ForegroundApp} to {@link FxForegroundApp}
-     *
-     * @param foregroundAppClass A {@link ForegroundApp} implementation that is expected to be an implementation of {@code FxForegroundApp}
-     * @throws IllegalArgumentException if foregroundAppClass doesn't implement {@code FxForegroundApp}
-     * @return The passed in reference, but cast to {@link FxForegroundApp}
-     */
-    @SuppressWarnings("unchecked")
-    private Class<? extends FxForegroundApp> castFxForegroundApp(Class<? extends ForegroundApp> foregroundAppClass) {
-        if (!FxForegroundApp.class.isAssignableFrom(foregroundAppClass)) {
-            throw new IllegalArgumentException("foregroundAppClass must be an implementation of FxForegroundApp");
-        }
-        return (Class<? extends FxForegroundApp>) foregroundAppClass;
+        launchForegroundApp(args, foregroundAppClass, initForegroundOnNewThread);
     }
 
     private void launchBackgroundApp(Class<? extends BackgroundApp> backgroundAppClass) {
@@ -250,7 +233,7 @@ public abstract class FxLauncherAbstract implements FxLauncher {
         }
     }
 
-    private void launchForegroundApp(String[] args, Class<? extends FxForegroundApp> foregroundAppClass, boolean async) {
+    private void launchForegroundApp(String[] args, Class<? extends ApplicationDelegate> foregroundAppClass, boolean async) {
         if (async) {
             log.info("Launching on {} thread", foregroundAppLauncherThreadName);
             startThread(foregroundAppLauncherThreadName, () -> startForegroundApp(args, foregroundAppClass));
@@ -289,7 +272,7 @@ public abstract class FxLauncherAbstract implements FxLauncher {
         backgroundApp.start();
     }
     
-    private void startForegroundApp(String[] args, Class<? extends FxForegroundApp> foregroundAppClass) {
+    private void startForegroundApp(String[] args, Class<? extends ApplicationDelegate> foregroundAppClass) {
         OpenJfxProxyApplication.configuredLauncher = this;
         this.foregroundAppClass = foregroundAppClass;
         log.info("Calling Application.launch()");

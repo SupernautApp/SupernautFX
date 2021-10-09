@@ -18,9 +18,9 @@ package app.supernaut;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Improved, asynchronous two-phase application launcher. It is logically-compatible with the JavaFX launcher.
- * See subclass {@code FxLauncher} and its implementations for full JavaFX support.
- *
+ * Asynchronous two-phase application launcher. This interface is <b>currently unused for JavaFX applications</b>.
+ * It is logically-compatible with {@code FxLauncher} which in earlier versions of Supernaut.FX was a subclass.
+ * <p>
  * It uses threads to start a background app as quickly as possible and
  * possibly before the foreground app is started. This background app can make network
  * requests while the foreground app is starting up, so that views in

@@ -21,8 +21,8 @@ import app.supernaut.fx.sample.SimpleFxLauncher;
  * interface extend the more abstract interfaces in {@link app.supernaut}. In general,
  * applications should not depend on classes defined in the {@code app.supernaut.fx.micronaut} module.
  * <p>
- * If you are writing a Supernaut.FX there are two main classes you need to know about: {@link app.supernaut.fx.FxForegroundApp}
- * and {@link app.supernaut.fx.FxLauncher}. See {@link app.supernaut.fx.FxForegroundApp} for an example app and how to get
+ * If you are writing a Supernaut.FX there are two main classes you need to know about: {@link app.supernaut.fx.ApplicationDelegate}
+ * and {@link app.supernaut.fx.FxLauncher}. See {@link app.supernaut.fx.ApplicationDelegate} for an example app and how to get
  * started or read the User's Guide (TBD).
  *
  * @uses app.supernaut.fx.FxLauncher To launch applications with an implementing provider.

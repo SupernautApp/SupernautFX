@@ -15,6 +15,7 @@
  */
 package app.supernaut.fx.testapp;
 
+import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
 import app.supernaut.fx.FxmlLoaderFactory;
 import javafx.application.Application;
@@ -24,9 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import app.supernaut.BackgroundApp;
-import app.supernaut.ForegroundApp;
 import app.supernaut.logging.JavaLoggingSupport;
-import app.supernaut.fx.FxForegroundApp;
 import app.supernaut.test.TimingMeasurements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,12 +37,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
- * A simple Supernaut FX App implementing {@link FxForegroundApp}.
+ * A simple Supernaut FX App implementing {@link ApplicationDelegate}.
  * This application parses command-line args to provide different options for starting
  * and stopping for startup performance measurement.
  */
 @Singleton
-public class TestApp implements FxForegroundApp {
+public class TestApp implements ApplicationDelegate {
     private static final Logger log = LoggerFactory.getLogger(TestApp.class);
     private static boolean backgroundStart = true;
     private final FxmlLoaderFactory loaderFactory;
@@ -81,10 +80,10 @@ public class TestApp implements FxForegroundApp {
            Get a Future for a ForegroundApp app, then resolve the future
          */
         log.info("Calling launch");
-        CompletableFuture<ForegroundApp> futureForegroundApp = launcher.launchAsync(args, TestApp.class, TestBackgroundApp.class);
+        CompletableFuture<ApplicationDelegate> futureForegroundApp = launcher.launchAsync(args, TestApp.class, TestBackgroundApp.class);
         log.info("We have a CompletableFuture<ForegroundApp>");
 
-        ForegroundApp foregroundApp = futureForegroundApp.get();
+        ApplicationDelegate foregroundApp = futureForegroundApp.get();
         measurements.add("ForegroundApp app ready");
 
         /*

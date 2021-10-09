@@ -15,6 +15,7 @@
  */
 package app.supernaut.fx.micronaut;
 
+import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxmlLoaderFactory;
 import app.supernaut.fx.services.FxBrowserService;
 import app.supernaut.fx.test.NoopBackgroundApp;
@@ -25,7 +26,6 @@ import javafx.application.Application;
 import javafx.application.HostServices;
 import app.supernaut.BackgroundApp;
 import app.supernaut.services.BrowserService;
-import app.supernaut.fx.FxForegroundApp;
 import app.supernaut.fx.FxLauncherAbstract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,7 +113,7 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
          * {@inheritDoc}
          */
         @Override
-        public FxForegroundApp createForegroundApp(Class<? extends FxForegroundApp> foregroundAppClass, Application proxyApplication) {
+        public ApplicationDelegate createForegroundApp(Class<? extends ApplicationDelegate> foregroundAppClass, Application proxyApplication) {
             return getForegroundAppBean(foregroundAppClass, proxyApplication);
         }
 
@@ -122,9 +122,9 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
          *
          * @param clazz The FXForegroundApp sub-class that we are creating and injecting
          * @param proxyApplication The proxy implementation instance of {@link Application}
-         * @return A newly constructed and injected {@link FxForegroundApp} instance
+         * @return A newly constructed and injected {@link ApplicationDelegate} instance
          */
-        protected FxForegroundApp getForegroundAppBean(Class<? extends FxForegroundApp> clazz, Application proxyApplication) {
+        protected ApplicationDelegate getForegroundAppBean(Class<? extends ApplicationDelegate> clazz, Application proxyApplication) {
             log.info("getForegroundAppBean()");
             // Since FXForegroundApp doesn't extend Application, an app that needs access to the
             // Application object can have it injected.

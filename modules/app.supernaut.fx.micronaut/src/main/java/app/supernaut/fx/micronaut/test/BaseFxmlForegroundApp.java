@@ -15,7 +15,7 @@
  */
 package app.supernaut.fx.micronaut.test;
 
-import app.supernaut.fx.FxForegroundApp;
+import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxmlLoaderFactory;
 
 import javafx.stage.Stage;
@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 /**
  * FxForegroundApp with constructor that expects a {@link FxmlLoaderFactory}
  */
-public class BaseFxmlForegroundApp implements FxForegroundApp {
+public class BaseFxmlForegroundApp implements ApplicationDelegate {
     /** {@link FxmlLoaderFactory} for subclass access */
     protected final FxmlLoaderFactory fxmlLoaderFactory;
 
