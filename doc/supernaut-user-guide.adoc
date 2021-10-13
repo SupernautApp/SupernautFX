@@ -175,7 +175,7 @@ and then use it to load you FXML-based windows and contollers.
         Parent root = loader.load();
 ----
 
-See `HelloForegroundApp` and `MainWindowController` (links TBD) for a fully-functioning example.
+See `HelloApp` and `MainWindowController` (links TBD) for a fully-functioning example.
 
 === Injecting Service Objects
 

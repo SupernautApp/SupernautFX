@@ -49,8 +49,8 @@ import java.net.URL;
 
 @Singleton
 @Factory
-public class HelloForegroundApp implements ApplicationDelegate {
-    private static final Logger log = LoggerFactory.getLogger(HelloForegroundApp.class);
+public class HelloApp implements ApplicationDelegate {
+    private static final Logger log = LoggerFactory.getLogger(HelloApp.class);
     private final FxmlLoaderFactory loaderFactory;
 
 
@@ -59,15 +59,15 @@ public class HelloForegroundApp implements ApplicationDelegate {
      * @param args command-line args
      */
     public static void main(String[] args) {
-        JavaLoggingSupport.configure(HelloForegroundApp.class, "app.supernaut.fx.sample.hello");
-        FxLauncher.byName("micronaut").launch(args, HelloForegroundApp.class);
+        JavaLoggingSupport.configure(HelloApp.class, "app.supernaut.fx.sample.hello");
+        FxLauncher.byName("micronaut").launch(args, HelloApp.class);
     }
 
     /**
      * Constructor
      * @param loaderFactory injected FXMLLoaderFactory
      */
-    public HelloForegroundApp(FxmlLoaderFactory loaderFactory) {
+    public HelloApp(FxmlLoaderFactory loaderFactory) {
         log.info("Constructing Hello");
         this.loaderFactory = loaderFactory;
     }
@@ -113,6 +113,6 @@ public class HelloForegroundApp implements ApplicationDelegate {
     }
 
     private URL getFXMLUrl(String fileName) {
-        return HelloForegroundApp.class.getResource(fileName);
+        return HelloApp.class.getResource(fileName);
     }
 }

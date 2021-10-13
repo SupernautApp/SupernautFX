@@ -9,7 +9,7 @@ def appName = 'SupernautFX Hello'
 version = helloAppVersion
 application {
     mainModule = 'app.supernaut.fx.sample.hello'
-    mainClass = 'app.supernaut.fx.sample.hello.HelloForegroundApp'
+    mainClass = 'app.supernaut.fx.sample.hello.HelloApp'
 }
 
 configurations {
