@@ -1,6 +1,6 @@
 = Supernaut.FX User's Guide
 Sean Gilligan
-v0.2, October 7, 2021: Preliminary draft
+v0.3.0, October 13, 2021: Preliminary draft
 :numbered:
 :toc:
 :toclevels: 2
@@ -13,7 +13,7 @@ This early-draft User's Guide provides an introduction to the concepts and major
 
 == Features and Benefits
 
-TBD. (See the README for now.)
+TBD. (See the https://github.com/SupernautApp/SupernautFX#readme[README] for now.)
 
 == Getting Started
 
@@ -95,12 +95,12 @@ public class MinimalApp extends Application {
 }
 ----
 
-By simply replacing `extends Application` with `implements FxForegroundApp` and using the `launch()` method of the `FXLauncher` service with the name `micronaut`, it becomes a Java.FX application. Also note that the `jakarta.inject` `@Singleton` annotation has been added.
+By simply replacing `extends Application` with `implements ApplicationDelegate` and using the `launch()` method of the `FXLauncher` service with the name `micronaut`, it becomes a Java.FX application. Also note that the `jakarta.inject` `@Singleton` annotation has been added.
 
 [source, java]
 ----
 @Singleton
-public class MinimalApp implements FxForegroundApp {
+public class MinimalApp implements ApplicationDelegate {
 
     public static void main(String[] args) {
         FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
@@ -133,7 +133,7 @@ and inject it into an added constructor of `MinimalApp`:
 [source, java]
 ----
 @Singleton
-public class MinimalApp implements FxForegroundApp {
+public class MinimalApp implements ApplicationDelegate {
     private final static String planetName;
 
     public static void main(String[] args) {
@@ -247,7 +247,7 @@ NOTE:: JavaFX provides the `Preloader` class that can display a simple window wh
 
 ==== Foreground Only
 
-This diagram shows the simplest Supernaut configuration from the perspective of the developer of a `ForegroundApplication`. It shows the four methods that an implementor _may_ implement (all but `start()` are optional) and shows the order in which they are called and what threads they are called on. This behavior is identical to a normal JavaFX app that subclasses `Application` but with the added capability of having dependencies injected into the constructor.
+This diagram shows the simplest Supernaut configuration from the perspective of the developer of a `ApplicationDelegate` (aka foreground application). It shows the four methods that an implementor _may_ implement (all but `start()` are optional) and shows the order in which they are called and what threads they are called on. This behavior is identical to a normal JavaFX app that subclasses `Application` but with the added capability of having dependencies injected into the constructor.
 
 [plantuml, format="svg", id="foreground-seq"]
 ....
@@ -256,37 +256,37 @@ skinparam NoteBackgroundColor white
 hide footbox
 
 participant "Supernaut/\nMicronaut" as Supernaut #pink
-participant ForegroundApplication
+participant ApplicationDelegate
 
 [-> Supernaut : launch()
 activate  Supernaut
 
 
-Supernaut -> ForegroundApplication ** : new w/inject
+Supernaut -> ApplicationDelegate ** : new w/inject
 note right: <font color=lightgreen>JFX application thread in light green
-activate ForegroundApplication
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : constructed
-deactivate  ForegroundApplication  #LightGreen
+activate ApplicationDelegate
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : constructed
+deactivate  ApplicationDelegate  #LightGreen
 
-Supernaut -> ForegroundApplication  : init()
-activate  ForegroundApplication #DarkGreen
+Supernaut -> ApplicationDelegate  : init()
+activate  ApplicationDelegate #DarkGreen
 note right: <font color=green>JFX init thread in dark green
-Supernaut <-- ForegroundApplication : return
-deactivate  ForegroundApplication  #DarkGreen
+Supernaut <-- ApplicationDelegate : return
+deactivate  ApplicationDelegate  #DarkGreen
 
-Supernaut -> ForegroundApplication  : start()
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : return
-deactivate  ForegroundApplication  #LightGreen
+Supernaut -> ApplicationDelegate  : start()
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : return
+deactivate  ApplicationDelegate  #LightGreen
 
 
-Supernaut -> ForegroundApplication  : stop()
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : return
+Supernaut -> ApplicationDelegate  : stop()
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : return
 
-deactivate ForegroundApplication  #LightGreen
-deactivate ForegroundApplication
+deactivate ApplicationDelegate  #LightGreen
+deactivate ApplicationDelegate
 
 deactivate  Supernaut
 ....
@@ -300,7 +300,7 @@ skinparam NoteBackgroundColor white
 hide footbox
 
 participant "Supernaut/\nMicronaut" as Supernaut #pink
-participant ForegroundApplication
+participant ApplicationDelegate
 participant BackgroundApplication
 
 [-> Supernaut : launch()
@@ -328,30 +328,30 @@ Supernaut <-- BackgroundApplication : return
 note right: <font color=blue>Background application thread(s) if any in blue
 activate BackgroundApplication #blue
 
-Supernaut -> ForegroundApplication ** : new w/inject
-activate ForegroundApplication
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : constructed
-deactivate  ForegroundApplication  #LightGreen
+Supernaut -> ApplicationDelegate ** : new w/inject
+activate ApplicationDelegate
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : constructed
+deactivate  ApplicationDelegate  #LightGreen
 
 note left: <font color=green>JFX init thread in dark green
-Supernaut -> ForegroundApplication  : init()
-activate  ForegroundApplication #DarkGreen
-Supernaut <-- ForegroundApplication : return
-deactivate  ForegroundApplication  #DarkGreen
+Supernaut -> ApplicationDelegate  : init()
+activate  ApplicationDelegate #DarkGreen
+Supernaut <-- ApplicationDelegate : return
+deactivate  ApplicationDelegate  #DarkGreen
 
-Supernaut -> ForegroundApplication  : start()
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : return
-deactivate  ForegroundApplication  #LightGreen
+Supernaut -> ApplicationDelegate  : start()
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : return
+deactivate  ApplicationDelegate  #LightGreen
 
-ForegroundApplication <- BackgroundApplication : started
+ApplicationDelegate <- BackgroundApplication : started
 
-Supernaut -> ForegroundApplication  : stop()
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : return
-deactivate ForegroundApplication  #LightGreen
-deactivate ForegroundApplication
+Supernaut -> ApplicationDelegate  : stop()
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : return
+deactivate ApplicationDelegate  #LightGreen
+deactivate ApplicationDelegate
 
 Supernaut -> BackgroundApplication  : stop()
 activate  BackgroundApplication #LightGreen
@@ -362,7 +362,7 @@ deactivate  BackgroundApplication  #LightGreen
 deactivate  BackgroundApplication
 
 
-deactivate  ForegroundApplication
+deactivate  ApplicationDelegate
 deactivate  Supernaut
 
 ....
@@ -377,7 +377,7 @@ hide footbox
 
 participant JFX #LightGreen
 participant "Supernaut/\nMicronaut" as Supernaut #pink
-participant ForegroundApplication
+participant ApplicationDelegate
 participant "Supernaut Launch Thread" as LaunchThread #pink
 participant BackgroundApplication
 
@@ -419,42 +419,42 @@ activate BackgroundApplication #blue
 
 
 
-Supernaut -> ForegroundApplication ** : new w/inject
-activate ForegroundApplication
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : constructed
-deactivate  ForegroundApplication  #LightGreen
+Supernaut -> ApplicationDelegate ** : new w/inject
+activate ApplicationDelegate
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : constructed
+deactivate  ApplicationDelegate  #LightGreen
 JFX <-- Supernaut : constructed
 deactivate  Supernaut  #LightGreen
 
 JFX -> Supernaut : init app
 note left: <font color=green>JFX init thread in dark green
 activate Supernaut #DarkGreen
-Supernaut -> ForegroundApplication  : init()
-activate  ForegroundApplication #DarkGreen
-Supernaut <-- ForegroundApplication : return
-deactivate  ForegroundApplication  #DarkGreen
+Supernaut -> ApplicationDelegate  : init()
+activate  ApplicationDelegate #DarkGreen
+Supernaut <-- ApplicationDelegate : return
+deactivate  ApplicationDelegate  #DarkGreen
 JFX <-- Supernaut : return
 deactivate  Supernaut  #DarkGreen
 
 JFX -> Supernaut : start app
 activate Supernaut #LightGreen
-Supernaut -> ForegroundApplication  : start()
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : return
-deactivate  ForegroundApplication  #LightGreen
+Supernaut -> ApplicationDelegate  : start()
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : return
+deactivate  ApplicationDelegate  #LightGreen
 JFX <-- Supernaut : return
 deactivate  Supernaut  #LightGreen
 
-ForegroundApplication <- BackgroundApplication : started
+ApplicationDelegate <- BackgroundApplication : started
 
 JFX -> Supernaut : stop app
 activate Supernaut #LightGreen
-Supernaut -> ForegroundApplication  : stop()
-activate  ForegroundApplication #LightGreen
-Supernaut <-- ForegroundApplication : return
-deactivate ForegroundApplication  #LightGreen
-deactivate ForegroundApplication
+Supernaut -> ApplicationDelegate  : stop()
+activate  ApplicationDelegate #LightGreen
+Supernaut <-- ApplicationDelegate : return
+deactivate ApplicationDelegate  #LightGreen
+deactivate ApplicationDelegate
 
 Supernaut -> BackgroundApplication  : stop()
 activate  BackgroundApplication #LightGreen
@@ -468,7 +468,7 @@ deactivate  BackgroundApplication
 JFX <-- Supernaut : return
 deactivate  Supernaut  #LightGreen
 
-deactivate  ForegroundApplication
+deactivate  ApplicationDelegate
 deactivate  Supernaut
 deactivate  JFX
 
