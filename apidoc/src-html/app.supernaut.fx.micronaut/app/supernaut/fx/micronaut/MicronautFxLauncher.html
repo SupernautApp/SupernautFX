@@ -28,17 +28,17 @@
 <span class="source-line-no">015</span><span id="line-15"> */</span>
 <span class="source-line-no">016</span><span id="line-16">package app.supernaut.fx.micronaut;</span>
 <span class="source-line-no">017</span><span id="line-17"></span>
-<span class="source-line-no">018</span><span id="line-18">import app.supernaut.fx.FxmlLoaderFactory;</span>
-<span class="source-line-no">019</span><span id="line-19">import app.supernaut.fx.services.FxBrowserService;</span>
-<span class="source-line-no">020</span><span id="line-20">import app.supernaut.fx.test.NoopBackgroundApp;</span>
-<span class="source-line-no">021</span><span id="line-21">import io.micronaut.context.ApplicationContext;</span>
-<span class="source-line-no">022</span><span id="line-22">import io.micronaut.context.BeanContext;</span>
-<span class="source-line-no">023</span><span id="line-23">import io.micronaut.context.env.Environment;</span>
-<span class="source-line-no">024</span><span id="line-24">import javafx.application.Application;</span>
-<span class="source-line-no">025</span><span id="line-25">import javafx.application.HostServices;</span>
-<span class="source-line-no">026</span><span id="line-26">import app.supernaut.BackgroundApp;</span>
-<span class="source-line-no">027</span><span id="line-27">import app.supernaut.services.BrowserService;</span>
-<span class="source-line-no">028</span><span id="line-28">import app.supernaut.fx.FxForegroundApp;</span>
+<span class="source-line-no">018</span><span id="line-18">import app.supernaut.fx.ApplicationDelegate;</span>
+<span class="source-line-no">019</span><span id="line-19">import app.supernaut.fx.FxmlLoaderFactory;</span>
+<span class="source-line-no">020</span><span id="line-20">import app.supernaut.fx.services.FxBrowserService;</span>
+<span class="source-line-no">021</span><span id="line-21">import app.supernaut.fx.test.NoopBackgroundApp;</span>
+<span class="source-line-no">022</span><span id="line-22">import io.micronaut.context.ApplicationContext;</span>
+<span class="source-line-no">023</span><span id="line-23">import io.micronaut.context.BeanContext;</span>
+<span class="source-line-no">024</span><span id="line-24">import io.micronaut.context.env.Environment;</span>
+<span class="source-line-no">025</span><span id="line-25">import javafx.application.Application;</span>
+<span class="source-line-no">026</span><span id="line-26">import javafx.application.HostServices;</span>
+<span class="source-line-no">027</span><span id="line-27">import app.supernaut.BackgroundApp;</span>
+<span class="source-line-no">028</span><span id="line-28">import app.supernaut.services.BrowserService;</span>
 <span class="source-line-no">029</span><span id="line-29">import app.supernaut.fx.FxLauncherAbstract;</span>
 <span class="source-line-no">030</span><span id="line-30">import org.slf4j.Logger;</span>
 <span class="source-line-no">031</span><span id="line-31">import org.slf4j.LoggerFactory;</span>
@@ -126,7 +126,7 @@
 <span class="source-line-no">113</span><span id="line-113">         * {@inheritDoc}</span>
 <span class="source-line-no">114</span><span id="line-114">         */</span>
 <span class="source-line-no">115</span><span id="line-115">        @Override</span>
-<span class="source-line-no">116</span><span id="line-116">        public FxForegroundApp createForegroundApp(Class&lt;? extends FxForegroundApp&gt; foregroundAppClass, Application proxyApplication) {</span>
+<span class="source-line-no">116</span><span id="line-116">        public ApplicationDelegate createForegroundApp(Class&lt;? extends ApplicationDelegate&gt; foregroundAppClass, Application proxyApplication) {</span>
 <span class="source-line-no">117</span><span id="line-117">            return getForegroundAppBean(foregroundAppClass, proxyApplication);</span>
 <span class="source-line-no">118</span><span id="line-118">        }</span>
 <span class="source-line-no">119</span><span id="line-119"></span>
@@ -135,9 +135,9 @@
 <span class="source-line-no">122</span><span id="line-122">         *</span>
 <span class="source-line-no">123</span><span id="line-123">         * @param clazz The FXForegroundApp sub-class that we are creating and injecting</span>
 <span class="source-line-no">124</span><span id="line-124">         * @param proxyApplication The proxy implementation instance of {@link Application}</span>
-<span class="source-line-no">125</span><span id="line-125">         * @return A newly constructed and injected {@link FxForegroundApp} instance</span>
+<span class="source-line-no">125</span><span id="line-125">         * @return A newly constructed and injected {@link ApplicationDelegate} instance</span>
 <span class="source-line-no">126</span><span id="line-126">         */</span>
-<span class="source-line-no">127</span><span id="line-127">        protected FxForegroundApp getForegroundAppBean(Class&lt;? extends FxForegroundApp&gt; clazz, Application proxyApplication) {</span>
+<span class="source-line-no">127</span><span id="line-127">        protected ApplicationDelegate getForegroundAppBean(Class&lt;? extends ApplicationDelegate&gt; clazz, Application proxyApplication) {</span>
 <span class="source-line-no">128</span><span id="line-128">            log.info("getForegroundAppBean()");</span>
 <span class="source-line-no">129</span><span id="line-129">            // Since FXForegroundApp doesn't extend Application, an app that needs access to the</span>
 <span class="source-line-no">130</span><span id="line-130">            // Application object can have it injected.</span>

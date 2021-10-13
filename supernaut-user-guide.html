@@ -442,8 +442,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Supernaut.FX User&#8217;s Guide</h1>
 <div class="details">
 <span id="author" class="author">Sean Gilligan</span><br>
-<span id="revnumber">version 0.2.1,</span>
-<span id="revdate">October 7, 2021</span>
+<span id="revnumber">version 0.3.0,</span>
+<span id="revdate">October 13, 2021</span>
 <br><span id="revremark">Preliminary draft</span>
 </div>
 <div id="toc" class="toc">
@@ -488,7 +488,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_features_and_benefits">2. Features and Benefits</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBD. (See the README for now.)</p>
+<p>TBD. (See the <a href="https://github.com/SupernautApp/SupernautFX#readme">README</a> for now.)</p>
 </div>
 </div>
 </div>
@@ -628,12 +628,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>By simply replacing <code>extends Application</code> with <code>implements FxForegroundApp</code> and using the <code>launch()</code> method of the <code>FXLauncher</code> service with the name <code>micronaut</code>, it becomes a Java.FX application. Also note that the <code>jakarta.inject</code> <code>@Singleton</code> annotation has been added.</p>
+<p>By simply replacing <code>extends Application</code> with <code>implements ApplicationDelegate</code> and using the <code>launch()</code> method of the <code>FXLauncher</code> service with the name <code>micronaut</code>, it becomes a Java.FX application. Also note that the <code>jakarta.inject</code> <code>@Singleton</code> annotation has been added.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-java" data-lang="java">@Singleton
-public class MinimalApp implements FxForegroundApp {
+public class MinimalApp implements ApplicationDelegate {
 
     public static void main(String[] args) {
         FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
@@ -668,7 +668,7 @@ public static class AppConfig {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-java" data-lang="java">@Singleton
-public class MinimalApp implements FxForegroundApp {
+public class MinimalApp implements ApplicationDelegate {
     private final static String planetName;
 
     public static void main(String[] args) {
@@ -858,11 +858,11 @@ public class MinimalApp implements FxForegroundApp {
 <div class="sect3">
 <h4 id="_foreground_only">4.1.1. Foreground Only</h4>
 <div class="paragraph">
-<p>This diagram shows the simplest Supernaut configuration from the perspective of the developer of a <code>ForegroundApplication</code>. It shows the four methods that an implementor <em>may</em> implement (all but <code>start()</code> are optional) and shows the order in which they are called and what threads they are called on. This behavior is identical to a normal JavaFX app that subclasses <code>Application</code> but with the added capability of having dependencies injected into the constructor.</p>
+<p>This diagram shows the simplest Supernaut configuration from the perspective of the developer of a <code>ApplicationDelegate</code> (aka foreground application). It shows the four methods that an implementor <em>may</em> implement (all but <code>start()</code> are optional) and shows the order in which they are called and what threads they are called on. This behavior is identical to a normal JavaFX app that subclasses <code>Application</code> but with the added capability of having dependencies injected into the constructor.</p>
 </div>
 <div id="foreground-seq" class="imageblock">
 <div class="content">
-<img src="diag-1247771b0cd2c7d04667d47b495aed99.svg" alt="diag 1247771b0cd2c7d04667d47b495aed99" width="638" height="376">
+<img src="diag-1e9a6f45b7dac7ce54c847862e0294a9.svg" alt="diag 1e9a6f45b7dac7ce54c847862e0294a9" width="616" height="376">
 </div>
 </div>
 </div>
@@ -870,7 +870,7 @@ public class MinimalApp implements FxForegroundApp {
 <h4 id="_foreground_background">4.1.2. Foreground &amp; Background</h4>
 <div id="background-seq" class="imageblock">
 <div class="content">
-<img src="diag-d1e48eb75701d890a402a52800a8012e.svg" alt="diag d1e48eb75701d890a402a52800a8012e" width="1001" height="761">
+<img src="diag-e42c37733fa455fe71c9523fdfb57828.svg" alt="diag e42c37733fa455fe71c9523fdfb57828" width="979" height="761">
 </div>
 </div>
 </div>
@@ -878,7 +878,7 @@ public class MinimalApp implements FxForegroundApp {
 <h4 id="_foreground_background_and_simplified_internals">4.1.3. Foreground, Background, and Simplified Internals</h4>
 <div id="full-seq" class="imageblock">
 <div class="content">
-<img src="diag-fce4fca8e441bd9d40c4d98162359a2a.svg" alt="diag fce4fca8e441bd9d40c4d98162359a2a" width="1354" height="1237">
+<img src="diag-0e0d1b4fa1ef4242e398657dc632659a.svg" alt="diag 0e0d1b4fa1ef4242e398657dc632659a" width="1332" height="1237">
 </div>
 </div>
 </div>
@@ -903,8 +903,8 @@ public class MinimalApp implements FxForegroundApp {
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.2.1<br>
-Last updated 2021-10-07 14:25:44 -0700
+Version 0.3.0<br>
+Last updated 2021-10-13 11:48:17 -0700
 </div>
 </div>
 </body>

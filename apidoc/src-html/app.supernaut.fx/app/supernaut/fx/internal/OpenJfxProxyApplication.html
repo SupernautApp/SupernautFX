@@ -28,8 +28,8 @@
 <span class="source-line-no">015</span><span id="line-15"> */</span>
 <span class="source-line-no">016</span><span id="line-16">package app.supernaut.fx.internal;</span>
 <span class="source-line-no">017</span><span id="line-17"></span>
-<span class="source-line-no">018</span><span id="line-18">import app.supernaut.fx.FxLauncher;</span>
-<span class="source-line-no">019</span><span id="line-19">import app.supernaut.fx.FxForegroundApp;</span>
+<span class="source-line-no">018</span><span id="line-18">import app.supernaut.fx.ApplicationDelegate;</span>
+<span class="source-line-no">019</span><span id="line-19">import app.supernaut.fx.FxLauncher;</span>
 <span class="source-line-no">020</span><span id="line-20">import javafx.application.Application;</span>
 <span class="source-line-no">021</span><span id="line-21">import javafx.stage.Stage;</span>
 <span class="source-line-no">022</span><span id="line-22">import org.slf4j.Logger;</span>
@@ -38,14 +38,14 @@
 <span class="source-line-no">025</span><span id="line-25"></span>
 <span class="source-line-no">026</span><span id="line-26">/**</span>
 <span class="source-line-no">027</span><span id="line-27"> * Internal &lt;b&gt;Supernaut.fx&lt;/b&gt; implementation of {@link Application}. As a static proxy object for</span>
-<span class="source-line-no">028</span><span id="line-28"> * {@link FxForegroundApp}, it delegates OpenJFX {@link Application} lifecycle calls to {@link FxForegroundApp}</span>
+<span class="source-line-no">028</span><span id="line-28"> * {@link ApplicationDelegate}, it delegates OpenJFX {@link Application} lifecycle calls to {@link ApplicationDelegate}</span>
 <span class="source-line-no">029</span><span id="line-29"> * and makes it more independent of OpenJFX.</span>
 <span class="source-line-no">030</span><span id="line-30"> * </span>
 <span class="source-line-no">031</span><span id="line-31"> * &lt;p&gt;Tagline: &lt;q&gt;</span>
 <span class="source-line-no">032</span><span id="line-32"> *  We subclass {@link javafx.application.Application} so you don't have to.</span>
 <span class="source-line-no">033</span><span id="line-33"> * &lt;/q&gt;&lt;/p&gt;</span>
 <span class="source-line-no">034</span><span id="line-34"> * &lt;p&gt;</span>
-<span class="source-line-no">035</span><span id="line-35"> * To create a Supernaut.fx app, write a class that implements {@link FxForegroundApp}.</span>
+<span class="source-line-no">035</span><span id="line-35"> * To create a Supernaut.fx app, write a class that implements {@link ApplicationDelegate}.</span>
 <span class="source-line-no">036</span><span id="line-36"> * &lt;/p&gt;</span>
 <span class="source-line-no">037</span><span id="line-37"> *</span>
 <span class="source-line-no">038</span><span id="line-38"> */</span>
@@ -54,7 +54,7 @@
 <span class="source-line-no">041</span><span id="line-41">    /** Launcher must set this global before calling constructor */</span>
 <span class="source-line-no">042</span><span id="line-42">    public static FxLauncher configuredLauncher;</span>
 <span class="source-line-no">043</span><span id="line-43">    private final FxLauncher launcher;</span>
-<span class="source-line-no">044</span><span id="line-44">    private final FxForegroundApp foregroundApp;</span>
+<span class="source-line-no">044</span><span id="line-44">    private final ApplicationDelegate foregroundApp;</span>
 <span class="source-line-no">045</span><span id="line-45">    </span>
 <span class="source-line-no">046</span><span id="line-46">    /**</span>
 <span class="source-line-no">047</span><span id="line-47">     * Create a JavaFX application that wraps a SfxForegroundApp</span>
@@ -82,7 +82,7 @@
 <span class="source-line-no">069</span><span id="line-69"></span>
 <span class="source-line-no">070</span><span id="line-70">    /**</span>
 <span class="source-line-no">071</span><span id="line-71">     * Supernaut.fx implementation of {@link Application#start}.</span>
-<span class="source-line-no">072</span><span id="line-72">     * Calls the application's implementation of {@link FxForegroundApp#start}</span>
+<span class="source-line-no">072</span><span id="line-72">     * Calls the application's implementation of {@link ApplicationDelegate#start}</span>
 <span class="source-line-no">073</span><span id="line-73">     *</span>
 <span class="source-line-no">074</span><span id="line-74">     * @param primaryStage The primary Stage for the application</span>
 <span class="source-line-no">075</span><span id="line-75">     * @throws Exception if something goes wrong</span>

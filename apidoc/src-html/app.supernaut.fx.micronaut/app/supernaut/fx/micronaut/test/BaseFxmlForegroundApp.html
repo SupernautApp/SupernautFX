@@ -28,7 +28,7 @@
 <span class="source-line-no">015</span><span id="line-15"> */</span>
 <span class="source-line-no">016</span><span id="line-16">package app.supernaut.fx.micronaut.test;</span>
 <span class="source-line-no">017</span><span id="line-17"></span>
-<span class="source-line-no">018</span><span id="line-18">import app.supernaut.fx.FxForegroundApp;</span>
+<span class="source-line-no">018</span><span id="line-18">import app.supernaut.fx.ApplicationDelegate;</span>
 <span class="source-line-no">019</span><span id="line-19">import app.supernaut.fx.FxmlLoaderFactory;</span>
 <span class="source-line-no">020</span><span id="line-20"></span>
 <span class="source-line-no">021</span><span id="line-21">import javafx.stage.Stage;</span>
@@ -36,7 +36,7 @@
 <span class="source-line-no">023</span><span id="line-23">/**</span>
 <span class="source-line-no">024</span><span id="line-24"> * FxForegroundApp with constructor that expects a {@link FxmlLoaderFactory}</span>
 <span class="source-line-no">025</span><span id="line-25"> */</span>
-<span class="source-line-no">026</span><span id="line-26">public class BaseFxmlForegroundApp implements FxForegroundApp {</span>
+<span class="source-line-no">026</span><span id="line-26">public class BaseFxmlForegroundApp implements ApplicationDelegate {</span>
 <span class="source-line-no">027</span><span id="line-27">    /** {@link FxmlLoaderFactory} for subclass access */</span>
 <span class="source-line-no">028</span><span id="line-28">    protected final FxmlLoaderFactory fxmlLoaderFactory;</span>
 <span class="source-line-no">029</span><span id="line-29"></span>

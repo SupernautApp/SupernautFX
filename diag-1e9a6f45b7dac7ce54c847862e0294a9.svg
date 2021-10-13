@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="376px" preserveAspectRatio="none" style="width:616px;height:376px;" version="1.1" viewBox="0 0 616 376" width="616px" zoomAndPan="magnify"><defs><filter height="300%" id="f18bujv2xctnlr" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f18bujv2xctnlr)" height="260.6621" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="72" y="86.2871"/><rect fill="#FFFFFF" filter="url(#f18bujv2xctnlr)" height="221.3516" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="125.5977"/><rect fill="#90EE90" filter="url(#f18bujv2xctnlr)" height="35.4883" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="125.5977"/><rect fill="#006400" filter="url(#f18bujv2xctnlr)" height="34.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="195.3965"/><rect fill="#90EE90" filter="url(#f18bujv2xctnlr)" height="29.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="259.0176"/><rect fill="#90EE90" filter="url(#f18bujv2xctnlr)" height="29.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="317.6387"/><rect fill="#FEFECE" filter="url(#f18bujv2xctnlr)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="152" x="187" y="94.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="138" x="194" y="114.8223">ApplicationDelegate</text><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="77" x2="77" y1="54.9766" y2="364.9492"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="265" x2="265" y1="127.0313" y2="364.9492"/><rect fill="#FFC0CB" filter="url(#f18bujv2xctnlr)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="92" x="29" y="3"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="36" y="23.5352">Supernaut/</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="69" x="40.5" y="40.0234">Micronaut</text><rect fill="#FFFFFF" filter="url(#f18bujv2xctnlr)" height="260.6621" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="72" y="86.2871"/><rect fill="#FFFFFF" filter="url(#f18bujv2xctnlr)" height="221.3516" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="125.5977"/><rect fill="#90EE90" filter="url(#f18bujv2xctnlr)" height="35.4883" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="125.5977"/><rect fill="#006400" filter="url(#f18bujv2xctnlr)" height="34.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="195.3965"/><rect fill="#90EE90" filter="url(#f18bujv2xctnlr)" height="29.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="259.0176"/><rect fill="#90EE90" filter="url(#f18bujv2xctnlr)" height="29.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="265" y="317.6387"/><polygon fill="#A80036" points="60,82.2871,70,86.2871,60,90.2871,64,86.2871" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="3" x2="66" y1="86.2871" y2="86.2871"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="50" x="10" y="81.5449">launch()</text><polygon fill="#A80036" points="175,111.5977,185,115.5977,175,119.5977,179,115.5977" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="82" x2="181" y1="115.5977" y2="115.5977"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="81" x="89" y="110.8555">new w/inject</text><rect fill="#FEFECE" filter="url(#f18bujv2xctnlr)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="152" x="187" y="94.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="138" x="194" y="114.8223">ApplicationDelegate</text><path d="M358,102.376 L358,127.376 L604,127.376 L604,112.376 L594,102.376 L358,102.376 " fill="#FFFFFF" filter="url(#f18bujv2xctnlr)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M594,102.376 L594,112.376 L604,112.376 L594,102.376 " fill="#FFFFFF" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#90EE90" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="225" x="364" y="119.9443">JFX application thread in light green</text><polygon fill="#A80036" points="93,157.0859,83,161.0859,93,165.0859,89,161.0859" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="87" x2="259" y1="161.0859" y2="161.0859"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="75" x="99" y="156.3438">constructed</text><polygon fill="#A80036" points="253,191.3965,263,195.3965,253,199.3965,257,195.3965" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="82" x2="259" y1="195.3965" y2="195.3965"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="29" x="89" y="190.6543">init()</text><path d="M280,174.0859 L280,199.0859 L476,199.0859 L476,184.0859 L466,174.0859 L280,174.0859 " fill="#FFFFFF" filter="url(#f18bujv2xctnlr)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M466,174.0859 L466,184.0859 L476,184.0859 L466,174.0859 " fill="#FFFFFF" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#008000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="175" x="286" y="191.6543">JFX init thread in dark green</text><polygon fill="#A80036" points="93,225.707,83,229.707,93,233.707,89,229.707" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="87" x2="259" y1="229.707" y2="229.707"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="99" y="224.9648">return</text><polygon fill="#A80036" points="253,255.0176,263,259.0176,253,263.0176,257,259.0176" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="82" x2="259" y1="259.0176" y2="259.0176"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="37" x="89" y="254.2754">start()</text><polygon fill="#A80036" points="93,284.3281,83,288.3281,93,292.3281,89,288.3281" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="87" x2="259" y1="288.3281" y2="288.3281"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="99" y="283.5859">return</text><polygon fill="#A80036" points="253,313.6387,263,317.6387,253,321.6387,257,317.6387" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="82" x2="259" y1="317.6387" y2="317.6387"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="36" x="89" y="312.8965">stop()</text><polygon fill="#A80036" points="88,342.9492,78,346.9492,88,350.9492,84,346.9492" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="82" x2="264" y1="346.9492" y2="346.9492"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="94" y="342.207">return</text><!--MD5=[0181c6880a28ed757d76bc6518fe3f11]
+@startuml
+
+skinparam NoteBackgroundColor white
+hide footbox
+
+participant "Supernaut/\nMicronaut" as Supernaut #pink
+participant ApplicationDelegate
+
+[-> Supernaut : launch()
+activate  Supernaut
+
+
+Supernaut -> ApplicationDelegate ** : new w/inject
+note right: <font color=lightgreen>JFX application thread in light green
+activate ApplicationDelegate
+activate  ApplicationDelegate #LightGreen
+Supernaut <- - ApplicationDelegate : constructed
+deactivate  ApplicationDelegate  #LightGreen
+
+Supernaut -> ApplicationDelegate  : init()
+activate  ApplicationDelegate #DarkGreen
+note right: <font color=green>JFX init thread in dark green
+Supernaut <- - ApplicationDelegate : return
+deactivate  ApplicationDelegate  #DarkGreen
+
+Supernaut -> ApplicationDelegate  : start()
+activate  ApplicationDelegate #LightGreen
+Supernaut <- - ApplicationDelegate : return
+deactivate  ApplicationDelegate  #LightGreen
+
+
+Supernaut -> ApplicationDelegate  : stop()
+activate  ApplicationDelegate #LightGreen
+Supernaut <- - ApplicationDelegate : return
+
+deactivate ApplicationDelegate  #LightGreen
+deactivate ApplicationDelegate
+
+deactivate  Supernaut
+@enduml
+
+PlantUML version 1.2019.12(Sun Nov 03 02:24:54 PST 2019)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 17+35
+Operating System: Mac OS X
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
