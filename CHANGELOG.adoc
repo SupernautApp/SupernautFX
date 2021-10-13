@@ -3,14 +3,26 @@
 
 A high-level view of the changes in each SupernautFX release.
 
-== v0.2.2-SNAPSHOT
+== v0.3.0-SNAPSHOT
 
 Released: under development
+
+=== API Improvements
+
+* Replace `FxForegroundApp` with `ApplicationDelegate`
+* `FxForegroundApp` is deprecated and subclasses `ApplicationDelegate`
+* `FxLauncher` no longer subclasses `Launcher`
+* `ApplicationDelegate`/`FxForegroundApp` no longer subclasses `ForegroundApp`
 
 === Breaking Changes
 
 * The deprecated `SupernautView`, `SupernautMainView`, and `FxMainView` abstraction interfaces have been removed. Just use `Stage`.
-* The deprecated `OpenJfxApplicationAware` has been removed. If you need an `Application` add it to your constructor and it will be injected there.
+* The deprecated `OpenJfxApplicationAware` has been removed. If you need your `Application` instance override `Application#setApplication` or add an `Application` parameter to your constructor and it will be injected there.
+* Upgrade to Micronaut 3.1.0 might require some tweaks to your buildfiles. See the samples.
+
+=== Dependency Upgrades
+
+* Upgrade to Micronaut 3.1.0
 
 == v0.2.1
 
