@@ -41,18 +41,18 @@ public final class OpenJfxProxyApplication extends Application {
     /** Launcher must set this global before calling constructor */
     public static FxLauncher configuredLauncher;
     private final FxLauncher launcher;
-    private final ApplicationDelegate foregroundApp;
+    private final ApplicationDelegate appDelegate;
     
     /**
-     * Create a JavaFX application that wraps a SfxForegroundApp
-     * Note that {@link FxLauncher#createForegroundApp(Application)} will wait
+     * Create a JavaFX application that wraps an {@link ApplicationDelegate}
+     * Note that {@link FxLauncher#createAppDelegate(Application)} will wait
      * on the background app initialized latch so this constructor
      * will block until the background app is created and initialized.
      * Constructed on the JavaFX application thread
      */
     public OpenJfxProxyApplication() {
         launcher = configuredLauncher;
-        foregroundApp = launcher.createForegroundApp(this);
+        appDelegate = launcher.createAppDelegate(this);
     }
 
     /**
@@ -63,8 +63,8 @@ public final class OpenJfxProxyApplication extends Application {
      */
     @Override
     public void init() throws Exception {
-        log.info("Initializing SfxForegroundApp");
-        foregroundApp.init();
+        log.info("Initializing ApplicationDelegate");
+        appDelegate.init();
     }
 
     /**
@@ -76,8 +76,8 @@ public final class OpenJfxProxyApplication extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        log.info("Starting SfxForegroundApp");
-        foregroundApp.start(primaryStage);
+        log.info("Starting ApplicationDelegate");
+        appDelegate.start(primaryStage);
     }
 
     /**
@@ -87,8 +87,8 @@ public final class OpenJfxProxyApplication extends Application {
      */
     @Override
     public void stop() throws Exception {
-        log.info("Stopping SfxForegroundApp");
-        foregroundApp.stop();
+        log.info("Stopping ApplicationDelegate");
+        appDelegate.stop();
         // TODO: Should call a "stop" method in the launcher or the AppFactory?
         launcher.getBackgroundApp().get().stop();
     }

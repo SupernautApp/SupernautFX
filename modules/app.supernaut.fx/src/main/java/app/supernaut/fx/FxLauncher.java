@@ -31,20 +31,20 @@ import java.util.concurrent.CompletableFuture;
 public interface FxLauncher {
     /**
      * Launch and run the application on the current thread.
-     * Does not return until after foreground app closes.
+     * Does not return until after ApplicationDelegate closes.
      * @param args command-line args
-     * @param foregroundApp class object for ForegroundApp
+     * @param appDelegate class object for ApplicationDelegate
      * @param backgroundApp class object for BackgroundApp
      */
-    void launch(String[] args, Class<? extends ApplicationDelegate> foregroundApp, Class<? extends BackgroundApp> backgroundApp);
+    void launch(String[] args, Class<? extends ApplicationDelegate> appDelegate, Class<? extends BackgroundApp> backgroundApp);
 
     /**
      * Launch and run the application on the current thread. Uses default/no-op background application.
-     * Does not return until after foreground app closes.
+     * Does not return until after ApplicationDelegate closes.
      * @param args command-line args
-     * @param foregroundApp class object for ForegroundApp
+     * @param appDelegate class object for ApplicationDelegate
      */
-    void launch(String[] args, Class<? extends ApplicationDelegate> foregroundApp);
+    void launch(String[] args, Class<? extends ApplicationDelegate> appDelegate);
 
     /**
      * Launch and run the application on a newly created thread.
@@ -52,19 +52,19 @@ public interface FxLauncher {
      * application startup scenarios.
      *
      * @param args command-line args
-     * @param foregroundApp class object for ForegroundApp
+     * @param appDelegate class object for ApplicationDelegate
      * @param backgroundApp class object for BackgroundApp
-     * @return A future that is completed when Foreground app is initialized
+     * @return A future that is completed when ApplicationDelegate app is initialized
      */
-    CompletableFuture<ApplicationDelegate> launchAsync(String[] args, Class<? extends ApplicationDelegate> foregroundApp, Class<? extends BackgroundApp> backgroundApp);
+    CompletableFuture<ApplicationDelegate> launchAsync(String[] args, Class<? extends ApplicationDelegate> appDelegate, Class<? extends BackgroundApp> backgroundApp);
 
     /**
-     * Get a future that will be completed when the Foreground app
+     * Get a future that will be completed when the ApplicationDelegate
      * is initialized.
      *
-     * @return A future that is completed when Foreground app is initialized
+     * @return A future that is completed when ApplicationDelegate is initialized
      */
-    CompletableFuture<ApplicationDelegate> getForegroundApp();
+    CompletableFuture<ApplicationDelegate> getAppDelegate();
 
     /**
      * Get a future that will be completed when the Background app
@@ -77,9 +77,9 @@ public interface FxLauncher {
     /**
      * Construct a {@link ApplicationDelegate} that is a delegate to {@code OpenJfxProxyApplication}.
      * @param jfxApplication The OpenJfx "proxy" app instance
-     * @return A newly constructed (and possibly injected) foreground app
+     * @return A newly constructed (and possibly injected) ApplicationDelegate
      */
-    ApplicationDelegate createForegroundApp(Application jfxApplication);
+    ApplicationDelegate createAppDelegate(Application jfxApplication);
 
     /**
      * Implementations must implement this method to return a unique name

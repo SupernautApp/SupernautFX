@@ -17,7 +17,7 @@ package app.supernaut.fx.sample.hello;
 
 import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
-import app.supernaut.fx.FxmlLoaderFactory;
+import app.supernaut.fx.fxml.FxmlLoaderFactory;
 import app.supernaut.fx.test.NoopBackgroundApp;
 import io.micronaut.context.annotation.Factory;
 import javafx.fxml.FXMLLoader;

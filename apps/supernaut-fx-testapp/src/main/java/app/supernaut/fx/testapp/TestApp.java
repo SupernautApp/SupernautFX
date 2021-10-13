@@ -17,7 +17,7 @@ package app.supernaut.fx.testapp;
 
 import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
-import app.supernaut.fx.FxmlLoaderFactory;
+import app.supernaut.fx.fxml.FxmlLoaderFactory;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

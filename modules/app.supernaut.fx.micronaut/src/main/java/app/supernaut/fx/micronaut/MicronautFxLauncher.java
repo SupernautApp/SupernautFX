@@ -16,7 +16,8 @@
 package app.supernaut.fx.micronaut;
 
 import app.supernaut.fx.ApplicationDelegate;
-import app.supernaut.fx.FxmlLoaderFactory;
+import app.supernaut.fx.fxml.FxmlLoaderFactory;
+import app.supernaut.fx.micronaut.fxml.MicronautFxmlLoaderFactory;
 import app.supernaut.fx.services.FxBrowserService;
 import app.supernaut.fx.test.NoopBackgroundApp;
 import io.micronaut.context.ApplicationContext;
@@ -113,21 +114,21 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
          * {@inheritDoc}
          */
         @Override
-        public ApplicationDelegate createForegroundApp(Class<? extends ApplicationDelegate> foregroundAppClass, Application proxyApplication) {
-            return getForegroundAppBean(foregroundAppClass, proxyApplication);
+        public ApplicationDelegate createAppDelegate(Class<? extends ApplicationDelegate> appDelegateClass, Application proxyApplication) {
+            log.info("getForegroundApp()");
+            initializeBeanContext(context, proxyApplication);
+            return context.getBean(appDelegateClass);
         }
 
         /**
          * Subclass {@link MicronautAppFactory} and override this method to customize your {@link BeanContext}.
          *
-         * @param clazz The FXForegroundApp sub-class that we are creating and injecting
+         * @param context The Micronaut BeanContext to initialize
          * @param proxyApplication The proxy implementation instance of {@link Application}
-         * @return A newly constructed and injected {@link ApplicationDelegate} instance
          */
-        protected ApplicationDelegate getForegroundAppBean(Class<? extends ApplicationDelegate> clazz, Application proxyApplication) {
-            log.info("getForegroundAppBean()");
-            // Since FXForegroundApp doesn't extend Application, an app that needs access to the
-            // Application object can have it injected.
+        protected void initializeBeanContext(BeanContext context, Application proxyApplication) {
+            log.info("initializeBeanContext()");
+            // An app that wants access to the Application object can have it injected.
             context.registerSingleton(Application.class, proxyApplication);
 
             // An app that needs HostServices can have it injected. For opening URLs in browsers
@@ -135,8 +136,8 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
             context.registerSingleton(HostServices.class, proxyApplication.getHostServices());
             context.registerSingleton(BrowserService.class, new FxBrowserService(proxyApplication.getHostServices()));
 
+            // TODO: Make this dependency on FXML optional
             context.registerSingleton(FxmlLoaderFactory.class, new MicronautFxmlLoaderFactory(context));
-            return context.getBean(clazz);
         }
     }
 }

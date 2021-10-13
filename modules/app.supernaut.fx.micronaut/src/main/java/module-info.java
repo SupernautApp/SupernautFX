@@ -29,7 +29,7 @@ module app.supernaut.fx.micronaut {
     requires org.slf4j;
     
     exports app.supernaut.fx.micronaut;
-    exports app.supernaut.fx.micronaut.test;
+    exports app.supernaut.fx.micronaut.fxml;
 
     provides app.supernaut.fx.FxLauncher with app.supernaut.fx.micronaut.MicronautFxLauncher;
 }

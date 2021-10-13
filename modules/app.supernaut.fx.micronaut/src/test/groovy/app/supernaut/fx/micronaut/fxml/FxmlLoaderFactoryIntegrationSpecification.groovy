@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.supernaut.fx.micronaut
+package app.supernaut.fx.micronaut.fxml
 
-import app.supernaut.fx.FxmlLoaderFactory
-import app.supernaut.fx.micronaut.test.BaseFxmlForegroundApp
+import app.supernaut.fx.fxml.BaseFxmlAppDelegate
+import app.supernaut.fx.fxml.FxmlLoaderFactory
 import io.micronaut.context.BeanContext
 import javafx.fxml.FXMLLoader
 import spock.lang.Ignore
@@ -58,7 +58,7 @@ class FxmlLoaderFactoryIntegrationSpecification extends Specification {
         ctx.registerSingleton(FxmlLoaderFactory.class, loaderFactory)
 
         when: "We create an Application bean with a constructor that requires a FxmlLoaderFactory"
-        BaseFxmlForegroundApp testApp = ctx.createBean(BaseFxmlForegroundApp.class)
+        BaseFxmlAppDelegate testApp = ctx.createBean(BaseFxmlAppDelegate.class)
 
 
         then: "The Application bean is successfully created and the FxmlLoaderFactory was injected. "

@@ -13,17 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.supernaut.fx.micronaut.test;
+package app.supernaut.fx.fxml;
 
 import app.supernaut.fx.ApplicationDelegate;
-import app.supernaut.fx.FxmlLoaderFactory;
 
 import javafx.stage.Stage;
 
 /**
- * FxForegroundApp with constructor that expects a {@link FxmlLoaderFactory}
+ * ApplicationDelegate with constructor that expects a {@link FxmlLoaderFactory}
  */
-public class BaseFxmlForegroundApp implements ApplicationDelegate {
+public class BaseFxmlAppDelegate implements ApplicationDelegate {
     /** {@link FxmlLoaderFactory} for subclass access */
     protected final FxmlLoaderFactory fxmlLoaderFactory;
 
@@ -32,7 +31,7 @@ public class BaseFxmlForegroundApp implements ApplicationDelegate {
      *
      * @param fxmlLoaderFactory the injected factory
      */
-    public BaseFxmlForegroundApp(FxmlLoaderFactory fxmlLoaderFactory) {
+    public BaseFxmlAppDelegate(FxmlLoaderFactory fxmlLoaderFactory) {
         this.fxmlLoaderFactory = fxmlLoaderFactory;
     }
 

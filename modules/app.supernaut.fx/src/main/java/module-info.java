@@ -36,6 +36,7 @@ module app.supernaut.fx {
     requires org.slf4j;
 
     exports app.supernaut.fx;
+    exports app.supernaut.fx.fxml;
     exports app.supernaut.fx.services;
     exports app.supernaut.fx.test;
     exports app.supernaut.fx.util;

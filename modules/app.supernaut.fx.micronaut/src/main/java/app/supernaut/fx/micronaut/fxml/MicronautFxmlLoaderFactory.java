@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.supernaut.fx.micronaut;
+package app.supernaut.fx.micronaut.fxml;
 
-import app.supernaut.fx.FxmlLoaderFactory;
+import app.supernaut.fx.fxml.FxmlLoaderFactory;
 import io.micronaut.context.BeanContext;
 import javafx.fxml.FXMLLoader;
 

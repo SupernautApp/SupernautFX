@@ -22,10 +22,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * No-op ForegroundApp which exits immediately (used for testing)
+ * No-op ApplicationDelegate which exits immediately (used for testing)
  */
-public final class NoopFxForegroundApp implements ApplicationDelegate {
-    private static final Logger log = LoggerFactory.getLogger(NoopFxForegroundApp.class);
+public final class NoopAppDelegate implements ApplicationDelegate {
+    private static final Logger log = LoggerFactory.getLogger(NoopAppDelegate.class);
 
     @Override
     public void start(Stage primaryStage) {
