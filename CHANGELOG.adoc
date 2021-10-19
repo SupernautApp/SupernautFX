@@ -7,6 +7,11 @@ A high-level view of the changes in each Supernaut.FX release.
 
 Released: Under development
 
+=== Dependency Upgrades
+
+* Upgrade to JavaFX 17.0.1
+
+
 == v0.3.0
 
 Released: 2021-10-13
