@@ -7,6 +7,7 @@ apply plugin: "org.beryx.jlink"
 
 def appName = 'SupernautFXTestApp'
 version = testAppVersion
+
 application {
     mainModule = 'app.supernaut.fx.testapp'
     mainClass = 'app.supernaut.fx.testapp.TestApp'
@@ -16,14 +17,19 @@ dependencies {
     implementation project (':modules:app.supernaut.fx')
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
-    compileOnly "jakarta.inject:jakarta.inject-api:${jakartaInjectVersion}"
-    compileOnly "io.micronaut:micronaut-inject:${micronautVersion}"  // For Micronaut annotations eg. @Factory and generated code
+    implementation "jakarta.inject:jakarta.inject-api"
+    implementation "io.micronaut:micronaut-inject:${micronautVersion}"  // For Micronaut annotations eg. @Factory and generated code
+
+    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
     runtimeOnly project (':modules:app.supernaut.fx.micronaut')     // Implementation of FxLauncher
     runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
-    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
-
+    constraints {
+        implementation('jakarta.inject:jakarta.inject-api:[2.0.1,)') {
+            because '2.0.1 is the first modular version, force Micronaut to use it'
+        }
+    }
 }
 
 // Workaround for https://github.com/SupernautApp/SupernautFX/issues/6
@@ -57,6 +63,7 @@ jlink {
     }
     mergedModule {
         requires 'org.slf4j'
+        requires 'jakarta.inject'
         requires 'jakarta.annotation'
     }
     jpackage {

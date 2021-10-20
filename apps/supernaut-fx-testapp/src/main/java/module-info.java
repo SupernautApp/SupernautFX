@@ -24,8 +24,8 @@ module app.supernaut.fx.testapp {
 
     requires app.supernaut.fx;
 
-    requires static jakarta.inject;
-    requires static io.micronaut.inject;
+    requires jakarta.inject;
+    requires io.micronaut.inject;
     requires jakarta.annotation;
 
     requires org.slf4j;
