@@ -31,12 +31,9 @@ allprojects {
     }
 
     dependencies {
-        testImplementation "org.codehaus.groovy:groovy:${groovyVersion}:"
-        testImplementation("org.spockframework:spock-core:${spockVersion}") {
-            exclude module: "groovy-all"
-        }
+        testImplementation "org.spockframework:spock-core:${spockVersion}"
 
-        testRuntimeOnly "net.bytebuddy:byte-buddy:1.11.15"                 // allows Spock to mock classes (in addition to interfaces)
+        testRuntimeOnly "net.bytebuddy:byte-buddy:1.11.20"                 // allows Spock to mock classes (in addition to interfaces)
         testRuntimeOnly "org.objenesis:objenesis:3.2"                     // Allow Spock to mock classes with constructor arguments
         testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"           // Runtime implementation of slf4j
     }
