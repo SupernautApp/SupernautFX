@@ -32,6 +32,11 @@ dependencies {
     }
 }
 
+configurations.all {
+    exclude group: 'javax.annotation', module: "javax.annotation-api"
+    exclude group: 'org.yaml', module: "snakeyaml"
+}
+
 // Workaround for https://github.com/SupernautApp/SupernautFX/issues/6
 modularity.disableEffectiveArgumentsAdjustment()
 
