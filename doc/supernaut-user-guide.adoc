@@ -30,13 +30,15 @@ Using https://github.com/SupernautApp/supernaut-fx-sample-gradle[supernaut-fx-sa
 
 The Badass JLink Plugin performs an important role in converting non-modular jars (especially the Micronaut jars) to work in a modular environment.
 
+You can also build natively-compiled images via the GluonFX Gradle Plugin and the GraalVM `native-image` capability.
+
 ==== Maven Sample
 
 Using https://github.com/SupernautApp/supernaut-fx-sample-maven[supernaut-fx-sample-maven], via the GluonFX Maven Plugin, you can build natively-compiled macOS, Windows, and Linux applications using the GraalVM native-image tool.
 
 ==== Comparison Matrix
 
-Eventually, you should be able to build both types of packages with either build tool.
+Eventually, you should be able to build `jpackage`'d images with Maven, as well.
 
 .Supernaut.FX Gradle vs Maven Comparison
 [cols="1, 3a, 3a"]
@@ -49,12 +51,15 @@ Eventually, you should be able to build both types of packages with either build
 * build jar
 * run
 * build native-looking app with bundled JRE with `jpackage`
+* build GraalVM natively-compiled image with GluonFX
+
 |
 
 * `micronaut-inject-java` annotation processor
 * Java Modularity Plugin
 * JavaFX Gradle Plugin
 * Badass JLink Plugin
+* GluonFX Gradle Plugin
 
 |Maven
 |
