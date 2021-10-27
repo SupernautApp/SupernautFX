@@ -18,7 +18,7 @@ before_script:
 
 build:
   script:
-    - ./gradlew buildCI buildJPackages --scan --info --stacktrace
+    - ./gradlew -PbaseModuleJavaCompatibility=8 buildCI buildJPackages --scan --info --stacktrace
   artifacts:
     paths:
       - supernautfx/build/libs

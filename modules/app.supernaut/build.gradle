@@ -1,11 +1,14 @@
 plugins {
     id 'java-library'
+    id 'org.beryx.jar' version '2.0.0-rc-5'
+}
+
+moduleConfig {
+    version = project.version
 }
 
 compileJava {
-    // We're currently requiring Java 9 for module-info.java, but the intention
-    // is to allow this module to be used in "modern" Android libraries and apps.
-    options.release = 9
+    options.release = (findProperty('baseModuleJavaCompatibility') ?: 9) as int
 }
 
 dependencies {
