@@ -7,9 +7,28 @@ A high-level view of the changes in each Supernaut.FX release.
 
 Released: Under development
 
+=== New functionality
+
+* New `FxLaunder.find()` method to find the default `FxLauncher`
+
+=== Breaking Changes
+
+* Remove deprecated `FxForegroundApp`
+* Naming changes to use "app delegate" more consistently (shouldn't affect most apps)
+* Move FXML-related classes to `.fxml` sub-packages (shouldn't affect most apps)
+* `MicronautFxLauncher.initializeBeanContext()` for better extensibility if you need to subclass
+
 === Dependency Upgrades
 
-* Upgrade to JavaFX 17.0.1
+* JavaFX 17.0.1
+* Micronaut 3.1.1
+* Jakarta Inject 2.0.1 (in sample apps)
+
+=== Build
+
+* Gradle build file cleanup
+** Use Gradle "constraint"
+** Sample app dependencies are better modeled/documented
 
 
 == v0.3.0
