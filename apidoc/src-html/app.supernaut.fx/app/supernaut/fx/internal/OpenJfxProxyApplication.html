@@ -54,18 +54,18 @@
 <span class="source-line-no">041</span><span id="line-41">    /** Launcher must set this global before calling constructor */</span>
 <span class="source-line-no">042</span><span id="line-42">    public static FxLauncher configuredLauncher;</span>
 <span class="source-line-no">043</span><span id="line-43">    private final FxLauncher launcher;</span>
-<span class="source-line-no">044</span><span id="line-44">    private final ApplicationDelegate foregroundApp;</span>
+<span class="source-line-no">044</span><span id="line-44">    private final ApplicationDelegate appDelegate;</span>
 <span class="source-line-no">045</span><span id="line-45">    </span>
 <span class="source-line-no">046</span><span id="line-46">    /**</span>
-<span class="source-line-no">047</span><span id="line-47">     * Create a JavaFX application that wraps a SfxForegroundApp</span>
-<span class="source-line-no">048</span><span id="line-48">     * Note that {@link FxLauncher#createForegroundApp(Application)} will wait</span>
+<span class="source-line-no">047</span><span id="line-47">     * Create a JavaFX application that wraps an {@link ApplicationDelegate}</span>
+<span class="source-line-no">048</span><span id="line-48">     * Note that {@link FxLauncher#createAppDelegate(Application)} will wait</span>
 <span class="source-line-no">049</span><span id="line-49">     * on the background app initialized latch so this constructor</span>
 <span class="source-line-no">050</span><span id="line-50">     * will block until the background app is created and initialized.</span>
 <span class="source-line-no">051</span><span id="line-51">     * Constructed on the JavaFX application thread</span>
 <span class="source-line-no">052</span><span id="line-52">     */</span>
 <span class="source-line-no">053</span><span id="line-53">    public OpenJfxProxyApplication() {</span>
 <span class="source-line-no">054</span><span id="line-54">        launcher = configuredLauncher;</span>
-<span class="source-line-no">055</span><span id="line-55">        foregroundApp = launcher.createForegroundApp(this);</span>
+<span class="source-line-no">055</span><span id="line-55">        appDelegate = launcher.createAppDelegate(this);</span>
 <span class="source-line-no">056</span><span id="line-56">    }</span>
 <span class="source-line-no">057</span><span id="line-57"></span>
 <span class="source-line-no">058</span><span id="line-58">    /**</span>
@@ -76,8 +76,8 @@
 <span class="source-line-no">063</span><span id="line-63">     */</span>
 <span class="source-line-no">064</span><span id="line-64">    @Override</span>
 <span class="source-line-no">065</span><span id="line-65">    public void init() throws Exception {</span>
-<span class="source-line-no">066</span><span id="line-66">        log.info("Initializing SfxForegroundApp");</span>
-<span class="source-line-no">067</span><span id="line-67">        foregroundApp.init();</span>
+<span class="source-line-no">066</span><span id="line-66">        log.info("Initializing ApplicationDelegate");</span>
+<span class="source-line-no">067</span><span id="line-67">        appDelegate.init();</span>
 <span class="source-line-no">068</span><span id="line-68">    }</span>
 <span class="source-line-no">069</span><span id="line-69"></span>
 <span class="source-line-no">070</span><span id="line-70">    /**</span>
@@ -89,8 +89,8 @@
 <span class="source-line-no">076</span><span id="line-76">     */</span>
 <span class="source-line-no">077</span><span id="line-77">    @Override</span>
 <span class="source-line-no">078</span><span id="line-78">    public void start(Stage primaryStage) throws Exception {</span>
-<span class="source-line-no">079</span><span id="line-79">        log.info("Starting SfxForegroundApp");</span>
-<span class="source-line-no">080</span><span id="line-80">        foregroundApp.start(primaryStage);</span>
+<span class="source-line-no">079</span><span id="line-79">        log.info("Starting ApplicationDelegate");</span>
+<span class="source-line-no">080</span><span id="line-80">        appDelegate.start(primaryStage);</span>
 <span class="source-line-no">081</span><span id="line-81">    }</span>
 <span class="source-line-no">082</span><span id="line-82"></span>
 <span class="source-line-no">083</span><span id="line-83">    /**</span>
@@ -100,8 +100,8 @@
 <span class="source-line-no">087</span><span id="line-87">     */</span>
 <span class="source-line-no">088</span><span id="line-88">    @Override</span>
 <span class="source-line-no">089</span><span id="line-89">    public void stop() throws Exception {</span>
-<span class="source-line-no">090</span><span id="line-90">        log.info("Stopping SfxForegroundApp");</span>
-<span class="source-line-no">091</span><span id="line-91">        foregroundApp.stop();</span>
+<span class="source-line-no">090</span><span id="line-90">        log.info("Stopping ApplicationDelegate");</span>
+<span class="source-line-no">091</span><span id="line-91">        appDelegate.stop();</span>
 <span class="source-line-no">092</span><span id="line-92">        // TODO: Should call a "stop" method in the launcher or the AppFactory?</span>
 <span class="source-line-no">093</span><span id="line-93">        launcher.getBackgroundApp().get().stop();</span>
 <span class="source-line-no">094</span><span id="line-94">    }</span>

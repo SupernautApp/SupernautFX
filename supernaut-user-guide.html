@@ -442,8 +442,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Supernaut.FX User&#8217;s Guide</h1>
 <div class="details">
 <span id="author" class="author">Sean Gilligan</span><br>
-<span id="revnumber">version 0.3.0,</span>
-<span id="revdate">October 13, 2021</span>
+<span id="revnumber">version 0.3.1,</span>
+<span id="revdate">October 27, 2021</span>
 <br><span id="revremark">Preliminary draft</span>
 </div>
 <div id="toc" class="toc">
@@ -511,6 +511,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The Badass JLink Plugin performs an important role in converting non-modular jars (especially the Micronaut jars) to work in a modular environment.</p>
 </div>
+<div class="paragraph">
+<p>You can also build natively-compiled images via the GluonFX Gradle Plugin and the GraalVM <code>native-image</code> capability.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_maven_sample">3.1.2. Maven Sample</h4>
@@ -521,7 +524,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_comparison_matrix">3.1.3. Comparison Matrix</h4>
 <div class="paragraph">
-<p>Eventually, you should be able to build both types of packages with either build tool.</p>
+<p>Eventually, you should be able to build `jpackage&#8217;d images with Maven, as well.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Supernaut.FX Gradle vs Maven Comparison</caption>
@@ -551,6 +554,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p>build native-looking app with bundled JRE with <code>jpackage</code></p>
 </li>
+<li>
+<p>build GraalVM natively-compiled image with GluonFX</p>
+</li>
 </ul>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
@@ -566,6 +572,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li>
 <p>Badass JLink Plugin</p>
+</li>
+<li>
+<p>GluonFX Gradle Plugin</p>
 </li>
 </ul>
 </div></div></td>
@@ -628,7 +637,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>By simply replacing <code>extends Application</code> with <code>implements ApplicationDelegate</code> and using the <code>launch()</code> method of the <code>FXLauncher</code> service with the name <code>micronaut</code>, it becomes a Java.FX application. Also note that the <code>jakarta.inject</code> <code>@Singleton</code> annotation has been added.</p>
+<p>By simply replacing <code>extends Application</code> with <code>implements ApplicationDelegate</code> and using the <code>launch()</code> method of the <code>FXLauncher</code> service found with the default <code>find()</code> method, it becomes a Supernaut.FX application. Also note that the <code>jakarta.inject</code> <code>@Singleton</code> annotation has been added.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -636,7 +645,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 public class MinimalApp implements ApplicationDelegate {
 
     public static void main(String[] args) {
-        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
+        FxLauncher.find().launch(args, MinimalApp.class);
     }
 
     @Override
@@ -672,7 +681,7 @@ public class MinimalApp implements ApplicationDelegate {
     private final static String planetName;
 
     public static void main(String[] args) {
-        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
+        FxLauncher.find().launch(args, MinimalApp.class);
     }
 
     public MinimalApp(AppConfig config) {
@@ -714,7 +723,7 @@ public class MinimalApp implements ApplicationDelegate {
 </div>
 </div>
 <div class="paragraph">
-<p>See <code>HelloForegroundApp</code> and <code>MainWindowController</code> (links TBD) for a fully-functioning example.</p>
+<p>See <code>HelloApp</code> and <code>MainWindowController</code> (links TBD) for a fully-functioning example.</p>
 </div>
 </div>
 <div class="sect2">
@@ -903,8 +912,8 @@ public class MinimalApp implements ApplicationDelegate {
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.3.0<br>
-Last updated 2021-10-13 11:48:17 -0700
+Version 0.3.1<br>
+Last updated 2021-10-27 19:47:50 -0700
 </div>
 </div>
 </body>
