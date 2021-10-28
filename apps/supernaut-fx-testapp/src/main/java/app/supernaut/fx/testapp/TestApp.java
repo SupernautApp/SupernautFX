@@ -104,7 +104,6 @@ public class TestApp implements ApplicationDelegate {
 
     private static FxLauncher getLauncher() {
         return FxLauncher.byName("micronaut");
-        //return new MicronautSfxLauncher(backgroundStart);
     }
 
     /**

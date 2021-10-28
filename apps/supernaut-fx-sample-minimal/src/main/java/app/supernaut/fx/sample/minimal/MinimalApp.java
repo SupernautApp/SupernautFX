@@ -36,7 +36,7 @@ public class MinimalApp implements ApplicationDelegate {
      * @param args command-line args
      */
     public static void main(String[] args) {
-        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
+        FxLauncher.find().launch(args, MinimalApp.class);
     }
 
     /**

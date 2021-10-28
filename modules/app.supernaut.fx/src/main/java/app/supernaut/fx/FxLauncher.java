@@ -19,8 +19,10 @@ import app.supernaut.BackgroundApp;
 import javafx.application.Application;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.ServiceLoader;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Predicate;
 
 /**
  * Launcher for Supernaut.FX (JavaFX) applications. By using this launcher, your applications
@@ -95,11 +97,40 @@ public interface FxLauncher {
      * @throws NoSuchElementException if not found
      */
     static FxLauncher byName(String name) {
-        ServiceLoader<FxLauncher> loaders = ServiceLoader.load(FxLauncher.class);
-        return loaders.stream()
+        return findFirst(launcher -> launcher.name().equals(name))
+                .orElseThrow(() -> new NoSuchElementException("Launcher " + name + " not found."));
+    }
+
+    /**
+     * Find default FxLauncher
+     *
+     * @return an FxLaunder instance
+     * @throws NoSuchElementException if not found
+     */
+    static FxLauncher find() {
+        return findFirst(FxLauncher::defaultFilter)
+                .orElseThrow(() -> new NoSuchElementException("Default Launcher not found."));
+    }
+
+    /**
+     * Find a launcher using a custom predicate
+     * @param filter predicate for finding a launcher
+     * @return the <b>first</b> launcher matching the predicate, if any
+     */
+    static Optional<FxLauncher> findFirst(Predicate<FxLauncher> filter) {
+        ServiceLoader<FxLauncher> loader = ServiceLoader.load(FxLauncher.class);
+        return loader.stream()
                 .map(ServiceLoader.Provider::get)
-                .filter(launcher -> launcher.name().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("Launcher '" + name + "' not found."));
+                .filter(FxLauncher::defaultFilter)
+                .findFirst();
+    }
+
+    /**
+     * Find the first available launcher that isn't the {@link app.supernaut.fx.sample.SimpleFxLauncher}
+     * @param launcher a candidate launcher
+     * @return true if it should be "found"
+     */
+    private static boolean defaultFilter(FxLauncher launcher) {
+        return !launcher.name().equals("simple");
     }
 }

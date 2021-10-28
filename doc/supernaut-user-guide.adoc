@@ -100,7 +100,7 @@ public class MinimalApp extends Application {
 }
 ----
 
-By simply replacing `extends Application` with `implements ApplicationDelegate` and using the `launch()` method of the `FXLauncher` service with the name `micronaut`, it becomes a Java.FX application. Also note that the `jakarta.inject` `@Singleton` annotation has been added.
+By simply replacing `extends Application` with `implements ApplicationDelegate` and using the `launch()` method of the `FXLauncher` service found with the default `find()` method, it becomes a Supernaut.FX application. Also note that the `jakarta.inject` `@Singleton` annotation has been added.
 
 [source, java]
 ----
@@ -108,7 +108,7 @@ By simply replacing `extends Application` with `implements ApplicationDelegate` 
 public class MinimalApp implements ApplicationDelegate {
 
     public static void main(String[] args) {
-        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
+        FxLauncher.find().launch(args, MinimalApp.class);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class MinimalApp implements ApplicationDelegate {
     private final static String planetName;
 
     public static void main(String[] args) {
-        FxLauncher.byName("micronaut").launch(args, MinimalApp.class);
+        FxLauncher.find().launch(args, MinimalApp.class);
     }
 
     public MinimalApp(AppConfig config) {
