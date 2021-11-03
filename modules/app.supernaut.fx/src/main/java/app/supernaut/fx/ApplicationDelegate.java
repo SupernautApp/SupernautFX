@@ -27,7 +27,7 @@ import javafx.stage.Stage;
  * <ol>
  *     <li>
  *         Supports flexible construction of application object hierarchies using Dependency Injection provided
- *         by <b>Micronaut®</b> framework and possibly other D.I. frameworks in the future.
+ *         by <b>Micronaut</b> framework and possibly other D.I. frameworks in the future.
  *     </li>
  *     <li>
  *       Applications {@code implement} an {@code interface} rather than {@code extend} a {@code class}.
