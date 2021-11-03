@@ -24,12 +24,6 @@ dependencies {
 
     runtimeOnly project (':modules:app.supernaut.fx.micronaut')     // Implementation of FxLauncher
     runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
-
-    constraints {
-        implementation('jakarta.inject:jakarta.inject-api:[2.0.1,)') {
-            because '2.0.1 is the first modular version, force Micronaut to use it'
-        }
-    }
 }
 
 configurations.all {
