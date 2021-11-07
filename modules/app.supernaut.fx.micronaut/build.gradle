@@ -5,6 +5,10 @@ plugins {
 apply plugin: app.supernaut.gradle.JavaFXPlatformPlugin
 def platform = ext.jfxPlatform
 
+tasks.named('compileJava') {
+    options.javaModuleVersion = project.version
+}
+
 dependencies {
     api project (':modules:app.supernaut.fx')
     api "org.openjfx:javafx-graphics:${javaFxVersion}"
