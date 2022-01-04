@@ -14,7 +14,7 @@ Released: Not yet
 
 === Dependency Upgrades
 
-* Micronaut 3.2.3
+* Micronaut 3.2.4
 
 === Build
 
