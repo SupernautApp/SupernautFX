@@ -18,7 +18,7 @@ Released: Not yet
 
 === Build
 
-* Gradle 7.3.1
+* Gradle 7.3.3
 * Micronaut Test (Spock) 3.0.5
 * GitLab CI build now uses  `openjdk-17-jdk`
 * Travis CI build removed
