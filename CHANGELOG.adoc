@@ -3,13 +3,13 @@
 
 A high-level view of the changes in each Supernaut.FX release.
 
-== v0.3.2-SNAPSHOT
+== v0.4.0
 
-Released: Not yet
+Released: 2022-01-04
 
 === Improvements
 
-* `app.supernaut` is now JDK 8-compatible (but still has `module-info.class in root)
+* `app.supernaut` is now JDK 8-compatible (but still has `module-info.class` in root)
 * All 3 modules now have module version info
 
 === Dependency Upgrades
