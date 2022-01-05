@@ -15,14 +15,6 @@ subprojects {
                     header(HttpHeaderAuthentication)
                 }
             }
-            maven {
-                name = "SupernautAppGitHubPackages"
-                url = "https://maven.pkg.github.com/SupernautApp/SupernautFX"
-                credentials {
-                    username = project.findProperty("supernaut.github.user") ?: System.getenv("GITHUB_ACTOR")
-                    password = project.findProperty("supernaut.github.key") ?: System.getenv("GITHUB_TOKEN")
-                }
-            }
         }
         publications {
             jar(MavenPublication) {

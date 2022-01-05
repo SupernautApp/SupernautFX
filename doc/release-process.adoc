@@ -22,6 +22,14 @@
 .. `./gradlew publishSite`
 . Create GitHub Release
 
+== Sample App Versions
+
+* Sample app versions are `1.0` + the Supernaut.FX version
+* Sample app versions are bumped when work on next release begins and _should_ never contain `-SNAPSHOT`.
+* These differences are required by limitations of the `jpackage` process. (some tools require 1.0 or later, others forbid a `-SNAPSHOT` in the version string.)
+
+NOTE:: We need to stop publishing sample apps to Maven repos.
+
 == Updating Gradle Dependency Verification configuration
 
 NOTE:: We are not using Dependency Verification yet, but we did try to use it.

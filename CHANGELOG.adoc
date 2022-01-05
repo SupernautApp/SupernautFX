@@ -23,6 +23,8 @@ Released: 2022-01-04
 * Micronaut Test (Spock) 3.0.5
 * GitLab CI build now uses  `openjdk-17-jdk`
 * Travis CI build removed
+* Remove vestigial (and problematic) references to Github Maven repos in `publishing` block in `maven-publish.gradle`
+* Sample Apps are now version 1.4.0 and will henceforth be `1.0` plus the Supernaut.FX version.
 
 == v0.3.1
 
