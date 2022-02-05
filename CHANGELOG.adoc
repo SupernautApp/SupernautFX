@@ -3,6 +3,10 @@
 
 A high-level view of the changes in each Supernaut.FX release.
 
+== v0.4.1-SNAPSHOT
+
+Released: not yet
+
 == v0.4.0
 
 Released: 2022-01-04
