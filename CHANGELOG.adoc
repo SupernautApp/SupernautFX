@@ -12,6 +12,10 @@ Released: not yet
 * JavaFX 17.0.2
 * SLF4J 2.0.0-alpha6
 
+=== Build
+
+* Upgrade to Badass JLink Plugin 2.24.4
+
 == v0.4.0
 
 Released: 2022-01-04
