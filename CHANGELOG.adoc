@@ -15,6 +15,7 @@ Released: not yet
 
 === Build
 
+* Upgrade to Gradle 7.4
 * Upgrade to Spock 2.2-M1-groovy-4.0 and (transitively) Groovy 4.0.0
 * Upgrade to Badass JLink Plugin 2.24.4
 
