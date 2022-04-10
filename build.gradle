@@ -2,7 +2,7 @@ plugins {
     id 'org.asciidoctor.jvm.convert'        version '3.3.2'
     id 'org.ajoberstar.git-publish'         version '3.0.0'
     id 'org.javamodularity.moduleplugin'    version '1.8.10'  apply false
-    id 'org.openjfx.javafxplugin'           version '0.0.10' apply false
+    id 'org.openjfx.javafxplugin'           version '0.0.12' apply false
     id 'org.beryx.jlink'                    version '2.24.4' apply false
     id 'com.github.hierynomus.license'      version '0.16.1' apply false
 }
