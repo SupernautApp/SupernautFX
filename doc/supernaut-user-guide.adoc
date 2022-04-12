@@ -236,6 +236,21 @@ Typical applications will have a _compile-time_ dependency on `app.supernaut.fx`
 
 You may also develop library modules for services depending only on `app.supernaut`.
 
+== Reference
+
+=== Logging
+
+The `app.supernaut.logging.JavaLoggingSupport` class can be used to configure `java.util.logging` in a way that is GraalVM-compatible. Typically this is done as one of the first lines of the `main()` method. For example:
+
+[source, java]
+----
+    public static void main(String[] args) {
+        JavaLoggingSupport.configure(HelloFX.class, "app.supernaut.fx.sample");
+        log.warn("Logging configured");
+        FxLauncher.byName("micronaut").launch(args, HelloFX.class);
+    }
+----
+
 == Multi-threaded Startup
 
 NOTE:: This section is for advanced users only. The parallel, asynchronous launch features should be considered experimental.

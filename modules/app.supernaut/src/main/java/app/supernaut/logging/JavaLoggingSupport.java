@@ -22,14 +22,13 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
- * GraalVM-compatible Support for using Java Logging
- * See: https://github.com/oracle/graal/blob/master/substratevm/LOGGING.md
+ * GraalVM-compatible support for using Java Logging.
+ * See GraalVM <a href="https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/Logging.md">docs/reference-manual/native-image/Logging.md</a>
  *
  * The default log-level for command-line tools configured in logging.properties
- * should be `WARNING`. The `-v` command-line switch should set the level to `FINE`.
- * Request-logging in RpcClient is at the `FINE` (slf4j `debug`) level.
+ * should be {@code WARNING}. {@link #setVerbose()} configures the level to {@code FINE}.
  *
- * TODO: Create a command-line option to set finer-grained log levels
+ * TODO: Document how to create a command-line option to set finer-grained log levels
  */
 public class JavaLoggingSupport {
     /** The default path of the logging properties file */
@@ -38,9 +37,9 @@ public class JavaLoggingSupport {
 
     /**
      * Configure logging.
-     * Should be one of the first things called in `main()`
+     * Should be one of the first things called in {@code main()}
      *
-     * @param rootClass root class for calling {@code }getResourceAsStream()}
+     * @param rootClass root class for calling {@code getResourceAsStream()}
      * @param loggingPropertiesResource Path to logging configuration properties resource file
      * @param loggerName The logger name
      */
@@ -70,7 +69,7 @@ public class JavaLoggingSupport {
     }
 
     /**
-     * Change log level (eg. as a result of `-v` command-line option)
+     * Change log level (e.g. as a result of a {@code '-v'} command-line option)
      */
     public static void setVerbose() {
         final Logger app = Logger.getLogger(loggerName);
