@@ -9,7 +9,7 @@ Released: not yet
 
 === Dependency Upgrades
 
-* JavaFX 17.0.2
+* JavaFX 18.0.1
 * Micronaut 3.4.4
 * SLF4J 2.0.0-alpha7
 
@@ -17,7 +17,7 @@ Released: not yet
 
 * Upgrade to Gradle 7.4.2
 * Upgrade to Spock 2.2-M1-groovy-4.0 and (transitively) Groovy 4.0.0
-* Upgrade to JavaFX Plugin 0.0.12
+* Upgrade to JavaFX Plugin 0.0.13
 * Upgrade to Badass JLink Plugin 2.25.0
 
 == v0.4.0
