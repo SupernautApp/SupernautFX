@@ -93,7 +93,7 @@ public interface FxLauncher {
      * Find a FxLauncher provider by name
      *
      * @param name Name (e.g. "micronaut")
-     * @return an FxLaunder instance
+     * @return an FxLauncher instance
      * @throws NoSuchElementException if not found
      */
     static FxLauncher byName(String name) {
@@ -104,7 +104,7 @@ public interface FxLauncher {
     /**
      * Find default FxLauncher
      *
-     * @return an FxLaunder instance
+     * @return an FxLauncher instance
      * @throws NoSuchElementException if not found
      */
     static FxLauncher find() {

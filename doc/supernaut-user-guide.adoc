@@ -17,7 +17,7 @@ TBD. (See the https://github.com/SupernautApp/SupernautFX#readme[README] for now
 
 == Getting Started
 
-This getting started section assumes you are already familiar with the basics of writing a JavaFX application.
+This _Getting Started_ section assumes you are already familiar with the basics of writing a JavaFX application.
 
 === Sample/Starter Projects on GitHub
 
