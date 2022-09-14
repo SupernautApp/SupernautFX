@@ -11,7 +11,7 @@ Released: not yet
 
 * JavaFX 17.0.2
 * Micronaut 3.4.4
-* SLF4J 2.0.0
+* SLF4J 2.0.1
 
 === Build
 
