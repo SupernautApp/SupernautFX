@@ -14,17 +14,17 @@ jobs:
     name: ${{ matrix.os }} JDK ${{ matrix.distribution }} ${{ matrix.java }}
     steps:
     - name: Git checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
     - name: Set up JDK (via matrix) for Gradle and Gradle Java Toolchain
       id: setupjdk
-      uses: actions/setup-java@v2.2.0
+      uses: actions/setup-java@v3
       with:
         distribution: ${{ matrix.distribution }}
         java-version: ${{ matrix.java }}
     - name: Verify Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1
     - name: Cache Gradle packages
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.gradle/caches
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
@@ -34,25 +34,25 @@ jobs:
       env:
         JAVA_HOME: ${{ steps.setupjdk.outputs.path }}
     - name: Upload DMG as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-dmg
         path: supernaut-fx-sample-hello/build/jpackage/*.dmg
         if-no-files-found: ignore
     - name: Upload EXE as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-exe
         path: supernaut-fx-sample-hello/build/jpackage/*.exe
         if-no-files-found: ignore
     - name: Upload DEB as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-deb
         path: supernaut-fx-sample-hello/build/jpackage/*.deb
         if-no-files-found: ignore
     - name: Upload RPM as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-rpm
         path: supernaut-fx-sample-hello/build/jpackage/*.rpm
