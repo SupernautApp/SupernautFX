@@ -11,12 +11,12 @@ Released: not yet
 
 * JavaFX 17.0.2
 * Micronaut 3.4.4
-* SLF4J 2.0.1
+* SLF4J 2.0.3
 
 === Build
 
 * Upgrade to Gradle 7.5.1
-* Upgrade to Spock 2.2-groovy-4.0 and (transitively) Groovy 4.0.x
+* Upgrade to Spock 2.3-groovy-4.0 and (transitively) Groovy 4.0.x
 * Upgrade to JavaFX Plugin 0.0.13
 * Upgrade to Badass JLink Plugin 2.25.0
 
