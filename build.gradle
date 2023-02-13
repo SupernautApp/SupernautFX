@@ -68,7 +68,6 @@ apply from: 'gradle/github-pages.gradle'
 apply from: 'gradle/maven-publish.gradle'
 
 task testReport(type: TestReport) {
-    // Don't worry about the Gradle deprecations in this block, they won't be removed in Gradle 8
     destinationDir = file("$buildDir/reports/allTests")
     // Include the results from the `test` task in all subprojects
     reportOn subprojects*.test
