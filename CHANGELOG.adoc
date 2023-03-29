@@ -15,7 +15,7 @@ Released: not yet
 
 === Build
 
-* Upgrade to Gradle 8.0
+* Upgrade to Gradle 8.1-rc-1
 * Upgrade to Spock 2.3-groovy-4.0 and (transitively) Groovy 4.0.x
 * Upgrade to JavaFX Plugin 0.0.13
 * Upgrade to Badass JLink Plugin 2.25.0
