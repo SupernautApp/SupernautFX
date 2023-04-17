@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
-        java: ['17']
+        java: ['17', '20']
         distribution: ['temurin']
       fail-fast: false
     name: ${{ matrix.os }} JDK ${{ matrix.distribution }} ${{ matrix.java }}
@@ -30,7 +30,7 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
     - name: Build with Gradle
-      run: ./gradlew -PbaseModuleJavaCompatibility=8 buildCI buildJPackages --scan --info --stacktrace
+      run: ./gradlew -PbaseModuleJavaCompatibility=8 -PjavaToolchainVersion=${{ matrix.java }} buildCI buildJPackages --scan --info --stacktrace
       env:
         JAVA_HOME: ${{ steps.setupjdk.outputs.path }}
     - name: Upload DMG as an artifact
