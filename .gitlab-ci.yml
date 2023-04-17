@@ -1,18 +1,17 @@
-image: ubuntu:focal
+image: debian:bookworm-slim
 
 # Note: You can test changes to this file locally with:
 # gitlab-runner exec docker --docker-privileged build
 
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-  UBUNTU_CODENAME: "focal"
   JDK_PACKAGE: "openjdk-17-jdk"
 
 before_script:
   - echo $GRADLE_OPTS
   - apt-get update
   - apt-get -y upgrade
-  - DEBIAN_FRONTEND=noninteractive apt-get -y install wget apt-transport-https gnupg curl binutils rpm fakeroot
+  - apt-get -y install wget apt-transport-https gnupg curl binutils rpm fakeroot
   - apt-get -y install $JDK_PACKAGE
   - java -version
 
