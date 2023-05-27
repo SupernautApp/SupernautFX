@@ -32,6 +32,7 @@ allprojects {
 
     dependencies {
         testImplementation "org.spockframework:spock-core:${spockVersion}"
+        testImplementation "org.apache.groovy:groovy:${groovyVersion}"
 
         testRuntimeOnly "net.bytebuddy:byte-buddy:1.11.20"                 // allows Spock to mock classes (in addition to interfaces)
         testRuntimeOnly "org.objenesis:objenesis:3.2"                     // Allow Spock to mock classes with constructor arguments
