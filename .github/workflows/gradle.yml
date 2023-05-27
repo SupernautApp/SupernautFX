@@ -37,23 +37,23 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-dmg
-        path: supernaut-fx-sample-hello/build/jpackage/*.dmg
+        path: apps/supernaut-fx-sample-hello/build/jpackage/*.dmg
         if-no-files-found: ignore
     - name: Upload EXE as an artifact
       uses: actions/upload-artifact@v3
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-exe
-        path: supernaut-fx-sample-hello/build/jpackage/*.exe
+        path: apps/supernaut-fx-sample-hello/build/jpackage/*.exe
         if-no-files-found: ignore
     - name: Upload DEB as an artifact
       uses: actions/upload-artifact@v3
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-deb
-        path: supernaut-fx-sample-hello/build/jpackage/*.deb
+        path: apps/supernaut-fx-sample-hello/build/jpackage/*.deb
         if-no-files-found: ignore
     - name: Upload RPM as an artifact
       uses: actions/upload-artifact@v3
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-rpm
-        path: supernaut-fx-sample-hello/build/jpackage/*.rpm
+        path: apps/supernaut-fx-sample-hello/build/jpackage/*.rpm
         if-no-files-found: ignore
