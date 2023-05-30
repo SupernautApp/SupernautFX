@@ -20,6 +20,7 @@ Released: not yet
 * Run Spock with Groovy 4.0.12 (for JDK 20 support)
 * Upgrade to JavaFX Plugin 0.0.13
 * Upgrade to Badass JLink Plugin 2.25.0
+* Upgrade BadAss Jar Plugin to 2.0.0 (used for base `app.supernaut` module)
 
 == v0.4.0
 
