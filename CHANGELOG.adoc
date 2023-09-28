@@ -11,13 +11,13 @@ Released: not yet
 
 * JavaFX 17.0.7
 * Micronaut 3.4.4
-* SLF4J 2.0.7
+* SLF4J 2.0.9
 
 === Build
 
 * Upgrade to Gradle 8.4-rc-2
 * Upgrade to Spock 2.3-groovy-4.0
-* Run Spock with Groovy 4.0.13 (for JDK 20 support)
+* Run Spock with Groovy 4.0.15
 * Upgrade to JavaFX Plugin 0.0.13
 * Upgrade to Badass JLink Plugin 2.25.0
 * Upgrade BadAss Jar Plugin to 2.0.0 (used for base `app.supernaut` module)
