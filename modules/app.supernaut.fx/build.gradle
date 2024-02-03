@@ -2,11 +2,21 @@ plugins {
     id 'java-library'
 }
 
-apply plugin: app.supernaut.gradle.JavaFXPlatformPlugin
-def platform = ext.jfxPlatform
+apply plugin: "org.openjfx.javafxplugin"
 
 tasks.named('compileJava') {
     options.javaModuleVersion = project.version
+}
+
+javafx {
+    modules = [ 'javafx.graphics', 'javafx.fxml' ]
+    configurations = [ 'compileOnly', 'testImplementation' ]
+}
+
+test {
+    moduleOptions {
+        runOnClasspath = true
+    }
 }
 
 dependencies {
@@ -15,13 +25,5 @@ dependencies {
     api "org.openjfx:javafx-graphics:${javaFxVersion}"
     api "org.openjfx:javafx-fxml:${javaFxVersion}"
 
-    compileOnly "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
-    compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
-    compileOnly "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
-
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
-
-    testImplementation "org.openjfx:javafx-base:${javaFxVersion}:${platform}"
-    testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:${platform}"
-    testImplementation "org.openjfx:javafx-fxml:${javaFxVersion}:${platform}"
 }

@@ -41,7 +41,7 @@ class FxVersionUtilSpec extends Specification {
         "18-ea+4"                           | "17.0.1"  | 1
         "18"                                | "17-ea+5" | 1
         "18-ea+4"                           | "17-ea+5" | 1
-      // This test fails, but maybe I'm undestanding things wrong
+      // This test fails, but maybe I'm understanding things wrong
       // "18-internal+2-2021-08-25-091715"   | "18-ea+4" | -1
     }
 }
