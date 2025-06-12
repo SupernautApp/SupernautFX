@@ -2,7 +2,7 @@ plugins {
     id 'org.asciidoctor.jvm.convert'        version '4.0.0'
     id 'org.ajoberstar.git-publish'         version '3.0.0'
     id 'org.openjfx.javafxplugin'           version '0.1.0'  apply false
-    id 'org.beryx.jlink'                    version '2.26.0' apply false
+    id 'org.beryx.jlink'                    version '3.1.1' apply false
     id 'com.github.hierynomus.license'      version '0.16.1' apply false
 }
 
