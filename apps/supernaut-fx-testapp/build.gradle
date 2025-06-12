@@ -31,24 +31,15 @@ configurations.all {
     exclude group: 'org.yaml', module: "snakeyaml"
 }
 
-// Workaround for https://github.com/SupernautApp/SupernautFX/issues/6
-modularity.disableEffectiveArgumentsAdjustment()
-
 javafx {
     version = javaFxVersion
     modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
 }
 
 run {
-    moduleOptions {
-        addModules = ['app.supernaut.fx.micronaut']
-    }
 }
 
 test {
-    moduleOptions {
-        runOnClasspath = true
-    }
 }
 
 def os = org.gradle.internal.os.OperatingSystem.current()
