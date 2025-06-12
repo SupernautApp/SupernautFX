@@ -37,25 +37,25 @@ jobs:
       env:
         JAVA_HOME: ${{ steps.setupjdk.outputs.path }}
     - name: Upload DMG as an artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-dmg
         path: apps/supernaut-fx-sample-hello/build/jpackage/*.dmg
         if-no-files-found: ignore
     - name: Upload EXE as an artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-exe
         path: apps/supernaut-fx-sample-hello/build/jpackage/*.exe
         if-no-files-found: ignore
     - name: Upload DEB as an artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-deb
         path: apps/supernaut-fx-sample-hello/build/jpackage/*.deb
         if-no-files-found: ignore
     - name: Upload RPM as an artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: supernaut-fx-hello-jdk${{ matrix.java }}-${{ matrix.os }}-rpm
         path: apps/supernaut-fx-sample-hello/build/jpackage/*.rpm
