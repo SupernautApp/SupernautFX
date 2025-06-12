@@ -18,6 +18,7 @@ Released: not yet
 * Upgrade to Gradle 8.14.2
 * Upgrade to Spock 2.3-groovy-4.0
 * Run Spock with Groovy 4.0.27
+* Java Modularity Gradle Plugin 1.8.15
 * Upgrade to JavaFX Plugin 0.0.13
 * Upgrade to Badass JLink Plugin 2.25.0
 * Upgrade BadAss Jar Plugin to 2.0.0 (used for base `app.supernaut` module)
