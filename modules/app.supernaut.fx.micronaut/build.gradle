@@ -14,9 +14,6 @@ javafx {
 }
 
 test {
-    moduleOptions {
-        runOnClasspath = true
-    }
 }
 
 dependencies {
