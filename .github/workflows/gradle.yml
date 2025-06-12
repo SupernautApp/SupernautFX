@@ -14,7 +14,7 @@ jobs:
     name: ${{ matrix.os }} JDK ${{ matrix.distribution }} ${{ matrix.java }}
     steps:
     - name: Git checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Set up JDK (via matrix) for Gradle and Gradle Java Toolchain
       id: setupjdk
       uses: actions/setup-java@v3
