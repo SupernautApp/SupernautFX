@@ -9,7 +9,7 @@ Released: not yet
 
 === Dependency Upgrades
 
-* JavaFX 17.0.7
+* JavaFX 17.0.15
 * Micronaut 3.4.4
 * SLF4J 2.0.17
 
