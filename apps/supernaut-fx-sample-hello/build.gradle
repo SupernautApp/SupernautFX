@@ -26,7 +26,7 @@ dependencies {
     runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 }
 
-configurations.all {
+configurations.configureEach {
     exclude group: 'javax.annotation', module: "javax.annotation-api"
     exclude group: 'org.yaml', module: "snakeyaml"
 }

@@ -67,7 +67,7 @@ apply from: 'gradle/asciidoctor.gradle'
 apply from: 'gradle/github-pages.gradle'
 apply from: 'gradle/maven-publish.gradle'
 
-task testReport(type: TestReport) {
+tasks.register('testReport', TestReport) {
     destinationDir = file("$buildDir/reports/allTests")
     // Include the results from the `test` task in all subprojects
     reportOn subprojects*.test
@@ -75,13 +75,13 @@ task testReport(type: TestReport) {
 
 build.dependsOn subprojects.build
 
-task buildCI {
+tasks.register('buildCI') {
     dependsOn build, testReport,
             mergedJavadoc,
             subprojects.collect { it.tasks.matching { it.name == 'jlink'} }
 }
 
-task buildJPackages {
+tasks.register('buildJPackages') {
     dependsOn buildCI, subprojects.collect { it.tasks.matching { it.name == 'jpackage'} }
 }
 
