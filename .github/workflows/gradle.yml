@@ -22,7 +22,7 @@ jobs:
         distribution: ${{ matrix.distribution }}
         java-version: ${{ matrix.java }}
     - name: Verify Gradle Wrapper
-      uses: gradle/wrapper-validation-action@v1
+      uses: gradle/actions/wrapper-validation@v4
     - name: Cache Gradle packages
       uses: actions/cache@v3
       with:
