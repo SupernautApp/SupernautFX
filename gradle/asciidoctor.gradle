@@ -6,10 +6,6 @@ asciidoctorj {
 }
 
 asciidoctor {
-    sourceDir file('doc')
-    outputDir file("$buildDir/site")
-    forkOptions {
-        // Fix issue with JDK16+
-        jvmArgs("--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.io=ALL-UNNAMED")
-    }
+    sourceDir = file('doc')
+    outputDir = file("$buildDir/site")
 }

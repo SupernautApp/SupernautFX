@@ -33,6 +33,7 @@ allprojects {
         testImplementation "org.spockframework:spock-core:${spockVersion}"
         testImplementation "org.apache.groovy:groovy:${groovyVersion}"
 
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
         testRuntimeOnly "net.bytebuddy:byte-buddy:1.11.20"                 // allows Spock to mock classes (in addition to interfaces)
         testRuntimeOnly "org.objenesis:objenesis:3.2"                     // Allow Spock to mock classes with constructor arguments
         testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"           // Runtime implementation of slf4j
@@ -68,9 +69,9 @@ apply from: 'gradle/github-pages.gradle'
 apply from: 'gradle/maven-publish.gradle'
 
 tasks.register('testReport', TestReport) {
-    destinationDir = file("$buildDir/reports/allTests")
     // Include the results from the `test` task in all subprojects
-    reportOn subprojects*.test
+    destinationDirectory = layout.buildDirectory.dir("reports/allTests")
+    testResults.from(subprojects.collect { it.tasks.withType(Test) })
 }
 
 build.dependsOn subprojects.build
