@@ -5,8 +5,8 @@ subprojects {
         repositories {
             def supernautGitlabProjectId = "26584840"
             maven {
-                url "https://gitlab.com/api/v4/projects/${supernautGitlabProjectId}/packages/maven"
-                name "GitLab"
+                url = "https://gitlab.com/api/v4/projects/${supernautGitlabProjectId}/packages/maven"
+                name = "GitLab"
                 credentials(HttpHeaderCredentials) {
                     name = 'Private-Token'
                     value = project.findProperty("gitLabMavenToken")
