@@ -3,25 +3,25 @@
 
 A high-level view of the changes in each Supernaut.FX release.
 
-== v0.4.1-SNAPSHOT
+== v0.5.0-SNAPSHOT
 
 Released: not yet
 
 === Dependency Upgrades
 
-* JavaFX 17.0.15
+* JavaFX 25
 * Micronaut 3.4.4
 * SLF4J 2.0.17
 
 === Build
 
-* Upgrade to Gradle 8.14.2
+* Upgrade to Gradle 9.1.0
 * Upgrade to Spock 2.3-groovy-4.0
-* Run Spock with Groovy 4.0.27
+* Run Spock with Groovy 4.0.28
 * Upgrade to JavaFX Plugin 0.1.0
-* Upgrade to Badass JLink Plugin 3.1.1
+* Upgrade to Badass JLink Plugin 3.1.4-rc
 * Upgrade BadAss Jar Plugin to 2.0.0 (used for base `app.supernaut` module)
-* Upgrade to Asciidoctor Gradle Plugin 4.0.0
+* Upgrade to Asciidoctor Gradle Plugin 4.0.4
 
 == v0.4.0
 
