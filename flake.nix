@@ -23,21 +23,13 @@
         # define default devshell, with a richer collection of tools intended for interactive development
         devShells.default = pkgs.mkShell {
           packages = with pkgs ; [
-                jdk25                      # JDK 25 will be in PATH
-                (gradle_9.override {       # Gradle 9.x (Nix package) runs using an internally-linked JDK
-                    java = jdk25;          # Run Gradle with this JDK
-                })
-		rpm                        # Used by jpackage to build an `.rpm`
-		# We probably need to add something for `.deb` here, but I tested on Debian + Nixpkgs and it wasn't needed.
-            ];
-        };
-
-        # define flake output packages
-        packages = let
-          # common properties across the derivations
-          version = "0.0.1";
-        in {
-           # TBD
+            jdk25                      # JDK 25 will be in PATH
+            (gradle_9.override {       # Gradle 9.x (Nix package) runs using an internally-linked JDK
+              java = jdk25;          # Run Gradle with this JDK
+            })
+		    rpm                        # Used by jpackage to build an `.rpm`
+		    # We probably need to add something for `.deb` here, but I tested on Debian + Nixpkgs and it wasn't needed.
+          ];
         };
       };
     };
