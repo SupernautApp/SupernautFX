@@ -1,11 +1,11 @@
-image: debian:bookworm-slim
+image: debian:trixie-slim
 
 # Note: You can test changes to this file locally with:
 # gitlab-runner exec docker --docker-privileged build
 
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-  JDK_PACKAGE: "openjdk-17-jdk"
+  JDK_PACKAGE: "openjdk-25-jdk"
 
 before_script:
   - echo $GRADLE_OPTS
