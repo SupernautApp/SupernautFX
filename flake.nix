@@ -22,7 +22,6 @@
       in {
         # define default devshell, with a richer collection of tools intended for interactive development
         devShells.default = pkgs.mkShell {
-          inputsFrom = with pkgs ; [ secp256k1 ];
           packages = with pkgs ; [
                 jdk21                      # JDK 21 will be in PATH
                 (gradle.override {         # Gradle 8.x (Nix package) runs using an internally-linked JDK
