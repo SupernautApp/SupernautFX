@@ -24,7 +24,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs ; [
                 jdk21                      # JDK 21 will be in PATH
-                (gradle.override {         # Gradle 8.x (Nix package) runs using an internally-linked JDK
+                (gradle_9.override {       # Gradle 9.x (Nix package) runs using an internally-linked JDK
                     java = jdk21;          # Run Gradle with this JDK
                 })
 		rpm                        # Used by jpackage to build an `.rpm`
