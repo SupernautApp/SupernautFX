@@ -53,7 +53,7 @@ allprojects {
     }
 
     compileJava {
-        options.release = 17
+        options.release = 25
         options.compilerArgs << '-Xlint:deprecation' << '-Xlint:unchecked'
     }
 
