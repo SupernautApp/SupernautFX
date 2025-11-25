@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
  * the foreground and background applications.
  */
 public class MicronautFxLauncher extends FxLauncherAbstract {
-    private static final Logger log = LoggerFactory.getLogger(FxLauncherAbstract.class);
+    private static final Logger log = LoggerFactory.getLogger(MicronautFxLauncher.class);
 
     /**
      * Default constructor that initializes the background app on its own thread.
