@@ -44,16 +44,16 @@ class SimpleJfxLauncherIntegrationSpec extends Specification {
         then:
         futureBackgroundApp != null
         foregroundApp != null
-        foregroundApp instanceof ApplicationDelegate
-        foregroundApp instanceof NoopAppDelegate
+        (foregroundApp instanceof ApplicationDelegate)
+        (foregroundApp instanceof NoopAppDelegate)
 
         when:
         BackgroundApp backgroundApp = futureBackgroundApp.get()
 
         then:
         backgroundApp != null
-        backgroundApp instanceof BackgroundApp
-        backgroundApp instanceof NoopBackgroundApp
+        (backgroundApp instanceof BackgroundApp)
+        (backgroundApp instanceof NoopBackgroundApp)
 
         when:
         foregroundApp.stop()

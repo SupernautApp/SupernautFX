@@ -39,14 +39,14 @@ class FxmlLoaderFactoryIntegrationSpecification extends Specification {
 
         then: "It is successfully retrieved"
         foundFactory != null
-        foundFactory instanceof MicronautFxmlLoaderFactory
+        (foundFactory instanceof MicronautFxmlLoaderFactory)
 
         when: "We use the FxmlLoaderFactory"
         FXMLLoader loader = foundFactory.get();
 
         then: "It creates an FXMLLoader"
         loader != null
-        loader instanceof FXMLLoader
+        (loader instanceof FXMLLoader)
     }
 
     // TODO: Re-enable this test somehow (somewhere) but without _this_ module depending on jakarta.inject
