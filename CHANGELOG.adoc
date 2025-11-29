@@ -25,7 +25,7 @@ Released: not yet
 * Upgrade to JavaFX Plugin 0.1.0
 * Upgrade to Badass JLink Plugin 3.1.4-rc
 * Remove BadAss Jar Plugin (`app.supernaut` now requires Java 9)
-* Upgrade to Asciidoctor Gradle Plugin 4.0.4
+* Upgrade to Asciidoctor Gradle Plugin 4.0.5
 
 == v0.4.0
 
