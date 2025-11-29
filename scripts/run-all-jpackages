@@ -1,0 +1,6 @@
+#!/bin/bash
+for i in apps/*/build/jpackage/*.app/Contents/MacOS/* ; do
+	echo "==== Running $i"
+    "$i"
+done
+
