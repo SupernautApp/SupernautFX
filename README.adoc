@@ -107,7 +107,7 @@ You may also develop library modules for services depending only on `app.superna
 
 . Clone the repository
 . Make sure your `JAVA_HOME` points to a JDK 17 or newer
-. `./gradlew -PbaseModuleJavaCompatibility=8 buildCI buildJPackages`
+. `./gradlew buildCI buildJPackages`
 
 To test one of the included sample apps:
 

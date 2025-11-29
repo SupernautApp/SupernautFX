@@ -33,7 +33,7 @@ jobs:
       shell: bash
       run: |
         JDKVER=${{ matrix.java }}
-        ./gradlew -PbaseModuleJavaCompatibility=8 -PjavaToolchainVersion=${JDKVER%%"-ea"} buildCI buildJPackages --scan --info --stacktrace
+        ./gradlew -PjavaToolchainVersion=${JDKVER%%"-ea"} buildCI buildJPackages --scan --info --stacktrace
       env:
         JAVA_HOME: ${{ steps.setupjdk.outputs.path }}
     - name: Upload DMG as an artifact
