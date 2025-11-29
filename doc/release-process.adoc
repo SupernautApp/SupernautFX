@@ -13,7 +13,7 @@
 .. `README.adoc`
 . Commit version bump and changelog.
 . Full build, test
-.. `./gradlew -PbaseModuleJavaCompatibility=8 clean buildCI buildJPackages`
+.. `./gradlew clean buildCI buildJPackages`
 . Tag: `git tag -a v0.x.y -m "Release 0.x.y"`
 . Push: `git push --tags origin master`
 . Publish to GitLab (and GitHub) Maven repos:
