@@ -5,7 +5,7 @@ plugins {
 apply plugin: "org.openjfx.javafxplugin"
 apply plugin: "org.beryx.jlink"
 
-def appName = 'SupernautFX Hello'
+def appName = 'SupernautFXHello'
 version = helloAppVersion
 
 application {
