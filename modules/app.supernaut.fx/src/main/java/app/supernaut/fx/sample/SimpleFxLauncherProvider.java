@@ -17,26 +17,29 @@ package app.supernaut.fx.sample;
 
 import app.supernaut.BackgroundApp;
 import app.supernaut.fx.ApplicationDelegate;
-import app.supernaut.fx.FxLauncherAbstract;
+import app.supernaut.fx.FxLauncher;
 import app.supernaut.fx.FxLauncherProvider;
 
 /**
- * A simple {@link FxLauncherAbstract} that uses {@link Class} objects to specify {@link BackgroundApp}
- * and {@link ApplicationDelegate}.
+ *
  */
-public final class SimpleFxLauncher extends FxLauncherAbstract {
-    /**
-     * Default constructor using background start
-     */
-    public SimpleFxLauncher(FxLauncherProvider.AppFactory appFactory) {
-        this( appFactory, true);
+public class SimpleFxLauncherProvider implements FxLauncherProvider {
+    @Override
+    public String id() {
+        return "simple";
     }
 
-    /**
-     * Constructor that lets you choose background start or not
-     * @param backgroundStart  true to start on background
-     */
-    public SimpleFxLauncher(FxLauncherProvider.AppFactory appFactory, boolean backgroundStart) {
-        super(appFactory, backgroundStart);
+    @Override
+    public FxLauncher launcher(FxLauncherProvider.AppFactory appFactory) {
+        return new SimpleFxLauncher(appFactory);
+    }
+
+    @Override
+    public FxLauncher launcher(Class<? extends ApplicationDelegate> appDelegateClass, Class<? extends BackgroundApp> backgroundAppClass) {
+        return new SimpleFxLauncher(new DefaultAppFactory(appDelegateClass, backgroundAppClass));
+    }
+
+    ///  A "Provider" must have a no-arg constructor
+    public SimpleFxLauncherProvider() {
     }
 }

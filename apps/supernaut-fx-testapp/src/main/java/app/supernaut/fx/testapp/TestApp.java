@@ -17,6 +17,7 @@ package app.supernaut.fx.testapp;
 
 import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
+import app.supernaut.fx.FxLauncherProvider;
 import app.supernaut.fx.fxml.FxmlLoaderFactory;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -71,16 +72,16 @@ public class TestApp implements ApplicationDelegate {
         }
 
         /*
-           Get a Launcher. It should really come from a ServiceLoader
+           Get a Launcher.
          */
         log.info("Entered main, getting launcher...");
-        FxLauncher launcher = getLauncher();
+        FxLauncher launcher = FxLauncherProvider.find().launcher(TestApp.class, TestBackgroundApp.class);
 
         /*
            Get a Future for a ForegroundApp app, then resolve the future
          */
         log.info("Calling launch");
-        CompletableFuture<ApplicationDelegate> futureForegroundApp = launcher.launchAsync(args, TestApp.class, TestBackgroundApp.class);
+        CompletableFuture<ApplicationDelegate> futureForegroundApp = launcher.launchAsync(args);
         log.info("We have a CompletableFuture<ForegroundApp>");
 
         ApplicationDelegate foregroundApp = futureForegroundApp.get();
@@ -99,11 +100,6 @@ public class TestApp implements ApplicationDelegate {
         if (args.length > 1 && args[0].equals("--test=exit_main_end")) {
             System.exit(0);
         }
-
-    }
-
-    private static FxLauncher getLauncher() {
-        return FxLauncher.byName("micronaut");
     }
 
     /**

@@ -13,30 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.supernaut.fx.sample;
+package app.supernaut.fx.micronaut;
 
 import app.supernaut.BackgroundApp;
 import app.supernaut.fx.ApplicationDelegate;
-import app.supernaut.fx.FxLauncherAbstract;
+import app.supernaut.fx.FxLauncher;
 import app.supernaut.fx.FxLauncherProvider;
 
 /**
- * A simple {@link FxLauncherAbstract} that uses {@link Class} objects to specify {@link BackgroundApp}
- * and {@link ApplicationDelegate}.
+ *
  */
-public final class SimpleFxLauncher extends FxLauncherAbstract {
-    /**
-     * Default constructor using background start
-     */
-    public SimpleFxLauncher(FxLauncherProvider.AppFactory appFactory) {
-        this( appFactory, true);
+public class MicronautFxLauncherProvider implements FxLauncherProvider {
+    @Override
+    public String id() {
+        return "micronaut";
     }
 
-    /**
-     * Constructor that lets you choose background start or not
-     * @param backgroundStart  true to start on background
-     */
-    public SimpleFxLauncher(FxLauncherProvider.AppFactory appFactory, boolean backgroundStart) {
-        super(appFactory, backgroundStart);
+    @Override
+    public FxLauncher launcher(Class<? extends ApplicationDelegate> appDelegateClass, Class<? extends BackgroundApp> backgroundAppClass) {
+        return new MicronautFxLauncher(appDelegateClass, backgroundAppClass);
+    }
+
+    @Override
+    public FxLauncher launcher(AppFactory appFactory) {
+        throw new UnsupportedOperationException("For Micronaut Use launcher() method that takes Class objects");
+    }
+
+    /// Providers must have no-arg constructor
+    public MicronautFxLauncherProvider() {
     }
 }

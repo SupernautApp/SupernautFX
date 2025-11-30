@@ -16,9 +16,8 @@
 package app.supernaut.fx.sample.hello;
 
 import app.supernaut.fx.ApplicationDelegate;
-import app.supernaut.fx.FxLauncher;
+import app.supernaut.fx.FxLauncherProvider;
 import app.supernaut.fx.fxml.FxmlLoaderFactory;
-import app.supernaut.fx.test.NoopBackgroundApp;
 import io.micronaut.context.annotation.Factory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,7 +59,7 @@ public class HelloApp implements ApplicationDelegate {
      */
     public static void main(String[] args) {
         JavaLoggingSupport.configure(HelloApp.class, "app.supernaut.fx.sample.hello");
-        FxLauncher.find().launch(args, HelloApp.class);
+        FxLauncherProvider.find().launcher(HelloApp.class).launch(args);
     }
 
     /**
@@ -102,14 +101,6 @@ public class HelloApp implements ApplicationDelegate {
     @Named("PLANETNAME")
     public String getPlanetName() {
         return "Mars";
-    }
-
-    /**
-     * @return A "noop" background app
-     */
-    @Singleton
-    public NoopBackgroundApp getBackgroundApp() {
-        return new NoopBackgroundApp();
     }
 
     private URL getFXMLUrl(String fileName) {

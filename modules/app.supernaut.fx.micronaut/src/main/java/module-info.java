@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import app.supernaut.fx.FxLauncherProvider;
+import app.supernaut.fx.micronaut.MicronautFxLauncherProvider;
+
 /**
  * Module implementing Supernaut.FX dependency injection with Micronaut
  *
@@ -31,5 +34,5 @@ module app.supernaut.fx.micronaut {
     exports app.supernaut.fx.micronaut;
     exports app.supernaut.fx.micronaut.fxml;
 
-    provides app.supernaut.fx.FxLauncher with app.supernaut.fx.micronaut.MicronautFxLauncher;
+    provides FxLauncherProvider with MicronautFxLauncherProvider;
 }

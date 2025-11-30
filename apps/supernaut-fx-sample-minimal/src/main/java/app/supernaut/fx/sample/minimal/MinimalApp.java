@@ -16,7 +16,7 @@
 package app.supernaut.fx.sample.minimal;
 
 import app.supernaut.fx.ApplicationDelegate;
-import app.supernaut.fx.FxLauncher;
+import app.supernaut.fx.FxLauncherProvider;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -36,7 +36,7 @@ public class MinimalApp implements ApplicationDelegate {
      * @param args command-line args
      */
     public static void main(String[] args) {
-        FxLauncher.find().launch(args, MinimalApp.class);
+        FxLauncherProvider.find().launcher(MinimalApp.class).launch(args);
     }
 
     /**
