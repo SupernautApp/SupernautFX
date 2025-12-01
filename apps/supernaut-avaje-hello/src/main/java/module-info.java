@@ -15,24 +15,26 @@
  */
 
 import app.supernaut.fx.FxLauncherProvider;
-import app.supernaut.fx.avaje.AvajeFxLauncherProvider;
+import io.avaje.inject.spi.InjectExtension;
 
-/**
- * Module implementing Supernaut.FX dependency injection with Avaje Inject
- *
- * @provides FxLauncherProvider with {@link AvajeFxLauncherProvider}
- */
-module app.supernaut.fx.avaje {
-    requires transitive app.supernaut.fx;
-    
+module app.supernaut.sample.avaje.hello {
+
     requires javafx.graphics;
+    requires javafx.controls;
     requires javafx.fxml;
 
-    requires org.slf4j;
+    requires app.supernaut.fx;
+    requires app.supernaut.fx.avaje;
+
+    requires jakarta.inject;
     requires io.avaje.inject;
 
-    exports app.supernaut.fx.avaje;
-    exports app.supernaut.fx.avaje.fxml;
+    requires org.slf4j;
 
-    provides FxLauncherProvider with AvajeFxLauncherProvider;
+    opens app.supernaut.sample.avaje.hello to javafx.graphics, java.base, javafx.fxml;
+    exports app.supernaut.sample.avaje.hello;
+
+    provides InjectExtension with app.supernaut.sample.avaje.hello.HelloModule;
+
+    uses FxLauncherProvider;
 }

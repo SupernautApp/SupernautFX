@@ -13,26 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package app.supernaut.fx.avaje;
 
-import app.supernaut.fx.FxLauncherProvider;
-import app.supernaut.fx.avaje.AvajeFxLauncherProvider;
+import app.supernaut.fx.services.FxBrowserService;
+import app.supernaut.services.BrowserService;
+import io.avaje.inject.Factory;
+import io.avaje.inject.Lazy;
+import jakarta.inject.Provider;
+import jakarta.inject.Singleton;
+import javafx.application.Application;
 
 /**
- * Module implementing Supernaut.FX dependency injection with Avaje Inject
  *
- * @provides FxLauncherProvider with {@link AvajeFxLauncherProvider}
  */
-module app.supernaut.fx.avaje {
-    requires transitive app.supernaut.fx;
-    
-    requires javafx.graphics;
-    requires javafx.fxml;
+@Lazy
+@Singleton
+@Factory
+public class AvajeBeanFactory implements Provider<BrowserService> {
+    public static Application proxyApplication;
 
-    requires org.slf4j;
-    requires io.avaje.inject;
-
-    exports app.supernaut.fx.avaje;
-    exports app.supernaut.fx.avaje.fxml;
-
-    provides FxLauncherProvider with AvajeFxLauncherProvider;
+    @Override
+    public BrowserService get() {
+        return new FxBrowserService(proxyApplication.getHostServices());
+    }
 }

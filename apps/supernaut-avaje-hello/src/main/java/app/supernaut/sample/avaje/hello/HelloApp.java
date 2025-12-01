@@ -1,0 +1,114 @@
+/*
+ * Copyright 2019-2022 M. Sean Gilligan.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package app.supernaut.sample.avaje.hello;
+
+import app.supernaut.fx.ApplicationDelegate;
+import app.supernaut.fx.FxLauncherProvider;
+import app.supernaut.fx.avaje.AvajeBeanFactory;
+import app.supernaut.fx.avaje.fxml.AvajeFxmlLoaderFactory;
+import app.supernaut.fx.fxml.FxmlLoaderFactory;
+import app.supernaut.logging.JavaLoggingSupport;
+import io.avaje.inject.Bean;
+import io.avaje.inject.Component;
+import io.avaje.inject.Factory;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.URL;
+
+/**
+ * A simple Supernaut.FX App implementing {@link ApplicationDelegate}.
+ *
+ * If is also annotated to be Avaje {@link Factory}. This allows it to
+ * create the {@link Named} {@code String} instance and to specify inclusion
+ * of a {@code Bean} that is defined in a library, which will enable the Avaje
+ * annotation processor to include the generated code for that {@code Bean}.
+ *
+ * (It might be nice to abstract this "factory" capability somehow so apps don't need to
+ * be  directly dependent on Avaje for something so simple, but at this point using the @Factory
+ * annotation seems to be the simplest way to do things.)
+ */
+
+
+@Singleton
+@Factory
+@Component.Import({AvajeFxmlLoaderFactory.class, AvajeBeanFactory.class})
+public class HelloApp implements ApplicationDelegate {
+    private static final Logger log = LoggerFactory.getLogger(HelloApp.class);
+    private final FxmlLoaderFactory loaderFactory;
+
+
+    /**
+     * Main method that calls launcher
+     * @param args command-line args
+     */
+    static void main(String[] args) {
+        JavaLoggingSupport.configure(HelloApp.class, "app.supernaut.sample.avaje.hello");
+        FxLauncherProvider.find().launcher(HelloApp.class).launch(args);
+    }
+
+    /**
+     * Constructor
+     * @param loaderFactory injected FXMLLoaderFactory
+     */
+    public HelloApp(FxmlLoaderFactory loaderFactory) {
+        log.info("Constructing Hello");
+        this.loaderFactory = loaderFactory;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void init() {
+        log.info("Initializing Hello");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        log.info("Starting Hello");
+        FXMLLoader loader = loaderFactory.get(getFXMLUrl("MainWindow.fxml"));
+        log.debug("primaryStage root FXML: {}", loader.getLocation());
+        Parent root = loader.load();
+
+        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.setTitle("SFX Avaje Hello");
+        primaryStage.show();
+    }
+
+    /**
+     * @return the planet name to great
+     */
+    @Bean
+    @Named("PLANETNAME")
+    public String getPlanetName() {
+        return "Mars";
+    }
+
+    private URL getFXMLUrl(String fileName) {
+        return HelloApp.class.getResource(fileName);
+    }
+}

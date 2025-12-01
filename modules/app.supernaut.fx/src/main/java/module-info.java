@@ -31,6 +31,8 @@ import app.supernaut.fx.sample.SimpleFxLauncherProvider;
 module app.supernaut.fx {
     requires transitive app.supernaut;
 
+    requires jakarta.inject;
+    
     requires javafx.graphics;
     requires javafx.fxml;
 

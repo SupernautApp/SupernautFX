@@ -29,8 +29,10 @@ public class AvajeAppFactory implements FxLauncherProvider.AppFactory {
     BeanScope beanScope;
 
     public AvajeAppFactory() {
-        beanScope = BeanScope.builder().build();
+        beanScope = BeanScope.builder()
+                .build();
     }
+
     @Override
     public BackgroundApp createBackgroundApp() {
         return beanScope.getOptional(BackgroundApp.class).orElse(new NoopBackgroundApp());
@@ -38,6 +40,7 @@ public class AvajeAppFactory implements FxLauncherProvider.AppFactory {
 
     @Override
     public ApplicationDelegate createAppDelegate(Application proxyApplication) {
+        AvajeBeanFactory.proxyApplication = proxyApplication;   // TODO: Fix this global var hack
         return beanScope.get(ApplicationDelegate.class);
     }
 }
