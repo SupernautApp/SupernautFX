@@ -15,6 +15,7 @@ application {
 
 dependencies {
     implementation project (':modules:app.supernaut.fx')
+    implementation project (':modules:app.supernaut.fx.avaje')
     implementation "io.avaje:avaje-inject:${avajeInjectVersion}"
     implementation "jakarta.inject:jakarta.inject-api"
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"

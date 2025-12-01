@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.supernaut.fx.sample.avaje;
+package app.supernaut.fx.avaje;
 
 import app.supernaut.BackgroundApp;
 import app.supernaut.fx.ApplicationDelegate;

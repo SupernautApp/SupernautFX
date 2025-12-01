@@ -40,6 +40,7 @@ module app.supernaut.fx.sample.avaje {
     requires javafx.controls;
 
     requires app.supernaut.fx;
+    requires app.supernaut.fx.avaje;
 
     requires jakarta.inject;
     requires io.avaje.inject;

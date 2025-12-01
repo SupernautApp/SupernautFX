@@ -16,8 +16,6 @@ javafx {
 test {
 }
 
-avajeInjectVersion = "11.5"
-
 dependencies {
     api project (':modules:app.supernaut.fx')
     api "org.openjfx:javafx-graphics:${javaFxVersion}"

@@ -35,7 +35,7 @@ public class MinimalApp implements ApplicationDelegate {
      * Main method that calls launcher
      * @param args command-line args
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         FxLauncherProvider.find().launcher(MinimalApp.class).launch(args);
     }
 

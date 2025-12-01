@@ -16,8 +16,8 @@
 package app.supernaut.fx.sample.avaje;
 
 import app.supernaut.fx.ApplicationDelegate;
-import app.supernaut.fx.FxLauncher;
-import app.supernaut.fx.sample.SimpleFxLauncherProvider;
+import app.supernaut.fx.FxLauncherProvider;
+import app.supernaut.fx.avaje.AvajeAppFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -37,12 +37,7 @@ public class MinimalApp implements ApplicationDelegate {
      * @param args command-line args
      */
     static void main(String[] args) {
-        //FxLauncher.find()("avaje-inject").launch(args, MinimalApp.class);
-        //AvajeInjectLauncher launcher = new AvajeInjectLauncher(true);
-        //launcher.launch(args, MinimalApp.class);
-        //FxLauncherProvider.AppFactory appFactory = new FxLauncherProvider.DefaultAppFactory(MinimalApp.class, NoopBackgroundApp.class);
-        FxLauncher launcher = new SimpleFxLauncherProvider().launcher(new AvajeAppFactory());
-        launcher.launch(new String[]{});
+        FxLauncherProvider.find().launcher(new AvajeAppFactory()).launch(new String[]{});
     }
 
     /**
@@ -71,6 +66,6 @@ public class MinimalApp implements ApplicationDelegate {
     @Singleton
     public static class AppConfig {
         /** the application name */
-        public final String appName = "Avaje XX Minimal";
+        public final String appName = "Avaje Minimal";
     }
 }
