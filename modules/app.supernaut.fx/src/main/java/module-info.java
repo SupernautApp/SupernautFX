@@ -41,6 +41,7 @@ module app.supernaut.fx {
     exports app.supernaut.fx.services;
     exports app.supernaut.fx.test;
     exports app.supernaut.fx.util;
+    exports app.supernaut.fx.sample;
     exports app.supernaut.fx.internal to javafx.graphics;
 
     uses FxLauncherProvider;

@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.supernaut.fx.sample.avajeapp;
+package app.supernaut.fx.sample.avaje;
 
 import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
-//import app.supernaut.fx.avaje.AvajeInjectLauncher;
-import io.avaje.inject.BeanScope;
+import app.supernaut.fx.sample.SimpleFxLauncherProvider;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import jakarta.inject.Singleton;
+
 /**
  * A minimal (Single-Class) Supernaut.FX App implementing {@link ApplicationDelegate}.
  */
+@Singleton
 public class MinimalApp implements ApplicationDelegate {
     private final String appName;
 
@@ -34,13 +36,13 @@ public class MinimalApp implements ApplicationDelegate {
      * Main method that calls launcher
      * @param args command-line args
      */
-    public static void main(String[] args) {
-        FxLauncher.byName("avaje-inject").launch(args, MinimalApp.class);
+    static void main(String[] args) {
+        //FxLauncher.find()("avaje-inject").launch(args, MinimalApp.class);
         //AvajeInjectLauncher launcher = new AvajeInjectLauncher(true);
         //launcher.launch(args, MinimalApp.class);
-//        BeanScope beanScope = BeanScope.builder()
-//                .bean(ApplicationDelegate.class, MinimalApp.class)
-//        .build();
+        //FxLauncherProvider.AppFactory appFactory = new FxLauncherProvider.DefaultAppFactory(MinimalApp.class, NoopBackgroundApp.class);
+        FxLauncher launcher = new SimpleFxLauncherProvider().launcher(new AvajeAppFactory());
+        launcher.launch(new String[]{});
     }
 
     /**
@@ -63,12 +65,12 @@ public class MinimalApp implements ApplicationDelegate {
         primaryStage.show();
     }
 
-//    /**
-//     * An example object that is constructed by the DI framework and injected.
-//     */
-//    @Singleton
-//    public static class AppConfig {
-//        /** the application name */
-//        public final String appName = "Avaje Minimal";
-//    }
+    /**
+     * An example object that is constructed by the DI framework and injected.
+     */
+    @Singleton
+    public static class AppConfig {
+        /** the application name */
+        public final String appName = "Avaje XX Minimal";
+    }
 }

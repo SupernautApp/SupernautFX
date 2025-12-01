@@ -1,0 +1,86 @@
+plugins {
+    id 'application'
+}
+
+apply plugin: "org.openjfx.javafxplugin"
+apply plugin: "org.beryx.jlink"
+
+def appName = 'SFX Avaje Min'
+version = helloAppVersion
+
+application {
+    mainModule = 'app.supernaut.fx.sample.avaje'
+    mainClass = 'app.supernaut.fx.sample.avaje.MinimalApp'
+}
+
+dependencies {
+    implementation project (':modules:app.supernaut.fx')
+    implementation "io.avaje:avaje-inject:${avajeInjectVersion}"
+    implementation "jakarta.inject:jakarta.inject-api"
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    annotationProcessor "io.avaje:avaje-inject-generator:${avajeInjectVersion}"
+
+    runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+}
+
+tasks.withType(Javadoc).configureEach { javadoc ->
+    dependsOn tasks.withType(JavaCompile) // ensure annotation processing / compilation happens first
+
+    // Include generated sources in Javadoc
+    source += fileTree("$buildDir/generated/sources/annotationProcessor/java/main")
+
+    // Add generated sources to classpath (important for symbols)
+    classpath += files("$buildDir/generated/sources/annotationProcessor/java/main")
+}
+
+javafx {
+    version = javaFxVersion
+    modules = ['javafx.graphics', 'javafx.controls', 'javafx.fxml']
+}
+
+run {
+}
+
+test {
+}
+
+def os = org.gradle.internal.os.OperatingSystem.current()
+
+jlink {
+    addExtraDependencies("javafx")
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages', '--add-modules', 'org.slf4j.jul']
+    launcher {
+        name = appName
+        jvmArgs = []
+    }
+    jpackage {
+        // See https://badass-jlink-plugin.beryx.org/releases/latest/#_jpackage for
+        // where the plugin's jpackage task finds the path to the jpackage tool by default
+        skipInstaller = false
+
+        // Which installers to make
+        if (os.linux) {
+            installerType = null            // default is ['rpm', 'deb']
+        } else if (os.macOsX) {
+            installerType = 'dmg'           // default is ['pkg', 'dmg']
+        } else if (os.windows) {
+            installerType = 'exe'           // default is ['exe', 'msi']
+        }
+
+        // Massage version string to be compatible with jpackage installers
+        // for the current OS platform
+        def appVersionForJpackage = normalizeAppVersion(version)
+
+        imageOptions = ["--verbose", "--app-version", appVersionForJpackage]
+        installerOptions = ["--app-version", appVersionForJpackage]
+        if (os.macOsX) {
+            if (rootProject.ext.signJPackageImages) {
+                logger.warn "Setting --mac-sign in jpackage imageOptions"
+                imageOptions += [ '--mac-sign' ]
+            }
+        } else if (os.windows) {
+            installerOptions += ['--win-dir-chooser', '--win-menu', '--win-shortcut']
+        }
+    }
+}
