@@ -15,8 +15,6 @@
  */
 package app.supernaut.fx.avaje;
 
-import app.supernaut.BackgroundApp;
-import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
 import app.supernaut.fx.FxLauncherProvider;
 
@@ -30,17 +28,10 @@ public class AvajeFxLauncherProvider implements FxLauncherProvider {
     }
 
     @Override
-    public FxLauncher launcher(Class<? extends ApplicationDelegate> appDelegateClass, Class<? extends BackgroundApp> backgroundAppClass) {
-        // Ignore the passed in classes -- this method is probably unused and the classes should be annotated, so we'll find them anyway
+    public FxLauncher launcher() {
         return new AvajeFxLauncher(true);
     }
-
-    // TODO: I don't think we really need appFactory passed in, but that's the current API of the superclass...
-    @Override
-    public FxLauncher launcher(AppFactory appFactory) {
-        return new AvajeFxLauncher(appFactory, true);
-    }
-
+    
     /// Providers must have no-arg constructor
     public AvajeFxLauncherProvider() {
     }

@@ -28,8 +28,8 @@ public class MicronautFxLauncher extends FxLauncherAbstract {
     /**
      * Default constructor that initializes the background app on its own thread.
      */
-    public MicronautFxLauncher(Class<? extends ApplicationDelegate> appDelegateClass, Class<? extends BackgroundApp> backgroundAppClass) {
-        this(new MicronautFxAppFactory(appDelegateClass, backgroundAppClass, false), true);
+    public MicronautFxLauncher() {
+        this(new MicronautFxAppFactory(false), true);
     }
 
     /**

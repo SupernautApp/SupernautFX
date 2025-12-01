@@ -17,7 +17,6 @@ package app.supernaut.fx.sample.avaje;
 
 import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncherProvider;
-import app.supernaut.fx.avaje.AvajeAppFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -37,7 +36,7 @@ public class MinimalApp implements ApplicationDelegate {
      * @param args command-line args
      */
     static void main(String[] args) {
-        FxLauncherProvider.find().launcher(new AvajeAppFactory()).launch(new String[]{});
+        FxLauncherProvider.find().launcher().launch(args);
     }
 
     /**

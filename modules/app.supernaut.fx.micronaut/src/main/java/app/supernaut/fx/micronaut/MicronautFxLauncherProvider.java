@@ -30,13 +30,8 @@ public class MicronautFxLauncherProvider implements FxLauncherProvider {
     }
 
     @Override
-    public FxLauncher launcher(Class<? extends ApplicationDelegate> appDelegateClass, Class<? extends BackgroundApp> backgroundAppClass) {
-        return new MicronautFxLauncher(appDelegateClass, backgroundAppClass);
-    }
-
-    @Override
-    public FxLauncher launcher(AppFactory appFactory) {
-        throw new UnsupportedOperationException("For Micronaut Use launcher() method that takes Class objects");
+    public FxLauncher launcher() {
+        return new MicronautFxLauncher();
     }
 
     /// Providers must have no-arg constructor

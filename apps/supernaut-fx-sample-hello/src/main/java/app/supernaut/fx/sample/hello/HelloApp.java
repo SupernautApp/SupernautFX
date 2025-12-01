@@ -59,7 +59,7 @@ public class HelloApp implements ApplicationDelegate {
      */
     public static void main(String[] args) {
         JavaLoggingSupport.configure(HelloApp.class, "app.supernaut.fx.sample.hello");
-        FxLauncherProvider.find().launcher(HelloApp.class).launch(args);
+        FxLauncherProvider.find().launcher().launch(args);
     }
 
     /**

@@ -31,24 +31,20 @@ import javafx.application.HostServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 /**
  *
  */
 public class MicronautFxAppFactory implements FxLauncherProvider.AppFactory {
     private static final Logger log = LoggerFactory.getLogger(MicronautFxAppFactory.class);
-    private final Class<? extends BackgroundApp> backgroundAppClass;
-    private final  Class<? extends ApplicationDelegate> appDelegateClass;
-
     private final BeanContext context;
 
     /**
      * Constructor for Micronaut implementation of AppFactory
      * @param useApplicationContext create {@link ApplicationContext} if true, {@link BeanContext} if false
      */
-    public MicronautFxAppFactory(Class<? extends ApplicationDelegate> appDelegateClass, Class<? extends BackgroundApp> backgroundAppClass, boolean useApplicationContext) {
-        this.appDelegateClass = appDelegateClass;
-        this.backgroundAppClass = backgroundAppClass;
-
+    public MicronautFxAppFactory(boolean useApplicationContext) {
         if (useApplicationContext) {
             log.info("Creating Micronaut ApplicationContext");
             this.context = ApplicationContext.builder(Environment.CLI).build();
@@ -66,12 +62,7 @@ public class MicronautFxAppFactory implements FxLauncherProvider.AppFactory {
      */
     @Override
     public BackgroundApp createBackgroundApp() {
-        if (backgroundAppClass.equals(NoopBackgroundApp.class)) {
-            // Special case for NoopBackgroundApp which is not an (annotated) Micronaut Bean
-            return new NoopBackgroundApp();
-        } else {
-            return context.getBean(backgroundAppClass);
-        }
+        return context.findBean(BackgroundApp.class).orElse(new NoopBackgroundApp());
     }
 
     /**
@@ -81,7 +72,7 @@ public class MicronautFxAppFactory implements FxLauncherProvider.AppFactory {
     public ApplicationDelegate createAppDelegate(Application proxyApplication) {
         log.info("getForegroundApp()");
         initializeBeanContext(context, proxyApplication);
-        return context.getBean(appDelegateClass);
+        return context.getBean(ApplicationDelegate.class);
     }
 
     /**

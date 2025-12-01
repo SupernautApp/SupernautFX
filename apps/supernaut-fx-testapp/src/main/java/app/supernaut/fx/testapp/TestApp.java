@@ -75,7 +75,7 @@ public class TestApp implements ApplicationDelegate {
            Get a Launcher.
          */
         log.info("Entered main, getting launcher...");
-        FxLauncher launcher = FxLauncherProvider.find().launcher(TestApp.class, TestBackgroundApp.class);
+        FxLauncher launcher = FxLauncherProvider.find().launcher();
 
         /*
            Get a Future for a ForegroundApp app, then resolve the future

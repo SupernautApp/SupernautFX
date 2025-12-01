@@ -34,15 +34,7 @@ public interface FxLauncherProvider {
      */
     String id();
 
-    FxLauncher launcher(AppFactory appFactory);
-
-    default FxLauncher launcher(Class<? extends ApplicationDelegate> appDelegateClass) {
-        return launcher(appDelegateClass, NoopBackgroundApp.class);
-    }
-
-    default FxLauncher launcher(Class<? extends ApplicationDelegate> appDelegateClass, Class<? extends BackgroundApp> backgroundAppClass) {
-        throw new UnsupportedOperationException();      // Only works for some implementations.
-    }
+    FxLauncher launcher();
 
     /**
      * Interface that can be used to create and pre-initialize {@link ApplicationDelegate} and {@link BackgroundApp}.

@@ -19,9 +19,11 @@ import app.supernaut.BackgroundApp;
 import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncher;
 import app.supernaut.fx.FxLauncherProvider;
+import app.supernaut.fx.test.NoopAppDelegate;
+import app.supernaut.fx.test.NoopBackgroundApp;
 
 /**
- *
+ * This is pathologically simple because AppDelegate and BackgroundApp are hard-coded
  */
 public class SimpleFxLauncherProvider implements FxLauncherProvider {
     @Override
@@ -30,13 +32,8 @@ public class SimpleFxLauncherProvider implements FxLauncherProvider {
     }
 
     @Override
-    public FxLauncher launcher(FxLauncherProvider.AppFactory appFactory) {
-        return new SimpleFxLauncher(appFactory);
-    }
-
-    @Override
-    public FxLauncher launcher(Class<? extends ApplicationDelegate> appDelegateClass, Class<? extends BackgroundApp> backgroundAppClass) {
-        return new SimpleFxLauncher(new DefaultAppFactory(appDelegateClass, backgroundAppClass));
+    public FxLauncher launcher() {
+        return new SimpleFxLauncher(new DefaultAppFactory(NoopAppDelegate.class, NoopBackgroundApp.class));
     }
 
     ///  A "Provider" must have a no-arg constructor
