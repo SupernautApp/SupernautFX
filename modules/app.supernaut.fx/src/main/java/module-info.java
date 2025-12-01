@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import app.supernaut.fx.sample.SimpleFxLauncher;
+import app.supernaut.fx.FxLauncherProvider;
+import app.supernaut.fx.sample.SimpleFxLauncherProvider;
 
 /**
  * Defines the core classes and interfaces used by <b>Supernaut.FX</b> applications. These
@@ -30,6 +31,8 @@ import app.supernaut.fx.sample.SimpleFxLauncher;
 module app.supernaut.fx {
     requires transitive app.supernaut;
 
+    requires jakarta.inject;
+    
     requires javafx.graphics;
     requires javafx.fxml;
 
@@ -40,8 +43,9 @@ module app.supernaut.fx {
     exports app.supernaut.fx.services;
     exports app.supernaut.fx.test;
     exports app.supernaut.fx.util;
+    exports app.supernaut.fx.sample;
     exports app.supernaut.fx.internal to javafx.graphics;
 
-    uses app.supernaut.fx.FxLauncher;
-    provides app.supernaut.fx.FxLauncher with SimpleFxLauncher;
+    uses FxLauncherProvider;
+    provides FxLauncherProvider with SimpleFxLauncherProvider;
 }

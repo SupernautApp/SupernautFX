@@ -18,33 +18,25 @@ package app.supernaut.fx.sample;
 import app.supernaut.BackgroundApp;
 import app.supernaut.fx.ApplicationDelegate;
 import app.supernaut.fx.FxLauncherAbstract;
+import app.supernaut.fx.FxLauncherProvider;
 
 /**
  * A simple {@link FxLauncherAbstract} that uses {@link Class} objects to specify {@link BackgroundApp}
  * and {@link ApplicationDelegate}.
  */
 public final class SimpleFxLauncher extends FxLauncherAbstract {
-
     /**
      * Default constructor using background start
      */
-    public SimpleFxLauncher() {
-        this(true);
+    public SimpleFxLauncher(FxLauncherProvider.AppFactory appFactory) {
+        this( appFactory, true);
     }
 
     /**
      * Constructor that lets you choose background start or not
      * @param backgroundStart  true to start on background
      */
-    public SimpleFxLauncher(boolean backgroundStart) {
-        super(DefaultAppFactory::new, backgroundStart);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String name() {
-        return "simple";
+    public SimpleFxLauncher(FxLauncherProvider.AppFactory appFactory, boolean backgroundStart) {
+        super(appFactory, backgroundStart);
     }
 }

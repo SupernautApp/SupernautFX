@@ -4,7 +4,10 @@ plugins {
 
 include 'modules:app.supernaut'
 include 'modules:app.supernaut.fx'
+include 'modules:app.supernaut.fx.avaje'
 include 'modules:app.supernaut.fx.micronaut'
+include 'apps:supernaut-avaje-hello'
+include 'apps:supernaut-fx-sample-avaje'
 include 'apps:supernaut-fx-sample-hello'
 include 'apps:supernaut-fx-sample-minimal'
 include 'apps:supernaut-fx-testapp'

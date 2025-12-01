@@ -16,7 +16,7 @@
 package app.supernaut.fx
 
 import app.supernaut.BackgroundApp
-import app.supernaut.fx.sample.SimpleFxLauncher
+import app.supernaut.fx.sample.SimpleFxLauncherProvider
 import app.supernaut.fx.test.NoopBackgroundApp
 import app.supernaut.fx.test.NoopAppDelegate
 import spock.lang.Ignore
@@ -31,8 +31,8 @@ import java.util.concurrent.CompletableFuture
 class SimpleJfxLauncherIntegrationSpec extends Specification {
     def "Can launch and stop an app with background start"() {
         when:
-        FxLauncher launcher =  new SimpleFxLauncher(true);
-        CompletableFuture<ApplicationDelegate> futureForegroundApp = launcher.launchAsync(new String[]{}, NoopAppDelegate, NoopBackgroundApp)
+        FxLauncher launcher = new SimpleFxLauncherProvider().launcher(NoopAppDelegate)
+        CompletableFuture<ApplicationDelegate> futureForegroundApp = launcher.launchAsync(new String[]{})
 
         then:
         futureForegroundApp != null
