@@ -23,7 +23,7 @@ Released: not yet
 * Upgrade to Spock 2.4-groovy-5.0
 * Run Spock with Groovy 5.0.3
 * Upgrade to JavaFX Plugin 0.1.0
-* Upgrade to Badass JLink Plugin 3.1.4-rc
+* Upgrade to Badass JLink Plugin 3.1.5
 * Remove BadAss Jar Plugin (`app.supernaut` now requires Java 9)
 * Upgrade to Asciidoctor Gradle Plugin 4.0.5
 
