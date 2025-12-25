@@ -1,0 +1,32 @@
+plugins {
+    id 'java-library'
+}
+
+apply plugin: "org.openjfx.javafxplugin"
+
+tasks.named('compileJava') {
+    options.javaModuleVersion = project.version
+}
+
+javafx {
+    modules = [ 'javafx.graphics', 'javafx.fxml' ]
+    configurations = [ 'compileOnly', 'testImplementation' ]
+}
+
+test {
+}
+
+dependencies {
+    api project (':modules:app.supernaut.fx')
+    api "org.openjfx:javafx-graphics:${javaFxVersion}"
+    api "org.openjfx:javafx-fxml:${javaFxVersion}"
+    api "io.avaje:avaje-inject:${avajeInjectVersion}"
+
+    implementation "io.avaje:avaje-inject:${avajeInjectVersion}"
+    // annotationProcessor "io.avaje:avaje-inject-generator:${avajeInjectVersion}"
+
+    testImplementation "io.avaje:avaje-inject-test:${avajeInjectVersion}"
+    // testAnnotationProcessor "io.avaje:avaje-inject-generator:${avajeInjectVersion}"
+    
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+}

@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import app.supernaut.fx.FxLauncherProvider;
+
 /**
  * SupernautFX Hello Sample app.
  * <p>
@@ -45,5 +48,5 @@ module app.supernaut.fx.sample.minimal {
     opens app.supernaut.fx.sample.minimal to javafx.graphics, java.base;
     exports app.supernaut.fx.sample.minimal;
 
-    uses app.supernaut.fx.FxLauncher;
+    uses FxLauncherProvider;
 }

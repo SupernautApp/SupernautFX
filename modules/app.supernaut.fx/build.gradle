@@ -18,6 +18,7 @@ test {
 
 dependencies {
     api project (':modules:app.supernaut')
+    api "jakarta.inject:jakarta.inject-api:${jakartaInjectVersion}"
 
     api "org.openjfx:javafx-graphics:${javaFxVersion}"
     api "org.openjfx:javafx-fxml:${javaFxVersion}"

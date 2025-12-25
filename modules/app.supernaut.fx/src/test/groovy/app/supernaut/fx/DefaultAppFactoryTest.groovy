@@ -15,6 +15,7 @@
  */
 package app.supernaut.fx
 
+import app.supernaut.fx.test.NoopAppDelegate
 import app.supernaut.fx.test.NoopBackgroundApp
 import spock.lang.Specification
 
@@ -25,15 +26,21 @@ class DefaultAppFactoryTest extends Specification {
 
     def "Can create a DefaultAppFactory"() {
         when:
-        def factory = new FxLauncherAbstract.DefaultAppFactory()
+        def factory = new FxLauncherProvider.DefaultAppFactory(NoopAppDelegate.class, NoopBackgroundApp.class)
 
         then:
         factory != null
 
         when:
-        def backgroundApp = factory.createBackgroundApp(NoopBackgroundApp.class)
+        def backgroundApp = factory.createBackgroundApp()
 
         then:
         backgroundApp != null
+
+        when:
+        def appDelegate = factory.createBackgroundApp()
+
+        then:
+        appDelegate != null
     }
 }

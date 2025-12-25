@@ -29,7 +29,7 @@ import java.net.URI;
 
 /**
  * TestApp Main Window Controller
- * Uses JSR 330 dependency injection annotations to tell Supernaut.FX/Micronaut
+ * Uses JSR 330 dependency injection annotations to tell Supernaut.FX
  * what to inject in its constructor. @FXML annotations tell the FXMLLoader where
  * to inject JFX objects from the FXML file.
  */

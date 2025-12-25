@@ -18,11 +18,7 @@ package app.supernaut.fx;
 import app.supernaut.BackgroundApp;
 import javafx.application.Application;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.ServiceLoader;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Predicate;
 
 /**
  * Launcher for Supernaut.FX (JavaFX) applications. By using this launcher, your applications
@@ -31,34 +27,11 @@ import java.util.function.Predicate;
  * an explanation of the advantages and details of this approach.
  */
 public interface FxLauncher {
-    /**
-     * Launch and run the application on the current thread.
-     * Does not return until after ApplicationDelegate closes.
-     * @param args command-line args
-     * @param appDelegate class object for ApplicationDelegate
-     * @param backgroundApp class object for BackgroundApp
-     */
-    void launch(String[] args, Class<? extends ApplicationDelegate> appDelegate, Class<? extends BackgroundApp> backgroundApp);
+    ///  New synchronous launch method
+    void launch(String[] args);
 
-    /**
-     * Launch and run the application on the current thread. Uses default/no-op background application.
-     * Does not return until after ApplicationDelegate closes.
-     * @param args command-line args
-     * @param appDelegate class object for ApplicationDelegate
-     */
-    void launch(String[] args, Class<? extends ApplicationDelegate> appDelegate);
-
-    /**
-     * Launch and run the application on a newly created thread.
-     * This method is useful for testing and possibly for other
-     * application startup scenarios.
-     *
-     * @param args command-line args
-     * @param appDelegate class object for ApplicationDelegate
-     * @param backgroundApp class object for BackgroundApp
-     * @return A future that is completed when ApplicationDelegate app is initialized
-     */
-    CompletableFuture<ApplicationDelegate> launchAsync(String[] args, Class<? extends ApplicationDelegate> appDelegate, Class<? extends BackgroundApp> backgroundApp);
+    ///  New Async launch method
+    CompletableFuture<ApplicationDelegate> launchAsync(String[] args);
 
     /**
      * Get a future that will be completed when the ApplicationDelegate
@@ -82,55 +55,4 @@ public interface FxLauncher {
      * @return A newly constructed (and possibly injected) ApplicationDelegate
      */
     ApplicationDelegate createAppDelegate(Application jfxApplication);
-
-    /**
-     * Implementations must implement this method to return a unique name
-     * @return A unique name for this DI-capable {@link FxLauncher} implementation
-     */
-    String name();
-
-    /**
-     * Find a FxLauncher provider by name
-     *
-     * @param name Name (e.g. "micronaut")
-     * @return an FxLauncher instance
-     * @throws NoSuchElementException if not found
-     */
-    static FxLauncher byName(String name) {
-        return findFirst(launcher -> launcher.name().equals(name))
-                .orElseThrow(() -> new NoSuchElementException("Launcher " + name + " not found."));
-    }
-
-    /**
-     * Find default FxLauncher
-     *
-     * @return an FxLauncher instance
-     * @throws NoSuchElementException if not found
-     */
-    static FxLauncher find() {
-        return findFirst(FxLauncher::defaultFilter)
-                .orElseThrow(() -> new NoSuchElementException("Default Launcher not found."));
-    }
-
-    /**
-     * Find a launcher using a custom predicate
-     * @param filter predicate for finding a launcher
-     * @return the <b>first</b> launcher matching the predicate, if any
-     */
-    static Optional<FxLauncher> findFirst(Predicate<FxLauncher> filter) {
-        ServiceLoader<FxLauncher> loader = ServiceLoader.load(FxLauncher.class);
-        return loader.stream()
-                .map(ServiceLoader.Provider::get)
-                .filter(FxLauncher::defaultFilter)
-                .findFirst();
-    }
-
-    /**
-     * Find the first available launcher that isn't the {@link app.supernaut.fx.sample.SimpleFxLauncher}
-     * @param launcher a candidate launcher
-     * @return true if it should be "found"
-     */
-    private static boolean defaultFilter(FxLauncher launcher) {
-        return !launcher.name().equals("simple");
-    }
 }

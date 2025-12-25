@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import app.supernaut.fx.FxLauncherProvider;
+
 /**
  * Module descriptor for SupernautFX Test App
  */
@@ -33,5 +36,5 @@ module app.supernaut.fx.testapp {
     opens app.supernaut.fx.testapp to javafx.graphics, javafx.fxml, java.base;
     exports app.supernaut.fx.testapp;
 
-    uses app.supernaut.fx.FxLauncher;
+    uses FxLauncherProvider;
 }
